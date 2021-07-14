@@ -1,11 +1,11 @@
 <template>
     <jet-form-section @submitted="updateProfileInformation">
         <template #title>
-            Profile Information
+            プロフィール情報
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            プロフィール情報とメールアドレスを更新する。
         </template>
 
         <template #form>
@@ -31,11 +31,11 @@
                 </div>
 
                 <jet-secondary-button class="mt-2 mr-2" type="button" @click.prevent="selectNewPhoto">
-                    Select A New Photo
+                    新しい写真を選択
                 </jet-secondary-button>
 
                 <jet-secondary-button type="button" class="mt-2" @click.prevent="deletePhoto" v-if="user.profile_photo_path">
-                    Remove Photo
+                    写真を削除
                 </jet-secondary-button>
 
                 <jet-input-error :message="form.errors.photo" class="mt-2" />
@@ -58,11 +58,11 @@
 
         <template #actions>
             <jet-action-message :on="form.recentlySuccessful" class="mr-3">
-                Saved.
+                更新完了
             </jet-action-message>
 
             <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
+                更新
             </jet-button>
         </template>
     </jet-form-section>
