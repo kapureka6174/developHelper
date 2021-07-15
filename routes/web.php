@@ -16,18 +16,23 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return Inertia::render('Home');
+})->name('Home');;
+
+Route::get('/services', function () {
+    return Inertia::render('Services');
+})->name('Services');
+
+Route::get('/users', function () {
+    return Inertia::render('Users');
+})->name('Users');
+
+Route::get('/Services', function () {
+    return Inertia::render('Services');
+})->name('Services');
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/create', function () {
+        return Inertia::render('Create');
+    })->name('Create');
 });
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
-
-Route::get('HelloWorld', function () {
-    return Inertia::render('HelloWorld');
-})->name('HelloWorld');

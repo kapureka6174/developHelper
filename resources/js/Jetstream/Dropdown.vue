@@ -29,6 +29,7 @@
                 <div
                     class="rounded-md ring-1 ring-black ring-opacity-5"
                     :class="contentClasses"
+                    v-if="$page.props.user"
                 >
                     <slot name="content"></slot>
                 </div>
