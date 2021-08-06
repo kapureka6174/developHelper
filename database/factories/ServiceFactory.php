@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Service;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ServiceFactory extends Factory
@@ -23,6 +24,9 @@ class ServiceFactory extends Factory
     {
         return [
             //
+            "user_id"  => User::factory(),
+            "title" => $this->faker->realText(15),
+            "description" => $this->faker->realText()
         ];
     }
 }
