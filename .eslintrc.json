@@ -24,6 +24,7 @@
     "globals": {
         "route": true,
         "axios": true,
-        "require": true
+        "require": true,
+        "module": true
     }
 }

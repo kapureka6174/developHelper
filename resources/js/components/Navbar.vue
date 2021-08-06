@@ -25,7 +25,7 @@
                             :href="route('Services')"
                             :active="route().current('Services')"
                         >
-                            サービス一覧
+                            サービス
                         </jet-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -33,7 +33,7 @@
                             :href="route('Users')"
                             :active="route().current('Users')"
                         >
-                            開発者一覧
+                            開発者
                         </jet-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -125,7 +125,7 @@
                     :href="route('Services')"
                     :active="route().current('Services')"
                 >
-                    サービス一覧
+                    サービス
                 </jet-responsive-nav-link>
             </div>
 
@@ -134,7 +134,7 @@
                     :href="route('Users')"
                     :active="route().current('Users')"
                 >
-                    開発者一覧
+                    開発者
                 </jet-responsive-nav-link>
             </div>
 
@@ -203,9 +203,6 @@
 
 <script>
 import JetApplicationMark from "@/Jetstream/ApplicationMark";
-import JetBanner from "@/Jetstream/Banner";
-import JetDropdown from "@/Jetstream/Dropdown";
-import JetDropdownLink from "@/Jetstream/DropdownLink";
 import JetNavLink from "@/Jetstream/NavLink";
 import JetResponsiveNavLink from "@/Jetstream/ResponsiveNavLink";
 import SettingDropdown from "./atoms/SettingDropdown.vue";
@@ -213,9 +210,6 @@ import SettingDropdown from "./atoms/SettingDropdown.vue";
 export default {
     components: {
         JetApplicationMark,
-        JetBanner,
-        JetDropdown,
-        JetDropdownLink,
         JetNavLink,
         JetResponsiveNavLink,
         SettingDropdown,

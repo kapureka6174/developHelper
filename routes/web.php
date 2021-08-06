@@ -23,9 +23,10 @@ Route::get('/services', function () {
     return Inertia::render('Services');
 })->name('Services');
 
-Route::get('/users', function () {
-    return Inertia::render('Users');
-})->name('Users');
+Route::get('/users',[App\Http\Controllers\UserController::class,'index'])->name('Users');
+Route::get('/users/{id}', function () {
+    return Inertia::render('User');
+})->name('User');
 
 Route::get('/Services', function () {
     return Inertia::render('Services');
