@@ -10,7 +10,7 @@
         </div>
         <div class="flex justify-end mt-4">
             <inertia-link
-                :href="route('User', { id: id })"
+                :href="route('Service', { id: id })"
                 class="text-xl font-medium text-indigo-500"
             >
                 詳しくみる

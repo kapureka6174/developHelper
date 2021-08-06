@@ -23,12 +23,11 @@ Route::get('/services', function () {
     return Inertia::render('Services');
 })->name('Services');
 
-Route::get('/users',[App\Http\Controllers\UserController::class,'index'])->name('Users');
-Route::get('/users/{id}',[App\Http\Controllers\UserController::class,'user']) ->name('User');
+Route::get('/users',[App\Http\Controllers\UserController::class,'all'])->name('Users');
+Route::get('/users/{id}',[App\Http\Controllers\UserController::class,'detail']) ->name('User');
 
-Route::get('/Services', function () {
-    return Inertia::render('Services');
-})->name('Services');
+Route::get('/Services',[App\Http\Controllers\ServiceController::class,'all'])->name('Services');
+Route::get('/Services/{id}',[App\Http\Controllers\ServiceController::class,'detail'])->name('Service');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/create', function () {
