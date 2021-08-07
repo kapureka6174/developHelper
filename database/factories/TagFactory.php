@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Tag;
+use App\Models\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TagFactory extends Factory
@@ -22,7 +23,8 @@ class TagFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'service_id' => Service::factory(),
+            'tagname' => $this->faker->word(),
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Requirement;
+use App\Models\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RequirementFactory extends Factory
@@ -22,7 +23,9 @@ class RequirementFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'service_id' => Service::factory(),
+            'content' => $this->faker->realText(20),
+            'finished' => $this->faker->boolean(50)
         ];
     }
 }

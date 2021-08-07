@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\TechField;
+use App\Models\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TechFieldFactory extends Factory
@@ -22,7 +23,8 @@ class TechFieldFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'service_id' => Service::factory(),
+            'fieldname' => $this->faker->word(),
         ];
     }
 }

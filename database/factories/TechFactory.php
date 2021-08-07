@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Tech;
+use App\Models\TechField;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TechFactory extends Factory
@@ -22,7 +23,9 @@ class TechFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'tech_field_id' => TechField::factory(),
+            'techname' => $this->faker->word(),
+            'version' => $this->faker->word(),
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Uri;
+use App\Models\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UriFactory extends Factory
@@ -22,7 +23,10 @@ class UriFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'service_id' => Service::factory(),
+            'uri' => $this->faker->word(),
+            'method' => $this->faker->word(),
+            'explain' => $this->faker->realText(),
         ];
     }
 }

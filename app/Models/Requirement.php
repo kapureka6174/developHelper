@@ -14,8 +14,8 @@ class Requirement extends Model
     protected $fillable = [
         "service_id",
         "content",
-        "finished"
-    ]
+        "finished",
+    ];
 
     public function service()
     {

@@ -9,7 +9,7 @@ class Uri extends Model
 {
     use HasFactory;
 
-    protected $table = 'uris'
+    protected $table = 'uris';
 
     protected $fillable = [
         'service_id',

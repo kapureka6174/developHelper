@@ -9,7 +9,7 @@ class TechField extends Model
 {
     use HasFactory;
 
-    protected $table = 'techfields';
+    protected $table = 'tech_fields';
 
     protected $fillable = [
         'service_id',
