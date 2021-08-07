@@ -15,5 +15,19 @@ export default {
     components: {
         AppLayout,
     },
+    props: {
+        requirements: {
+            type: Array,
+        },
+        tags: {
+            type: Array,
+        },
+        techFields: {
+            type: Array,
+        },
+        uris: {
+            type: Array,
+        },
+    },
 };
 </script>

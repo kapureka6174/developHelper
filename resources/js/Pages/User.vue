@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                開発者の個人画面
+                {{ user.name }}のサービス一覧
             </h2>
         </template>
 
@@ -28,6 +28,9 @@ export default {
         ServiceCard,
     },
     props: {
+        user: {
+            type: Object,
+        },
         services: {
             type: Array,
         },
