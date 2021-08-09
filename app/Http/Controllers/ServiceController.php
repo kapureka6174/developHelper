@@ -21,10 +21,15 @@ class ServiceController extends Controller
 
     // paramで渡されてきたservice_idと一致するサービスのデータをViewに渡す。
     public function detail ($id) {
+        $service = Service::where('id', $id)->first();
         $requirements = Requirement::where('service_id', $id)->get();
         $uris = Uri::where('service_id', $id)->get();
-        $techFields = \DB::table('tech_fields')->where('service_id', $id)->leftJoin('teches','teches.tech_field_id', 'tech_fields.id')->get();
+        // $techFields = TechField::join('teches','tech_fields.id', '=', 'teches.tech_field_id')->where('service_id', $id)->get();
+        $techFields = TechField::where('service_id', $id)->get();
+        foreach ($techFields as $field) {
+            $field['teches'] = Tech::where('tech_field_id', $field['id'])->get();
+        }
         $tags= Tag::where('service_id', $id)->get();
-        return Inertia::render('Service',['requirement' => $requirements, 'uris' => $uris, 'TechFields' => $techFields, 'Tags' => $tags]);
+        return Inertia::render('Service',['service' => $service,'requirements' => $requirements, 'uris' => $uris, 'techFields' => $techFields, 'tags' => $tags]);
     }
 }
