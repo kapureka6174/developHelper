@@ -19556,13 +19556,44 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      categories: []
+    };
+  },
   components: {
     AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_0__.default,
     ServiceCard: _components_ServiceCard_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
   props: {
-    services: {
-      type: Array
+    services: Array,
+    tags: Array
+  },
+  methods: {
+    resultTags: function resultTags(id) {
+      return this.tags.filter(function (tag) {
+        return tag.service_id === id;
+      });
+    },
+    plusCategory: function plusCategory(name) {
+      if (!this.categories.includes(name)) this.categories.push(name);
+    },
+    deleteCategory: function deleteCategory(name) {
+      var index = this.categories.indexOf(name);
+      this.categories.splice(index, 1);
+    },
+    exitCategory: function exitCategory(tags) {
+      var flag = true;
+
+      if (this.categories.length) {
+        flag = false;
+
+        for (var i = 0; i < tags.length; i++) {
+          if (this.categories.includes(tags[i].tagname)) flag = true;
+        }
+      }
+
+      return flag;
     }
   }
 });
@@ -19728,7 +19759,8 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     id: Number,
     title: String,
-    description: String
+    description: String,
+    tags: Array
   }
 });
 
@@ -23021,6 +23053,22 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 );
 
 var _hoisted_2 = {
+  "class": "m-3"
+};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
+  "class": "text-2xl text-indigo-700 font-semibold"
+}, "カテゴリー", -1
+/* HOISTED */
+);
+
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
+  "class": "text-2xl text-indigo-700 font-semibold"
+}, "選択中", -1
+/* HOISTED */
+);
+
+var _hoisted_5 = {
   "class": "grid grid-cols-1 md:grid-cols-3 gap-4"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -23033,16 +23081,41 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [_hoisted_1];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.services, function (service) {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.tags, function (tag) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+          key: tag.id,
+          "class": "\r\n                    text-xs\r\n                    inline-flex\r\n                    items-center\r\n                    font-bold\r\n                    leading-sm\r\n                    uppercase\r\n                    px-3\r\n                    py-1\r\n                    bg-blue-200\r\n                    text-blue-700\r\n                    rounded-full\r\n                    mx-2\r\n                ",
+          onClick: function onClick($event) {
+            return $options.plusCategory(tag.tagname);
+          }
+        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tag.tagname), 9
+        /* TEXT, PROPS */
+        , ["onClick"]);
+      }), 128
+      /* KEYED_FRAGMENT */
+      ))]), _hoisted_4, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.categories, function (category) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+          key: category,
+          "class": "\r\n                text-xs\r\n                inline-flex\r\n                items-center\r\n                font-bold\r\n                leading-sm\r\n                uppercase\r\n                px-3\r\n                py-1\r\n                bg-blue-200\r\n                text-blue-700\r\n                rounded-full\r\n                mx-2\r\n            ",
+          onClick: function onClick($event) {
+            return $options.deleteCategory(category);
+          }
+        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(category), 9
+        /* TEXT, PROPS */
+        , ["onClick"]);
+      }), 128
+      /* KEYED_FRAGMENT */
+      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.services, function (service) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           key: service.id
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_service_card, {
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_service_card, {
           id: service.id,
           title: service.title,
-          description: service.description
+          description: service.description,
+          tags: $options.resultTags(service.id)
         }, null, 8
         /* PROPS */
-        , ["id", "title", "description"])]);
+        , ["id", "title", "description", "tags"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.exitCategory($options.resultTags(service.id))]])]);
       }), 128
       /* KEYED_FRAGMENT */
       ))])];
@@ -23648,7 +23721,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.title), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.description), 1
+  ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.tags, function (tag) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+      key: tag.id,
+      "class": "\r\n                    text-xs\r\n                    inline-flex\r\n                    items-center\r\n                    font-bold\r\n                    leading-sm\r\n                    uppercase\r\n                    px-3\r\n                    py-1\r\n                    bg-blue-200\r\n                    text-blue-700\r\n                    rounded-full\r\n                    mx-2\r\n                "
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tag.tagname), 1
+    /* TEXT */
+    );
+  }), 128
+  /* KEYED_FRAGMENT */
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.description), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
     href: _ctx.route('Service', {

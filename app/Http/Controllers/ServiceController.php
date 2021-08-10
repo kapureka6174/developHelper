@@ -16,7 +16,7 @@ class ServiceController extends Controller
 
     // 全サービスのデータを引っ張て来てViewに渡す。
     public function all () {
-        return Inertia::render('Services',['services' => Service::all()]);
+        return Inertia::render('Services',['services' => Service::all(), 'tags' => Tag::all()]);
     }
 
     // paramで渡されてきたservice_idと一致するサービスのデータをViewに渡す。

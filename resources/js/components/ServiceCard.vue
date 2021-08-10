@@ -4,6 +4,26 @@
             <h2 class="text-gray-800 text-3xl font-semibold">
                 {{ title }}
             </h2>
+            <div
+                v-for="tag in tags"
+                :key="tag.id"
+                class="
+                    text-xs
+                    inline-flex
+                    items-center
+                    font-bold
+                    leading-sm
+                    uppercase
+                    px-3
+                    py-1
+                    bg-blue-200
+                    text-blue-700
+                    rounded-full
+                    mx-2
+                "
+            >
+                {{ tag.tagname }}
+            </div>
             <p class="mt-2 text-gray-600">
                 {{ description }}
             </p>
@@ -25,6 +45,7 @@ export default {
         id: Number,
         title: String,
         description: String,
+        tags: Array,
     },
 };
 </script>
