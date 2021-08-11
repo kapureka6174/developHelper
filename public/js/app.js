@@ -19582,7 +19582,7 @@ __webpack_require__.r(__webpack_exports__);
       var index = this.categories.indexOf(name);
       this.categories.splice(index, 1);
     },
-    exitCategory: function exitCategory(tags) {
+    existCategory: function existCategory(tags) {
       var flag = true;
 
       if (this.categories.length) {
@@ -23062,13 +23062,17 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 /* HOISTED */
 );
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
+var _hoisted_4 = {
+  "class": "m-3"
+};
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
   "class": "text-2xl text-indigo-700 font-semibold"
 }, "選択中", -1
 /* HOISTED */
 );
 
-var _hoisted_5 = {
+var _hoisted_6 = {
   "class": "grid grid-cols-1 md:grid-cols-3 gap-4"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -23084,7 +23088,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.tags, function (tag) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           key: tag.id,
-          "class": "\r\n                    text-xs\r\n                    inline-flex\r\n                    items-center\r\n                    font-bold\r\n                    leading-sm\r\n                    uppercase\r\n                    px-3\r\n                    py-1\r\n                    bg-blue-200\r\n                    text-blue-700\r\n                    rounded-full\r\n                    mx-2\r\n                ",
+          "class": "\r\n                    text-xs\r\n                    inline-flex\r\n                    items-center\r\n                    font-bold\r\n                    leading-sm\r\n                    uppercase\r\n                    px-3\r\n                    py-1\r\n                    bg-blue-200\r\n                    text-blue-700\r\n                    rounded-full\r\n                    mx-2\r\n                    my-1\r\n                    hover:bg-blue-100\r\n                ",
           onClick: function onClick($event) {
             return $options.plusCategory(tag.tagname);
           }
@@ -23093,10 +23097,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , ["onClick"]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))]), _hoisted_4, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.categories, function (category) {
+      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.categories, function (category) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           key: category,
-          "class": "\r\n                text-xs\r\n                inline-flex\r\n                items-center\r\n                font-bold\r\n                leading-sm\r\n                uppercase\r\n                px-3\r\n                py-1\r\n                bg-blue-200\r\n                text-blue-700\r\n                rounded-full\r\n                mx-2\r\n            ",
+          "class": "\r\n                    text-xs\r\n                    inline-flex\r\n                    items-center\r\n                    font-bold\r\n                    leading-sm\r\n                    uppercase\r\n                    px-3\r\n                    py-1\r\n                    bg-blue-300\r\n                    text-blue-700\r\n                    rounded-full\r\n                    mx-2\r\n                    my-1\r\n                    hover:bg-blue-100\r\n                ",
           onClick: function onClick($event) {
             return $options.deleteCategory(category);
           }
@@ -23105,17 +23109,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , ["onClick"]);
       }), 128
       /* KEYED_FRAGMENT */
-      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.services, function (service) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
-          key: service.id
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_service_card, {
+      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.services, function (service) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_service_card, {
+          key: service.id,
           id: service.id,
           title: service.title,
           description: service.description,
           tags: $options.resultTags(service.id)
         }, null, 8
         /* PROPS */
-        , ["id", "title", "description", "tags"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.exitCategory($options.resultTags(service.id))]])]);
+        , ["id", "title", "description", "tags"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.existCategory($options.resultTags(service.id))]]);
       }), 128
       /* KEYED_FRAGMENT */
       ))])];

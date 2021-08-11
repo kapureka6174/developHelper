@@ -23,45 +23,52 @@
                     text-blue-700
                     rounded-full
                     mx-2
+                    my-1
+                    hover:bg-blue-100
                 "
                 @click="plusCategory(tag.tagname)"
             >
                 {{ tag.tagname }}
             </div>
         </div>
-        <h1 class="text-2xl text-indigo-700 font-semibold">選択中</h1>
-        <div
-            v-for="category in categories"
-            :key="category"
-            class="
-                text-xs
-                inline-flex
-                items-center
-                font-bold
-                leading-sm
-                uppercase
-                px-3
-                py-1
-                bg-blue-200
-                text-blue-700
-                rounded-full
-                mx-2
-            "
-            @click="deleteCategory(category)"
-        >
-            {{ category }}
+
+        <div class="m-3">
+            <h1 class="text-2xl text-indigo-700 font-semibold">選択中</h1>
+            <div
+                v-for="category in categories"
+                :key="category"
+                class="
+                    text-xs
+                    inline-flex
+                    items-center
+                    font-bold
+                    leading-sm
+                    uppercase
+                    px-3
+                    py-1
+                    bg-blue-300
+                    text-blue-700
+                    rounded-full
+                    mx-2
+                    my-1
+                    hover:bg-blue-100
+                "
+                @click="deleteCategory(category)"
+            >
+                {{ category }}
+            </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div v-for="service in services" :key="service.id">
-                <service-card
-                    :id="service.id"
-                    :title="service.title"
-                    :description="service.description"
-                    :tags="resultTags(service.id)"
-                    v-show="exitCategory(resultTags(service.id))"
-                />
-            </div>
+            <service-card
+                v-for="service in services"
+                :key="service.id"
+                :id="service.id"
+                :title="service.title"
+                :description="service.description"
+                :tags="resultTags(service.id)"
+                v-show="existCategory(resultTags(service.id))"
+            />
         </div>
     </app-layout>
 </template>
@@ -97,7 +104,7 @@ export default {
             const index = this.categories.indexOf(name);
             this.categories.splice(index, 1);
         },
-        exitCategory(tags) {
+        existCategory(tags) {
             let flag = true;
             if (this.categories.length) {
                 flag = false;
