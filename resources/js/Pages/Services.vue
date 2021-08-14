@@ -5,6 +5,8 @@
                 サービス一覧
             </h2>
         </template>
+
+        <!-- タグ一覧の表示 -->
         <div class="m-3">
             <h1 class="text-2xl text-indigo-700 font-semibold">カテゴリー</h1>
             <div
@@ -32,6 +34,7 @@
             </div>
         </div>
 
+        <!-- 選択中のタグ一覧の表示 -->
         <div class="m-3">
             <h1 class="text-2xl text-indigo-700 font-semibold">選択中</h1>
             <div
@@ -59,6 +62,7 @@
             </div>
         </div>
 
+        <!-- サービス一覧の表示 -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <service-card
                 v-for="service in services"
@@ -92,18 +96,22 @@ export default {
         tags: Array,
     },
     methods: {
+        // サービスごとのタグを取得
         resultTags(id) {
             return this.tags.filter(function (tag) {
                 return tag.service_id === id;
             });
         },
+        // カテゴリーを選択中に追加する
         plusCategory(name) {
             if (!this.categories.includes(name)) this.categories.push(name);
         },
+        // カテゴリーを選択中から削除する
         deleteCategory(name) {
             const index = this.categories.indexOf(name);
             this.categories.splice(index, 1);
         },
+        // 選択中のカテゴリーを保存した配列にサービスごとのカテゴリーが含まれているか
         existCategory(tags) {
             let flag = true;
             if (this.categories.length) {
