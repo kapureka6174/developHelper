@@ -18979,257 +18979,143 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_0__.default
   },
-  data: function data() {
-    return {
-      title: {
-        editable: true,
+  setup: function setup() {
+    var normalObj = function normalObj(type) {
+      return {
         content: "",
-        error: false
-      },
+        editable: true,
+        error: type == 1 ? "" : false
+      };
+    };
+
+    var techField = function techField() {
+      return {
+        techField: normalObj(1),
+        teches: [{
+          tech: normalObj(1),
+          version: normalObj(1)
+        }]
+      };
+    };
+
+    var requirement = function requirement() {
+      return {
+        requireTitle: normalObj(),
+        requireExplain: normalObj()
+      };
+    };
+
+    var uri = function uri() {
+      return {
+        uri: normalObj(),
+        method: normalObj(),
+        explain: normalObj()
+      };
+    };
+
+    var form = (0,vue__WEBPACK_IMPORTED_MODULE_1__.reactive)({
+      title: normalObj(),
       tags: {
         content: [],
         error: ""
       },
-      description: {
-        editable: true,
-        content: "",
-        error: false
-      },
-      techFields: [{
-        techField: {
-          content: "",
-          editable: true,
-          error: ""
-        },
-        teches: [{
-          tech: {
-            content: "",
-            editable: true,
-            error: ""
-          },
-          version: {
-            content: "",
-            editable: true,
-            error: ""
-          }
-        }]
-      }],
-      requirements: [{
-        requireTitle: {
-          content: "",
-          editable: true,
-          error: false
-        },
-        requireExplain: {
-          content: "",
-          editable: true,
-          error: false
-        }
-      }],
-      uris: [{
-        uri: {
-          content: "",
-          editable: true,
-          error: false
-        },
-        method: {
-          content: "",
-          editable: true,
-          error: false
-        },
-        explain: {
-          content: "",
-          editable: true,
-          error: false
-        }
-      }]
-    };
-  },
-  methods: {
-    plusTitle: function plusTitle(e) {
-      if (!e.target.value) {
-        this.title.content = "";
-        this.title.error = true;
+      description: normalObj(),
+      techFields: [techField()],
+      requirements: [requirement()],
+      uris: [uri()]
+    }); // 直接代入型の処理
+
+    var addContent = function addContent(value, type, index, techIndex) {
+      if (!value || type === "description" && !form.description.content.match(/\S/g)) {
+        form[type].error = true;
       } else {
-        this.title.content = e.target.value;
-        this.title.editable = false;
-        this.title.error = false;
+        switch (type) {
+          case "title":
+            form[type].error = false;
+            form[type].editable = false;
+            break;
+
+          case "description":
+            form[type].content.replace(/\n/g, "\\n");
+            form[type].error = false;
+            form[type].editable = false;
+            break;
+
+          case "techFields":
+            form[type][index].techField.error = false;
+            form[type][index].techField.editable = false;
+            break;
+
+          case "tech":
+          case "version":
+            form.techFields[index].teches[techIndex][type].error = "";
+            form.techFields[index].teches[techIndex][type].editable = false;
+            break;
+
+          case "requireTitle":
+          case "requireExplain":
+            form.requirements[index][type].error = "";
+            form.requirements[index][type].editable = false;
+            break;
+
+          case "uri":
+          case "method":
+          case "explain":
+            form.uris[index][type].error = "";
+            form.uris[index][type].editable = false;
+            break;
+        }
       }
-    },
-    plusTag: function plusTag(e) {
+    }; // タグ（配列に入れ込む）の処理
+
+
+    var plusTag = function plusTag(e) {
       if (!e.target.value) {
-        this.tags.error = "カテゴリーが入力されていません。";
+        form.tags.error = "カテゴリーが入力されていません。";
       } else if ( // 大小区別せずに比較する
-      this.tags.content.map(function (tag) {
+      form.tags.content.map(function (tag) {
         return tag.toUpperCase();
       }).includes(e.target.value.toUpperCase())) {
-        this.tags.error = "既に同じカテゴリーが追加されています。";
+        form.tags.error = "既に同じカテゴリーが追加されています。";
       } else {
-        this.tags.content.push(e.target.value);
-        this.tags.error = false;
+        form.tags.content.push(e.target.value);
+        form.tags.error = false;
         e.target.value = "";
       }
-    },
-    deleteTag: function deleteTag(value) {
-      var index = this.tags.content.indexOf(value);
-      this.tags.content.splice(index, 1);
-    },
-    plusDescription: function plusDescription() {
-      if (!this.description.content.match(/\S/g)) {
-        this.description.error = true;
-      } else {
-        console.log(this.description.content);
-        this.description.content.replace(/\n/g, "\\n");
-        console.log(this.description.content);
-        this.description.editable = false;
-        this.description.error = false;
-      }
-    },
-    plusTechFields: function plusTechFields() {
-      this.techFields.push({
-        techField: {
-          content: "",
-          editable: true,
-          error: ""
-        },
-        teches: [{
-          tech: {
-            content: "",
-            editable: true,
-            error: ""
-          },
-          version: {
-            content: "",
-            editable: true,
-            error: ""
-          }
-        }]
+    }; // 配列に入れ込む（使用技術、要件定義、URI設計）
+
+
+    var addLine = function addLine(type, obj, index) {
+      index === undefined ? form["".concat(type, "s")].push(obj) : form.techFields[index].teches.push({
+        tech: normalObj(1),
+        version: normalObj(1)
       });
-    },
-    plusTechField: function plusTechField(e, index) {
-      if (!e.target.value) {
-        this.techFields[index].techField.error = "技術分野を入力してください。";
-      } else {
-        this.techFields[index].techField.content = e.target.value;
-        this.techFields[index].techField.editable = false;
-      }
-    },
-    plusTechName: function plusTechName(e, index, techIndex) {
-      if (!e.target.value) {
-        this.techFields[index].teches[techIndex].tech.error = "技術名を入力してください。";
-      } else {
-        this.techFields[index].teches[techIndex].tech.content = e.target.value;
-        this.techFields[index].teches[techIndex].tech.editable = false;
-      }
-    },
-    plusTechVersion: function plusTechVersion(e, index, techIndex) {
-      if (!e.target.value) {
-        this.techFields[index].teches[techIndex].version.error = "バージョンを入力してください。";
-      } else {
-        this.techFields[index].teches[techIndex].version.content = e.target.value;
-        this.techFields[index].teches[techIndex].version.editable = false;
-      }
-    },
-    plusTech: function plusTech(index) {
-      this.techFields[index].teches.push({
-        tech: {
-          content: "",
-          editable: true,
-          error: ""
-        },
-        version: {
-          content: "",
-          editable: true,
-          error: ""
-        }
-      });
-    },
-    deleteTech: function deleteTech(index, techIndex) {
-      this.techFields[index].teches.splice(techIndex, 1);
-    },
-    plusRequirements: function plusRequirements() {
-      this.requirements.push({
-        requireTitle: {
-          content: "",
-          editable: true,
-          error: false
-        },
-        requireExplain: {
-          content: "",
-          editable: true,
-          error: false
-        }
-      });
-    },
-    plusRequireTitle: function plusRequireTitle(e, index) {
-      if (!e.target.value) {
-        this.requirements[index].requireTitle.error = true;
-      } else {
-        this.requirements[index].requireTitle.content = e.target.value;
-        this.requirements[index].requireTitle.error = false;
-        this.requirements[index].requireTitle.editable = false;
-      }
-    },
-    plusRequireExplain: function plusRequireExplain(e, index) {
-      if (!e.target.value) {
-        this.requirements[index].requireExplain.error = true;
-      } else {
-        this.requirements[index].requireExplain.content = e.target.value;
-        this.requirements[index].requireExplain.error = false;
-        this.requirements[index].requireExplain.editable = false;
-      }
-    },
-    plusUris: function plusUris() {
-      this.uris.push({
-        uri: {
-          content: "",
-          editable: true,
-          error: false
-        },
-        method: {
-          content: "",
-          editable: true,
-          error: false
-        },
-        explain: {
-          content: "",
-          editable: true,
-          error: false
-        }
-      });
-    },
-    plusUri: function plusUri(e, index) {
-      if (!e.target.value) {
-        this.uris[index].uri.error = true;
-      } else {
-        this.uris[index].uri.content = e.target.value;
-        this.uris[index].uri.error = false;
-        this.uris[index].uri.editable = false;
-      }
-    },
-    plusMethod: function plusMethod(e, index) {
-      if (!e.target.value) {
-        this.uris[index].method.error = true;
-      } else {
-        this.uris[index].method.content = e.target.value;
-        this.uris[index].method.error = false;
-        this.uris[index].method.editable = false;
-      }
-    },
-    plusExplain: function plusExplain(e, index) {
-      if (!e.target.value) {
-        this.uris[index].explain.error = true;
-      } else {
-        this.uris[index].explain.content = e.target.value;
-        this.uris[index].explain.error = false;
-        this.uris[index].explain.editable = false;
-      }
-    }
+    }; // DBへ保存
+
+
+    var submit = function submit() {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia.post("/create", form);
+    };
+
+    return {
+      form: form,
+      techField: techField,
+      requirement: requirement,
+      uri: uri,
+      addContent: addContent,
+      addLine: addLine,
+      plusTag: plusTag,
+      submit: submit
+    };
   }
 });
 
@@ -19800,14 +19686,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _components_ServiceCard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/ServiceCard.vue */ "./resources/js/components/ServiceCard.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      categories: []
-    };
-  },
   components: {
     AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_0__.default,
     ServiceCard: _components_ServiceCard_vue__WEBPACK_IMPORTED_MODULE_1__.default
@@ -19816,36 +19699,51 @@ __webpack_require__.r(__webpack_exports__);
     services: Array,
     tags: Array
   },
-  methods: {
-    // サービスごとのタグを取得
-    resultTags: function resultTags(id) {
-      return this.tags.filter(function (tag) {
+  setup: function setup(props) {
+    // タグの重複をなくす
+    var newTags = [];
+
+    for (var i = 0; i < props.tags.length; i++) {
+      newTags.push(props.tags[i].tagname);
+    }
+
+    var noDupTags = new Set(newTags); // カテゴリーを選択中に追加する
+
+    var categories = (0,vue__WEBPACK_IMPORTED_MODULE_2__.reactive)([]);
+
+    var plusCategory = function plusCategory(name) {
+      if (!categories.includes(name)) categories.push(name);
+    }; // サービスごとのタグを取得
+
+
+    var resultTags = function resultTags(id) {
+      return props.tags.filter(function (tag) {
         return tag.service_id === id;
       });
-    },
-    // カテゴリーを選択中に追加する
-    plusCategory: function plusCategory(name) {
-      if (!this.categories.includes(name)) this.categories.push(name);
-    },
-    // カテゴリーを選択中から削除する
-    deleteCategory: function deleteCategory(name) {
-      var index = this.categories.indexOf(name);
-      this.categories.splice(index, 1);
-    },
-    // 選択中のカテゴリーを保存した配列にサービスごとのカテゴリーが含まれているか
-    existCategory: function existCategory(tags) {
+    }; // 選択中のカテゴリーがサービスが個別に持つタグと一致しているかどうか
+
+
+    var existCategory = function existCategory(tags) {
       var flag = true;
 
-      if (this.categories.length) {
+      if (categories.length) {
         flag = false;
 
-        for (var i = 0; i < tags.length; i++) {
-          if (this.categories.includes(tags[i].tagname)) flag = true;
+        for (var _i = 0; _i < tags.length; _i++) {
+          if (categories.includes(tags[_i].tagname)) flag = true;
         }
       }
 
       return flag;
-    }
+    };
+
+    return {
+      noDupTags: noDupTags,
+      categories: categories,
+      plusCategory: plusCategory,
+      resultTags: resultTags,
+      existCategory: existCategory
+    };
   }
 });
 
@@ -21934,58 +21832,61 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  "class": "flex items-center justify-between"
+};
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
   "class": "font-semibold text-xl text-gray-800 leading-tight"
 }, " 新規作成画面 ", -1
 /* HOISTED */
 );
 
-var _hoisted_2 = {
+var _hoisted_3 = {
   "class": "py-10 px-4"
 };
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
   "class": "text-2xl text-indigo-700 font-semibold pb-3"
 }, " サービス名 ", -1
 /* HOISTED */
 );
 
-var _hoisted_4 = {
+var _hoisted_5 = {
   key: 2,
   "class": "\r\n                    bg-red-100\r\n                    border border-red-400\r\n                    text-red-700\r\n                    px-4\r\n                    py-3\r\n                    rounded\r\n                    mt-2\r\n                ",
   role: "alert"
 };
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", {
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", {
   "class": "font-bold"
 }, "サービス名が入力されていません。", -1
 /* HOISTED */
 );
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
   "class": "text-2xl text-indigo-700 font-semibold pb-3 mt-3"
 }, " カテゴリー ", -1
 /* HOISTED */
 );
 
-var _hoisted_7 = {
+var _hoisted_8 = {
   "class": "relative"
 };
-var _hoisted_8 = {
+var _hoisted_9 = {
   key: 0,
   "class": "\r\n                        bg-red-100\r\n                        border border-red-400\r\n                        text-red-700\r\n                        px-4\r\n                        py-3\r\n                        rounded\r\n                        mt-2\r\n                        w-full\r\n                        md:w-1/2\r\n                    ",
   role: "alert"
 };
-var _hoisted_9 = {
+var _hoisted_10 = {
   "class": "font-bold"
 };
-var _hoisted_10 = {
+var _hoisted_11 = {
   "class": "ml-2 mr-1 leading-relaxed truncate max-w-xs px-1",
   "x-text": "tag"
 };
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("svg", {
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("svg", {
   "class": "w-6 h-6 fill-current mx-auto",
   xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 24 24"
@@ -21996,63 +21897,63 @@ var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_12 = {
+var _hoisted_13 = {
   "class": "pt-3"
 };
-var _hoisted_13 = {
+var _hoisted_14 = {
   "class": "flex mb-3 items-center"
 };
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
   "class": "text-2xl text-indigo-700 font-semibold mr-2"
 }, " サービス概要 ", -1
 /* HOISTED */
 );
 
-var _hoisted_15 = {
+var _hoisted_16 = {
   key: 1,
   "class": "\r\n                        whitespace-pre-line\r\n                        mt-2\r\n                        py-2\r\n                        px-4\r\n                        mb-3\r\n                        text-xl text-gray-700\r\n                        font-bold\r\n                        break-words\r\n                    "
 };
-var _hoisted_16 = {
+var _hoisted_17 = {
   key: 2,
   "class": "\r\n                        bg-red-100\r\n                        border border-red-400\r\n                        text-red-700\r\n                        px-4\r\n                        py-3\r\n                        rounded\r\n                        mt-2\r\n                    ",
   role: "alert"
 };
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", {
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", {
   "class": "font-bold"
 }, "サービスの概要が入力されていません。", -1
 /* HOISTED */
 );
 
-var _hoisted_18 = {
+var _hoisted_19 = {
   "class": "flex mb-3 items-center"
 };
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
   "class": "text-2xl text-indigo-700 font-semibold mr-2"
 }, " 使用技術 ", -1
 /* HOISTED */
 );
 
-var _hoisted_20 = {
+var _hoisted_21 = {
   "class": "grid grid-cols-1 md:grid-cols-2"
 };
-var _hoisted_21 = {
+var _hoisted_22 = {
   "class": "bg-blue-200 m-2 rounded p-3"
 };
-var _hoisted_22 = {
+var _hoisted_23 = {
   "class": "flex items-center mb-3"
 };
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   stroke: "none",
   d: "M0 0h24v24H0z"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "18",
   y1: "6",
   x2: "6",
@@ -22061,7 +21962,7 @@ var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "6",
   y1: "6",
   x2: "18",
@@ -22070,80 +21971,19 @@ var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
   points: "3 6 5 6 21 6"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
-  x1: "10",
-  y1: "11",
-  x2: "10",
-  y2: "17"
 }, null, -1
 /* HOISTED */
 );
 
 var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
-  x1: "14",
-  y1: "11",
-  x2: "14",
-  y2: "17"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_30 = {
-  "class": "flex mb-3 items-center"
-};
-
-var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
-  "class": "text-2xl text-indigo-700 font-semibold mr-2"
-}, " 要件定義 ", -1
-/* HOISTED */
-);
-
-var _hoisted_32 = {
-  "class": "text-gray-700"
-};
-var _hoisted_33 = {
-  "class": "container px-5 py-2"
-};
-var _hoisted_34 = {
-  "class": "flex flex-wrap"
-};
-var _hoisted_35 = {
-  key: 1,
-  "class": "mb-1",
-  open: ""
-};
-var _hoisted_36 = {
-  "class": "\r\n                                            rounded\r\n                                            py-2\r\n                                            px-4\r\n                                            bg-gray-200\r\n                                            relative\r\n                                            h-full\r\n                                        "
-};
-var _hoisted_37 = {
-  "class": "font-semibold break-words"
-};
-
-var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
-  points: "3 6 5 6 21 6"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
-  d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "10",
   y1: "11",
   x2: "10",
@@ -22152,7 +21992,7 @@ var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "14",
   y1: "11",
   x2: "14",
@@ -22161,24 +22001,85 @@ var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_42 = {
+var _hoisted_31 = {
   "class": "flex mb-3 items-center"
 };
 
-var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+  "class": "text-2xl text-indigo-700 font-semibold mr-2"
+}, " 要件定義 ", -1
+/* HOISTED */
+);
+
+var _hoisted_33 = {
+  "class": "text-gray-700"
+};
+var _hoisted_34 = {
+  "class": "container px-5 py-2"
+};
+var _hoisted_35 = {
+  "class": "flex flex-wrap"
+};
+var _hoisted_36 = {
+  key: 1,
+  "class": "mb-1",
+  open: ""
+};
+var _hoisted_37 = {
+  "class": "\r\n                                            rounded\r\n                                            py-2\r\n                                            px-4\r\n                                            bg-gray-200\r\n                                            relative\r\n                                            h-full\r\n                                        "
+};
+var _hoisted_38 = {
+  "class": "font-semibold break-words"
+};
+
+var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
+  points: "3 6 5 6 21 6"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+  d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+  x1: "10",
+  y1: "11",
+  x2: "10",
+  y2: "17"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+  x1: "14",
+  y1: "11",
+  x2: "14",
+  y2: "17"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_43 = {
+  "class": "flex mb-3 items-center"
+};
+
+var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
   "class": "text-2xl text-indigo-700 font-semibold mr-2"
 }, " URI設計 ", -1
 /* HOISTED */
 );
 
-var _hoisted_44 = {
+var _hoisted_45 = {
   "class": "overflow-x-auto"
 };
-var _hoisted_45 = {
+var _hoisted_46 = {
   "class": "rounded-t-lg m-5 mx-auto bg-gray-200 text-gray-800"
 };
 
-var _hoisted_46 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "\r\n                            text-left\r\n                            border-b-2 border-gray-300\r\n                            flex flex-col-3\r\n                            items-center\r\n                        "
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "px-4 py-3 w-3/12 md:w-2/12"
@@ -22190,24 +22091,24 @@ var _hoisted_46 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_47 = {
-  "class": "px-4 py-3 w-3/12 md:w-2/12"
-};
 var _hoisted_48 = {
   "class": "px-4 py-3 w-3/12 md:w-2/12"
 };
 var _hoisted_49 = {
+  "class": "px-4 py-3 w-3/12 md:w-2/12"
+};
+var _hoisted_50 = {
   "class": "\r\n                                px-4\r\n                                py-3\r\n                                w-6/12\r\n                                overflow-x-auto\r\n                                max-h-40\r\n                                sm:max-h-full\r\n                                md:w-8/12\r\n                                flex\r\n                                items-center\r\n                            "
 };
 
-var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   stroke: "none",
   d: "M0 0h24v24H0z"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_52 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "18",
   y1: "6",
   x2: "6",
@@ -22216,7 +22117,7 @@ var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_52 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_53 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "6",
   y1: "6",
   x2: "18",
@@ -22230,121 +22131,130 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, null, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_1];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        "class": "\r\n                        bg-indigo-600\r\n                        hover:bg-indigo-400\r\n                        h-8\r\n                        w-12\r\n                        text-white\r\n                        rounded\r\n                    ",
+        onClick: _cache[1] || (_cache[1] = function () {
+          return $setup.submit && $setup.submit.apply($setup, arguments);
+        })
+      }, " 保存 ")])];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, _ctx.title.editable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" サービス名 "), _hoisted_4, $setup.form.title.editable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
         key: 0,
         "class": "w-full rounded",
         type: "text",
-        onKeyup: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
-          return $options.plusTitle && $options.plusTitle.apply($options, arguments);
-        }, ["enter"])),
-        value: _ctx.title.content,
         placeholder: "サービス名を入力してください",
-        onBlur: _cache[2] || (_cache[2] = function ($event) {
-          return _ctx.title.error = false;
-        })
-      }, null, 40
-      /* PROPS, HYDRATE_EVENTS */
-      , ["value"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
-        key: 1,
-        onClick: _cache[3] || (_cache[3] = function ($event) {
-          return _ctx.title.editable = true;
+        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+          return $setup.form.title.content = $event;
         }),
-        "class": "text-2xl font-bold text-gray-700"
-      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.title.content), 1
+        onKeyup: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+          return $setup.addContent($setup.form.title.content, 'title');
+        }, ["enter"])),
+        onBlur: _cache[4] || (_cache[4] = function ($event) {
+          return $setup.form.title.error = false;
+        })
+      }, null, 544
+      /* HYDRATE_EVENTS, NEED_PATCH */
+      )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.title.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
+        key: 1,
+        "class": "text-2xl font-bold text-gray-700",
+        onClick: _cache[5] || (_cache[5] = function ($event) {
+          return $setup.form.title.editable = true;
+        })
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.title.content), 1
       /* TEXT */
-      )), _ctx.title.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, [_hoisted_5])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+      )), $setup.form.title.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_5, [_hoisted_6])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" カテゴリー "), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
         "class": "\r\n                        appearance-none\r\n                        block\r\n                        w-full\r\n                        md:w-1/2\r\n                        bg-white\r\n                        text-gray-700\r\n                        border border-gray-200\r\n                        rounded\r\n                        py-2\r\n                        px-4\r\n                        leading-tight\r\n                        focus:outline-none\r\n                        focus:ring-1\r\n                        focus:ring-blue-500\r\n                        focus:border-blue-500\r\n                    ",
         placeholder: "カテゴリーを追加できます",
-        onKeyup: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
-          return $options.plusTag && $options.plusTag.apply($options, arguments);
+        onKeyup: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
+          return $setup.plusTag && $setup.plusTag.apply($setup, arguments);
         }, ["enter"])),
-        onBlur: _cache[5] || (_cache[5] = function ($event) {
-          return _ctx.tags.error = '';
+        onBlur: _cache[7] || (_cache[7] = function ($event) {
+          return $setup.form.tags.error = '';
         })
       }, null, 32
       /* HYDRATE_EVENTS */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" selections "), _ctx.tags.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.tags.error), 1
+      ), $setup.form.tags.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.tags.error), 1
       /* TEXT */
-      )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.tags.content, function (tag) {
+      )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.tags.content, function (tag, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           "class": "\r\n                        bg-blue-100\r\n                        inline-flex\r\n                        items-center\r\n                        text-sm\r\n                        rounded\r\n                        mt-2\r\n                        mr-1\r\n                        overflow-hidden\r\n                    ",
-          key: tag
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tag), 1
+          key: index
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tag), 1
         /* TEXT */
         ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
           "class": "\r\n                            w-6\r\n                            h-8\r\n                            inline-block\r\n                            align-middle\r\n                            text-gray-500\r\n                            bg-blue-200\r\n                            focus:outline-none\r\n                        ",
           onClick: function onClick($event) {
-            return $options.deleteTag(tag);
+            return $setup.form.tags.content.splice(index, 1);
           }
-        }, [_hoisted_11], 8
+        }, [_hoisted_12], 8
         /* PROPS */
         , ["onClick"])]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [_hoisted_14, _ctx.description.editable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
+      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" サービスの概要 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [_hoisted_15, $setup.form.description.editable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
         key: 0,
         "class": "\r\n                            bg-indigo-600\r\n                            hover:bg-indigo-400\r\n                            h-8\r\n                            w-12\r\n                            text-white\r\n                            rounded\r\n                        ",
-        onClick: _cache[6] || (_cache[6] = function () {
-          return $options.plusDescription && $options.plusDescription.apply($options, arguments);
+        onClick: _cache[8] || (_cache[8] = function ($event) {
+          return $setup.addContent($setup.form.description.content, 'description');
         })
       }, " 決定 ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
         key: 1,
         "class": "\r\n                            bg-indigo-600\r\n                            hover:bg-indigo-400\r\n                            h-8\r\n                            w-12\r\n                            text-white\r\n                            rounded\r\n                        ",
-        onClick: _cache[7] || (_cache[7] = function ($event) {
-          return _ctx.description.editable = true;
+        onClick: _cache[9] || (_cache[9] = function ($event) {
+          return $setup.form.description.editable = true;
         })
-      }, " 編集 "))]), _ctx.description.editable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("textarea", {
+      }, " 編集 "))]), $setup.form.description.editable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("textarea", {
         key: 0,
         "class": "\r\n                        autoexpand\r\n                        tracking-wide\r\n                        py-2\r\n                        px-4\r\n                        mb-3\r\n                        leading-relaxed\r\n                        appearance-none\r\n                        block\r\n                        w-full\r\n                        border border-gray-200\r\n                        rounded\r\n                        focus:outline-none focus:bg-white focus:border-gray-500\r\n                    ",
         rows: "10",
         placeholder: "サービスの説明を入力してください。",
-        "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
-          return _ctx.description.content = $event;
+        "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
+          return $setup.form.description.content = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.description.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.description.content), 1
+      )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.description.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.description.content), 1
       /* TEXT */
-      )), _ctx.description.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_16, [_hoisted_17])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+      )), $setup.form.description.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_17, [_hoisted_18])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 使用技術について "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
         "class": "\r\n                        bg-indigo-600\r\n                        hover:bg-indigo-400\r\n                        h-8\r\n                        w-12\r\n                        text-white\r\n                        rounded\r\n                    ",
-        onClick: _cache[9] || (_cache[9] = function () {
-          return $options.plusTechFields && $options.plusTechFields.apply($options, arguments);
+        onClick: _cache[11] || (_cache[11] = function ($event) {
+          return $setup.addLine('techField', $setup.techField());
         })
-      }, " 追加 ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.techFields, function (techField, index) {
+      }, " 追加 ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.techFields, function (techField, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
-          key: techField
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [techField.techField.editable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
+          key: index
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [$setup.form.techFields[index].techField.editable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
           key: 0,
-          value: techField.techField.content,
+          "onUpdate:modelValue": function onUpdateModelValue($event) {
+            return $setup.form.techFields[index].techField.content = $event;
+          },
           "class": "\r\n                                    appearance-none\r\n                                    block\r\n                                    w-4/5\r\n                                    bg-white\r\n                                    text-gray-700\r\n                                    border border-gray-200\r\n                                    rounded\r\n                                    py-2\r\n                                    px-4\r\n                                    mr-2\r\n                                    leading-tight\r\n                                    focus:outline-none\r\n                                    focus:ring-1\r\n                                    focus:ring-blue-500\r\n                                    focus:border-blue-500\r\n                                ",
           placeholder: "技術分野を入力してください。",
           onKeyup: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
-            return $options.plusTechField($event, index);
+            return $setup.addContent($setup.form.techFields[index].techField.content, 'techFields', index);
           }, ["enter"])
         }, null, 40
         /* PROPS, HYDRATE_EVENTS */
-        , ["value", "onKeyup"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
+        , ["onUpdate:modelValue", "onKeyup"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.techFields[index].techField.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
           key: 1,
           "class": "\r\n                                    py-2\r\n                                    px-4\r\n                                    mr-2\r\n                                    font-bold\r\n                                    text-gray-700\r\n                                    w-4/5\r\n                                ",
           onClick: function onClick($event) {
-            return techField.techField.editable = true;
+            return $setup.form.techFields[index].techField.editable = true;
           }
-        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(techField.techField.content), 9
+        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.techFields[index].techField.content), 9
         /* TEXT, PROPS */
         , ["onClick"])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
           "class": "\r\n                                    bg-indigo-600\r\n                                    hover:bg-indigo-400\r\n                                    h-8\r\n                                    w-12\r\n                                    text-white\r\n                                    rounded\r\n                                    mr-3\r\n                                ",
           onClick: function onClick($event) {
-            return $options.plusTech(index);
+            return $setup.addLine('teches', techField, index);
           }
         }, " 追加 ", 8
         /* PROPS */
         , ["onClick"]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
           "class": "h-6 w-6 text-red-600 hover:text-red-400",
           onClick: function onClick($event) {
-            return _ctx.techFields.splice(index, 1);
+            return $setup.form.techFields.splice(index, 1);
           },
           width: "24",
           height: "24",
@@ -22354,47 +22264,51 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           fill: "none",
           "stroke-linecap": "round",
           "stroke-linejoin": "round"
-        }, [_hoisted_23, _hoisted_24, _hoisted_25], 8
+        }, [_hoisted_24, _hoisted_25, _hoisted_26], 8
         /* PROPS */
         , ["onClick"]))]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(techField.teches, function (tech, techIndex) {
           return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
             "class": "flex mb-2 items-center",
-            key: tech
-          }, [tech.tech.editable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
+            key: techIndex
+          }, [$setup.form.techFields[index].teches[techIndex].tech.editable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
             key: 0,
             "class": "\r\n                                    appearance-none\r\n                                    block\r\n                                    w-3/5\r\n                                    bg-white\r\n                                    text-gray-700\r\n                                    border border-gray-200\r\n                                    rounded\r\n                                    py-2\r\n                                    px-4\r\n                                    mr-2\r\n                                    leading-tight\r\n                                    focus:outline-none\r\n                                    focus:ring-1\r\n                                    focus:ring-blue-500\r\n                                    focus:border-blue-500\r\n                                ",
             placeholder: "技術名",
             onKeyup: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
-              return $options.plusTechName($event, index, techIndex);
+              return $setup.addContent($setup.form.techFields[index].teches[techIndex].tech.content, 'tech', index, techIndex);
             }, ["enter"]),
-            value: tech.tech.content
+            "onUpdate:modelValue": function onUpdateModelValue($event) {
+              return $setup.form.techFields[index].teches[techIndex].tech.content = $event;
+            }
           }, null, 40
           /* PROPS, HYDRATE_EVENTS */
-          , ["onKeyup", "value"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
+          , ["onKeyup", "onUpdate:modelValue"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.techFields[index].teches[techIndex].tech.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
             key: 1,
             "class": "py-2 px-4 mr-2 font-bold text-gray-700",
             onClick: function onClick($event) {
-              return tech.tech.editable = true;
+              return $setup.form.techFields[index].teches[techIndex].tech.editable = true;
             }
-          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tech.tech.content), 9
+          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.techFields[index].teches[techIndex].tech.content), 9
           /* TEXT, PROPS */
-          , ["onClick"])), tech.version.editable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
+          , ["onClick"])), $setup.form.techFields[index].teches[techIndex].version.editable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
             key: 2,
             "class": "\r\n                                    appearance-none\r\n                                    block\r\n                                    w-2/5\r\n                                    bg-white\r\n                                    text-gray-700\r\n                                    border border-gray-200\r\n                                    rounded\r\n                                    py-2\r\n                                    px-4\r\n                                    mr-2\r\n                                    leading-tight\r\n                                    focus:outline-none\r\n                                    focus:ring-1\r\n                                    focus:ring-blue-500\r\n                                    focus:border-blue-500\r\n                                ",
             placeholder: "バージョン",
             onKeyup: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
-              return $options.plusTechVersion($event, index, techIndex);
+              return $setup.addContent($setup.form.techFields[index].teches[techIndex].version.content, 'version', index, techIndex);
             }, ["enter"]),
-            value: tech.version.content
+            "onUpdate:modelValue": function onUpdateModelValue($event) {
+              return $setup.form.techFields[index].teches[techIndex].version.content = $event;
+            }
           }, null, 40
           /* PROPS, HYDRATE_EVENTS */
-          , ["onKeyup", "value"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
+          , ["onKeyup", "onUpdate:modelValue"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.techFields[index].teches[techIndex].version.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
             key: 3,
             "class": "py-2 px-4 mr-2 font-bold text-gray-700",
             onClick: function onClick($event) {
-              return tech.version.editable = true;
+              return $setup.form.techFields[index].teches[techIndex].version.editable = true;
             }
-          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tech.version.content), 9
+          }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.techFields[index].teches[techIndex].version.content), 9
           /* TEXT, PROPS */
           , ["onClick"])), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
             "class": "h-6 w-6 text-red-600 hover:text-red-400",
@@ -22405,9 +22319,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "stroke-linecap": "round",
             "stroke-linejoin": "round",
             onClick: function onClick($event) {
-              return $options.deleteTech(index, techIndex);
+              return $setup.form.techFields[index].teches.splice(techIndex, 1);
             }
-          }, [_hoisted_26, _hoisted_27, _hoisted_28, _hoisted_29], 8
+          }, [_hoisted_27, _hoisted_28, _hoisted_29, _hoisted_30], 8
           /* PROPS */
           , ["onClick"]))]);
         }), 128
@@ -22415,26 +22329,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         ))])]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_30, [_hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 要件定義 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_31, [_hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
         "class": "\r\n                        bg-indigo-600\r\n                        hover:bg-indigo-400\r\n                        h-8\r\n                        w-12\r\n                        text-white\r\n                        rounded\r\n                    ",
-        onClick: _cache[10] || (_cache[10] = function () {
-          return $options.plusRequirements && $options.plusRequirements.apply($options, arguments);
+        onClick: _cache[12] || (_cache[12] = function ($event) {
+          return $setup.addLine('requirement', $setup.requirement());
         })
-      }, " 追加 ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_34, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.requirements, function (requirement, index) {
+      }, " 追加 ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_35, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.requirements, function (requirement, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           "class": "w-full",
           key: index
-        }, [requirement.requireTitle.editable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
+        }, [$setup.form.requirements[index].requireTitle.editable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
           key: 0,
           "class": "\r\n                                        appearance-none\r\n                                        block\r\n                                        w-full\r\n                                        bg-white\r\n                                        text-gray-700\r\n                                        border border-gray-200\r\n                                        rounded\r\n                                        py-2\r\n                                        px-4\r\n                                        mr-2\r\n                                        leading-tight\r\n                                        focus:outline-none\r\n                                        focus:ring-1\r\n                                        focus:ring-blue-500\r\n                                        focus:border-blue-500\r\n                                    ",
           placeholder: "要件名・機能名を入力してください",
           onKeyup: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
-            return $options.plusRequireTitle($event, index);
+            return $setup.addContent($setup.form.requirements[index].requireTitle.content, 'requireTitle', index);
           }, ["enter"]),
-          value: requirement.requireTitle.content
+          "onUpdate:modelValue": function onUpdateModelValue($event) {
+            return $setup.form.requirements[index].requireTitle.content = $event;
+          }
         }, null, 40
         /* PROPS, HYDRATE_EVENTS */
-        , ["onKeyup", "value"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("details", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("summary", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_37, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(requirement.requireTitle.content), 1
+        , ["onKeyup", "onUpdate:modelValue"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.requirements[index].requireTitle.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("details", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("summary", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.requirements[index].requireTitle.content), 1
         /* TEXT */
         ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
           "class": "\r\n                                                h-6\r\n                                                w-6\r\n                                                text-red-600\r\n                                                hover:text-red-400\r\n                                                absolute\r\n                                                top-1\r\n                                                right-1\r\n                                            ",
@@ -22445,93 +22361,101 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "stroke-linecap": "round",
           "stroke-linejoin": "round",
           onClick: function onClick($event) {
-            return _ctx.requirements.splice(index, 1);
+            return $setup.form.requirements.splice(index, 1);
           }
-        }, [_hoisted_38, _hoisted_39, _hoisted_40, _hoisted_41], 8
+        }, [_hoisted_39, _hoisted_40, _hoisted_41, _hoisted_42], 8
         /* PROPS */
-        , ["onClick"]))]), requirement.requireExplain.editable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("textarea", {
+        , ["onClick"]))]), $setup.form.requirements[index].requireExplain.editable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("textarea", {
           key: 0,
           "class": "\r\n                                            appearance-none\r\n                                            block\r\n                                            w-full\r\n                                            bg-white\r\n                                            text-gray-700\r\n                                            border border-gray-200\r\n                                            rounded\r\n                                            py-2\r\n                                            px-4\r\n                                            mt-2\r\n                                            mr-2\r\n                                            leading-tight\r\n                                            focus:outline-none\r\n                                            focus:ring-1\r\n                                            focus:ring-blue-500\r\n                                            focus:border-blue-500\r\n                                        ",
           rows: "8",
           placeholder: "要件・機能の説明を入力してください",
           onKeyup: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
-            return $options.plusRequireExplain($event, index);
+            return $setup.addContent($setup.form.requirements[index].requireExplain.content, 'requireExplain', index);
           }, ["enter"]),
-          value: requirement.requireExplain.content
+          "onUpdate:modelValue": function onUpdateModelValue($event) {
+            return $setup.form.requirements[index].requireExplain.content = $event;
+          }
         }, null, 40
         /* PROPS, HYDRATE_EVENTS */
-        , ["onKeyup", "value"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
+        , ["onKeyup", "onUpdate:modelValue"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.requirements[index].requireExplain.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
           key: 1,
           "class": "\r\n                                            text-grey-600\r\n                                            font-bold\r\n                                            m-4\r\n                                            whitespace-pre-line\r\n                                            break-words\r\n                                        ",
           onClick: function onClick($event) {
-            return requirement.requireExplain.editable = true;
+            return $setup.form.requirements[index].requireExplain.editable = true;
           }
-        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(requirement.requireExplain.content), 9
+        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.requirements[index].requireExplain.content), 9
         /* TEXT, PROPS */
         , ["onClick"]))]))]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_42, [_hoisted_43, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+      ))])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_43, [_hoisted_44, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
         "class": "\r\n                        bg-indigo-600\r\n                        hover:bg-indigo-400\r\n                        h-8\r\n                        w-12\r\n                        text-white\r\n                        rounded\r\n                    ",
-        onClick: _cache[11] || (_cache[11] = function () {
-          return $options.plusUris && $options.plusUris.apply($options, arguments);
+        onClick: _cache[13] || (_cache[13] = function ($event) {
+          return $setup.addLine('uri', $setup.uri());
         })
-      }, " 追加 ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_45, [_hoisted_46, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.uris, function (uri, index) {
+      }, " 追加 ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_45, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_46, [_hoisted_47, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.uris, function (uri, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           "class": "\r\n                            bg-gray-100\r\n                            border-b border-gray-200\r\n                            flex flex-col-3\r\n                            items-center\r\n                        ",
           key: index
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_47, [uri.uri.editable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_48, [$setup.form.uris[index].uri.editable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
           key: 0,
           "class": "\r\n                                    appearance-none\r\n                                    block\r\n                                    w-full\r\n                                    bg-white\r\n                                    text-gray-700\r\n                                    border border-gray-200\r\n                                    rounded\r\n                                    h-10\r\n                                    px-1\r\n                                    leading-tight\r\n                                    focus:outline-none\r\n                                    focus:ring-1\r\n                                    focus:ring-blue-500\r\n                                    focus:border-blue-500\r\n                                ",
           onKeyup: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
-            return $options.plusUri($event, index);
+            return $setup.addContent($setup.form.uris[index].uri.content, 'uri', index);
           }, ["enter"]),
-          value: uri.uri.content
+          "onUpdate:modelValue": function onUpdateModelValue($event) {
+            return $setup.form.uris[index].uri.content = $event;
+          }
         }, null, 40
         /* PROPS, HYDRATE_EVENTS */
-        , ["onKeyup", "value"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
+        , ["onKeyup", "onUpdate:modelValue"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.uris[index].uri.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
           key: 1,
           onClick: function onClick($event) {
-            return uri.uri.editable = true;
+            return $setup.form.uris[index].uri.editable = true;
           }
-        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(uri.uri.content), 9
+        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.uris[index].uri.content), 9
         /* TEXT, PROPS */
-        , ["onClick"]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_48, [uri.method.editable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
+        , ["onClick"]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_49, [$setup.form.uris[index].method.editable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
           key: 0,
           "class": "\r\n                                    appearance-none\r\n                                    block\r\n                                    w-full\r\n                                    bg-white\r\n                                    text-gray-700\r\n                                    border border-gray-200\r\n                                    rounded\r\n                                    h-10\r\n                                    px-1\r\n                                    leading-tight\r\n                                    focus:outline-none\r\n                                    focus:ring-1\r\n                                    focus:ring-blue-500\r\n                                    focus:border-blue-500\r\n                                ",
           onKeyup: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
-            return $options.plusMethod($event, index);
+            return $setup.addContent($setup.form.uris[index].method.content, 'method', index);
           }, ["enter"]),
-          value: uri.method.content
+          "onUpdate:modelValue": function onUpdateModelValue($event) {
+            return $setup.form.uris[index].method.content = $event;
+          }
         }, null, 40
         /* PROPS, HYDRATE_EVENTS */
-        , ["onKeyup", "value"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
+        , ["onKeyup", "onUpdate:modelValue"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.uris[index].method.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
           key: 1,
           onClick: function onClick($event) {
-            return uri.method.editable = true;
+            return $setup.form.uris[index].method.editable = true;
           }
-        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(uri.method.content), 9
+        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.uris[index].method.content), 9
         /* TEXT, PROPS */
-        , ["onClick"]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_49, [uri.explain.editable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
+        , ["onClick"]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_50, [$setup.form.uris[index].explain.editable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
           key: 0,
           "class": "\r\n                                    appearance-none\r\n                                    block\r\n                                    w-full\r\n                                    bg-white\r\n                                    text-gray-700\r\n                                    border border-gray-200\r\n                                    rounded\r\n                                    h-10\r\n                                    px-1\r\n                                    mr-2\r\n                                    leading-tight\r\n                                    focus:outline-none\r\n                                    focus:ring-1\r\n                                    focus:ring-blue-500\r\n                                    focus:border-blue-500\r\n                                ",
           onKeyup: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
-            return $options.plusExplain($event, index);
+            return $setup.addContent($setup.form.uris[index].explain.content, 'explain', index);
           }, ["enter"]),
-          value: uri.explain.content
+          "onUpdate:modelValue": function onUpdateModelValue($event) {
+            return $setup.form.uris[index].explain.content = $event;
+          }
         }, null, 40
         /* PROPS, HYDRATE_EVENTS */
-        , ["onKeyup", "value"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
+        , ["onKeyup", "onUpdate:modelValue"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.uris[index].explain.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
           key: 1,
           onClick: function onClick($event) {
-            return uri.explain.editable = true;
+            return $setup.form.uris[index].explain.editable = true;
           }
-        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(uri.explain.content), 9
+        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.uris[index].explain.content), 9
         /* TEXT, PROPS */
         , ["onClick"])), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
           "class": "h-6 w-6 text-red-600 hover:text-red-400",
           onClick: function onClick($event) {
-            return _ctx.uris.splice(index, 1);
+            return $setup.form.uris.splice(index, 1);
           },
           width: "24",
           height: "24",
@@ -22541,7 +22465,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           fill: "none",
           "stroke-linecap": "round",
           "stroke-linejoin": "round"
-        }, [_hoisted_50, _hoisted_51, _hoisted_52], 8
+        }, [_hoisted_51, _hoisted_52, _hoisted_53], 8
         /* PROPS */
         , ["onClick"]))])]);
       }), 128
@@ -23936,24 +23860,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [_hoisted_1];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.tags, function (tag) {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.noDupTags, function (tag, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
-          key: tag.id,
+          key: index,
           "class": "\r\n                    text-xs\r\n                    inline-flex\r\n                    items-center\r\n                    font-bold\r\n                    leading-sm\r\n                    uppercase\r\n                    px-3\r\n                    py-1\r\n                    bg-blue-200\r\n                    text-blue-700\r\n                    rounded-full\r\n                    mx-2\r\n                    my-1\r\n                    hover:bg-blue-100\r\n                ",
           onClick: function onClick($event) {
-            return $options.plusCategory(tag.tagname);
+            return $setup.plusCategory(tag);
           }
-        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tag.tagname), 9
+        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tag), 9
         /* TEXT, PROPS */
         , ["onClick"]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.categories, function (category) {
+      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.categories, function (category, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
-          key: category,
+          key: index,
           "class": "\r\n                    text-xs\r\n                    inline-flex\r\n                    items-center\r\n                    font-bold\r\n                    leading-sm\r\n                    uppercase\r\n                    px-3\r\n                    py-1\r\n                    bg-blue-300\r\n                    text-blue-700\r\n                    rounded-full\r\n                    mx-2\r\n                    my-1\r\n                    hover:bg-blue-100\r\n                ",
           onClick: function onClick($event) {
-            return $options.deleteCategory(category);
+            return $setup.categories.splice(index, 1);
           }
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(category), 9
         /* TEXT, PROPS */
@@ -23966,10 +23890,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           id: service.id,
           title: service.title,
           description: service.description,
-          tags: $options.resultTags(service.id)
+          tags: $setup.resultTags(service.id)
         }, null, 8
         /* PROPS */
-        , ["id", "title", "description", "tags"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $options.existCategory($options.resultTags(service.id))]]);
+        , ["id", "title", "description", "tags"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $setup.existCategory($setup.resultTags(service.id))]]);
       }), 128
       /* KEYED_FRAGMENT */
       ))])];

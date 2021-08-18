@@ -10,8 +10,8 @@
         <div class="m-3">
             <h1 class="text-2xl text-indigo-700 font-semibold">カテゴリー</h1>
             <div
-                v-for="tag in tags"
-                :key="tag.id"
+                v-for="(tag, index) in noDupTags"
+                :key="index"
                 class="
                     text-xs
                     inline-flex
@@ -28,9 +28,9 @@
                     my-1
                     hover:bg-blue-100
                 "
-                @click="plusCategory(tag.tagname)"
+                @click="plusCategory(tag)"
             >
-                {{ tag.tagname }}
+                {{ tag }}
             </div>
         </div>
 
@@ -38,8 +38,8 @@
         <div class="m-3">
             <h1 class="text-2xl text-indigo-700 font-semibold">選択中</h1>
             <div
-                v-for="category in categories"
-                :key="category"
+                v-for="(category, index) in categories"
+                :key="index"
                 class="
                     text-xs
                     inline-flex
@@ -56,7 +56,7 @@
                     my-1
                     hover:bg-blue-100
                 "
-                @click="deleteCategory(category)"
+                @click="categories.splice(index, 1)"
             >
                 {{ category }}
             </div>
@@ -80,13 +80,9 @@
 <script>
 import AppLayout from "../Layouts/AppLayout.vue";
 import ServiceCard from "../components/ServiceCard.vue";
+import { reactive } from "vue";
 
 export default {
-    data: function () {
-        return {
-            categories: [],
-        };
-    },
     components: {
         AppLayout,
         ServiceCard,
@@ -95,33 +91,44 @@ export default {
         services: Array,
         tags: Array,
     },
-    methods: {
-        // サービスごとのタグを取得
-        resultTags(id) {
-            return this.tags.filter(function (tag) {
-                return tag.service_id === id;
-            });
-        },
+    setup(props) {
+        // タグの重複をなくす
+        const newTags = [];
+        for (let i = 0; i < props.tags.length; i++) {
+            newTags.push(props.tags[i].tagname);
+        }
+        const noDupTags = new Set(newTags);
+
         // カテゴリーを選択中に追加する
-        plusCategory(name) {
-            if (!this.categories.includes(name)) this.categories.push(name);
-        },
-        // カテゴリーを選択中から削除する
-        deleteCategory(name) {
-            const index = this.categories.indexOf(name);
-            this.categories.splice(index, 1);
-        },
-        // 選択中のカテゴリーを保存した配列にサービスごとのカテゴリーが含まれているか
-        existCategory(tags) {
+        const categories = reactive([]);
+        const plusCategory = (name) => {
+            if (!categories.includes(name)) categories.push(name);
+        };
+
+        // サービスごとのタグを取得
+        const resultTags = (id) => {
+            return props.tags.filter((tag) => tag.service_id === id);
+        };
+
+        // 選択中のカテゴリーがサービスが個別に持つタグと一致しているかどうか
+        const existCategory = (tags) => {
             let flag = true;
-            if (this.categories.length) {
+            if (categories.length) {
                 flag = false;
                 for (let i = 0; i < tags.length; i++) {
-                    if (this.categories.includes(tags[i].tagname)) flag = true;
+                    if (categories.includes(tags[i].tagname)) flag = true;
                 }
             }
             return flag;
-        },
+        };
+
+        return {
+            noDupTags,
+            categories,
+            plusCategory,
+            resultTags,
+            existCategory,
+        };
     },
 };
 </script>

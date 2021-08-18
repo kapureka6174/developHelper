@@ -16,6 +16,7 @@ class CreateRequirementsTable extends Migration
         Schema::create('requirements', function (Blueprint $table) {
             $table->id();
             $table->foreignId('service_id')->constrained();
+            $table->text('title');
             $table->text('content');
             $table->boolean('finished')->nullable()->default(false);
             $table->timestamps();

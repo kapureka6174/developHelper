@@ -26,7 +26,7 @@ class UriFactory extends Factory
             'service_id' => Service::factory(),
             'uri' => $this->faker->word(),
             'method' => $this->faker->word(),
-            'explain' => $this->faker->realText(),
+            'explain' => $this->faker->realText(20),
         ];
     }
 }

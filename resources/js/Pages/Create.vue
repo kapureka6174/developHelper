@@ -1,30 +1,46 @@
 <template>
     <app-layout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                新規作成画面
-            </h2>
+            <div class="flex items-center justify-between">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    新規作成画面
+                </h2>
+                <button
+                    class="
+                        bg-indigo-600
+                        hover:bg-indigo-400
+                        h-8
+                        w-12
+                        text-white
+                        rounded
+                    "
+                    @click="submit"
+                >
+                    保存
+                </button>
+            </div>
         </template>
 
         <div class="py-10 px-4">
+            <!-- サービス名 -->
             <h1 class="text-2xl text-indigo-700 font-semibold pb-3">
                 サービス名
             </h1>
             <input
-                v-if="title.editable"
+                v-if="form.title.editable"
                 class="w-full rounded"
                 type="text"
-                @keyup.enter="plusTitle"
-                :value="title.content"
                 placeholder="サービス名を入力してください"
-                v-on:blur="title.error = false"
+                v-model="form.title.content"
+                @keyup.enter="addContent(form.title.content, 'title')"
+                v-on:blur="form.title.error = false"
             />
             <p
                 v-else
-                @click="title.editable = true"
                 class="text-2xl font-bold text-gray-700"
+                @click="form.title.editable = true"
             >
-                {{ title.content }}
+                {{ form.title.content }}
             </p>
             <div
                 class="
@@ -37,13 +53,14 @@
                     mt-2
                 "
                 role="alert"
-                v-if="title.error"
+                v-if="form.title.error"
             >
                 <strong class="font-bold"
                     >サービス名が入力されていません。</strong
                 >
             </div>
 
+            <!-- カテゴリー -->
             <h1 class="text-2xl text-indigo-700 font-semibold pb-3 mt-3">
                 カテゴリー
             </h1>
@@ -68,9 +85,8 @@
                     "
                     placeholder="カテゴリーを追加できます"
                     @keyup.enter="plusTag"
-                    v-on:blur="tags.error = ''"
+                    v-on:blur="form.tags.error = ''"
                 />
-                <!-- selections -->
                 <div
                     class="
                         bg-red-100
@@ -84,9 +100,9 @@
                         md:w-1/2
                     "
                     role="alert"
-                    v-if="tags.error"
+                    v-if="form.tags.error"
                 >
-                    <strong class="font-bold">{{ tags.error }}</strong>
+                    <strong class="font-bold">{{ form.tags.error }}</strong>
                 </div>
                 <div
                     class="
@@ -99,8 +115,8 @@
                         mr-1
                         overflow-hidden
                     "
-                    v-for="tag in tags.content"
-                    :key="tag"
+                    v-for="(tag, index) in form.tags.content"
+                    :key="index"
                 >
                     <span
                         class="ml-2 mr-1 leading-relaxed truncate max-w-xs px-1"
@@ -117,7 +133,7 @@
                             bg-blue-200
                             focus:outline-none
                         "
-                        @click="deleteTag(tag)"
+                        @click="form.tags.content.splice(index, 1)"
                     >
                         <svg
                             class="w-6 h-6 fill-current mx-auto"
@@ -133,6 +149,7 @@
                 </div>
             </div>
 
+            <!-- サービスの概要 -->
             <div class="pt-3">
                 <div class="flex mb-3 items-center">
                     <h2 class="text-2xl text-indigo-700 font-semibold mr-2">
@@ -147,8 +164,10 @@
                             text-white
                             rounded
                         "
-                        v-if="description.editable"
-                        @click="plusDescription"
+                        v-if="form.description.editable"
+                        @click="
+                            addContent(form.description.content, 'description')
+                        "
                     >
                         決定
                     </button>
@@ -162,7 +181,7 @@
                             rounded
                         "
                         v-else
-                        @click="description.editable = true"
+                        @click="form.description.editable = true"
                     >
                         編集
                     </button>
@@ -184,8 +203,8 @@
                     "
                     rows="10"
                     placeholder="サービスの説明を入力してください。"
-                    v-if="description.editable"
-                    v-model="description.content"
+                    v-if="form.description.editable"
+                    v-model="form.description.content"
                 ></textarea>
                 <p
                     class="
@@ -200,7 +219,7 @@
                     "
                     v-else
                 >
-                    {{ description.content }}
+                    {{ form.description.content }}
                 </p>
                 <div
                     class="
@@ -213,7 +232,7 @@
                         mt-2
                     "
                     role="alert"
-                    v-if="description.error"
+                    v-if="form.description.error"
                 >
                     <strong class="font-bold"
                         >サービスの概要が入力されていません。</strong
@@ -221,6 +240,7 @@
                 </div>
             </div>
 
+            <!-- 使用技術について -->
             <div class="flex mb-3 items-center">
                 <h2 class="text-2xl text-indigo-700 font-semibold mr-2">
                     使用技術
@@ -234,18 +254,20 @@
                         text-white
                         rounded
                     "
-                    @click="plusTechFields"
+                    @click="addLine('techField', techField())"
                 >
                     追加
                 </button>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2">
-                <div v-for="(techField, index) in techFields" :key="techField">
+                <div v-for="(techField, index) in form.techFields" :key="index">
                     <div class="bg-blue-200 m-2 rounded p-3">
                         <div class="flex items-center mb-3">
                             <input
-                                v-if="techField.techField.editable"
-                                :value="techField.techField.content"
+                                v-if="form.techFields[index].techField.editable"
+                                v-model="
+                                    form.techFields[index].techField.content
+                                "
                                 class="
                                     appearance-none
                                     block
@@ -264,7 +286,14 @@
                                     focus:border-blue-500
                                 "
                                 placeholder="技術分野を入力してください。"
-                                @keyup.enter="plusTechField($event, index)"
+                                @keyup.enter="
+                                    addContent(
+                                        form.techFields[index].techField
+                                            .content,
+                                        'techFields',
+                                        index
+                                    )
+                                "
                             />
                             <p
                                 v-else
@@ -276,9 +305,13 @@
                                     text-gray-700
                                     w-4/5
                                 "
-                                @click="techField.techField.editable = true"
+                                @click="
+                                    form.techFields[
+                                        index
+                                    ].techField.editable = true
+                                "
                             >
-                                {{ techField.techField.content }}
+                                {{ form.techFields[index].techField.content }}
                             </p>
                             <button
                                 class="
@@ -290,13 +323,13 @@
                                     rounded
                                     mr-3
                                 "
-                                @click="plusTech(index)"
+                                @click="addLine('teches', techField, index)"
                             >
                                 追加
                             </button>
                             <svg
                                 class="h-6 w-6 text-red-600 hover:text-red-400"
-                                @click="techFields.splice(index, 1)"
+                                @click="form.techFields.splice(index, 1)"
                                 width="24"
                                 height="24"
                                 viewBox="0 0 24 24"
@@ -314,10 +347,13 @@
                         <div
                             class="flex mb-2 items-center"
                             v-for="(tech, techIndex) in techField.teches"
-                            :key="tech"
+                            :key="techIndex"
                         >
                             <input
-                                v-if="tech.tech.editable"
+                                v-if="
+                                    form.techFields[index].teches[techIndex]
+                                        .tech.editable
+                                "
                                 class="
                                     appearance-none
                                     block
@@ -337,19 +373,38 @@
                                 "
                                 placeholder="技術名"
                                 @keyup.enter="
-                                    plusTechName($event, index, techIndex)
+                                    addContent(
+                                        form.techFields[index].teches[techIndex]
+                                            .tech.content,
+                                        'tech',
+                                        index,
+                                        techIndex
+                                    )
                                 "
-                                :value="tech.tech.content"
+                                v-model="
+                                    form.techFields[index].teches[techIndex]
+                                        .tech.content
+                                "
                             />
                             <p
                                 v-else
                                 class="py-2 px-4 mr-2 font-bold text-gray-700"
-                                @click="tech.tech.editable = true"
+                                @click="
+                                    form.techFields[index].teches[
+                                        techIndex
+                                    ].tech.editable = true
+                                "
                             >
-                                {{ tech.tech.content }}
+                                {{
+                                    form.techFields[index].teches[techIndex]
+                                        .tech.content
+                                }}
                             </p>
                             <input
-                                v-if="tech.version.editable"
+                                v-if="
+                                    form.techFields[index].teches[techIndex]
+                                        .version.editable
+                                "
                                 class="
                                     appearance-none
                                     block
@@ -369,16 +424,32 @@
                                 "
                                 placeholder="バージョン"
                                 @keyup.enter="
-                                    plusTechVersion($event, index, techIndex)
+                                    addContent(
+                                        form.techFields[index].teches[techIndex]
+                                            .version.content,
+                                        'version',
+                                        index,
+                                        techIndex
+                                    )
                                 "
-                                :value="tech.version.content"
+                                v-model="
+                                    form.techFields[index].teches[techIndex]
+                                        .version.content
+                                "
                             />
                             <p
                                 v-else
                                 class="py-2 px-4 mr-2 font-bold text-gray-700"
-                                @click="tech.version.editable = true"
+                                @click="
+                                    form.techFields[index].teches[
+                                        techIndex
+                                    ].version.editable = true
+                                "
                             >
-                                {{ tech.version.content }}
+                                {{
+                                    form.techFields[index].teches[techIndex]
+                                        .version.content
+                                }}
                             </p>
                             <svg
                                 class="h-6 w-6 text-red-600 hover:text-red-400"
@@ -388,7 +459,12 @@
                                 stroke-width="2"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                @click="deleteTech(index, techIndex)"
+                                @click="
+                                    form.techFields[index].teches.splice(
+                                        techIndex,
+                                        1
+                                    )
+                                "
                             >
                                 <polyline points="3 6 5 6 21 6" />
                                 <path
@@ -402,6 +478,7 @@
                 </div>
             </div>
 
+            <!-- 要件定義 -->
             <div class="flex mb-3 items-center">
                 <h2 class="text-2xl text-indigo-700 font-semibold mr-2">
                     要件定義
@@ -415,7 +492,7 @@
                         text-white
                         rounded
                     "
-                    @click="plusRequirements"
+                    @click="addLine('requirement', requirement())"
                 >
                     追加
                 </button>
@@ -426,11 +503,16 @@
                         <div class="flex flex-wrap">
                             <div
                                 class="w-full"
-                                v-for="(requirement, index) in requirements"
+                                v-for="(
+                                    requirement, index
+                                ) in form.requirements"
                                 :key="index"
                             >
                                 <input
-                                    v-if="requirement.requireTitle.editable"
+                                    v-if="
+                                        form.requirements[index].requireTitle
+                                            .editable
+                                    "
                                     class="
                                         appearance-none
                                         block
@@ -450,9 +532,17 @@
                                     "
                                     placeholder="要件名・機能名を入力してください"
                                     @keyup.enter="
-                                        plusRequireTitle($event, index)
+                                        addContent(
+                                            form.requirements[index]
+                                                .requireTitle.content,
+                                            'requireTitle',
+                                            index
+                                        )
                                     "
-                                    :value="requirement.requireTitle.content"
+                                    v-model="
+                                        form.requirements[index].requireTitle
+                                            .content
+                                    "
                                 />
                                 <details v-else class="mb-1" open>
                                     <summary
@@ -467,7 +557,8 @@
                                     >
                                         <span class="font-semibold break-words">
                                             {{
-                                                requirement.requireTitle.content
+                                                form.requirements[index]
+                                                    .requireTitle.content
                                             }}
                                         </span>
                                         <svg
@@ -487,7 +578,10 @@
                                             stroke-linecap="round"
                                             stroke-linejoin="round"
                                             @click="
-                                                requirements.splice(index, 1)
+                                                form.requirements.splice(
+                                                    index,
+                                                    1
+                                                )
                                             "
                                         >
                                             <polyline points="3 6 5 6 21 6" />
@@ -511,7 +605,8 @@
 
                                     <textarea
                                         v-if="
-                                            requirement.requireExplain.editable
+                                            form.requirements[index]
+                                                .requireExplain.editable
                                         "
                                         class="
                                             appearance-none
@@ -534,10 +629,16 @@
                                         rows="8"
                                         placeholder="要件・機能の説明を入力してください"
                                         @keyup.enter="
-                                            plusRequireExplain($event, index)
+                                            addContent(
+                                                form.requirements[index]
+                                                    .requireExplain.content,
+                                                'requireExplain',
+                                                index
+                                            )
                                         "
-                                        :value="
-                                            requirement.requireExplain.content
+                                        v-model="
+                                            form.requirements[index]
+                                                .requireExplain.content
                                         "
                                     />
 
@@ -551,10 +652,15 @@
                                             break-words
                                         "
                                         @click="
-                                            requirement.requireExplain.editable = true
+                                            form.requirements[
+                                                index
+                                            ].requireExplain.editable = true
                                         "
                                     >
-                                        {{ requirement.requireExplain.content }}
+                                        {{
+                                            form.requirements[index]
+                                                .requireExplain.content
+                                        }}
                                     </p>
                                 </details>
                             </div>
@@ -576,7 +682,7 @@
                         text-white
                         rounded
                     "
-                    @click="plusUris"
+                    @click="addLine('uri', uri())"
                 >
                     追加
                 </button>
@@ -603,12 +709,12 @@
                             flex flex-col-3
                             items-center
                         "
-                        v-for="(uri, index) in uris"
+                        v-for="(uri, index) in form.uris"
                         :key="index"
                     >
                         <div class="px-4 py-3 w-3/12 md:w-2/12">
                             <input
-                                v-if="uri.uri.editable"
+                                v-if="form.uris[index].uri.editable"
                                 class="
                                     appearance-none
                                     block
@@ -625,16 +731,25 @@
                                     focus:ring-blue-500
                                     focus:border-blue-500
                                 "
-                                @keyup.enter="plusUri($event, index)"
-                                :value="uri.uri.content"
+                                @keyup.enter="
+                                    addContent(
+                                        form.uris[index].uri.content,
+                                        'uri',
+                                        index
+                                    )
+                                "
+                                v-model="form.uris[index].uri.content"
                             />
-                            <p v-else @click="uri.uri.editable = true">
-                                {{ uri.uri.content }}
+                            <p
+                                v-else
+                                @click="form.uris[index].uri.editable = true"
+                            >
+                                {{ form.uris[index].uri.content }}
                             </p>
                         </div>
                         <div class="px-4 py-3 w-3/12 md:w-2/12">
                             <input
-                                v-if="uri.method.editable"
+                                v-if="form.uris[index].method.editable"
                                 class="
                                     appearance-none
                                     block
@@ -651,11 +766,20 @@
                                     focus:ring-blue-500
                                     focus:border-blue-500
                                 "
-                                @keyup.enter="plusMethod($event, index)"
-                                :value="uri.method.content"
+                                @keyup.enter="
+                                    addContent(
+                                        form.uris[index].method.content,
+                                        'method',
+                                        index
+                                    )
+                                "
+                                v-model="form.uris[index].method.content"
                             />
-                            <p v-else @click="uri.method.editable = true">
-                                {{ uri.method.content }}
+                            <p
+                                v-else
+                                @click="form.uris[index].method.editable = true"
+                            >
+                                {{ form.uris[index].method.content }}
                             </p>
                         </div>
                         <div
@@ -672,7 +796,7 @@
                             "
                         >
                             <input
-                                v-if="uri.explain.editable"
+                                v-if="form.uris[index].explain.editable"
                                 class="
                                     appearance-none
                                     block
@@ -690,15 +814,26 @@
                                     focus:ring-blue-500
                                     focus:border-blue-500
                                 "
-                                @keyup.enter="plusExplain($event, index)"
-                                :value="uri.explain.content"
+                                @keyup.enter="
+                                    addContent(
+                                        form.uris[index].explain.content,
+                                        'explain',
+                                        index
+                                    )
+                                "
+                                v-model="form.uris[index].explain.content"
                             />
-                            <p v-else @click="uri.explain.editable = true">
-                                {{ uri.explain.content }}
+                            <p
+                                v-else
+                                @click="
+                                    form.uris[index].explain.editable = true
+                                "
+                            >
+                                {{ form.uris[index].explain.content }}
                             </p>
                             <svg
                                 class="h-6 w-6 text-red-600 hover:text-red-400"
-                                @click="uris.splice(index, 1)"
+                                @click="form.uris.splice(index, 1)"
                                 width="24"
                                 height="24"
                                 viewBox="0 0 24 24"
@@ -722,277 +857,155 @@
 
 <script>
 import AppLayout from "../Layouts/AppLayout.vue";
+import { reactive } from "vue";
+import { Inertia } from "@inertiajs/inertia";
 
 export default {
     components: {
         AppLayout,
     },
-    data: function () {
-        return {
-            title: {
-                editable: true,
+    setup() {
+        const normalObj = (type) => {
+            return {
                 content: "",
-                error: false,
-            },
+                editable: true,
+                error: type == 1 ? "" : false,
+            };
+        };
+
+        const techField = () => {
+            return {
+                techField: normalObj(1),
+                teches: [
+                    {
+                        tech: normalObj(1),
+                        version: normalObj(1),
+                    },
+                ],
+            };
+        };
+
+        const requirement = () => {
+            return {
+                requireTitle: normalObj(),
+                requireExplain: normalObj(),
+            };
+        };
+
+        const uri = () => {
+            return {
+                uri: normalObj(),
+                method: normalObj(),
+                explain: normalObj(),
+            };
+        };
+
+        const form = reactive({
+            title: normalObj(),
             tags: {
                 content: [],
                 error: "",
             },
-            description: {
-                editable: true,
-                content: "",
-                error: false,
-            },
-            techFields: [
-                {
-                    techField: {
-                        content: "",
-                        editable: true,
-                        error: "",
-                    },
-                    teches: [
-                        {
-                            tech: {
-                                content: "",
-                                editable: true,
-                                error: "",
-                            },
-                            version: {
-                                content: "",
-                                editable: true,
-                                error: "",
-                            },
-                        },
-                    ],
-                },
-            ],
-            requirements: [
-                {
-                    requireTitle: {
-                        content: "",
-                        editable: true,
-                        error: false,
-                    },
-                    requireExplain: {
-                        content: "",
-                        editable: true,
-                        error: false,
-                    },
-                },
-            ],
-            uris: [
-                {
-                    uri: {
-                        content: "",
-                        editable: true,
-                        error: false,
-                    },
-                    method: {
-                        content: "",
-                        editable: true,
-                        error: false,
-                    },
-                    explain: {
-                        content: "",
-                        editable: true,
-                        error: false,
-                    },
-                },
-            ],
-        };
-    },
-    methods: {
-        plusTitle(e) {
-            if (!e.target.value) {
-                this.title.content = "";
-                this.title.error = true;
+            description: normalObj(),
+            techFields: [techField()],
+            requirements: [requirement()],
+            uris: [uri()],
+        });
+
+        // 直接代入型の処理
+        const addContent = (value, type, index, techIndex) => {
+            if (
+                !value ||
+                (type === "description" &&
+                    !form.description.content.match(/\S/g))
+            ) {
+                form[type].error = true;
             } else {
-                this.title.content = e.target.value;
-                this.title.editable = false;
-                this.title.error = false;
+                switch (type) {
+                    case "title":
+                        form[type].error = false;
+                        form[type].editable = false;
+                        break;
+
+                    case "description":
+                        form[type].content.replace(/\n/g, "\\n");
+                        form[type].error = false;
+                        form[type].editable = false;
+                        break;
+
+                    case "techFields":
+                        form[type][index].techField.error = false;
+                        form[type][index].techField.editable = false;
+                        break;
+
+                    case "tech":
+                    case "version":
+                        form.techFields[index].teches[techIndex][type].error =
+                            "";
+                        form.techFields[index].teches[techIndex][
+                            type
+                        ].editable = false;
+                        break;
+
+                    case "requireTitle":
+                    case "requireExplain":
+                        form.requirements[index][type].error = "";
+                        form.requirements[index][type].editable = false;
+                        break;
+
+                    case "uri":
+                    case "method":
+                    case "explain":
+                        form.uris[index][type].error = "";
+                        form.uris[index][type].editable = false;
+                        break;
+                }
             }
-        },
-        plusTag(e) {
+        };
+
+        // タグ（配列に入れ込む）の処理
+        const plusTag = (e) => {
             if (!e.target.value) {
-                this.tags.error = "カテゴリーが入力されていません。";
+                form.tags.error = "カテゴリーが入力されていません。";
             } else if (
                 // 大小区別せずに比較する
-                this.tags.content
+                form.tags.content
                     .map((tag) => tag.toUpperCase())
                     .includes(e.target.value.toUpperCase())
             ) {
-                this.tags.error = "既に同じカテゴリーが追加されています。";
+                form.tags.error = "既に同じカテゴリーが追加されています。";
             } else {
-                this.tags.content.push(e.target.value);
-                this.tags.error = false;
+                form.tags.content.push(e.target.value);
+                form.tags.error = false;
                 e.target.value = "";
             }
-        },
-        deleteTag(value) {
-            const index = this.tags.content.indexOf(value);
-            this.tags.content.splice(index, 1);
-        },
-        plusDescription() {
-            if (!this.description.content.match(/\S/g)) {
-                this.description.error = true;
-            } else {
-                console.log(this.description.content);
-                this.description.content.replace(/\n/g, "\\n");
-                console.log(this.description.content);
-                this.description.editable = false;
-                this.description.error = false;
-            }
-        },
-        plusTechFields() {
-            this.techFields.push({
-                techField: {
-                    content: "",
-                    editable: true,
-                    error: "",
-                },
-                teches: [
-                    {
-                        tech: {
-                            content: "",
-                            editable: true,
-                            error: "",
-                        },
-                        version: {
-                            content: "",
-                            editable: true,
-                            error: "",
-                        },
-                    },
-                ],
-            });
-        },
-        plusTechField(e, index) {
-            if (!e.target.value) {
-                this.techFields[index].techField.error =
-                    "技術分野を入力してください。";
-            } else {
-                this.techFields[index].techField.content = e.target.value;
-                this.techFields[index].techField.editable = false;
-            }
-        },
-        plusTechName(e, index, techIndex) {
-            if (!e.target.value) {
-                this.techFields[index].teches[techIndex].tech.error =
-                    "技術名を入力してください。";
-            } else {
-                this.techFields[index].teches[techIndex].tech.content =
-                    e.target.value;
-                this.techFields[index].teches[techIndex].tech.editable = false;
-            }
-        },
-        plusTechVersion(e, index, techIndex) {
-            if (!e.target.value) {
-                this.techFields[index].teches[techIndex].version.error =
-                    "バージョンを入力してください。";
-            } else {
-                this.techFields[index].teches[techIndex].version.content =
-                    e.target.value;
-                this.techFields[index].teches[
-                    techIndex
-                ].version.editable = false;
-            }
-        },
-        plusTech(index) {
-            this.techFields[index].teches.push({
-                tech: {
-                    content: "",
-                    editable: true,
-                    error: "",
-                },
-                version: {
-                    content: "",
-                    editable: true,
-                    error: "",
-                },
-            });
-        },
-        deleteTech(index, techIndex) {
-            this.techFields[index].teches.splice(techIndex, 1);
-        },
-        plusRequirements() {
-            this.requirements.push({
-                requireTitle: {
-                    content: "",
-                    editable: true,
-                    error: false,
-                },
-                requireExplain: {
-                    content: "",
-                    editable: true,
-                    error: false,
-                },
-            });
-        },
-        plusRequireTitle(e, index) {
-            if (!e.target.value) {
-                this.requirements[index].requireTitle.error = true;
-            } else {
-                this.requirements[index].requireTitle.content = e.target.value;
-                this.requirements[index].requireTitle.error = false;
-                this.requirements[index].requireTitle.editable = false;
-            }
-        },
-        plusRequireExplain(e, index) {
-            if (!e.target.value) {
-                this.requirements[index].requireExplain.error = true;
-            } else {
-                this.requirements[index].requireExplain.content =
-                    e.target.value;
-                this.requirements[index].requireExplain.error = false;
-                this.requirements[index].requireExplain.editable = false;
-            }
-        },
-        plusUris() {
-            this.uris.push({
-                uri: {
-                    content: "",
-                    editable: true,
-                    error: false,
-                },
-                method: {
-                    content: "",
-                    editable: true,
-                    error: false,
-                },
-                explain: {
-                    content: "",
-                    editable: true,
-                    error: false,
-                },
-            });
-        },
-        plusUri(e, index) {
-            if (!e.target.value) {
-                this.uris[index].uri.error = true;
-            } else {
-                this.uris[index].uri.content = e.target.value;
-                this.uris[index].uri.error = false;
-                this.uris[index].uri.editable = false;
-            }
-        },
-        plusMethod(e, index) {
-            if (!e.target.value) {
-                this.uris[index].method.error = true;
-            } else {
-                this.uris[index].method.content = e.target.value;
-                this.uris[index].method.error = false;
-                this.uris[index].method.editable = false;
-            }
-        },
-        plusExplain(e, index) {
-            if (!e.target.value) {
-                this.uris[index].explain.error = true;
-            } else {
-                this.uris[index].explain.content = e.target.value;
-                this.uris[index].explain.error = false;
-                this.uris[index].explain.editable = false;
-            }
-        },
+        };
+
+        // 配列に入れ込む（使用技術、要件定義、URI設計）
+        const addLine = (type, obj, index) => {
+            index === undefined
+                ? form[`${type}s`].push(obj)
+                : form.techFields[index].teches.push({
+                      tech: normalObj(1),
+                      version: normalObj(1),
+                  });
+        };
+
+        // DBへ保存
+        const submit = () => {
+            Inertia.post("/create", form);
+        };
+
+        return {
+            form,
+            techField,
+            requirement,
+            uri,
+            addContent,
+            addLine,
+            plusTag,
+            submit,
+        };
     },
 };
 </script>

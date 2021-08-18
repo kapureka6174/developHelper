@@ -24,7 +24,7 @@ class TechFieldFactory extends Factory
     {
         return [
             'service_id' => Service::factory(),
-            'fieldname' => $this->faker->word(),
+            'fieldname' => $this->faker->realText(10),
         ];
     }
 }

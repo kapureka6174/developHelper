@@ -25,7 +25,7 @@ class TechFactory extends Factory
         return [
             'tech_field_id' => TechField::factory(),
             'techname' => $this->faker->word(),
-            'version' => $this->faker->word(),
+            'version' => $this->faker->randomNumber(2),
         ];
     }
 }

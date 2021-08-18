@@ -24,7 +24,7 @@ class TagFactory extends Factory
     {
         return [
             'service_id' => Service::factory(),
-            'tagname' => $this->faker->word(),
+            'tagname' => $this->faker->realText(10),
         ];
     }
 }

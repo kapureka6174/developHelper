@@ -30,7 +30,6 @@ Route::get('/Services',[App\Http\Controllers\ServiceController::class,'all'])->n
 Route::get('/Services/{id}',[App\Http\Controllers\ServiceController::class,'detail'])->name('Service');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('/create', function () {
-        return Inertia::render('Create');
-    })->name('Create');
+    Route::get('/create', [App\Http\Controllers\ServiceController::class,'new'])->name('Create');
+    Route::post('/create', [App\Http\Controllers\ServiceController::class,'create']);
 });
