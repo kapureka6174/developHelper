@@ -5,25 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Requirement extends Model
+class Comment extends Model
 {
     use HasFactory;
 
-    protected $table = 'requirements';
+    protected $table = 'comments';
 
     protected $fillable = [
         "service_id",
-        "title",
+        "user_id",
+        "type",
         "content",
-        "finished",
     ];
-
-    public function pages() {
-        return $this->belongsToMany(Page::class);
-    }
 
     public function service()
     {
         return $this->belongsTo(Service::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

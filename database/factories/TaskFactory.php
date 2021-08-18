@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Requirement;
+use App\Models\Task;
 use App\Models\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RequirementFactory extends Factory
+class TaskFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Requirement::class;
+    protected $model = Task::class;
 
     /**
      * Define the model's default state.
@@ -23,9 +23,10 @@ class RequirementFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->realText(10),
-            'content' => $this->faker->realText(20),
-            'finished' => $this->faker->boolean(50)
+            "service_id" => Service::class,
+            "taskname" => $this->faker->realText(10),
+            "state" => $this->faker->randomElement(['やるべきこと', '開発中', '完了']),
+            "time" => $this->faker->numberBetween(2,10),
         ];
     }
 }

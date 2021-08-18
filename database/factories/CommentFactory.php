@@ -2,18 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Requirement;
+use App\Models\Comment;
 use App\Models\Service;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RequirementFactory extends Factory
+class CommentFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Requirement::class;
+    protected $model = Comment::class;
 
     /**
      * Define the model's default state.
@@ -23,9 +24,10 @@ class RequirementFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->realText(10),
-            'content' => $this->faker->realText(20),
-            'finished' => $this->faker->boolean(50)
+            "service_id" => Service::class,
+            "user_id" => User::class,
+            "type" => $this->faker->randomElement(['質問', '感想', 'アドバイス']),
+            "content" => $this->faker->realText(),
         ];
     }
 }

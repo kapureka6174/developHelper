@@ -5,19 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+class ServiceTag extends Model
 {
     use HasFactory;
 
-    protected $table = 'tags';
+    protected $table = 'service_tag';
 
     protected $fillable = [
         "service_id",
-        "tagname"
+        "tag_id",
     ];
-
-    public function services()
-    {
-        return $this->belongsToMany(Service::class);
-    }
 }

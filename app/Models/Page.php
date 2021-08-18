@@ -5,19 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+class Page extends Model
 {
     use HasFactory;
 
-    protected $table = 'tags';
+    protected $table = 'pages';
 
     protected $fillable = [
-        "service_id",
-        "tagname"
+        "requirement_id",
+        "pagename",
     ];
 
-    public function services()
+    public function requirements()
     {
-        return $this->belongsToMany(Service::class);
+        return $this->belongsToMany(Requirement::class);
     }
+
 }

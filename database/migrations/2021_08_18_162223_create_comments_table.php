@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRequirementsTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateRequirementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('requirements', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('service_id')->constrained();
-            $table->string('title');
+            $table->foreignId('user_id')->constrained();
+            $table->enum('type',['質問', '感想', 'アドバイス']);
             $table->text('content');
-            $table->boolean('finished')->nullable()->default(false);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateRequirementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('requirements');
+        Schema::dropIfExists('comments');
     }
 }

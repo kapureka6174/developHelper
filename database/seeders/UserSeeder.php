@@ -10,6 +10,9 @@ use App\Models\Tag;
 use App\Models\Uri;
 use App\Models\TechField;
 use App\Models\Tech;
+use App\Models\Task;
+use App\Models\Comment;
+use App\Models\Page;
 
 class UserSeeder extends Seeder
 {
@@ -20,13 +23,14 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->count(10)->has(Service::factory()->count(2))->create()->each(function ($service){
-            Requirement::factory()->count(2)->create(['service_id' => $service->id]);
-            Tag::factory()->count(2)->create(['service_id' => $service->id]);
-            Uri::factory()->count(2)->create(['service_id' => $service->id]);
-            TechField::factory()->count(2)->create(['service_id' => $service->id])->each( function ($techField){
-                Tech::factory()->count(2)->create(['tech_field_id' => $techField->id]);
-            });
-        });
+        // User::factory()->count(10)->has(Service::factory()->count(2))->create()->each(function ($service){
+        //     Requirement::factory()->count(2)->create(['service_id' => $service->id]);
+        //     Tag::factory()->count(2)->create(['service_id' => $service->id]);
+        //     Uri::factory()->count(2)->create(['service_id' => $service->id]);
+        //     TechField::factory()->count(2)->create(['service_id' => $service->id])->each( function ($techField){
+        //         Tech::factory()->count(2)->create(['tech_field_id' => $techField->id]);
+        //     });
+        // });
+        User::factory()->count(10)->create();
     }
 }

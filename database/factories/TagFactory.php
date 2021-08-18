@@ -23,7 +23,6 @@ class TagFactory extends Factory
     public function definition()
     {
         return [
-            'service_id' => Service::factory(),
             'tagname' => $this->faker->realText(10),
         ];
     }

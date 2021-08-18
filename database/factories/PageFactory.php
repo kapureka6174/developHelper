@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Requirement;
-use App\Models\Service;
+use App\Models\Page;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RequirementFactory extends Factory
+class PageFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Requirement::class;
+    protected $model = Page::class;
 
     /**
      * Define the model's default state.
@@ -23,9 +22,7 @@ class RequirementFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->realText(10),
-            'content' => $this->faker->realText(20),
-            'finished' => $this->faker->boolean(50)
+            "pagename" => $this->faker->realText(10),
         ];
     }
 }

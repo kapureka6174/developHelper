@@ -17,11 +17,6 @@ class Service extends Model
         "description"
     ];
 
-    public function tag()
-    {
-        return $this->hasMany(Tag::class);
-    }
-
     public function techfield()
     {
         return $this->hasMany(Techfield::class);
@@ -37,8 +32,23 @@ class Service extends Model
         return $this->hasMany(Requirement::class);
     }
 
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function task()
+    {
+        return $this->hasMany(Task::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }
