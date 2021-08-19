@@ -10,6 +10,9 @@ use App\Models\Uri;
 use App\Models\TechField;
 use App\Models\Tech;
 use App\Models\Tag;
+use App\Models\Task;
+use App\Models\Comment;
+use App\Models\Page;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -18,21 +21,26 @@ class ServiceController extends Controller
 
     // 全サービスのデータを引っ張て来てViewに渡す。
     public function all () {
-        return Inertia::render('Services',['services' => Service::all(), 'tags' => Tag::all()]);
+        $services = Service::with('tags:id,tagname')->get();
+        return Inertia::render('Services',['services' => $services, 'tags' => Tag::all()]);
     }
 
     // サービスの詳細ページを表示する時にサービスが持つ情報をViewに渡す
     public function detail ($id) {
-        $service = Service::where('id', $id)->first();
-        $requirements = Requirement::where('service_id', $id)->get();
-        $uris = Uri::where('service_id', $id)->get();
-        // $techFields = TechField::join('teches','tech_fields.id', '=', 'teches.tech_field_id')->where('service_id', $id)->get();
-        $techFields = TechField::where('service_id', $id)->get();
-        foreach ($techFields as $field) {
-            $field['teches'] = Tech::where('tech_field_id', $field['id'])->get();
-        }
-        $tags= Tag::where('service_id', $id)->get();
-        return Inertia::render('Service',['service' => $service,'requirements' => $requirements, 'uris' => $uris, 'techFields' => $techFields, 'tags' => $tags]);
+        $service = Service::where('id', $id)->with('tags:id,tagname')->first(['id', 'title', 'description']);
+        $techFields = TechField::where('service_id', $id)->with('teches:id,tech_field_id,techname,version')->get(['id', 'fieldname']);
+        $requirements = Requirement::where('service_id', $id)->get(['id', 'title', 'content', 'finished']);
+        // whereHasで該当サービスが持っているページのみを取得
+        $pages = Page::whereHas('requirements', function($query) use($id) {
+            $query->where('service_id', $id);
+            // withで取得カラムを指定し、該当サービスのページが持つrequirementsを取得
+        })->with(['requirements' => function($query) use ($id) {
+            $query->select('requirements.id', 'title', 'content', 'finished')->where('service_id',$id);
+        }])->get(['pages.id','pages.pagename']);
+        $uris = Uri::where('service_id', $id)->get(['id', 'uri', 'method', 'explain']);
+        $tasks = Task::where('service_id', $id)->get(['id', 'taskname', 'state', 'time']);
+        $comments = Comment::where('service_id', $id)->with('user:id,name')->get();
+        return Inertia::render('Service',['service' => $service, 'techFields' => $techFields,'requirements' => $requirements, 'pages' => $pages, 'uris' => $uris, 'tasks' => $tasks, 'comments' => $comments]);
     }
 
     public function new () {

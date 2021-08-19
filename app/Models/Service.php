@@ -17,27 +17,27 @@ class Service extends Model
         "description"
     ];
 
-    public function techfield()
+    public function techfields()
     {
         return $this->hasMany(Techfield::class);
     }
 
-    public function Uri()
+    public function Uris()
     {
         return $this->hasMany(Uri::class);
     }
 
-    public function requirement()
+    public function requirements()
     {
         return $this->hasMany(Requirement::class);
     }
 
-    public function comment()
+    public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
-    public function task()
+    public function tasks()
     {
         return $this->hasMany(Task::class);
     }

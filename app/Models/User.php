@@ -59,12 +59,12 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function service()
+    public function services()
     {
         return $this->hasMany(Service::class);
     }
 
-    public function comment()
+    public function comments()
     {
         return $this->hasMany(Comment::class);
     }

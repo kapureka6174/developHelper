@@ -16,9 +16,9 @@ class TechField extends Model
         'fieldname'
     ];
 
-    public function tech()
+    public function teches()
     {
-        return $this->hasMany(Tech::class);
+        return $this->hasMany(Tech::class,'tech_field_id');
     }
 
     public function service()

@@ -10,7 +10,7 @@
         <div class="m-3">
             <h1 class="text-2xl text-indigo-700 font-semibold">カテゴリー</h1>
             <div
-                v-for="(tag, index) in noDupTags"
+                v-for="(tag, index) in tags"
                 :key="index"
                 class="
                     text-xs
@@ -28,9 +28,9 @@
                     my-1
                     hover:bg-blue-100
                 "
-                @click="plusCategory(tag)"
+                @click="plusCategory(tag.tagname)"
             >
-                {{ tag }}
+                {{ tag.tagname }}
             </div>
         </div>
 
@@ -70,8 +70,8 @@
                 :id="service.id"
                 :title="service.title"
                 :description="service.description"
-                :tags="resultTags(service.id)"
-                v-show="existCategory(resultTags(service.id))"
+                :tags="service.tags"
+                v-show="existCategory(service.tags)"
             />
         </div>
     </app-layout>
@@ -91,23 +91,11 @@ export default {
         services: Array,
         tags: Array,
     },
-    setup(props) {
-        // タグの重複をなくす
-        const newTags = [];
-        for (let i = 0; i < props.tags.length; i++) {
-            newTags.push(props.tags[i].tagname);
-        }
-        const noDupTags = new Set(newTags);
-
+    setup() {
         // カテゴリーを選択中に追加する
         const categories = reactive([]);
         const plusCategory = (name) => {
             if (!categories.includes(name)) categories.push(name);
-        };
-
-        // サービスごとのタグを取得
-        const resultTags = (id) => {
-            return props.tags.filter((tag) => tag.service_id === id);
         };
 
         // 選択中のカテゴリーがサービスが個別に持つタグと一致しているかどうか
@@ -123,10 +111,8 @@ export default {
         };
 
         return {
-            noDupTags,
             categories,
             plusCategory,
-            resultTags,
             existCategory,
         };
     },

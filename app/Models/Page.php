@@ -18,7 +18,7 @@ class Page extends Model
 
     public function requirements()
     {
-        return $this->belongsToMany(Requirement::class);
+        return $this->belongsToMany(Requirement::class,'requirement_page');
     }
 
 }

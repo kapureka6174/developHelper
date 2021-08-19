@@ -19,7 +19,7 @@ class Requirement extends Model
     ];
 
     public function pages() {
-        return $this->belongsToMany(Page::class);
+        return $this->belongsToMany(Page::class,'requirement_page');
     }
 
     public function service()
