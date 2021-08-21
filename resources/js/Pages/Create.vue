@@ -555,7 +555,14 @@
                                             h-full
                                         "
                                     >
-                                        <span class="font-semibold break-words">
+                                        <span
+                                            class="font-semibold break-words"
+                                            @click="
+                                                form.requirements[
+                                                    index
+                                                ].requireTitle.editable = true
+                                            "
+                                        >
                                             {{
                                                 form.requirements[index]
                                                     .requireTitle.content
@@ -603,44 +610,59 @@
                                         </svg>
                                     </summary>
 
-                                    <textarea
+                                    <div
                                         v-if="
                                             form.requirements[index]
                                                 .requireExplain.editable
                                         "
-                                        class="
-                                            appearance-none
-                                            block
-                                            w-full
-                                            bg-white
-                                            text-gray-700
-                                            border border-gray-200
-                                            rounded
-                                            py-2
-                                            px-4
-                                            mt-2
-                                            mr-2
-                                            leading-tight
-                                            focus:outline-none
-                                            focus:ring-1
-                                            focus:ring-blue-500
-                                            focus:border-blue-500
-                                        "
-                                        rows="8"
-                                        placeholder="要件・機能の説明を入力してください"
-                                        @keyup.enter="
-                                            addContent(
+                                        class="flex flex-col items-end"
+                                    >
+                                        <textarea
+                                            class="
+                                                appearance-none
+                                                block
+                                                w-full
+                                                bg-white
+                                                text-gray-700
+                                                border border-gray-200
+                                                rounded
+                                                py-2
+                                                px-4
+                                                leading-tight
+                                                focus:outline-none
+                                                focus:ring-1
+                                                focus:ring-blue-500
+                                                focus:border-blue-500
+                                            "
+                                            rows="8"
+                                            placeholder="要件・機能の説明を入力してください"
+                                            v-model="
                                                 form.requirements[index]
-                                                    .requireExplain.content,
-                                                'requireExplain',
-                                                index
-                                            )
-                                        "
-                                        v-model="
-                                            form.requirements[index]
-                                                .requireExplain.content
-                                        "
-                                    />
+                                                    .requireExplain.content
+                                            "
+                                        />
+                                        <button
+                                            class="
+                                                bg-indigo-600
+                                                hover:bg-indigo-400
+                                                h-8
+                                                w-12
+                                                text-white
+                                                rounded
+                                                m-2
+                                            "
+                                            @click="
+                                                addContent(
+                                                    form.requirements[index]
+                                                        .requireExplain.content,
+                                                    'requireExplain',
+                                                    index
+                                                )
+                                            "
+                                        >
+                                            決定
+                                        </button>
+                                    </div>
 
                                     <p
                                         v-else
@@ -669,8 +691,200 @@
                 </section>
             </div>
 
+            <!-- ページ -->
+            <h1 class="text-2xl text-indigo-700 font-semibold">ページ</h1>
+            <div v-for="(requirement, index) in form.requirements" :key="index">
+                <div
+                    v-if="!form.requirements[index].requireTitle.editable"
+                    class="
+                        w-4/5
+                        bg-gray-200
+                        flex
+                        items-center
+                        rounded-md
+                        py-3
+                        my-1
+                        mx-auto
+                    "
+                >
+                    <input
+                        type="checkbox"
+                        class="
+                            form-checkbox
+                            h-5
+                            w-5
+                            text-green-600
+                            rounded
+                            mx-2
+                        "
+                        v-model="form.requirements[index].requireTitle.selected"
+                    />
+                    <p class="font-bold text-gray-600 w-4/5">
+                        {{ form.requirements[index].requireTitle.content }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="w-full text-center">
+                <button
+                    class="
+                        bg-indigo-600
+                        hover:bg-indigo-400
+                        h-10
+                        w-28
+                        text-white
+                        rounded
+                    "
+                    @click="addLine('page', page())"
+                >
+                    ページを追加
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 justify-between">
+                <div
+                    v-for="(page, index) in form.pages"
+                    :key="index"
+                    class="bg-blue-400 rounded m-3"
+                >
+                    <div class="flex items-center">
+                        <input
+                            v-if="form.pages[index].pagename.editable"
+                            class="
+                                appearance-none
+                                block
+                                w-3/5
+                                bg-white
+                                text-gray-700
+                                border border-gray-200
+                                rounded
+                                py-2
+                                px-4
+                                my-2
+                                mx-auto
+                                leading-tight
+                                focus:outline-none
+                                focus:ring-1
+                                focus:ring-blue-500
+                                focus:border-blue-500
+                            "
+                            v-model="form.pages[index].pagename.content"
+                            type="text"
+                            @keyup.enter="
+                                addContent(
+                                    form.pages[index].pagename.content,
+                                    'pagename',
+                                    index
+                                )
+                            "
+                        />
+                        <h1
+                            v-else
+                            class="
+                                text-white text-xl
+                                font-semibold
+                                my-2
+                                py-2
+                                px-4
+                                mx-auto
+                                w-4/5
+                                text-center
+                            "
+                            @click="form.pages[index].pagename.editable = true"
+                        >
+                            {{ form.pages[index].pagename.content }}
+                        </h1>
+                        <svg
+                            class="h-6 w-6 text-red-600 hover:text-red-400 mr-3"
+                            @click="form.pages.splice(index, 1)"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path stroke="none" d="M0 0h24v24H0z" />
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                    </div>
+                    <div class="w-full text-center mb-3">
+                        <button
+                            class="
+                                bg-indigo-600
+                                hover:bg-indigo-400
+                                h-10
+                                w-40
+                                text-white
+                                rounded
+                            "
+                            @click="addSelectedRequirement(index)"
+                        >
+                            選択中の機能を追加
+                        </button>
+                    </div>
+                    <div
+                        v-for="(
+                            requirement, requirementIndex
+                        ) in page.requirements"
+                        :key="requirementIndex"
+                        class="w-full flex items-center justify-around mb-3"
+                    >
+                        <p
+                            class="
+                                font-bold
+                                text-gray-600
+                                bg-gray-200
+                                rounded-md
+                                py-2
+                                px-4
+                                w-4/5
+                                mx-3
+                                text-center
+                            "
+                        >
+                            {{
+                                form.pages[index].requirements[requirementIndex]
+                            }}
+                        </p>
+                        <svg
+                            class="
+                                h-6
+                                w-6
+                                text-red-600
+                                my-2
+                                mr-4
+                                hover:text-red-400
+                            "
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            @click="
+                                form.pages[index].requirements.splice(
+                                    requirementIndex,
+                                    1
+                                )
+                            "
+                        >
+                            <polyline points="3 6 5 6 21 6" />
+                            <path
+                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                            />
+                            <line x1="10" y1="11" x2="10" y2="17" />
+                            <line x1="14" y1="11" x2="14" y2="17" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
             <div class="flex mb-3 items-center">
-                <h2 class="text-2xl text-indigo-700 font-semibold mr-2">
+                <h2 class="text-2xl text-indigo-700 font-semibold mr-2 my-4">
                     URI設計
                 </h2>
                 <button
@@ -866,11 +1080,32 @@ export default {
     },
     setup() {
         const normalObj = (type) => {
-            return {
-                content: "",
-                editable: true,
-                error: type == 1 ? "" : false,
-            };
+            let obj;
+            switch (type) {
+                case 1:
+                    obj = {
+                        content: "",
+                        editable: true,
+                        error: "",
+                    };
+                    break;
+                case 2:
+                    obj = {
+                        content: "",
+                        editable: true,
+                        error: false,
+                        selected: false,
+                    };
+                    break;
+                default:
+                    obj = {
+                        content: "",
+                        editable: true,
+                        error: false,
+                    };
+                    break;
+            }
+            return obj;
         };
 
         const techField = () => {
@@ -887,7 +1122,7 @@ export default {
 
         const requirement = () => {
             return {
-                requireTitle: normalObj(),
+                requireTitle: normalObj(2),
                 requireExplain: normalObj(),
             };
         };
@@ -897,6 +1132,13 @@ export default {
                 uri: normalObj(),
                 method: normalObj(),
                 explain: normalObj(),
+            };
+        };
+
+        const page = () => {
+            return {
+                pagename: normalObj(),
+                requirements: [],
             };
         };
 
@@ -910,6 +1152,7 @@ export default {
             techFields: [techField()],
             requirements: [requirement()],
             uris: [uri()],
+            pages: [page()],
         });
 
         // 直接代入型の処理
@@ -959,6 +1202,10 @@ export default {
                         form.uris[index][type].error = "";
                         form.uris[index][type].editable = false;
                         break;
+
+                    case "pagename":
+                        form.pages[index][type].error = "";
+                        form.pages[index][type].editable = false;
                 }
             }
         };
@@ -991,6 +1238,18 @@ export default {
                   });
         };
 
+        const addSelectedRequirement = (pageIndex) => {
+            form.pages[pageIndex].requirements = [];
+            const selectedArray = form.requirements.filter(
+                (requirement) => requirement.requireTitle.selected == true
+            );
+            selectedArray.forEach((requirement) => {
+                form.pages[pageIndex].requirements.push(
+                    requirement.requireTitle.content
+                );
+            });
+        };
+
         // DBへ保存
         const submit = () => {
             Inertia.post("/create", form);
@@ -1000,10 +1259,12 @@ export default {
             form,
             techField,
             requirement,
+            page,
             uri,
             addContent,
             addLine,
             plusTag,
+            addSelectedRequirement,
             submit,
         };
     },
