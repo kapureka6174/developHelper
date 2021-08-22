@@ -17,7 +17,7 @@ class CreateRequirementsTable extends Migration
             $table->id();
             $table->foreignId('service_id')->constrained();
             $table->string('title');
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->boolean('finished')->nullable()->default(false);
             $table->timestamps();
         });

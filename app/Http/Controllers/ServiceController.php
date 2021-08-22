@@ -27,7 +27,7 @@ class ServiceController extends Controller
 
     // サービスの詳細ページを表示する時にサービスが持つ情報をViewに渡す
     public function detail ($id) {
-        $service = Service::where('id', $id)->with('tags:id,tagname')->first(['id', 'title', 'description']);
+        $service = Service::where('id', $id)->with('tags:id,tagname')->first(['id', 'user_id' ,'title', 'description']);
         $techFields = TechField::where('service_id', $id)->with('teches:id,tech_field_id,techname,version')->get(['id', 'fieldname']);
         $requirements = Requirement::where('service_id', $id)->get(['id', 'title', 'content', 'finished']);
         // whereHasで該当サービスが持っているページのみを取得
@@ -59,10 +59,10 @@ class ServiceController extends Controller
 
         // Tagテーブルに追加
         foreach ($data['tags']['content'] as $tagname) {
-            $tag = Tag::create([
-                'service_id' => $service['id'],
+            $tag = Tag::firstOrCreate([
                 'tagname' => $tagname,
             ]);
+            $service->tags()->attach($tag['id']);
         }
 
         // techFieldに追加
@@ -92,6 +92,17 @@ class ServiceController extends Controller
             ]);
         }
 
+        // pagesテーブルに追加
+        foreach ($data['pages'] as $page) {
+            $pages = Page::create([
+                'pagename' => $page['pagename']['content'],
+            ]);
+            foreach ($page['requirements'] as $requirement) {
+                $requirementID = Requirement::where('title', $requirement)->get('id');
+                $pages->requirements()->attach($requirementID);
+            }
+        }
+
         // uriテーブルに追加
         foreach ($data['uris'] as $uriDesign) {
             $uri = Uri::create([
@@ -102,6 +113,18 @@ class ServiceController extends Controller
             ]);
         }
 
-        return redirect()->route('Services');
+        return redirect()->route('Service', ['id' => $service['id']]);
     }
-}
+
+    public function add (Request $request) {
+        $data = $request->all();
+        $comment = Comment::create([
+            'service_id' => $data['id'],
+            'user_id' => Auth::id(),
+            'type' => $data['comments']['type'],
+            'content' => $data['comments']['content'],
+        ]);
+
+        return redirect()->route('Service', ['id' => $data['id']]);
+    }
+ }

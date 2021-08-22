@@ -32,4 +32,5 @@ Route::get('/Services/{id}',[App\Http\Controllers\ServiceController::class,'deta
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/create', [App\Http\Controllers\ServiceController::class,'new'])->name('Create');
     Route::post('/create', [App\Http\Controllers\ServiceController::class,'create']);
+    Route::post('/Services/{id}',[App\Http\Controllers\ServiceController::class,'add'])->name('Service');
 });
