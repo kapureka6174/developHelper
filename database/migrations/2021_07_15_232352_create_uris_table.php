@@ -15,7 +15,7 @@ class CreateUrisTable extends Migration
     {
         Schema::create('uris', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_id')->constrained();
+            $table->foreignId('service_id')->constrained()->cascadeOnDelete();
             $table->string('uri')->nullable();
             $table->string('method')->nullable();
             $table->string('explain')->nullable();

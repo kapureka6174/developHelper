@@ -18,6 +18,6 @@ class UserController extends Controller
     public function detail ($id) {
         $services = Service::where('user_id',$id)->get();
         $user = User::where('id', $id)->first();
-        return Inertia::render('User',['services' => $services, 'user' => $user]);
+        return Inertia::render('User',['services' => $services, 'developer' => $user]);
     }
  }

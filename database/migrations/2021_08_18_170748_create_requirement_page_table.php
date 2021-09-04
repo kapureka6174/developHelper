@@ -17,8 +17,8 @@ class CreateRequirementPageTable extends Migration
             $table->id();
             $table->unsignedBigInteger('requirement_id');
             $table->unsignedBigInteger('page_id');
-            $table->foreign('requirement_id')->references('id')->on('requirements')->onDelete('cascade');
-            $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
+            $table->foreign('requirement_id')->references('id')->on('requirements')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('page_id')->references('id')->on('pages')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ class CreateRequirementsTable extends Migration
     {
         Schema::create('requirements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_id')->constrained();
+            $table->foreignId('service_id')->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->text('content')->nullable();
             $table->boolean('finished')->nullable()->default(false);

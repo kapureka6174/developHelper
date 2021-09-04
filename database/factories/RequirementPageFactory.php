@@ -23,13 +23,9 @@ class RequirementPageFactory extends Factory
      */
     public function definition()
     {
-        /* 中間テーブルに紐付けるIDを取得する*/
-        $requirementIDs  = Requirement::pluck('id')->all();
-        $pageIDs  = Page::pluck('id')->all();
-
         return [
-            'requirement_id' => $this->faker->randomElement($requirementIDs), // ランダムでIDを選択
-            'page_id' => $this->faker->randomElement($pageIDs),  // ランダムでIDを選択
+            'requirement_id' => Requirement::class,
+            'page_id' => Page::class,
         ];
     }
 }

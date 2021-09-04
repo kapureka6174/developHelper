@@ -12,9 +12,14 @@ class Page extends Model
     protected $table = 'pages';
 
     protected $fillable = [
-        "requirement_id",
+        "service_id",
         "pagename",
     ];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
 
     public function requirements()
     {

@@ -174,7 +174,7 @@ export default {
         },
 
         regenerateRecoveryCodes() {
-            axios.post("/user/two-factor-recovery-codes").then((response) => {
+            axios.post("/user/two-factor-recovery-codes").then(() => {
                 this.showRecoveryCodes();
             });
         },

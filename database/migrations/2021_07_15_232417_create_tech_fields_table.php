@@ -15,7 +15,7 @@ class CreateTechFieldsTable extends Migration
     {
         Schema::create('tech_fields', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_id')->constrained();
+            $table->foreignId('service_id')->constrained()->cascadeOnDelete();
             $table->string('fieldname');
             $table->timestamps();
         });

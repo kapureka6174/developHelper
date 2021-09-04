@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 use App\Models\Service;
 use App\Models\Requirement;
@@ -30,13 +31,7 @@ class ServiceController extends Controller
         $service = Service::where('id', $id)->with('tags:id,tagname')->first(['id', 'user_id' ,'title', 'description']);
         $techFields = TechField::where('service_id', $id)->with('teches:id,tech_field_id,techname,version')->get(['id', 'fieldname']);
         $requirements = Requirement::where('service_id', $id)->get(['id', 'title', 'content', 'finished']);
-        // whereHasで該当サービスが持っているページのみを取得
-        $pages = Page::whereHas('requirements', function($query) use($id) {
-            $query->where('service_id', $id);
-            // withで取得カラムを指定し、該当サービスのページが持つrequirementsを取得
-        })->with(['requirements' => function($query) use ($id) {
-            $query->select('requirements.id', 'title', 'content', 'finished')->where('service_id',$id);
-        }])->get(['pages.id','pages.pagename']);
+        $pages = Page::where('service_id', $id)->with('requirements:id,title,content,finished')->get(['id', 'pagename']);
         $uris = Uri::where('service_id', $id)->get(['id', 'uri', 'method', 'explain']);
         $tasks = Task::where('service_id', $id)->get(['id', 'taskname', 'state', 'time']);
         $comments = Comment::where('service_id', $id)->with('user:id,name')->get();
@@ -116,15 +111,240 @@ class ServiceController extends Controller
         return redirect()->route('Service', ['id' => $service['id']]);
     }
 
-    public function add (Request $request) {
-        $data = $request->all();
-        $comment = Comment::create([
-            'service_id' => $data['id'],
-            'user_id' => Auth::id(),
-            'type' => $data['comments']['type'],
-            'content' => $data['comments']['content'],
-        ]);
+    // 編集画面の表示
+    public function edit($id) {
+        $service = Service::where('id', $id)->with('tags:id,tagname')->first(['id', 'user_id' ,'title', 'description']);
+        if (Auth::id() !== $service['user_id']) {
+            return Inertia::render('Edit', ['errorMessage' => '編集権限がありません。正しいアカウントでログインしてください。']);
+        }
+        $techFields = TechField::where('service_id', $id)->with('teches:id,tech_field_id,techname,version')->get(['id', 'fieldname']);
+        $requirements = Requirement::where('service_id', $id)->get(['id', 'title', 'content', 'finished']);
+        $pages = Page::where('service_id', $id)->with('requirements:id,title,content,finished')->get(['id', 'pagename']);
+        $uris = Uri::where('service_id', $id)->get(['id', 'uri', 'method', 'explain']);
+        return Inertia::render('Edit',['service' => $service, 'techFields' => $techFields,'requirements' => $requirements, 'pages' => $pages, 'uris' => $uris]);
+    }
 
-        return redirect()->route('Service', ['id' => $data['id']]);
+    public function update(Request $request) {
+        $data = $request->all();
+        // バリデーションのルールを指定
+        $rules = [
+            'id' => 'required|integer',
+            'title.content' => 'required|string',
+            'title.decidable' => 'required|accepted',
+            'description.content' => 'required|string',
+            'description.decidable' => 'required|accepted',
+            'tags.content.*' => 'required|string',
+            'techFields.*.techField.id' => 'nullable|integer',
+            'techFields.*.techField.content' => 'required|string',
+            'techFields.*.techField.decidable' => 'required|accepted',
+            'techFields.*.teches.*.id' => 'nullable|integer',
+            'techFields.*.teches.*.tech.content' => 'required|string',
+            'techFields.*.teches.*.tech.decidable' => 'required|accepted',
+            'techFields.*.teches.*.version.content' => 'nullable|string',
+            'techFields.*.teches.*.version.decidable' => 'required|boolean',
+            'requirements.*.id' => 'nullable|integer',
+            'requirements.*.requireTitle.content' => 'required|string',
+            'requirements.*.requireTitle.decidable' => 'required|accepted',
+            'requirements.*.requireExplain.content' => 'nullable|string',
+            'requirements.*.requireExplain.decidable' => 'required|boolean',
+            'uris.*.id' => 'nullable|integer',
+            'uris.*.uri.content' => 'required|string',
+            'uris.*.uri.decidable' => 'required|accepted',
+            'uris.*.method.content' => 'required|string',
+            'uris.*.method.decidable' => 'required|accepted',
+            'uris.*.explain.content' => 'required|string',
+            'uris.*.explain.decidable' => 'required|accepted',
+            'pages.*.id' => 'nullable|integer',
+            'pages.*.pagename.content' => 'required|string',
+            'pages.*.pagename.decidable' => 'required|accepted',
+            'pages.*.requirements' => 'array',
+            'pages.*.requirements.*.id' => 'nullable|integer',
+            'pages.*.requirements.*.content' => 'nullable|string',
+        ];
+
+        // バリデーションの設定と実行
+        $validation = Validator::make($data, $rules);
+        // バリデーションの実行
+        $validation->validate();
+
+        $validatedData = $validation->validated();
+
+        // Serviceテーブルの変更
+        Service::where('id', $validatedData['id'])->update([
+            'title' => $validatedData['title']['content'],
+            'description' => $validatedData['description']['content'],
+        ]);
+        // Tagテーブルの変更（存在するなら）
+        if (in_array('tags',$validatedData)) {
+            $newTags = $validatedData['tags']['content'];
+            $oldTags = Service::find($validatedData['id'])->tags()->get();
+            $service = Service::find($validatedData['id']);
+            foreach ($oldTags as $tag) {
+                // 新しいタグに含まれている場合はそのまま
+                if (in_array($tag['tagname'],$newTags)) {
+                    $index = array_search($tag['tagname'], $newTags);
+                    array_splice($newTags, $index, 1);
+                } else {
+                    //　含まれていないタグは削除（リレーションのみ）
+                    $service->tags()->detach($tag['id']);
+                }
+            }
+
+            // 新しいタグを追加
+            foreach ($newTags as $tagname) {
+                $tag = Tag::firstOrCreate([
+                    'tagname' => $tagname,
+                ]);
+                $service->tags()->attach($tag['id']);
+            }
+
+            //　どのサービスにも結びついていないタグを削除する
+            $tags = Tag::with('services:id')->get();
+            foreach ($tags as $tag) {
+                if (count($tag['services']) == 0) {
+                    Tag::where('id', $tag['id'])->delete();
+                }
+            }
+        }
+
+        // TechFieldテーブルの変更
+        $newTechFields = $validatedData['techFields'];
+        foreach ($newTechFields as $fieldAndTeches) {
+            // idがあるなら更新（techField）
+            if (count($fieldAndTeches['techField']) == 3) {
+                $techField = TechField::where('id', $fieldAndTeches['techField']['id'])->update([
+                    'fieldname' => $fieldAndTeches['techField']['content'],
+                ]);
+
+                foreach ($fieldAndTeches['teches'] as $techContent) {
+                    // idがあるなら更新（teches）
+                    if (count($techContent) == 3) {
+                        Tech::where('id', $techContent['id'])->update([
+                            'techname' => $techContent['tech']['content'],
+                            'version' => $techContent['version']['content'],
+                        ]);
+
+                    } else {
+                        Tech::create([
+                            'tech_field_id' => $fieldAndTeches['techField']['id'],
+                            'techname' => $techContent['tech']['content'],
+                            'version' => $techContent['version']['content'],
+                        ]);
+                    }
+                }
+            } else {
+                // 新規追加
+                $techField = TechField::create([
+                    'service_id' => $validatedData['id'],
+                    'fieldname' => $fieldAndTeches['techField']['content'],
+                ]);
+
+                // techテーブルに新規追加
+                foreach ($fieldAndTeches['teches'] as $techContent) {
+                    $teches = Tech::create([
+                        'tech_field_id' => $techField['id'],
+                        'techname' => $techContent['tech']['content'],
+                        'version' => $techContent['version']['content'],
+                    ]);
+                }
+            }
+        }
+        // TechFieldの削除
+        foreach ($data['deleteData']['techFields'] as $id) {
+            TechField::where('id', $id)->delete();
+        }
+        // Techesの削除
+        foreach ($data['deleteData']['teches'] as $id) {
+            Tech::where('id', $id)->delete();
+        }
+
+        // requirementテーブルの変更
+        foreach ($validatedData['requirements'] as $require) {
+            if (count($require) == 3) {
+                Requirement::where('id', $require['id'])->update([
+                    'title' => $require['requireTitle']['content'],
+                    'content' => $require['requireExplain']['content'],
+                ]);
+            } else {
+                Requirement::create([
+                    'service_id' => $validatedData['id'],
+                    'title' => $require['requireTitle']['content'],
+                    'content' => $require['requireExplain']['content'],
+                    'finished' => false,
+                ]);
+            }
+        }
+
+        // requirementsテーブルの削除
+        foreach ($data['deleteData']['requirements'] as $id) {
+            Requirement::where('id', $id)->delete();
+        }
+
+        // pagesテーブルの変更
+        foreach ($validatedData['pages'] as $page) {
+            // idがあるなら変更
+            if (count($page) == 3) {
+                Page::where('id', $page['id'])->update([
+                    'pagename' => $page['pagename']['content'],
+                ]);
+
+                $newPage = Page::find($page['id']);
+                foreach ($page['requirements'] as $requirement) {
+                    if (count($requirement) == 2) {
+                        $newPage->requirements()->syncWithoutDetaching($requirement['id']);
+                    } else {
+                        $requirementID = Requirement::where('service_id', $validatedData['id'])->where('title', $requirement)->get('id');
+                        $newPage->requirements()->syncWithoutDetaching($requirementID);
+                    }
+                }
+            } else {
+                $newPage = Page::create([
+                    'service_id' => $validatedData['id'],
+                    'pagename' => $page['pagename']['content'],
+                ]);
+
+                foreach ($page['requirements'] as $requirement) {
+                    if (count($requirement) == 2) {
+                        $newPage->requirements()->syncWithoutDetaching($requirement['id']);
+                    } else {
+                        $requirementID = Requirement::where('service_id', $validatedData['id'])->where('title', $requirement)->get('id');
+                        $newPage->requirements()->syncWithoutDetaching($requirementID);
+                    }
+                }
+            }
+        }
+
+        foreach ($data['deleteData']['pages'] as $id) {
+            Page::where('id', $id)->delete();
+        }
+
+        foreach ($data['deleteData']['pageRequirements'] as $content) {
+            $page = Page::find($content['page_id']);
+            $page->requirements()->detach($content['id']);
+        }
+
+        // uriテーブルに追加
+        foreach ($validatedData['uris'] as $uriDesign) {
+            if (count($uriDesign) == 4) {
+                Uri::where('id', $uriDesign['id'])->update([
+                    'uri' => $uriDesign['uri']['content'],
+                    'method' => $uriDesign['method']['content'],
+                    'explain' => $uriDesign['explain']['content'],
+                ]);
+            } else {
+                $uri = Uri::create([
+                    'service_id' => $validatedData['id'],
+                    'uri' => $uriDesign['uri']['content'],
+                    'method' => $uriDesign['method']['content'],
+                    'explain' => $uriDesign['explain']['content'],
+                ]);
+            }
+        }
+
+        foreach ($data['deleteData']['uris'] as $id) {
+            Uri::where('id', $id)->delete();
+        }
+
+        return redirect()->route('Service', ['id' => $validatedData['id']]);
     }
  }

@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ user.name }}のサービス一覧
+                {{ developer.name }}のサービス一覧
             </h2>
         </template>
 
@@ -28,7 +28,7 @@ export default {
         ServiceCard,
     },
     props: {
-        user: {
+        developer: {
             type: Object,
         },
         services: {

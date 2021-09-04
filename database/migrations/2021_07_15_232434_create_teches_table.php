@@ -15,7 +15,7 @@ class CreateTechesTable extends Migration
     {
         Schema::create('teches', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tech_field_id')->constrained();
+            $table->foreignId('tech_field_id')->constrained()->cascadeOnDelete();
             $table->string('techname');
             $table->string('version')->nullable();
             $table->timestamps();

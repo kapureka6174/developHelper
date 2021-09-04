@@ -15,7 +15,7 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_id')->constrained();
+            $table->foreignId('service_id')->constrained()->cascadeOnDelete();
             $table->string('taskname');
             $table->enum('state',['やるべきこと', '開発中', '完了']);
             $table->integer('time');

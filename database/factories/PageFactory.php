@@ -22,6 +22,7 @@ class PageFactory extends Factory
     public function definition()
     {
         return [
+            "service_id" => Service::class,
             "pagename" => $this->faker->realText(10),
         ];
     }

@@ -12,7 +12,7 @@
 */
 
 return [
-    'accepted'             => ':attributeを承認してください。',
+    'accepted'             => ':attributeが編集中です。',
     'active_url'           => ':attributeは、有効なURLではありません。',
     'after'                => ':attributeには、:dateより後の日付を指定してください。',
     'after_or_equal'       => ':attributeには、:date以降の日付を指定してください。',
@@ -102,7 +102,7 @@ return [
     'prohibited_unless'    => ':attributeフィールドは、:otherが:valuesでない限り禁止されています。',
     'regex'                => ':attributeには、有効な正規表現を指定してください。',
     'relatable'            => 'この:attributeきない場合に伴い資源です。',
-    'required'             => ':attributeは、必ず指定してください。',
+    'required'             => ':attributeが入力されていません。',
     'required_if'          => ':otherが:valueの場合、:attributeを指定してください。',
     'required_unless'      => ':otherが:values以外の場合、:attributeを指定してください。',
     'required_with'        => ':valuesが指定されている場合、:attributeも指定してください。',
@@ -131,6 +131,34 @@ return [
     'attributes'           => [
         'name' => '名前',
         'email' => 'メールアドレス',
-        'password' => 'パスワード'
+        'password' => 'パスワード',
+        // サービス
+        'title.content' => 'タイトル',
+        'title.decidable' => 'タイトル',
+        'description.content' => '概要',
+        'description.decidable' => '概要',
+        'tags.tagname.*.content' => 'カテゴリー',
+        //　技術分野
+        'techFields.*.techField.content' => '技術分野',
+        'techFields.*.techField.decidable' => '技術分野',
+        'techFields.*.teches.*.tech.content' => '技術名',
+        'techFields.*.teches.*.tech.decidable' => '技術名',
+        'techFields.*.teches.*.version.content' => 'バージョン',
+        'techFields.*.teches.*.version.decidable' => 'バージョン',
+        // 要件定義
+        'requirements.*.requireTitle.content' => '要件',
+        'requirements.*.requireTitle.decidable' => '要件',
+        'requirements.*.requireExplain.content' => '要件の説明',
+        'requirements.*.requireExplain.decidable' => '要件の説明',
+        //　URI設計
+        'uris.*.uri.content' => 'URI',
+        'uris.*.uri.decidable' => 'URI',
+        'uris.*.method.content' => 'メソッド',
+        'uris.*.method.decidable' => 'メソッド',
+        'uris.*.explain.content' => '説明',
+        'uris.*.explain.decidable' => '説明',
+        //　ページ
+        'pages.*.pagename.content' => 'ページ名',
+        'pages.*.pagename.decidable' => 'ページ名',
     ],
 ];
