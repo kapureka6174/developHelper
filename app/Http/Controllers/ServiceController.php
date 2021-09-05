@@ -164,8 +164,10 @@ class ServiceController extends Controller
 
         // バリデーションの設定と実行
         $validation = Validator::make($data, $rules);
-        // バリデーションの実行
-        $validation->validate();
+
+        if ($validation->fails()) {
+            return redirect()->back()->withErrors($validation)->with('fail', 'エラーが発生しました。');
+        }
 
         $validatedData = $validation->validated();
 
@@ -345,6 +347,12 @@ class ServiceController extends Controller
             Uri::where('id', $id)->delete();
         }
 
-        return redirect()->route('Service', ['id' => $validatedData['id']]);
+        return redirect()->route('Service', ['id' => $validatedData['id']])->with('success', '保存が完了しました');
+    }
+
+    public function delete (Request $request) {
+        $data = $request->all();
+        Service::where('id', $data['id'])->delete();
+        return redirect()->route('Services');
     }
  }

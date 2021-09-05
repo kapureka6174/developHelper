@@ -19997,6 +19997,7 @@ __webpack_require__.r(__webpack_exports__);
         _method: "PUT",
         name: this.user.name,
         email: this.user.email,
+        introduction: this.user.introduction,
         photo: null
       }),
       photoPreview: null
@@ -20070,8 +20071,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+ // import { reactive } from "vue";
 
 
 
@@ -20100,7 +20102,7 @@ __webpack_require__.r(__webpack_exports__);
     } // 送信するデータ（コメント と タスク）
 
 
-    var form = (0,vue__WEBPACK_IMPORTED_MODULE_1__.reactive)({
+    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.useForm)({
       id: props.service.id,
       comments: {
         type: "",
@@ -20132,24 +20134,36 @@ __webpack_require__.r(__webpack_exports__);
 
 
     var commentSubmit = function commentSubmit() {
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia.post(route("Comment"), form, {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.post(route("Comment"), form, {
+        errorBag: "comments",
         preserveScroll: true
       });
     }; // TaskControllerにformを渡す
 
 
     var taskSubmit = function taskSubmit() {
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia.post(route("Task"), form, {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.post(route("Task"), form, {
+        errorBag: "tasks",
         preserveScroll: true
       });
     };
 
+    var check = function check() {
+      if (confirm("".concat(props.service.title, "\u3092\u672C\u5F53\u306B\u524A\u9664\u3057\u307E\u3059\u304B\uFF1F"))) {
+        _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.post(route("Delete"), {
+          id: props.service.id
+        });
+      }
+    };
+
+    console.log(form);
     return {
       form: form,
       getArray: getArray,
       addContent: addContent,
       commentSubmit: commentSubmit,
-      taskSubmit: taskSubmit
+      taskSubmit: taskSubmit,
+      check: check
     };
   }
 });
@@ -23159,48 +23173,76 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 var _hoisted_3 = {
   "class": "py-10 px-4"
 };
+var _hoisted_4 = {
+  key: 0,
+  "class": "alert"
+};
+var _hoisted_5 = {
+  "class": "fixed top-0 right-0 m-6"
+};
+var _hoisted_6 = {
+  "class": "\r\n                                rounded-lg\r\n                                shadow-md\r\n                                p-6\r\n                                pr-10\r\n                                bg-red-200\r\n                                text-red-900\r\n                            ",
+  style: {
+    "min-width": "240px"
+  }
+};
+var _hoisted_7 = {
+  "class": "flex items-center"
+};
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
   "class": "text-2xl text-indigo-700 font-semibold pb-3"
 }, " サービス名 ", -1
 /* HOISTED */
 );
 
-var _hoisted_5 = {
-  key: 2,
-  "class": "\r\n                        bg-red-100\r\n                        border border-red-400\r\n                        text-red-700\r\n                        px-4\r\n                        py-3\r\n                        rounded\r\n                        mt-2\r\n                    ",
-  role: "alert"
-};
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", {
-  "class": "font-bold"
-}, "サービス名が入力されていません。", -1
-/* HOISTED */
-);
-
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
-  "class": "text-2xl text-indigo-700 font-semibold pb-3 mt-3"
-}, " カテゴリー ", -1
-/* HOISTED */
-);
-
-var _hoisted_8 = {
-  "class": "relative"
-};
 var _hoisted_9 = {
-  key: 0,
-  "class": "\r\n                            bg-red-100\r\n                            border border-red-400\r\n                            text-red-700\r\n                            px-4\r\n                            py-3\r\n                            rounded\r\n                            mt-2\r\n                            w-full\r\n                            md:w-1/2\r\n                        ",
-  role: "alert"
+  key: 3
 };
 var _hoisted_10 = {
   "class": "font-bold"
 };
 var _hoisted_11 = {
+  key: 4,
+  "class": "\r\n                        bg-red-100\r\n                        border border-red-400\r\n                        text-red-700\r\n                        px-4\r\n                        py-3\r\n                        rounded\r\n                        mt-2\r\n                    ",
+  role: "alert"
+};
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", {
+  "class": "font-bold"
+}, "サービス名が入力されていません。", -1
+/* HOISTED */
+);
+
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
+  "class": "text-2xl text-indigo-700 font-semibold pb-3 mt-3"
+}, " カテゴリー ", -1
+/* HOISTED */
+);
+
+var _hoisted_14 = {
+  "class": "relative"
+};
+var _hoisted_15 = {
+  key: 0
+};
+var _hoisted_16 = {
+  "class": "font-bold"
+};
+var _hoisted_17 = {
+  key: 1,
+  "class": "\r\n                            bg-red-100\r\n                            border border-red-400\r\n                            text-red-700\r\n                            px-4\r\n                            py-3\r\n                            rounded\r\n                            mt-2\r\n                            w-full\r\n                            md:w-1/2\r\n                        ",
+  role: "alert"
+};
+var _hoisted_18 = {
+  "class": "font-bold"
+};
+var _hoisted_19 = {
   "class": "\r\n                                ml-2\r\n                                mr-1\r\n                                leading-relaxed\r\n                                truncate\r\n                                max-w-xs\r\n                                px-1\r\n                            ",
   "x-text": "tag"
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("svg", {
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("svg", {
   "class": "w-6 h-6 fill-current mx-auto",
   xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 24 24"
@@ -23211,63 +23253,69 @@ var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_13 = {
+var _hoisted_21 = {
   "class": "pt-3"
 };
-var _hoisted_14 = {
+var _hoisted_22 = {
   "class": "flex mb-3 items-center"
 };
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
   "class": "text-2xl text-indigo-700 font-semibold mr-2"
 }, " サービス概要 ", -1
 /* HOISTED */
 );
 
-var _hoisted_16 = {
+var _hoisted_24 = {
   key: 1,
   "class": "\r\n                            whitespace-pre-line\r\n                            mt-2\r\n                            py-2\r\n                            px-4\r\n                            mb-3\r\n                            text-xl text-gray-600\r\n                            break-words\r\n                        "
 };
-var _hoisted_17 = {
-  key: 2,
+var _hoisted_25 = {
+  key: 2
+};
+var _hoisted_26 = {
+  "class": "font-bold"
+};
+var _hoisted_27 = {
+  key: 3,
   "class": "\r\n                            bg-red-100\r\n                            border border-red-400\r\n                            text-red-700\r\n                            px-4\r\n                            py-3\r\n                            rounded\r\n                            mt-2\r\n                        ",
   role: "alert"
 };
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", {
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", {
   "class": "font-bold"
 }, "サービスの概要が入力されていません。", -1
 /* HOISTED */
 );
 
-var _hoisted_19 = {
+var _hoisted_29 = {
   "class": "flex mb-3 items-center"
 };
 
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
   "class": "text-2xl text-indigo-700 font-semibold mr-2"
 }, " 使用技術 ", -1
 /* HOISTED */
 );
 
-var _hoisted_21 = {
+var _hoisted_31 = {
   "class": "grid grid-cols-1 md:grid-cols-2"
 };
-var _hoisted_22 = {
+var _hoisted_32 = {
   "class": "bg-blue-200 m-2 rounded p-3"
 };
-var _hoisted_23 = {
+var _hoisted_33 = {
   "class": "flex items-center mb-3"
 };
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   stroke: "none",
   d: "M0 0h24v24H0z"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "18",
   y1: "6",
   x2: "6",
@@ -23276,7 +23324,7 @@ var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "6",
   y1: "6",
   x2: "18",
@@ -23285,85 +23333,28 @@ var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
+var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
   points: "3 6 5 6 21 6"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "10",
   y1: "11",
   x2: "10",
   y2: "17"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
-  x1: "14",
-  y1: "11",
-  x2: "14",
-  y2: "17"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_31 = {
-  "class": "flex mb-3 items-center"
-};
-
-var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
-  "class": "text-2xl text-indigo-700 font-semibold mr-2"
-}, " 要件定義 ", -1
-/* HOISTED */
-);
-
-var _hoisted_33 = {
-  "class": "text-gray-700"
-};
-var _hoisted_34 = {
-  "class": "container px-5 py-2"
-};
-var _hoisted_35 = {
-  "class": "flex flex-wrap"
-};
-var _hoisted_36 = {
-  key: 1,
-  "class": "mb-1"
-};
-var _hoisted_37 = {
-  "class": "\r\n                                                rounded\r\n                                                py-2\r\n                                                px-4\r\n                                                bg-gray-200\r\n                                                relative\r\n                                                h-full\r\n                                            "
-};
-
-var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
-  points: "3 6 5 6 21 6"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
-  d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
 }, null, -1
 /* HOISTED */
 );
 
 var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
-  x1: "10",
-  y1: "11",
-  x2: "10",
-  y2: "17"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "14",
   y1: "11",
   x2: "14",
@@ -23372,42 +23363,114 @@ var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
+var _hoisted_41 = {
+  key: 0
+};
 var _hoisted_42 = {
+  "class": "font-bold"
+};
+var _hoisted_43 = {
+  "class": "flex mb-3 items-center"
+};
+
+var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+  "class": "text-2xl text-indigo-700 font-semibold mr-2"
+}, " 要件定義 ", -1
+/* HOISTED */
+);
+
+var _hoisted_45 = {
+  "class": "text-gray-700"
+};
+var _hoisted_46 = {
+  "class": "container px-5 py-2"
+};
+var _hoisted_47 = {
+  "class": "flex flex-wrap"
+};
+var _hoisted_48 = {
+  key: 1,
+  "class": "mb-1"
+};
+var _hoisted_49 = {
+  "class": "\r\n                                                rounded\r\n                                                py-2\r\n                                                px-4\r\n                                                bg-gray-200\r\n                                                relative\r\n                                                h-full\r\n                                            "
+};
+
+var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
+  points: "3 6 5 6 21 6"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+  d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_52 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+  x1: "10",
+  y1: "11",
+  x2: "10",
+  y2: "17"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_53 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+  x1: "14",
+  y1: "11",
+  x2: "14",
+  y2: "17"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_54 = {
   key: 0,
   "class": "flex flex-col items-end"
 };
+var _hoisted_55 = {
+  key: 2
+};
+var _hoisted_56 = {
+  "class": "font-bold"
+};
 
-var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
+var _hoisted_57 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
   "class": "text-2xl text-indigo-700 font-semibold"
 }, "ページ", -1
 /* HOISTED */
 );
 
-var _hoisted_44 = {
+var _hoisted_58 = {
   key: 0,
   "class": "\r\n                            w-4/5\r\n                            bg-gray-200\r\n                            flex\r\n                            items-center\r\n                            rounded-md\r\n                            py-3\r\n                            my-1\r\n                            mx-auto\r\n                        "
 };
-var _hoisted_45 = {
+var _hoisted_59 = {
   "class": "font-bold text-gray-600 w-4/5"
 };
-var _hoisted_46 = {
+var _hoisted_60 = {
   "class": "w-full text-center"
 };
-var _hoisted_47 = {
+var _hoisted_61 = {
   "class": "grid grid-cols-1 md:grid-cols-3 justify-between"
 };
-var _hoisted_48 = {
+var _hoisted_62 = {
+  "class": "bg-blue-400 rounded m-3 pb-3"
+};
+var _hoisted_63 = {
   "class": "flex items-center"
 };
 
-var _hoisted_49 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_64 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   stroke: "none",
   d: "M0 0h24v24H0z"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_65 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "18",
   y1: "6",
   x2: "6",
@@ -23416,7 +23479,7 @@ var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_66 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "6",
   y1: "6",
   x2: "18",
@@ -23425,26 +23488,26 @@ var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_52 = {
+var _hoisted_67 = {
   "class": "w-full text-center mb-3"
 };
-var _hoisted_53 = {
-  "class": "\r\n                                    font-bold\r\n                                    text-gray-600\r\n                                    bg-gray-200\r\n                                    rounded-md\r\n                                    py-2\r\n                                    px-4\r\n                                    w-4/5\r\n                                    mx-3\r\n                                    text-center\r\n                                "
+var _hoisted_68 = {
+  "class": "\r\n                                        font-bold\r\n                                        text-gray-600\r\n                                        bg-gray-200\r\n                                        rounded-md\r\n                                        py-2\r\n                                        px-4\r\n                                        w-4/5\r\n                                        mx-3\r\n                                        text-center\r\n                                    "
 };
 
-var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
+var _hoisted_69 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
   points: "3 6 5 6 21 6"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_55 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_70 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_71 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "10",
   y1: "11",
   x2: "10",
@@ -23453,7 +23516,7 @@ var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_57 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_72 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "14",
   y1: "11",
   x2: "14",
@@ -23462,24 +23525,36 @@ var _hoisted_57 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_58 = {
+var _hoisted_73 = {
+  key: 0
+};
+var _hoisted_74 = {
+  "class": "font-bold"
+};
+var _hoisted_75 = {
   "class": "flex mb-3 items-center"
 };
 
-var _hoisted_59 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+var _hoisted_76 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
   "class": "text-2xl text-indigo-700 font-semibold mr-2 my-4"
 }, " URI設計 ", -1
 /* HOISTED */
 );
 
-var _hoisted_60 = {
+var _hoisted_77 = {
+  key: 5
+};
+var _hoisted_78 = {
+  "class": "font-bold"
+};
+var _hoisted_79 = {
   "class": "overflow-x-auto"
 };
-var _hoisted_61 = {
+var _hoisted_80 = {
   "class": "\r\n                            rounded-t-lg\r\n                            m-5\r\n                            mx-auto\r\n                            bg-gray-200\r\n                            text-gray-800\r\n                        "
 };
 
-var _hoisted_62 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_81 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "\r\n                                text-left\r\n                                border-b-2 border-gray-300\r\n                                flex flex-col-3\r\n                                items-center\r\n                            "
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "px-4 py-3 w-3/12 md:w-2/12"
@@ -23491,24 +23566,24 @@ var _hoisted_62 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_63 = {
+var _hoisted_82 = {
   "class": "px-4 py-3 w-3/12 md:w-2/12"
 };
-var _hoisted_64 = {
+var _hoisted_83 = {
   "class": "px-4 py-3 w-3/12 md:w-2/12"
 };
-var _hoisted_65 = {
+var _hoisted_84 = {
   "class": "\r\n                                    px-4\r\n                                    py-3\r\n                                    w-6/12\r\n                                    overflow-x-auto\r\n                                    max-h-40\r\n                                    sm:max-h-full\r\n                                    md:w-8/12\r\n                                    flex\r\n                                    items-center\r\n                                "
 };
 
-var _hoisted_66 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_85 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   stroke: "none",
   d: "M0 0h24v24H0z"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_67 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_86 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "18",
   y1: "6",
   x2: "6",
@@ -23517,7 +23592,7 @@ var _hoisted_67 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_68 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_87 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "6",
   y1: "6",
   x2: "18",
@@ -23539,69 +23614,100 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, " 保存 ")])];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" サービス名 "), _hoisted_4, !$setup.form.title.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
-        key: 0,
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [_ctx.$page.props.flash.fail ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+        "class": "\r\n                                    opacity-75\r\n                                    cursor-pointer\r\n                                    absolute\r\n                                    top-0\r\n                                    right-0\r\n                                    py-2\r\n                                    px-3\r\n                                    hover:opacity-100\r\n                                ",
+        onClick: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+          return _ctx.$page.props.flash.fail = null;
+        }, ["prevent"]))
+      }, " × "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.flash.fail), 1
+      /* TEXT */
+      )])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" サービス名 "), _hoisted_8, !$setup.form.title.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
+        key: 1,
         "class": "w-full rounded",
         type: "text",
         placeholder: "サービス名を入力してください",
-        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
           return $setup.form.title.content = $event;
         }),
-        onKeyup: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+        onKeyup: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
           return $setup.addContent($setup.form.title.content, 'title');
         }, ["enter"])),
-        onBlur: _cache[4] || (_cache[4] = function ($event) {
+        onBlur: _cache[5] || (_cache[5] = function ($event) {
           return $setup.form.title.error = false;
         })
       }, null, 544
       /* HYDRATE_EVENTS, NEED_PATCH */
       )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.title.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
-        key: 1,
+        key: 2,
         "class": "text-2xl font-bold text-gray-700",
-        onClick: _cache[5] || (_cache[5] = function ($event) {
+        onClick: _cache[6] || (_cache[6] = function ($event) {
           return $setup.form.title.decidable = false;
         })
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.title.content), 1
       /* TEXT */
-      )), $setup.form.title.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_5, [_hoisted_6])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" カテゴリー "), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（サーバーサイド） "), Object.keys(_ctx.$page.props.errors).length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.entries(_ctx.$page.props.errors).filter(function (e) {
+        return /title/.test(e[0]);
+      }), function (error, index) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+          key: index,
+          "class": "\r\n                            bg-red-100\r\n                            border border-red-400\r\n                            text-red-700\r\n                            px-4\r\n                            py-3\r\n                            rounded\r\n                            my-2\r\n                        ",
+          role: "alert"
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error[1]), 1
+        /* TEXT */
+        )]);
+      }), 128
+      /* KEYED_FRAGMENT */
+      ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（クライアントサイド） "), $setup.form.title.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_11, [_hoisted_12])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" カテゴリー "), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
         "class": "\r\n                            appearance-none\r\n                            block\r\n                            w-full\r\n                            md:w-1/2\r\n                            bg-white\r\n                            text-gray-700\r\n                            border border-gray-200\r\n                            rounded\r\n                            py-2\r\n                            px-4\r\n                            leading-tight\r\n                            focus:outline-none\r\n                            focus:ring-1\r\n                            focus:ring-blue-500\r\n                            focus:border-blue-500\r\n                        ",
         placeholder: "カテゴリーを追加できます",
-        onKeyup: _cache[6] || (_cache[6] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
+        onKeyup: _cache[7] || (_cache[7] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
           return $setup.plusTag && $setup.plusTag.apply($setup, arguments);
         }, ["enter"])),
-        onBlur: _cache[7] || (_cache[7] = function ($event) {
+        onBlur: _cache[8] || (_cache[8] = function ($event) {
           return $setup.form.tags.error = '';
         })
       }, null, 32
       /* HYDRATE_EVENTS */
-      ), $setup.form.tags.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.tags.error), 1
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（サーバーサイド） "), Object.keys(_ctx.$page.props.errors).length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_15, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.entries(_ctx.$page.props.errors).filter(function (e) {
+        return /tags/.test(e[0]);
+      }), function (error, index) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+          key: index,
+          "class": "\r\n                                bg-red-100\r\n                                border border-red-400\r\n                                text-red-700\r\n                                px-4\r\n                                py-3\r\n                                rounded\r\n                                my-2\r\n                            ",
+          role: "alert"
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error[1]), 1
+        /* TEXT */
+        )]);
+      }), 128
+      /* KEYED_FRAGMENT */
+      ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（クライアントサイド） "), $setup.form.tags.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("strong", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.tags.error), 1
       /* TEXT */
       )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.tags.content, function (tag, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           "class": "\r\n                            bg-blue-100\r\n                            inline-flex\r\n                            items-center\r\n                            text-sm\r\n                            rounded\r\n                            mt-2\r\n                            mr-1\r\n                            overflow-hidden\r\n                        ",
           key: index
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tag), 1
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tag), 1
         /* TEXT */
         ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
           "class": "\r\n                                w-6\r\n                                h-8\r\n                                inline-block\r\n                                align-middle\r\n                                text-gray-500\r\n                                bg-blue-200\r\n                                focus:outline-none\r\n                            ",
           onClick: function onClick($event) {
             return $setup.form.tags.content.splice(index, 1);
           }
-        }, [_hoisted_12], 8
+        }, [_hoisted_20], 8
         /* PROPS */
         , ["onClick"])]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" サービスの概要 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [_hoisted_15, !$setup.form.description.decidable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
+      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" サービスの概要 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [_hoisted_23, !$setup.form.description.decidable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
         key: 0,
         "class": "\r\n                                bg-indigo-600\r\n                                hover:bg-indigo-400\r\n                                h-8\r\n                                w-12\r\n                                text-white\r\n                                rounded\r\n                            ",
-        onClick: _cache[8] || (_cache[8] = function ($event) {
+        onClick: _cache[9] || (_cache[9] = function ($event) {
           return $setup.addContent($setup.form.description.content, 'description');
         })
       }, " 決定 ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
         key: 1,
         "class": "\r\n                                bg-indigo-600\r\n                                hover:bg-indigo-400\r\n                                h-8\r\n                                w-12\r\n                                text-white\r\n                                rounded\r\n                            ",
-        onClick: _cache[9] || (_cache[9] = function ($event) {
+        onClick: _cache[10] || (_cache[10] = function ($event) {
           return $setup.form.description.decidable = false;
         })
       }, " 編集 "))]), !$setup.form.description.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("textarea", {
@@ -23609,22 +23715,34 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "\r\n                            autoexpand\r\n                            tracking-wide\r\n                            py-2\r\n                            px-4\r\n                            mb-3\r\n                            leading-relaxed\r\n                            appearance-none\r\n                            block\r\n                            w-full\r\n                            border border-gray-200\r\n                            rounded\r\n                            focus:outline-none\r\n                            focus:bg-white\r\n                            focus:border-gray-500\r\n                        ",
         rows: "10",
         placeholder: "サービスの説明を入力してください。",
-        "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
+        "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
           return $setup.form.description.content = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.description.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.description.content), 1
+      )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.description.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.description.content), 1
       /* TEXT */
-      )), $setup.form.description.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_17, [_hoisted_18])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 使用技術について "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（サーバーサイド） "), Object.keys(_ctx.$page.props.errors).length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_25, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.entries(_ctx.$page.props.errors).filter(function (e) {
+        return /description/.test(e[0]);
+      }), function (error, index) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+          key: index,
+          "class": "\r\n                                bg-red-100\r\n                                border border-red-400\r\n                                text-red-700\r\n                                px-4\r\n                                py-3\r\n                                rounded\r\n                                my-2\r\n                            ",
+          role: "alert"
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error[1]), 1
+        /* TEXT */
+        )]);
+      }), 128
+      /* KEYED_FRAGMENT */
+      ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（クライアントサイド） "), $setup.form.description.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_27, [_hoisted_28])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 使用技術について "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_29, [_hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
         "class": "\r\n                            bg-indigo-600\r\n                            hover:bg-indigo-400\r\n                            h-8\r\n                            w-12\r\n                            text-white\r\n                            rounded\r\n                        ",
-        onClick: _cache[11] || (_cache[11] = function ($event) {
+        onClick: _cache[12] || (_cache[12] = function ($event) {
           return $setup.addLine('techField', $setup.techField());
         })
-      }, " 追加 ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.techFields, function (techField, index) {
+      }, " 追加 ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_31, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.techFields, function (techField, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           key: index
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [!$setup.form.techFields[index].techField.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_33, [!$setup.form.techFields[index].techField.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
           key: 0,
           "onUpdate:modelValue": function onUpdateModelValue($event) {
             return $setup.form.techFields[index].techField.content = $event;
@@ -23664,7 +23782,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           fill: "none",
           "stroke-linecap": "round",
           "stroke-linejoin": "round"
-        }, [_hoisted_24, _hoisted_25, _hoisted_26], 8
+        }, [_hoisted_34, _hoisted_35, _hoisted_36], 8
         /* PROPS */
         , ["onClick"]))]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(techField.teches, function (tech, techIndex) {
           return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
@@ -23721,20 +23839,32 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             onClick: function onClick($event) {
               return $setup.spliceArray('tech', index, techIndex);
             }
-          }, [_hoisted_27, _hoisted_28, _hoisted_29, _hoisted_30], 8
+          }, [_hoisted_37, _hoisted_38, _hoisted_39, _hoisted_40], 8
           /* PROPS */
           , ["onClick"]))]);
         }), 128
         /* KEYED_FRAGMENT */
-        ))])]);
+        ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（サーバーサイド） "), Object.keys(_ctx.$page.props.errors).length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_41, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.entries(_ctx.$page.props.errors).filter(function (e) {
+          return e[0].split('.')[0] == 'techFields' && e[0].split('.')[1] == "".concat(index) ? true : false;
+        }), function (error, errorIndex) {
+          return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+            key: errorIndex,
+            "class": "\r\n                                    bg-red-100\r\n                                    border border-red-400\r\n                                    text-red-700\r\n                                    px-4\r\n                                    py-3\r\n                                    rounded\r\n                                    m-2\r\n                                ",
+            role: "alert"
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_42, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error[1]), 1
+          /* TEXT */
+          )]);
+        }), 128
+        /* KEYED_FRAGMENT */
+        ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 要件定義 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_31, [_hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 要件定義 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_43, [_hoisted_44, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
         "class": "\r\n                            bg-indigo-600\r\n                            hover:bg-indigo-400\r\n                            h-8\r\n                            w-12\r\n                            text-white\r\n                            rounded\r\n                        ",
-        onClick: _cache[12] || (_cache[12] = function ($event) {
+        onClick: _cache[13] || (_cache[13] = function ($event) {
           return $setup.addLine('requirement', $setup.requirement());
         })
-      }, " 追加 ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_35, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.requirements, function (requirement, index) {
+      }, " 追加 ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_45, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_47, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.requirements, function (requirement, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           "class": "w-full",
           key: index
@@ -23750,7 +23880,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }
         }, null, 40
         /* PROPS, HYDRATE_EVENTS */
-        , ["onKeyup", "onUpdate:modelValue"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.requirements[index].requireTitle.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("details", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("summary", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+        , ["onKeyup", "onUpdate:modelValue"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.requirements[index].requireTitle.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("details", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("summary", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
           "class": "\r\n                                                    font-semibold\r\n                                                    break-words\r\n                                                ",
           onClick: function onClick($event) {
             return $setup.form.requirements[index].requireTitle.decidable = false;
@@ -23768,9 +23898,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           onClick: function onClick($event) {
             return $setup.spliceArray('requirement', index);
           }
-        }, [_hoisted_38, _hoisted_39, _hoisted_40, _hoisted_41], 8
+        }, [_hoisted_50, _hoisted_51, _hoisted_52, _hoisted_53], 8
         /* PROPS */
-        , ["onClick"]))]), !$setup.form.requirements[index].requireExplain.decidable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
+        , ["onClick"]))]), !$setup.form.requirements[index].requireExplain.decidable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_54, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
           "class": "\r\n                                                    appearance-none\r\n                                                    block\r\n                                                    w-full\r\n                                                    bg-white\r\n                                                    text-gray-700\r\n                                                    border border-gray-200\r\n                                                    rounded\r\n                                                    py-2\r\n                                                    px-4\r\n                                                    leading-tight\r\n                                                    focus:outline-none\r\n                                                    focus:ring-1\r\n                                                    focus:ring-blue-500\r\n                                                    focus:border-blue-500\r\n                                                ",
           rows: "8",
           placeholder: "要件・機能の説明を入力してください",
@@ -23794,13 +23924,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.requirements[index].requireExplain.content), 9
         /* TEXT, PROPS */
-        , ["onClick"]))]))]);
+        , ["onClick"]))])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（サーバーサイド） "), Object.keys(_ctx.$page.props.errors).length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_55, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.entries(_ctx.$page.props.errors).filter(function (e) {
+          return e[0].split('.')[0] == 'requirements' && e[0].split('.')[1] == "".concat(index) ? true : false;
+        }), function (error, errorIndex) {
+          return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+            key: errorIndex,
+            "class": "\r\n                                                bg-red-100\r\n                                                border border-red-400\r\n                                                text-red-700\r\n                                                px-4\r\n                                                py-3\r\n                                                rounded\r\n                                                m-2\r\n                                            ",
+            role: "alert"
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_56, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error[1]), 1
+          /* TEXT */
+          )]);
+        }), 128
+        /* KEYED_FRAGMENT */
+        ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ページ "), _hoisted_43, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.requirements, function (requirement, index) {
+      ))])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ページ "), _hoisted_57, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.requirements, function (requirement, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           key: index
-        }, [$setup.form.requirements[index].requireTitle.decidable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+        }, [$setup.form.requirements[index].requireTitle.decidable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_58, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
           type: "checkbox",
           "class": "\r\n                                form-checkbox\r\n                                h-5\r\n                                w-5\r\n                                text-green-600\r\n                                rounded\r\n                                mx-2\r\n                            ",
           "onUpdate:modelValue": function onUpdateModelValue($event) {
@@ -23808,23 +23950,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }
         }, null, 8
         /* PROPS */
-        , ["onUpdate:modelValue"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.form.requirements[index].requireTitle.selected]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.requirements[index].requireTitle.content), 1
+        , ["onUpdate:modelValue"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.form.requirements[index].requireTitle.selected]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_59, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.requirements[index].requireTitle.content), 1
         /* TEXT */
         )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
       }), 128
       /* KEYED_FRAGMENT */
-      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_60, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
         "class": "\r\n                            bg-indigo-600\r\n                            hover:bg-indigo-400\r\n                            h-10\r\n                            w-28\r\n                            text-white\r\n                            rounded\r\n                        ",
-        onClick: _cache[13] || (_cache[13] = function ($event) {
+        onClick: _cache[14] || (_cache[14] = function ($event) {
           return $setup.addLine('page', $setup.page());
         })
-      }, " ページを追加 ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_47, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.pages, function (page, index) {
+      }, " ページを追加 ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_61, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.pages, function (page, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
-          key: index,
-          "class": "bg-blue-400 rounded m-3"
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_48, [!$setup.form.pages[index].pagename.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
+          key: index
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_62, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_63, [!$setup.form.pages[index].pagename.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
           key: 0,
-          "class": "\r\n                                    appearance-none\r\n                                    block\r\n                                    w-3/5\r\n                                    bg-white\r\n                                    text-gray-700\r\n                                    border border-gray-200\r\n                                    rounded\r\n                                    py-2\r\n                                    px-4\r\n                                    my-2\r\n                                    mx-auto\r\n                                    leading-tight\r\n                                    focus:outline-none\r\n                                    focus:ring-1\r\n                                    focus:ring-blue-500\r\n                                    focus:border-blue-500\r\n                                ",
+          "class": "\r\n                                        appearance-none\r\n                                        block\r\n                                        w-3/5\r\n                                        bg-white\r\n                                        text-gray-700\r\n                                        border border-gray-200\r\n                                        rounded\r\n                                        py-2\r\n                                        px-4\r\n                                        my-2\r\n                                        mx-auto\r\n                                        leading-tight\r\n                                        focus:outline-none\r\n                                        focus:ring-1\r\n                                        focus:ring-blue-500\r\n                                        focus:border-blue-500\r\n                                    ",
           "onUpdate:modelValue": function onUpdateModelValue($event) {
             return $setup.form.pages[index].pagename.content = $event;
           },
@@ -23836,14 +23977,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* PROPS, HYDRATE_EVENTS */
         , ["onUpdate:modelValue", "onKeyup"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.pages[index].pagename.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h1", {
           key: 1,
-          "class": "\r\n                                    text-white text-xl\r\n                                    font-semibold\r\n                                    my-2\r\n                                    py-2\r\n                                    px-4\r\n                                    mx-auto\r\n                                    w-4/5\r\n                                    text-center\r\n                                ",
+          "class": "\r\n                                        text-white text-xl\r\n                                        font-semibold\r\n                                        my-2\r\n                                        py-2\r\n                                        px-4\r\n                                        mx-auto\r\n                                        w-4/5\r\n                                        text-center\r\n                                    ",
           onClick: function onClick($event) {
             return $setup.form.pages[index].pagename.decidable = false;
           }
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.pages[index].pagename.content), 9
         /* TEXT, PROPS */
         , ["onClick"])), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
-          "class": "\r\n                                    h-6\r\n                                    w-6\r\n                                    text-red-600\r\n                                    hover:text-red-400\r\n                                    mr-3\r\n                                ",
+          "class": "\r\n                                        h-6\r\n                                        w-6\r\n                                        text-red-600\r\n                                        hover:text-red-400\r\n                                        mr-3\r\n                                    ",
           onClick: function onClick($event) {
             return $setup.spliceArray('page', index);
           },
@@ -23855,10 +23996,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           fill: "none",
           "stroke-linecap": "round",
           "stroke-linejoin": "round"
-        }, [_hoisted_49, _hoisted_50, _hoisted_51], 8
+        }, [_hoisted_64, _hoisted_65, _hoisted_66], 8
         /* PROPS */
-        , ["onClick"]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_52, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-          "class": "\r\n                                    bg-indigo-600\r\n                                    hover:bg-indigo-400\r\n                                    h-10\r\n                                    w-40\r\n                                    text-white\r\n                                    rounded\r\n                                ",
+        , ["onClick"]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_67, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+          "class": "\r\n                                        bg-indigo-600\r\n                                        hover:bg-indigo-400\r\n                                        h-10\r\n                                        w-40\r\n                                        text-white\r\n                                        rounded\r\n                                    ",
           onClick: function onClick($event) {
             return $setup.addSelectedRequirement(index);
           }
@@ -23867,11 +24008,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         , ["onClick"])]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(page.requirements, function (requirement, requirementIndex) {
           return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
             key: requirementIndex,
-            "class": "w-full flex items-center justify-around mb-3"
-          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_53, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.pages[index].requirements[requirementIndex].content), 1
+            "class": "\r\n                                    w-full\r\n                                    flex\r\n                                    items-center\r\n                                    justify-around\r\n                                    mb-3\r\n                                "
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_68, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.pages[index].requirements[requirementIndex].content), 1
           /* TEXT */
           ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
-            "class": "\r\n                                    h-6\r\n                                    w-6\r\n                                    text-red-600\r\n                                    my-2\r\n                                    mr-4\r\n                                    hover:text-red-400\r\n                                ",
+            "class": "\r\n                                        h-6\r\n                                        w-6\r\n                                        text-red-600\r\n                                        my-2\r\n                                        mr-4\r\n                                        hover:text-red-400\r\n                                    ",
             viewBox: "0 0 24 24",
             fill: "none",
             stroke: "currentColor",
@@ -23881,24 +24022,48 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             onClick: function onClick($event) {
               return $setup.spliceArray('pageRequirement', index, requirementIndex);
             }
-          }, [_hoisted_54, _hoisted_55, _hoisted_56, _hoisted_57], 8
+          }, [_hoisted_69, _hoisted_70, _hoisted_71, _hoisted_72], 8
           /* PROPS */
           , ["onClick"]))]);
         }), 128
         /* KEYED_FRAGMENT */
-        ))]);
+        ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（サーバーサイド） "), Object.keys(_ctx.$page.props.errors).length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_73, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.entries(_ctx.$page.props.errors).filter(function (e) {
+          return e[0].split('.')[0] == 'pages' && e[0].split('.')[1] == "".concat(index) ? true : false;
+        }), function (error, errorIndex) {
+          return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+            key: errorIndex,
+            "class": "\r\n                                    bg-red-100\r\n                                    border border-red-400\r\n                                    text-red-700\r\n                                    px-4\r\n                                    py-3\r\n                                    rounded\r\n                                    m-2\r\n                                ",
+            role: "alert"
+          }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_74, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error[1]), 1
+          /* TEXT */
+          )]);
+        }), 128
+        /* KEYED_FRAGMENT */
+        ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_58, [_hoisted_59, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_75, [_hoisted_76, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
         "class": "\r\n                            bg-indigo-600\r\n                            hover:bg-indigo-400\r\n                            h-8\r\n                            w-12\r\n                            text-white\r\n                            rounded\r\n                        ",
-        onClick: _cache[14] || (_cache[14] = function ($event) {
+        onClick: _cache[15] || (_cache[15] = function ($event) {
           return $setup.addLine('uri', $setup.uri());
         })
-      }, " 追加 ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_60, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_61, [_hoisted_62, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.uris, function (uri, index) {
+      }, " 追加 ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（サーバーサイド） "), Object.keys(_ctx.$page.props.errors).length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_77, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.entries(_ctx.$page.props.errors).filter(function (e) {
+        return e[0].split('.')[0] == 'uris' ? true : false;
+      }), function (error, errorIndex) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+          key: errorIndex,
+          "class": "\r\n                            bg-red-100\r\n                            border border-red-400\r\n                            text-red-700\r\n                            px-4\r\n                            py-3\r\n                            rounded\r\n                            m-2\r\n                        ",
+          role: "alert"
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_78, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error[1]), 1
+        /* TEXT */
+        )]);
+      }), 128
+      /* KEYED_FRAGMENT */
+      ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_79, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_80, [_hoisted_81, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.uris, function (uri, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           "class": "\r\n                                bg-gray-100\r\n                                border-b border-gray-200\r\n                                flex flex-col-3\r\n                                items-center\r\n                            ",
           key: index
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_63, [!$setup.form.uris[index].uri.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_82, [!$setup.form.uris[index].uri.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
           key: 0,
           "class": "\r\n                                        appearance-none\r\n                                        block\r\n                                        w-full\r\n                                        bg-white\r\n                                        text-gray-700\r\n                                        border border-gray-200\r\n                                        rounded\r\n                                        h-10\r\n                                        px-1\r\n                                        leading-tight\r\n                                        focus:outline-none\r\n                                        focus:ring-1\r\n                                        focus:ring-blue-500\r\n                                        focus:border-blue-500\r\n                                    ",
           onKeyup: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
@@ -23916,7 +24081,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.uris[index].uri.content), 9
         /* TEXT, PROPS */
-        , ["onClick"]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_64, [!$setup.form.uris[index].method.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
+        , ["onClick"]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_83, [!$setup.form.uris[index].method.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
           key: 0,
           "class": "\r\n                                        appearance-none\r\n                                        block\r\n                                        w-full\r\n                                        bg-white\r\n                                        text-gray-700\r\n                                        border border-gray-200\r\n                                        rounded\r\n                                        h-10\r\n                                        px-1\r\n                                        leading-tight\r\n                                        focus:outline-none\r\n                                        focus:ring-1\r\n                                        focus:ring-blue-500\r\n                                        focus:border-blue-500\r\n                                    ",
           onKeyup: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
@@ -23934,7 +24099,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           }
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.uris[index].method.content), 9
         /* TEXT, PROPS */
-        , ["onClick"]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_65, [!$setup.form.uris[index].explain.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
+        , ["onClick"]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_84, [!$setup.form.uris[index].explain.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
           key: 0,
           "class": "\r\n                                        appearance-none\r\n                                        block\r\n                                        w-full\r\n                                        bg-white\r\n                                        text-gray-700\r\n                                        border border-gray-200\r\n                                        rounded\r\n                                        h-10\r\n                                        px-1\r\n                                        mr-2\r\n                                        leading-tight\r\n                                        focus:outline-none\r\n                                        focus:ring-1\r\n                                        focus:ring-blue-500\r\n                                        focus:border-blue-500\r\n                                    ",
           onKeyup: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
@@ -23965,7 +24130,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           fill: "none",
           "stroke-linecap": "round",
           "stroke-linejoin": "round"
-        }, [_hoisted_66, _hoisted_67, _hoisted_68], 8
+        }, [_hoisted_85, _hoisted_86, _hoisted_87], 8
         /* PROPS */
         , ["onClick"]))])]);
       }), 128
@@ -24940,10 +25105,13 @@ var _hoisted_8 = {
 var _hoisted_9 = {
   "class": "col-span-6 sm:col-span-4"
 };
+var _hoisted_10 = {
+  "class": "col-span-6 sm:col-span-4"
+};
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" 更新完了 ");
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" 更新完了 ");
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" 更新 ");
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" 更新 ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_label = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-label");
@@ -25066,6 +25234,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "mt-2"
       }, null, 8
       /* PROPS */
+      , ["message"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Introduction "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_label, {
+        "for": "introduction",
+        value: "紹介文"
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
+        "class": "\n                        border-gray-300\n                        focus:border-indigo-300\n                        focus:ring\n                        focus:ring-indigo-200\n                        focus:ring-opacity-50\n                        rounded-md\n                        shadow-sm\n                        mt-1\n                        block\n                        w-full\n                    ",
+        id: "introduction",
+        type: "text",
+        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+          return $data.form.introduction = $event;
+        }),
+        rows: "10"
+      }, null, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.introduction]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
+        message: $data.form.errors.introduction,
+        "class": "mt-2"
+      }, null, 8
+      /* PROPS */
       , ["message"])])];
     }),
     actions: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -25074,7 +25260,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "mr-3"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_10];
+          return [_hoisted_11];
         }),
         _: 1
         /* STABLE */
@@ -25088,7 +25274,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         disabled: $data.form.processing
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_11];
+          return [_hoisted_12];
         }),
         _: 1
         /* STABLE */
@@ -25272,70 +25458,71 @@ var _hoisted_36 = {
   "class": "flex items-center"
 };
 var _hoisted_37 = {
-  key: 1,
-  "class": "\r\n                            bg-red-100\r\n                            border border-red-400\r\n                            text-red-700\r\n                            px-4\r\n                            py-3\r\n                            rounded\r\n                            my-2\r\n                        ",
-  role: "alert"
+  key: 1
 };
 var _hoisted_38 = {
+  "class": "font-bold"
+};
+var _hoisted_39 = {
   key: 2,
   "class": "grid grid-cols-1 md:grid-cols-3 gap-4"
 };
-var _hoisted_39 = {
+var _hoisted_40 = {
   "class": "w-full bg-gray-100 rounded p-6"
 };
 
-var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
   "class": "\r\n                                    text-gray-700\r\n                                    font-bold\r\n                                    text-2xl\r\n                                    my-1\r\n                                    w-4/5\r\n                                    text-center\r\n                                "
 }, " やるべきこと ", -1
 /* HOISTED */
 );
 
-var _hoisted_41 = {
+var _hoisted_42 = {
   "class": "\r\n                                        text-gray-600\r\n                                        font-semibold\r\n                                        mx-auto\r\n                                        py-3\r\n                                        w-4/5\r\n                                        bg-blue-200\r\n                                        rounded\r\n                                        text-center\r\n                                    "
 };
-var _hoisted_42 = {
+var _hoisted_43 = {
   "class": "w-full bg-gray-100 rounded p-6"
 };
 
-var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
   "class": "\r\n                                    text-gray-700\r\n                                    font-bold\r\n                                    text-2xl\r\n                                    mx-auto\r\n                                    my-1\r\n                                    w-4/5\r\n                                    text-center\r\n                                "
 }, " 開発中 ", -1
 /* HOISTED */
 );
 
-var _hoisted_44 = {
+var _hoisted_45 = {
   "class": "\r\n                                        text-gray-600\r\n                                        font-semibold\r\n                                        mx-auto\r\n                                        py-3\r\n                                        w-4/5\r\n                                        bg-blue-200\r\n                                        rounded\r\n                                        text-center\r\n                                    "
 };
-var _hoisted_45 = {
+var _hoisted_46 = {
   "class": "w-full bg-gray-100 rounded p-6"
 };
 
-var _hoisted_46 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
   "class": "\r\n                                    text-gray-700\r\n                                    font-bold\r\n                                    text-2xl\r\n                                    mx-auto\r\n                                    my-1\r\n                                    w-4/5\r\n                                    text-center\r\n                                "
 }, " 完了 ", -1
 /* HOISTED */
 );
 
-var _hoisted_47 = {
+var _hoisted_48 = {
   "class": "\r\n                                        text-gray-600\r\n                                        font-semibold\r\n                                        mx-auto\r\n                                        py-3\r\n                                        w-4/5\r\n                                        bg-blue-200\r\n                                        rounded\r\n                                        text-center\r\n                                    "
 };
-var _hoisted_48 = {
+var _hoisted_49 = {
   "class": "grid grid-cols-1 md:grid-cols-3 gap-4"
 };
-var _hoisted_49 = {
+var _hoisted_50 = {
   "class": "w-full bg-gray-100 rounded p-6"
 };
-var _hoisted_50 = {
+var _hoisted_51 = {
   "class": "flex items-center"
 };
 
-var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+var _hoisted_52 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
   "class": "\r\n                                        text-gray-700\r\n                                        font-bold\r\n                                        text-2xl\r\n                                        mx-auto\r\n                                        my-1\r\n                                        w-4/5\r\n                                        text-center\r\n                                    "
 }, " やるべきこと ", -1
 /* HOISTED */
 );
 
-var _hoisted_52 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_53 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   "stroke-linecap": "round",
   "stroke-linejoin": "round",
   "stroke-width": "2",
@@ -25344,120 +25531,37 @@ var _hoisted_52 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_53 = {
+var _hoisted_54 = {
   key: 1,
   "class": "\r\n                                        mx-auto\r\n                                        bg-blue-200\r\n                                        w-4/5\r\n                                        rounded\r\n                                        text-center\r\n                                        flex\r\n                                        items-center\r\n                                        px-4\r\n                                        py-3\r\n                                        justify-between\r\n                                    "
 };
 
-var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_55 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   stroke: "none",
   d: "M0 0h24v24H0z"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_55 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
-  points: "9 6 15 12 9 18"
 }, null, -1
 /* HOISTED */
 );
 
 var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
-  points: "3 6 5 6 21 6"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_57 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
-  d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_58 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
-  x1: "10",
-  y1: "11",
-  x2: "10",
-  y2: "17"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_59 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
-  x1: "14",
-  y1: "11",
-  x2: "14",
-  y2: "17"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_60 = {
-  "class": "w-full bg-gray-100 rounded p-6"
-};
-var _hoisted_61 = {
-  "class": "flex items-center"
-};
-
-var _hoisted_62 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
-  "class": "\r\n                                        text-gray-700\r\n                                        font-bold\r\n                                        text-2xl\r\n                                        mx-auto\r\n                                        my-1\r\n                                        w-4/5\r\n                                        text-center\r\n                                    "
-}, " 開発中 ", -1
-/* HOISTED */
-);
-
-var _hoisted_63 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "stroke-width": "2",
-  d: "M12 4v16m8-8H4"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_64 = {
-  key: 1,
-  "class": "\r\n                                        mx-auto\r\n                                        bg-blue-200\r\n                                        w-4/5\r\n                                        rounded\r\n                                        text-center\r\n                                        flex\r\n                                        items-center\r\n                                        px-4\r\n                                        py-3\r\n                                        justify-between\r\n                                    "
-};
-
-var _hoisted_65 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
-  stroke: "none",
-  d: "M0 0h24v24H0z"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_66 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
-  points: "15 6 9 12 15 18"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_67 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
-  stroke: "none",
-  d: "M0 0h24v24H0z"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_68 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
   points: "9 6 15 12 9 18"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_69 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
+var _hoisted_57 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
   points: "3 6 5 6 21 6"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_70 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_58 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_71 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_59 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "10",
   y1: "11",
   x2: "10",
@@ -25466,7 +25570,7 @@ var _hoisted_71 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_72 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_60 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "14",
   y1: "11",
   x2: "14",
@@ -25475,20 +25579,20 @@ var _hoisted_72 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_73 = {
+var _hoisted_61 = {
   "class": "w-full bg-gray-100 rounded p-6"
 };
-var _hoisted_74 = {
+var _hoisted_62 = {
   "class": "flex items-center"
 };
 
-var _hoisted_75 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+var _hoisted_63 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
   "class": "\r\n                                        text-gray-700\r\n                                        font-bold\r\n                                        text-2xl\r\n                                        mx-auto\r\n                                        my-1\r\n                                        w-4/5\r\n                                        text-center\r\n                                    "
-}, " 完了 ", -1
+}, " 開発中 ", -1
 /* HOISTED */
 );
 
-var _hoisted_76 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_64 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   "stroke-linecap": "round",
   "stroke-linejoin": "round",
   "stroke-width": "2",
@@ -25497,37 +25601,50 @@ var _hoisted_76 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_77 = {
+var _hoisted_65 = {
   key: 1,
   "class": "\r\n                                        mx-auto\r\n                                        bg-blue-200\r\n                                        w-4/5\r\n                                        rounded\r\n                                        text-center\r\n                                        flex\r\n                                        items-center\r\n                                        px-4\r\n                                        py-3\r\n                                        justify-between\r\n                                    "
 };
 
-var _hoisted_78 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_66 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   stroke: "none",
   d: "M0 0h24v24H0z"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_79 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
+var _hoisted_67 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
   points: "15 6 9 12 15 18"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_80 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
+var _hoisted_68 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+  stroke: "none",
+  d: "M0 0h24v24H0z"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_69 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
+  points: "9 6 15 12 9 18"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_70 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
   points: "3 6 5 6 21 6"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_81 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+var _hoisted_71 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
   d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_82 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_72 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "10",
   y1: "11",
   x2: "10",
@@ -25536,7 +25653,7 @@ var _hoisted_82 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_83 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+var _hoisted_73 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
   x1: "14",
   y1: "11",
   x2: "14",
@@ -25545,51 +25662,127 @@ var _hoisted_83 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_84 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
+var _hoisted_74 = {
+  "class": "w-full bg-gray-100 rounded p-6"
+};
+var _hoisted_75 = {
+  "class": "flex items-center"
+};
+
+var _hoisted_76 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+  "class": "\r\n                                        text-gray-700\r\n                                        font-bold\r\n                                        text-2xl\r\n                                        mx-auto\r\n                                        my-1\r\n                                        w-4/5\r\n                                        text-center\r\n                                    "
+}, " 完了 ", -1
+/* HOISTED */
+);
+
+var _hoisted_77 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  "stroke-width": "2",
+  d: "M12 4v16m8-8H4"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_78 = {
+  key: 1,
+  "class": "\r\n                                        mx-auto\r\n                                        bg-blue-200\r\n                                        w-4/5\r\n                                        rounded\r\n                                        text-center\r\n                                        flex\r\n                                        items-center\r\n                                        px-4\r\n                                        py-3\r\n                                        justify-between\r\n                                    "
+};
+
+var _hoisted_79 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+  stroke: "none",
+  d: "M0 0h24v24H0z"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_80 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
+  points: "15 6 9 12 15 18"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_81 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("polyline", {
+  points: "3 6 5 6 21 6"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_82 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("path", {
+  d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_83 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+  x1: "10",
+  y1: "11",
+  x2: "10",
+  y2: "17"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_84 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
+  x1: "14",
+  y1: "11",
+  x2: "14",
+  y2: "17"
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_85 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
   "class": "text-2xl text-indigo-700 font-semibold my-2"
 }, " コメント ", -1
 /* HOISTED */
 );
 
-var _hoisted_85 = {
+var _hoisted_86 = {
   "class": "flex items-center"
 };
-var _hoisted_86 = {
+var _hoisted_87 = {
   "class": "text-gray-600 font-bold text-2xl mr-2"
 };
-var _hoisted_87 = {
+var _hoisted_88 = {
   "class": "\r\n                                text-gray-600\r\n                                font-semibold\r\n                                bg-blue-100\r\n                                rounded\r\n                                text-center\r\n                                py-2\r\n                                px-4\r\n                            "
 };
-var _hoisted_88 = {
+var _hoisted_89 = {
   "class": "text-gray-600 mt-2"
 };
-var _hoisted_89 = {
+var _hoisted_90 = {
   "class": "w-full bg-gray-100 p-4 flex flex-col"
 };
 
-var _hoisted_90 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_91 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "質問"
 }, "質問", -1
 /* HOISTED */
 );
 
-var _hoisted_91 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_92 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "アドバイス"
 }, "アドバイス", -1
 /* HOISTED */
 );
 
-var _hoisted_92 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+var _hoisted_93 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
   value: "感想"
 }, "感想", -1
 /* HOISTED */
 );
 
-var _hoisted_93 = {
+var _hoisted_94 = {
   key: 1,
   "class": "\r\n                            py-2\r\n                            px-4\r\n                            mb-3\r\n                            w-full\r\n                            whitespace-pre-line\r\n                            break-words\r\n                        "
 };
-var _hoisted_94 = {
+var _hoisted_95 = {
+  key: 2
+};
+var _hoisted_96 = {
+  "class": "font-bold"
+};
+var _hoisted_97 = {
   "class": "flex justify-end w-full"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -25599,9 +25792,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_app_layout, null, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [_hoisted_2, _ctx.$page.props.user !== null && _ctx.$page.props.user.id == $props.service.user_id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [_ctx.$page.props.user !== null && _ctx.$page.props.user.id == $props.service.user_id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
         key: 0,
-        "class": "\r\n                            bg-indigo-600\r\n                            hover:bg-indigo-400\r\n                            h-8\r\n                            w-12\r\n                            text-white\r\n                            rounded\r\n                        ",
+        "class": "\r\n                                bg-indigo-600\r\n                                hover:bg-indigo-400\r\n                                h-8\r\n                                w-12\r\n                                text-white\r\n                                rounded\r\n                            ",
         onClick: _cache[1] || (_cache[1] = function () {
           return _ctx.edit && _ctx.edit.apply(_ctx, arguments);
         })
@@ -25618,7 +25811,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["href"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
+      , ["href"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.$page.props.user !== null && _ctx.$page.props.user.id == $props.service.user_id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
+        key: 1,
+        "class": "\r\n                                bg-red-600\r\n                                hover:bg-red-400\r\n                                h-8\r\n                                w-12\r\n                                text-white\r\n                                rounded\r\n                            ",
+        onClick: _cache[2] || (_cache[2] = function () {
+          return $setup.check && $setup.check.apply($setup, arguments);
+        })
+      }, " 削除 ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.service.title), 1
@@ -25701,66 +25900,67 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_31, [_hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" タスクの保存ボタン "), _ctx.$page.props.user !== null && _ctx.$page.props.user.id == $props.service.user_id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
         key: 0,
         "class": "\r\n                                bg-indigo-600\r\n                                hover:bg-indigo-400\r\n                                h-8\r\n                                w-12\r\n                                text-white\r\n                                rounded\r\n                            ",
-        onClick: _cache[2] || (_cache[2] = function () {
+        onClick: _cache[3] || (_cache[3] = function () {
           return $setup.taskSubmit && $setup.taskSubmit.apply($setup, arguments);
         })
       }, " 保存 ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _ctx.$page.props.flash.success ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
         "class": "\r\n                                        opacity-75\r\n                                        cursor-pointer\r\n                                        absolute\r\n                                        top-0\r\n                                        right-0\r\n                                        py-2\r\n                                        px-3\r\n                                        hover:opacity-100\r\n                                    ",
-        onClick: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+        onClick: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
           return _ctx.$page.props.flash.success = null;
         }, ["prevent"]))
       }, " × "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.flash.success), 1
       /* TEXT */
-      )])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示 "), _ctx.$page.props.user !== null && Object.keys(_ctx.$page.props.errors).length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_37, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.values(_ctx.$page.props.errors), function (error, index) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
-          "class": "font-bold",
-          key: index
-        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error), 1
+      )])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示 "), _ctx.$page.props.errors.tasks ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_37, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.values(_ctx.$page.props.errors.tasks), function (error, index) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+          key: index,
+          "class": "\r\n                                bg-red-100\r\n                                border border-red-400\r\n                                text-red-700\r\n                                px-4\r\n                                py-3\r\n                                rounded\r\n                                my-2\r\n                            ",
+          role: "alert"
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error), 1
         /* TEXT */
-        );
+        )]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 通常表示 "), _ctx.$page.props.user == null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_39, [_hoisted_40, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.tasks.filter(function (e) {
+      ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 通常表示 "), _ctx.$page.props.user == null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_40, [_hoisted_41, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.tasks.filter(function (e) {
         return e.state == 'やるべきこと';
       }), function (task) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           key: task.id,
           "class": "my-2"
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(task.taskname), 1
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_42, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(task.taskname), 1
         /* TEXT */
         )]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_42, [_hoisted_43, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.tasks.filter(function (e) {
+      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_43, [_hoisted_44, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.tasks.filter(function (e) {
         return e.state == '開発中';
       }), function (task) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           key: task.id,
           "class": "my-2"
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_44, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(task.taskname), 1
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(task.taskname), 1
         /* TEXT */
         )]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_45, [_hoisted_46, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.tasks.filter(function (e) {
+      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_46, [_hoisted_47, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.tasks.filter(function (e) {
         return e.state == '完了';
       }), function (task) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           key: task.id,
           "class": "my-2"
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_47, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(task.taskname), 1
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_48, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(task.taskname), 1
         /* TEXT */
         )]);
       }), 128
       /* KEYED_FRAGMENT */
       ))])])) : _ctx.$page.props.user.id == $props.service.user_id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         key: 3
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 編集表示 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_50, [_hoisted_51, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 編集表示 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_50, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_51, [_hoisted_52, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
         "class": "\r\n                                        h-8\r\n                                        w-8\r\n                                        text-blue-500\r\n                                        hover:text-blue-300\r\n                                    ",
         fill: "none",
         viewBox: "0 0 24 24",
         stroke: "currentColor",
-        onClick: _cache[4] || (_cache[4] = function ($event) {
+        onClick: _cache[5] || (_cache[5] = function ($event) {
           return $setup.form.tasks.push({
             taskname: '',
             state: 'やるべきこと',
@@ -25768,7 +25968,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             isDelete: false
           });
         })
-      }, [_hoisted_52]))]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.getArray('やるべきこと'), function (task) {
+      }, [_hoisted_53]))]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.getArray('やるべきこと'), function (task) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           key: task.index,
           "class": "my-2 flex items-center"
@@ -25784,7 +25984,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "class": "\r\n                                        appearance-none\r\n                                        block\r\n                                        w-4/5\r\n                                        bg-white\r\n                                        text-gray-700\r\n                                        border border-gray-200\r\n                                        rounded\r\n                                        py-3\r\n                                        mx-auto\r\n                                        leading-tight\r\n                                        focus:outline-none\r\n                                        focus:ring-1\r\n                                        focus:ring-blue-500\r\n                                        focus:border-blue-500\r\n                                    "
         }, null, 40
         /* PROPS, HYDRATE_EVENTS */
-        , ["onUpdate:modelValue", "onKeyup"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.tasks[task.index].taskname]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_53, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+        , ["onUpdate:modelValue", "onKeyup"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.tasks[task.index].taskname]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_54, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
           "class": "text-gray-600 font-semibold",
           onClick: function onClick($event) {
             return $setup.form.tasks[task.index].decidable = false;
@@ -25804,7 +26004,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           onClick: function onClick($event) {
             return $setup.form.tasks[task.index].state = '開発中';
           }
-        }, [_hoisted_54, _hoisted_55], 8
+        }, [_hoisted_55, _hoisted_56], 8
         /* PROPS */
         , ["onClick"]))])), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
           "class": "\r\n                                        h-6\r\n                                        w-6\r\n                                        text-red-600\r\n                                        hover:text-red-400\r\n                                    ",
@@ -25817,17 +26017,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           onClick: function onClick($event) {
             return $setup.form.tasks[task.index].isDelete = true;
           }
-        }, [_hoisted_56, _hoisted_57, _hoisted_58, _hoisted_59], 8
+        }, [_hoisted_57, _hoisted_58, _hoisted_59, _hoisted_60], 8
         /* PROPS */
         , ["onClick"]))]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_60, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_61, [_hoisted_62, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
+      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_61, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_62, [_hoisted_63, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
         "class": "\r\n                                        h-8\r\n                                        w-8\r\n                                        text-blue-500\r\n                                        hover:text-blue-300\r\n                                    ",
         fill: "none",
         viewBox: "0 0 24 24",
         stroke: "currentColor",
-        onClick: _cache[5] || (_cache[5] = function ($event) {
+        onClick: _cache[6] || (_cache[6] = function ($event) {
           return $setup.form.tasks.push({
             taskname: '',
             state: '開発中',
@@ -25835,7 +26035,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             isDelete: false
           });
         })
-      }, [_hoisted_63]))]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.getArray('開発中'), function (task) {
+      }, [_hoisted_64]))]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.getArray('開発中'), function (task) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           key: task.index,
           "class": "my-2 flex items-center"
@@ -25851,7 +26051,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "class": "\r\n                                        appearance-none\r\n                                        block\r\n                                        w-4/5\r\n                                        bg-white\r\n                                        text-gray-700\r\n                                        border border-gray-200\r\n                                        rounded\r\n                                        py-3\r\n                                        mx-auto\r\n                                        leading-tight\r\n                                        focus:outline-none\r\n                                        focus:ring-1\r\n                                        focus:ring-blue-500\r\n                                        focus:border-blue-500\r\n                                    "
         }, null, 40
         /* PROPS, HYDRATE_EVENTS */
-        , ["onUpdate:modelValue", "onKeyup"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.tasks[task.index].taskname]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_64, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
+        , ["onUpdate:modelValue", "onKeyup"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.tasks[task.index].taskname]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_65, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
           "class": "\r\n                                            h-8\r\n                                            w-8\r\n                                            text-blue-500\r\n                                            flex-shrink-0\r\n                                            hover:text-blue-300\r\n                                        ",
           width: "24",
           height: "24",
@@ -25864,7 +26064,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           onClick: function onClick($event) {
             return $setup.form.tasks[task.index].state = 'やるべきこと';
           }
-        }, [_hoisted_65, _hoisted_66], 8
+        }, [_hoisted_66, _hoisted_67], 8
         /* PROPS */
         , ["onClick"])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
           "class": "text-gray-600 font-semibold",
@@ -25886,7 +26086,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           onClick: function onClick($event) {
             return $setup.form.tasks[task.index].state = '完了';
           }
-        }, [_hoisted_67, _hoisted_68], 8
+        }, [_hoisted_68, _hoisted_69], 8
         /* PROPS */
         , ["onClick"]))])), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
           "class": "\r\n                                        h-6\r\n                                        w-6\r\n                                        text-red-600\r\n                                        hover:text-red-400\r\n                                    ",
@@ -25899,17 +26099,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           onClick: function onClick($event) {
             return $setup.form.tasks[task.index].isDelete = true;
           }
-        }, [_hoisted_69, _hoisted_70, _hoisted_71, _hoisted_72], 8
+        }, [_hoisted_70, _hoisted_71, _hoisted_72, _hoisted_73], 8
         /* PROPS */
         , ["onClick"]))]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_73, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_74, [_hoisted_75, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
+      ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_74, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_75, [_hoisted_76, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
         "class": "\r\n                                        h-8\r\n                                        w-8\r\n                                        text-blue-500\r\n                                        hover:text-blue-300\r\n                                    ",
         fill: "none",
         viewBox: "0 0 24 24",
         stroke: "currentColor",
-        onClick: _cache[6] || (_cache[6] = function ($event) {
+        onClick: _cache[7] || (_cache[7] = function ($event) {
           return $setup.form.tasks.push({
             taskname: '',
             state: '完了',
@@ -25917,7 +26117,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             isDelete: false
           });
         })
-      }, [_hoisted_76]))]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.getArray('完了'), function (task) {
+      }, [_hoisted_77]))]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.getArray('完了'), function (task) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           key: task.index,
           "class": "my-2 flex items-center"
@@ -25933,7 +26133,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "class": "\r\n                                        appearance-none\r\n                                        block\r\n                                        w-4/5\r\n                                        bg-white\r\n                                        text-gray-700\r\n                                        border border-gray-200\r\n                                        rounded\r\n                                        py-3\r\n                                        mx-auto\r\n                                        leading-tight\r\n                                        focus:outline-none\r\n                                        focus:ring-1\r\n                                        focus:ring-blue-500\r\n                                        focus:border-blue-500\r\n                                    "
         }, null, 40
         /* PROPS, HYDRATE_EVENTS */
-        , ["onUpdate:modelValue", "onKeyup"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.tasks[task.index].taskname]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_77, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
+        , ["onUpdate:modelValue", "onKeyup"])), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.tasks[task.index].taskname]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_78, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("svg", {
           "class": "\r\n                                            h-8\r\n                                            w-8\r\n                                            text-blue-500\r\n                                            flex-shrink-0\r\n                                            hover:text-blue-300\r\n                                        ",
           width: "24",
           height: "24",
@@ -25946,7 +26146,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           onClick: function onClick($event) {
             return $setup.form.tasks[task.index].state = '開発中';
           }
-        }, [_hoisted_78, _hoisted_79], 8
+        }, [_hoisted_79, _hoisted_80], 8
         /* PROPS */
         , ["onClick"])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
           "class": "text-gray-600 font-semibold",
@@ -25966,59 +26166,69 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           onClick: function onClick($event) {
             return $setup.form.tasks[task.index].isDelete = true;
           }
-        }, [_hoisted_80, _hoisted_81, _hoisted_82, _hoisted_83], 8
+        }, [_hoisted_81, _hoisted_82, _hoisted_83, _hoisted_84], 8
         /* PROPS */
         , ["onClick"]))]);
       }), 128
       /* KEYED_FRAGMENT */
       ))])])], 2112
       /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
-      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_84, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.comments, function (comment) {
+      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_85, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.comments, function (comment) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           key: comment.id,
           "class": "rounded-md bg-gray-100 w-full my-3 p-5"
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_85, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", _hoisted_86, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(comment.user.name), 1
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_86, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", _hoisted_87, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(comment.user.name), 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", _hoisted_87, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(comment.type), 1
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", _hoisted_88, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(comment.type), 1
         /* TEXT */
-        )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_88, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(comment.content), 1
+        )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_89, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(comment.content), 1
         /* TEXT */
         )]);
       }), 128
       /* KEYED_FRAGMENT */
-      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_89, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
+      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_90, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
         "class": "\r\n                            w-32\r\n                            rounded\r\n                            border border-gray-200\r\n                            focus:outline-none\r\n                            focus:ring-1\r\n                            focus:ring-blue-500\r\n                            focus:border-blue-500\r\n                            mb-3\r\n                        ",
-        "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+        "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
           return $setup.form.comments.type = $event;
         })
-      }, [_hoisted_90, _hoisted_91, _hoisted_92], 512
+      }, [_hoisted_91, _hoisted_92, _hoisted_93], 512
       /* NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.form.comments.type]]), !$setup.form.comments.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("textarea", {
         key: 0,
         "class": "\r\n                            autoexpand\r\n                            tracking-wide\r\n                            py-2\r\n                            px-4\r\n                            mb-3\r\n                            leading-relaxed\r\n                            appearance-none\r\n                            block\r\n                            w-full\r\n                            border border-gray-200\r\n                            rounded\r\n                            focus:outline-none\r\n                            focus:bg-white\r\n                            focus:border-gray-500\r\n                        ",
-        "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+        "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
           return $setup.form.comments.content = $event;
         }),
         rows: "10"
       }, null, 512
       /* NEED_PATCH */
-      )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.comments.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", _hoisted_93, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.comments.content), 1
+      )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.comments.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", _hoisted_94, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.form.comments.content), 1
       /* TEXT */
-      )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_94, [!$setup.form.comments.decidable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
+      )), _ctx.$page.props.errors.comments ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_95, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.values(_ctx.$page.props.errors.comments), function (error, index) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+          key: index,
+          "class": "\r\n                                bg-red-100\r\n                                border border-red-400\r\n                                text-red-700\r\n                                px-4\r\n                                py-3\r\n                                rounded\r\n                                my-2\r\n                            ",
+          role: "alert"
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_96, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error), 1
+        /* TEXT */
+        )]);
+      }), 128
+      /* KEYED_FRAGMENT */
+      ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_97, [!$setup.form.comments.decidable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
         key: 0,
         "class": "\r\n                                bg-indigo-600\r\n                                hover:bg-indigo-400\r\n                                h-10\r\n                                w-16\r\n                                mr-3\r\n                                text-white\r\n                                rounded\r\n                            ",
-        onClick: _cache[9] || (_cache[9] = function ($event) {
+        onClick: _cache[10] || (_cache[10] = function ($event) {
           return $setup.form.comments.decidable = true;
         })
       }, " 決定 ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
         key: 1,
         "class": "\r\n                                bg-indigo-600\r\n                                hover:bg-indigo-400\r\n                                h-10\r\n                                w-16\r\n                                mr-3\r\n                                text-white\r\n                                rounded\r\n                            ",
-        onClick: _cache[10] || (_cache[10] = function ($event) {
+        onClick: _cache[11] || (_cache[11] = function ($event) {
           return $setup.form.comments.decidable = false;
         })
       }, " 編集 ")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
         "class": "\r\n                                bg-indigo-600\r\n                                hover:bg-indigo-400\r\n                                h-10\r\n                                w-16\r\n                                text-white\r\n                                rounded\r\n                            ",
-        onClick: _cache[11] || (_cache[11] = function () {
+        onClick: _cache[12] || (_cache[12] = function () {
           return $setup.commentSubmit && $setup.commentSubmit.apply($setup, arguments);
         })
       }, " 投稿 ")])])])];

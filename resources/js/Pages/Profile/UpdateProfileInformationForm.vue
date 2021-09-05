@@ -88,6 +88,33 @@
                 />
                 <jet-input-error :message="form.errors.email" class="mt-2" />
             </div>
+
+            <!-- Introduction -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="introduction" value="紹介文" />
+                <textarea
+                    class="
+                        border-gray-300
+                        focus:border-indigo-300
+                        focus:ring
+                        focus:ring-indigo-200
+                        focus:ring-opacity-50
+                        rounded-md
+                        shadow-sm
+                        mt-1
+                        block
+                        w-full
+                    "
+                    id="introduction"
+                    type="text"
+                    v-model="form.introduction"
+                    rows="10"
+                />
+                <jet-input-error
+                    :message="form.errors.introduction"
+                    class="mt-2"
+                />
+            </div>
         </template>
 
         <template #actions>
@@ -133,6 +160,7 @@ export default {
                 _method: "PUT",
                 name: this.user.name,
                 email: this.user.email,
+                introduction: this.user.introduction,
                 photo: null,
             }),
 

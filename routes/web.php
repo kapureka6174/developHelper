@@ -38,16 +38,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/task',[App\Http\Controllers\TaskController::class,'addTask'])->name('Task');
     Route::get('/services/{id}/edit',[App\Http\Controllers\ServiceController::class,'edit'])->name('Edit');
     Route::post('/edit',[App\Http\Controllers\ServiceController::class,'update']);
+    Route::post('/delete',[App\Http\Controllers\ServiceController::class,'delete'])->name('Delete');
 });
 
-Route::post('/forgot-password', function (Request $request) {
-    $request->validate(['email' => 'required|email']);
-
-    $status = Password::sendResetLink(
-        $request->only('email')
-    );
-
-    return $status === Password::RESET_LINK_SENT
-                ? back()->with(['status' => __($status)])
-                : back()->withErrors(['email' => __($status)]);
-})->middleware('guest')->name('password.email');

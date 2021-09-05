@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class TaskController extends Controller
 {
@@ -20,22 +21,22 @@ class TaskController extends Controller
         // バリデーションのルールを指定
         $rules = [
             'id' => 'nullable|integer',
+            '*.id' => 'required|integer',
             '*.taskname' => 'required|string',
-            '*.state' => 'required|string',
+            '*.state' => ['required','string', Rule::in(["やるべきこと","開発中","完了"])],
             '*.decidable' => 'required|accepted',
         ];
 
         // バリデーションの設定と実行
-        $validation = Validator::make($inputData, $rules, $messages = [
+        $validatedData = Validator::make($inputData, $rules, $messages = [
             '*.taskname.required' => 'タスクの名前が入力されていません。',
             '*.state.required' => 'タスクの状態が入力されていません。',
             '*.decidable.accepted' => 'タスクの名前が編集中です。',
-        ]);
+        ])->validateWithBag('tasks');
         // バリデーションの実行
-        $validation->validate();
 
         // idを既に持っているものは変更
-        $updateData = array_filter($validation->validated(), function($task) {
+        $updateData = array_filter($validatedData, function($task) {
             return count($task) > 3;
         });
         // 変更
@@ -44,7 +45,7 @@ class TaskController extends Controller
         }
 
         // idを持っていないものは追加
-        $createData = array_filter($validation->validated(), function($task) {
+        $createData = array_filter($validatedData, function($task) {
             return count($task) == 3;
         });
         // 追加

@@ -12,25 +12,46 @@
                     >
                         サービス詳細画面
                     </h2>
-                    <button
-                        v-if="
-                            $page.props.user !== null &&
-                            $page.props.user.id == service.user_id
-                        "
-                        class="
-                            bg-indigo-600
-                            hover:bg-indigo-400
-                            h-8
-                            w-12
-                            text-white
-                            rounded
-                        "
-                        @click="edit"
-                    >
-                        <inertia-link :href="route('Edit', { id: service.id })">
-                            編集
-                        </inertia-link>
-                    </button>
+                    <div>
+                        <button
+                            v-if="
+                                $page.props.user !== null &&
+                                $page.props.user.id == service.user_id
+                            "
+                            class="
+                                bg-indigo-600
+                                hover:bg-indigo-400
+                                h-8
+                                w-12
+                                text-white
+                                rounded
+                            "
+                            @click="edit"
+                        >
+                            <inertia-link
+                                :href="route('Edit', { id: service.id })"
+                            >
+                                編集
+                            </inertia-link>
+                        </button>
+                        <button
+                            v-if="
+                                $page.props.user !== null &&
+                                $page.props.user.id == service.user_id
+                            "
+                            class="
+                                bg-red-600
+                                hover:bg-red-400
+                                h-8
+                                w-12
+                                text-white
+                                rounded
+                            "
+                            @click="check"
+                        >
+                            削除
+                        </button>
+                    </div>
                 </div>
             </template>
             <div class="py-10 px-4">
@@ -346,31 +367,27 @@
                     </div>
 
                     <!-- エラー表示 -->
-                    <div
-                        v-if="
-                            $page.props.user !== null &&
-                            Object.keys($page.props.errors).length
-                        "
-                        class="
-                            bg-red-100
-                            border border-red-400
-                            text-red-700
-                            px-4
-                            py-3
-                            rounded
-                            my-2
-                        "
-                        role="alert"
-                    >
-                        <p
-                            class="font-bold"
+                    <div v-if="$page.props.errors.tasks">
+                        <div
                             v-for="(error, index) in Object.values(
-                                $page.props.errors
+                                $page.props.errors.tasks
                             )"
                             :key="index"
+                            class="
+                                bg-red-100
+                                border border-red-400
+                                text-red-700
+                                px-4
+                                py-3
+                                rounded
+                                my-2
+                            "
+                            role="alert"
                         >
-                            {{ error }}
-                        </p>
+                            <p class="font-bold">
+                                {{ error }}
+                            </p>
+                        </div>
                     </div>
 
                     <!-- 通常表示 -->
@@ -1046,6 +1063,28 @@
                     >
                         {{ form.comments.content }}
                     </p>
+                    <div v-if="$page.props.errors.comments">
+                        <div
+                            v-for="(error, index) in Object.values(
+                                $page.props.errors.comments
+                            )"
+                            :key="index"
+                            class="
+                                bg-red-100
+                                border border-red-400
+                                text-red-700
+                                px-4
+                                py-3
+                                rounded
+                                my-2
+                            "
+                            role="alert"
+                        >
+                            <p class="font-bold">
+                                {{ error }}
+                            </p>
+                        </div>
+                    </div>
                     <div class="flex justify-end w-full">
                         <button
                             v-if="!form.comments.decidable"
@@ -1099,8 +1138,9 @@
 
 <script>
 import AppLayout from "../Layouts/AppLayout.vue";
-import { reactive } from "vue";
+// import { reactive } from "vue";
 import { Inertia } from "@inertiajs/inertia";
+import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
@@ -1126,7 +1166,7 @@ export default {
         }
 
         // 送信するデータ（コメント と タスク）
-        const form = reactive({
+        const form = useForm({
             id: props.service.id,
             comments: {
                 type: "",
@@ -1160,6 +1200,7 @@ export default {
         // CommentControllerにformを渡す
         const commentSubmit = () => {
             Inertia.post(route("Comment"), form, {
+                errorBag: "comments",
                 preserveScroll: true,
             });
         };
@@ -1167,9 +1208,18 @@ export default {
         // TaskControllerにformを渡す
         const taskSubmit = () => {
             Inertia.post(route("Task"), form, {
+                errorBag: "tasks",
                 preserveScroll: true,
             });
         };
+
+        const check = () => {
+            if (confirm(`${props.service.title}を本当に削除しますか？`)) {
+                Inertia.post(route("Delete"), { id: props.service.id });
+            }
+        };
+
+        console.log(form);
 
         return {
             form,
@@ -1177,6 +1227,7 @@ export default {
             addContent,
             commentSubmit,
             taskSubmit,
+            check,
         };
     },
 };

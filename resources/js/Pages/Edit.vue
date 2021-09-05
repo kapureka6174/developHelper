@@ -29,6 +29,40 @@
             </template>
 
             <div class="py-10 px-4">
+                <div v-if="$page.props.flash.fail" class="alert">
+                    <div class="fixed top-0 right-0 m-6">
+                        <div
+                            class="
+                                rounded-lg
+                                shadow-md
+                                p-6
+                                pr-10
+                                bg-red-200
+                                text-red-900
+                            "
+                            style="min-width: 240px"
+                        >
+                            <button
+                                class="
+                                    opacity-75
+                                    cursor-pointer
+                                    absolute
+                                    top-0
+                                    right-0
+                                    py-2
+                                    px-3
+                                    hover:opacity-100
+                                "
+                                @click.prevent="$page.props.flash.fail = null"
+                            >
+                                ×
+                            </button>
+                            <div class="flex items-center">
+                                {{ $page.props.flash.fail }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- サービス名 -->
                 <h1 class="text-2xl text-indigo-700 font-semibold pb-3">
                     サービス名
@@ -49,6 +83,33 @@
                 >
                     {{ form.title.content }}
                 </p>
+
+                <!-- エラー表示（サーバーサイド） -->
+                <div v-if="Object.keys($page.props.errors).length">
+                    <div
+                        v-for="(error, index) in Object.entries(
+                            $page.props.errors
+                        ).filter((e) => {
+                            return /title/.test(e[0]);
+                        })"
+                        :key="index"
+                        class="
+                            bg-red-100
+                            border border-red-400
+                            text-red-700
+                            px-4
+                            py-3
+                            rounded
+                            my-2
+                        "
+                        role="alert"
+                    >
+                        <p class="font-bold">
+                            {{ error[1] }}
+                        </p>
+                    </div>
+                </div>
+                <!-- エラー表示（クライアントサイド） -->
                 <div
                     class="
                         bg-red-100
@@ -94,6 +155,32 @@
                         @keyup.enter="plusTag"
                         v-on:blur="form.tags.error = ''"
                     />
+                    <!-- エラー表示（サーバーサイド） -->
+                    <div v-if="Object.keys($page.props.errors).length">
+                        <div
+                            v-for="(error, index) in Object.entries(
+                                $page.props.errors
+                            ).filter((e) => {
+                                return /tags/.test(e[0]);
+                            })"
+                            :key="index"
+                            class="
+                                bg-red-100
+                                border border-red-400
+                                text-red-700
+                                px-4
+                                py-3
+                                rounded
+                                my-2
+                            "
+                            role="alert"
+                        >
+                            <p class="font-bold">
+                                {{ error[1] }}
+                            </p>
+                        </div>
+                    </div>
+                    <!-- エラー表示（クライアントサイド） -->
                     <div
                         class="
                             bg-red-100
@@ -239,6 +326,32 @@
                     >
                         {{ form.description.content }}
                     </p>
+                    <!-- エラー表示（サーバーサイド） -->
+                    <div v-if="Object.keys($page.props.errors).length">
+                        <div
+                            v-for="(error, index) in Object.entries(
+                                $page.props.errors
+                            ).filter((e) => {
+                                return /description/.test(e[0]);
+                            })"
+                            :key="index"
+                            class="
+                                bg-red-100
+                                border border-red-400
+                                text-red-700
+                                px-4
+                                py-3
+                                rounded
+                                my-2
+                            "
+                            role="alert"
+                        >
+                            <p class="font-bold">
+                                {{ error[1] }}
+                            </p>
+                        </div>
+                    </div>
+                    <!-- エラー表示（クライアントサイド） -->
                     <div
                         class="
                             bg-red-100
@@ -277,6 +390,7 @@
                         追加
                     </button>
                 </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2">
                     <div
                         v-for="(techField, index) in form.techFields"
@@ -524,6 +638,35 @@
                                 </svg>
                             </div>
                         </div>
+
+                        <!-- エラー表示（サーバーサイド） -->
+                        <div v-if="Object.keys($page.props.errors).length">
+                            <div
+                                v-for="(error, errorIndex) in Object.entries(
+                                    $page.props.errors
+                                ).filter((e) => {
+                                    return e[0].split('.')[0] == 'techFields' &&
+                                        e[0].split('.')[1] == `${index}`
+                                        ? true
+                                        : false;
+                                })"
+                                :key="errorIndex"
+                                class="
+                                    bg-red-100
+                                    border border-red-400
+                                    text-red-700
+                                    px-4
+                                    py-3
+                                    rounded
+                                    m-2
+                                "
+                                role="alert"
+                            >
+                                <p class="font-bold">
+                                    {{ error[1] }}
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -740,6 +883,43 @@
                                             }}
                                         </p>
                                     </details>
+                                    <!-- エラー表示（サーバーサイド） -->
+                                    <div
+                                        v-if="
+                                            Object.keys($page.props.errors)
+                                                .length
+                                        "
+                                    >
+                                        <div
+                                            v-for="(
+                                                error, errorIndex
+                                            ) in Object.entries(
+                                                $page.props.errors
+                                            ).filter((e) => {
+                                                return e[0].split('.')[0] ==
+                                                    'requirements' &&
+                                                    e[0].split('.')[1] ==
+                                                        `${index}`
+                                                    ? true
+                                                    : false;
+                                            })"
+                                            :key="errorIndex"
+                                            class="
+                                                bg-red-100
+                                                border border-red-400
+                                                text-red-700
+                                                px-4
+                                                py-3
+                                                rounded
+                                                m-2
+                                            "
+                                            role="alert"
+                                        >
+                                            <p class="font-bold">
+                                                {{ error[1] }}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -802,154 +982,188 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 justify-between">
-                    <div
-                        v-for="(page, index) in form.pages"
-                        :key="index"
-                        class="bg-blue-400 rounded m-3"
-                    >
-                        <div class="flex items-center">
-                            <input
-                                v-if="!form.pages[index].pagename.decidable"
-                                class="
-                                    appearance-none
-                                    block
-                                    w-3/5
-                                    bg-white
-                                    text-gray-700
-                                    border border-gray-200
-                                    rounded
-                                    py-2
-                                    px-4
-                                    my-2
-                                    mx-auto
-                                    leading-tight
-                                    focus:outline-none
-                                    focus:ring-1
-                                    focus:ring-blue-500
-                                    focus:border-blue-500
-                                "
-                                v-model="form.pages[index].pagename.content"
-                                type="text"
-                                @keyup.enter="
-                                    addContent(
-                                        form.pages[index].pagename.content,
-                                        'pagename',
-                                        index
-                                    )
-                                "
-                            />
-                            <h1
-                                v-else
-                                class="
-                                    text-white text-xl
-                                    font-semibold
-                                    my-2
-                                    py-2
-                                    px-4
-                                    mx-auto
-                                    w-4/5
-                                    text-center
-                                "
-                                @click="
-                                    form.pages[index].pagename.decidable = false
-                                "
-                            >
-                                {{ form.pages[index].pagename.content }}
-                            </h1>
-                            <svg
-                                class="
-                                    h-6
-                                    w-6
-                                    text-red-600
-                                    hover:text-red-400
-                                    mr-3
-                                "
-                                @click="spliceArray('page', index)"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                stroke-width="2"
-                                stroke="currentColor"
-                                fill="none"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <line x1="18" y1="6" x2="6" y2="18" />
-                                <line x1="6" y1="6" x2="18" y2="18" />
-                            </svg>
-                        </div>
-                        <div class="w-full text-center mb-3">
-                            <button
-                                class="
-                                    bg-indigo-600
-                                    hover:bg-indigo-400
-                                    h-10
-                                    w-40
-                                    text-white
-                                    rounded
-                                "
-                                @click="addSelectedRequirement(index)"
-                            >
-                                選択中の機能を追加
-                            </button>
-                        </div>
-                        <div
-                            v-for="(
-                                requirement, requirementIndex
-                            ) in page.requirements"
-                            :key="requirementIndex"
-                            class="w-full flex items-center justify-around mb-3"
-                        >
-                            <p
-                                class="
-                                    font-bold
-                                    text-gray-600
-                                    bg-gray-200
-                                    rounded-md
-                                    py-2
-                                    px-4
-                                    w-4/5
-                                    mx-3
-                                    text-center
-                                "
-                            >
-                                {{
-                                    form.pages[index].requirements[
-                                        requirementIndex
-                                    ].content
-                                }}
-                            </p>
-                            <svg
-                                class="
-                                    h-6
-                                    w-6
-                                    text-red-600
-                                    my-2
-                                    mr-4
-                                    hover:text-red-400
-                                "
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                @click="
-                                    spliceArray(
-                                        'pageRequirement',
-                                        index,
-                                        requirementIndex
-                                    )
-                                "
-                            >
-                                <polyline points="3 6 5 6 21 6" />
-                                <path
-                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                    <div v-for="(page, index) in form.pages" :key="index">
+                        <div class="bg-blue-400 rounded m-3 pb-3">
+                            <div class="flex items-center">
+                                <input
+                                    v-if="!form.pages[index].pagename.decidable"
+                                    class="
+                                        appearance-none
+                                        block
+                                        w-3/5
+                                        bg-white
+                                        text-gray-700
+                                        border border-gray-200
+                                        rounded
+                                        py-2
+                                        px-4
+                                        my-2
+                                        mx-auto
+                                        leading-tight
+                                        focus:outline-none
+                                        focus:ring-1
+                                        focus:ring-blue-500
+                                        focus:border-blue-500
+                                    "
+                                    v-model="form.pages[index].pagename.content"
+                                    type="text"
+                                    @keyup.enter="
+                                        addContent(
+                                            form.pages[index].pagename.content,
+                                            'pagename',
+                                            index
+                                        )
+                                    "
                                 />
-                                <line x1="10" y1="11" x2="10" y2="17" />
-                                <line x1="14" y1="11" x2="14" y2="17" />
-                            </svg>
+                                <h1
+                                    v-else
+                                    class="
+                                        text-white text-xl
+                                        font-semibold
+                                        my-2
+                                        py-2
+                                        px-4
+                                        mx-auto
+                                        w-4/5
+                                        text-center
+                                    "
+                                    @click="
+                                        form.pages[
+                                            index
+                                        ].pagename.decidable = false
+                                    "
+                                >
+                                    {{ form.pages[index].pagename.content }}
+                                </h1>
+                                <svg
+                                    class="
+                                        h-6
+                                        w-6
+                                        text-red-600
+                                        hover:text-red-400
+                                        mr-3
+                                    "
+                                    @click="spliceArray('page', index)"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="2"
+                                    stroke="currentColor"
+                                    fill="none"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path stroke="none" d="M0 0h24v24H0z" />
+                                    <line x1="18" y1="6" x2="6" y2="18" />
+                                    <line x1="6" y1="6" x2="18" y2="18" />
+                                </svg>
+                            </div>
+                            <div class="w-full text-center mb-3">
+                                <button
+                                    class="
+                                        bg-indigo-600
+                                        hover:bg-indigo-400
+                                        h-10
+                                        w-40
+                                        text-white
+                                        rounded
+                                    "
+                                    @click="addSelectedRequirement(index)"
+                                >
+                                    選択中の機能を追加
+                                </button>
+                            </div>
+                            <div
+                                v-for="(
+                                    requirement, requirementIndex
+                                ) in page.requirements"
+                                :key="requirementIndex"
+                                class="
+                                    w-full
+                                    flex
+                                    items-center
+                                    justify-around
+                                    mb-3
+                                "
+                            >
+                                <p
+                                    class="
+                                        font-bold
+                                        text-gray-600
+                                        bg-gray-200
+                                        rounded-md
+                                        py-2
+                                        px-4
+                                        w-4/5
+                                        mx-3
+                                        text-center
+                                    "
+                                >
+                                    {{
+                                        form.pages[index].requirements[
+                                            requirementIndex
+                                        ].content
+                                    }}
+                                </p>
+                                <svg
+                                    class="
+                                        h-6
+                                        w-6
+                                        text-red-600
+                                        my-2
+                                        mr-4
+                                        hover:text-red-400
+                                    "
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    @click="
+                                        spliceArray(
+                                            'pageRequirement',
+                                            index,
+                                            requirementIndex
+                                        )
+                                    "
+                                >
+                                    <polyline points="3 6 5 6 21 6" />
+                                    <path
+                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                                    />
+                                    <line x1="10" y1="11" x2="10" y2="17" />
+                                    <line x1="14" y1="11" x2="14" y2="17" />
+                                </svg>
+                            </div>
+                        </div>
+                        <!-- エラー表示（サーバーサイド） -->
+                        <div v-if="Object.keys($page.props.errors).length">
+                            <div
+                                v-for="(error, errorIndex) in Object.entries(
+                                    $page.props.errors
+                                ).filter((e) => {
+                                    return e[0].split('.')[0] == 'pages' &&
+                                        e[0].split('.')[1] == `${index}`
+                                        ? true
+                                        : false;
+                                })"
+                                :key="errorIndex"
+                                class="
+                                    bg-red-100
+                                    border border-red-400
+                                    text-red-700
+                                    px-4
+                                    py-3
+                                    rounded
+                                    m-2
+                                "
+                                role="alert"
+                            >
+                                <p class="font-bold">
+                                    {{ error[1] }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -973,6 +1187,31 @@
                     >
                         追加
                     </button>
+                </div>
+                <!-- エラー表示（サーバーサイド） -->
+                <div v-if="Object.keys($page.props.errors).length">
+                    <div
+                        v-for="(error, errorIndex) in Object.entries(
+                            $page.props.errors
+                        ).filter((e) => {
+                            return e[0].split('.')[0] == 'uris' ? true : false;
+                        })"
+                        :key="errorIndex"
+                        class="
+                            bg-red-100
+                            border border-red-400
+                            text-red-700
+                            px-4
+                            py-3
+                            rounded
+                            m-2
+                        "
+                        role="alert"
+                    >
+                        <p class="font-bold">
+                            {{ error[1] }}
+                        </p>
+                    </div>
                 </div>
                 <div class="overflow-x-auto">
                     <div

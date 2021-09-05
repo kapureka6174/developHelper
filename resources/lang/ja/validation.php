@@ -132,9 +132,10 @@ return [
         'name' => '名前',
         'email' => 'メールアドレス',
         'password' => 'パスワード',
+        'introduction' => '紹介文',
         // サービス
-        'title.content' => 'タイトル',
-        'title.decidable' => 'タイトル',
+        'title.content' => 'サービス名',
+        'title.decidable' => 'サービス名',
         'description.content' => '概要',
         'description.decidable' => '概要',
         'tags.tagname.*.content' => 'カテゴリー',
@@ -153,12 +154,16 @@ return [
         //　URI設計
         'uris.*.uri.content' => 'URI',
         'uris.*.uri.decidable' => 'URI',
-        'uris.*.method.content' => 'メソッド',
-        'uris.*.method.decidable' => 'メソッド',
-        'uris.*.explain.content' => '説明',
-        'uris.*.explain.decidable' => '説明',
+        'uris.*.method.content' => 'URI設計のメソッド',
+        'uris.*.method.decidable' => 'URI設計のメソッド',
+        'uris.*.explain.content' => 'URI設計の説明',
+        'uris.*.explain.decidable' => 'URI設計の説明',
         //　ページ
         'pages.*.pagename.content' => 'ページ名',
         'pages.*.pagename.decidable' => 'ページ名',
+        // コメント
+        'comments.type' => 'コメントの項目',
+        'comments.content' => 'コメントの内容',
+        'comments.decidable' => 'コメント',
     ],
 ];
