@@ -64,6 +64,19 @@
                     ログイン
                 </jet-button>
             </div>
+
+            <!-- -- Login with GitHub -- -->
+            <div class="flex items-center justify-end mt-4">
+                <inertia-link class="btn" :href="route('Github_Login')">
+                    Login with GitHub
+                </inertia-link>
+            </div>
+            <!-- -- Login with Google -- -->
+            <div class="flex items-center justify-end mt-4">
+                <inertia-link class="btn" :href="route('Google_Login')">
+                    Login with Google
+                </inertia-link>
+            </div>
         </form>
     </jet-authentication-card>
 </template>

@@ -25,6 +25,7 @@
                                 w-12
                                 text-white
                                 rounded
+                                mr-3
                             "
                             @click="edit"
                         >

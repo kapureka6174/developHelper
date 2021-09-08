@@ -41,3 +41,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/delete',[App\Http\Controllers\ServiceController::class,'delete'])->name('Delete');
 });
 
+Route::get('auth/github', [App\Http\Controllers\GitHubController::class, 'gitRedirect'])->name('Github_Login');
+Route::get('auth/github/callback', [App\Http\Controllers\GitHubController::class, 'gitCallback']);
+
+Route::get('auth/google', [App\Http\Controllers\GoogleController::class, 'googleRedirect'])->name('Google_Login');
+Route::get('auth/google/callback', [App\Http\Controllers\GoogleController::class, 'googleCallback']);

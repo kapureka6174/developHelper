@@ -115,7 +115,7 @@ class ServiceController extends Controller
     public function edit($id) {
         $service = Service::where('id', $id)->with('tags:id,tagname')->first(['id', 'user_id' ,'title', 'description']);
         if (Auth::id() !== $service['user_id']) {
-            return Inertia::render('Edit', ['errorMessage' => '編集権限がありません。正しいアカウントでログインしてください。']);
+            return Inertia::render('PermissionError', ['errorMessage' => '編集権限がありません。正しいアカウントでログインしてください。']);
         }
         $techFields = TechField::where('service_id', $id)->with('teches:id,tech_field_id,techname,version')->get(['id', 'fieldname']);
         $requirements = Requirement::where('service_id', $id)->get(['id', 'title', 'content', 'finished']);
