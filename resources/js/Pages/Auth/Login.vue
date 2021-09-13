@@ -65,18 +65,59 @@
                 </jet-button>
             </div>
 
+            <hr class="my-4" />
+
+            <div class="flex justify-center my-2">
+                <h2 class="font-semibold">または</h2>
+            </div>
+
+            <div class="flex justify-around">
+                <!-- -- Login with GitHub -- -->
+                <inertia-link
+                    class="btn text-white"
+                    :href="route('Github_Login')"
+                >
+                    <div
+                        class="bg-black hover:bg-gray-700 rounded-md px-4 py-2"
+                    >
+                        GitHubでログイン
+                    </div>
+                </inertia-link>
+                <!-- -- Login with Google -- -->
+                <inertia-link
+                    class="btn text-white"
+                    :href="route('Google_Login')"
+                >
+                    <div
+                        class="bg-red-600 hover:bg-red-400 rounded-md px-4 py-2"
+                    >
+                        Googleでログイン
+                    </div>
+                </inertia-link>
+            </div>
+
+            <hr class="my-4" />
+            <div class="flex justify-center my-2">
+                <h2 class="font-semibold">
+                    ユーザー登録せずに機能を試したい方はこちら
+                </h2>
+            </div>
             <!-- -- Login with GitHub -- -->
-            <div class="flex items-center justify-end mt-4">
-                <inertia-link class="btn" :href="route('Github_Login')">
-                    Login with GitHub
-                </inertia-link>
-            </div>
-            <!-- -- Login with Google -- -->
-            <div class="flex items-center justify-end mt-4">
-                <inertia-link class="btn" :href="route('Google_Login')">
-                    Login with Google
-                </inertia-link>
-            </div>
+            <inertia-link class="btn text-white" :href="route('Guest_Login')">
+                <div
+                    class="
+                        bg-yellow-600
+                        hover:bg-yellow-300
+                        rounded-md
+                        px-4
+                        py-2
+                        items-center
+                        text-center
+                    "
+                >
+                    ゲストユーザーログイン
+                </div>
+            </inertia-link>
         </form>
     </jet-authentication-card>
 </template>

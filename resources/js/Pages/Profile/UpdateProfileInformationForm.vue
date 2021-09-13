@@ -7,6 +7,13 @@
         </template>
 
         <template #form>
+            <!-- 注意文 -->
+            <div class="col-span-6 sm:col-span-4">
+                <h2 class="font-semibold text-red-400">
+                    ※ゲストユーザーは、プロフィールを編集できません。
+                </h2>
+            </div>
+
             <!-- Profile Photo -->
             <div
                 class="col-span-6 sm:col-span-4"
@@ -64,8 +71,24 @@
                 <jet-input-error :message="form.errors.photo" class="mt-2" />
             </div>
 
-            <!-- Name -->
-            <div class="col-span-6 sm:col-span-4">
+            <!-- ゲスト表示（名前） -->
+            <div
+                v-if="$page.props.user.id == 13"
+                class="col-span-6 sm:col-span-4"
+            >
+                <jet-label for="name" value="名前" />
+                <jet-input
+                    id="name"
+                    type="text"
+                    class="mt-1 block w-full bg-gray-300"
+                    v-model="form.name"
+                    readonly
+                    autocomplete="name"
+                />
+                <jet-input-error :message="form.errors.name" class="mt-2" />
+            </div>
+            <!-- 通常表示（名前） -->
+            <div v-else class="col-span-6 sm:col-span-4">
                 <jet-label for="name" value="名前" />
                 <jet-input
                     id="name"
@@ -77,8 +100,23 @@
                 <jet-input-error :message="form.errors.name" class="mt-2" />
             </div>
 
-            <!-- Email -->
-            <div class="col-span-6 sm:col-span-4">
+            <!-- ゲスト表示（Email） -->
+            <div
+                v-if="$page.props.user.id == 13"
+                class="col-span-6 sm:col-span-4"
+            >
+                <jet-label for="email" value="メールアドレス" />
+                <jet-input
+                    id="email"
+                    type="email"
+                    class="mt-1 block w-full bg-gray-300"
+                    v-model="form.email"
+                    readonly
+                />
+                <jet-input-error :message="form.errors.email" class="mt-2" />
+            </div>
+            <!-- 通常表示（Email） -->
+            <div v-else class="col-span-6 sm:col-span-4">
                 <jet-label for="email" value="メールアドレス" />
                 <jet-input
                     id="email"
@@ -89,8 +127,39 @@
                 <jet-input-error :message="form.errors.email" class="mt-2" />
             </div>
 
-            <!-- Introduction -->
-            <div class="col-span-6 sm:col-span-4">
+            <!-- ゲスト表示（紹介文） -->
+            <div
+                v-if="$page.props.user.id == 13"
+                class="col-span-6 sm:col-span-4"
+            >
+                <jet-label for="introduction" value="紹介文" />
+                <textarea
+                    class="
+                        border-gray-300
+                        focus:border-indigo-300
+                        focus:ring
+                        focus:ring-indigo-200
+                        focus:ring-opacity-50
+                        rounded-md
+                        shadow-sm
+                        mt-1
+                        block
+                        w-full
+                        bg-gray-300
+                    "
+                    id="introduction"
+                    type="text"
+                    v-model="form.introduction"
+                    rows="10"
+                    readonly
+                />
+                <jet-input-error
+                    :message="form.errors.introduction"
+                    class="mt-2"
+                />
+            </div>
+            <!-- 通常表示（紹介文） -->
+            <div v-else class="col-span-6 sm:col-span-4">
                 <jet-label for="introduction" value="紹介文" />
                 <textarea
                     class="
@@ -122,7 +191,18 @@
                 更新完了
             </jet-action-message>
 
+            <!-- ゲスト表示 -->
             <jet-button
+                v-if="$page.props.user.id == 13"
+                :class="{ 'opacity-25': form.processing }"
+                :disabled="form.processing"
+                type="button"
+            >
+                更新
+            </jet-button>
+            <!-- 通常表示 -->
+            <jet-button
+                v-else
                 :class="{ 'opacity-25': form.processing }"
                 :disabled="form.processing"
             >

@@ -21,8 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->rememberToken();
             $table->string('profile_photo_path', 2048)->nullable();
-            $table->string('social_id')->nullable();
-            $table->string('auth_type')->nullable();
+            $table->string('google_id')->nullable();
+            $table->string('github_id')->nullable();
             $table->longText('introduction')->nullable();
             $table->timestamps();
         });

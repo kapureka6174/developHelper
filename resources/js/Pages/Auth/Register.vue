@@ -114,6 +114,29 @@
                     アカウント作成
                 </jet-button>
             </div>
+
+            <hr class="my-4" />
+
+            <div class="flex justify-around">
+                <!-- -- Login with GitHub -- -->
+                <div class="bg-black hover:bg-gray-700 rounded-md px-4 py-2">
+                    <inertia-link
+                        class="btn text-white"
+                        :href="route('Github_Login')"
+                    >
+                        GitHubで作成
+                    </inertia-link>
+                </div>
+                <!-- -- Login with Google -- -->
+                <div class="bg-red-600 hover:bg-red-400 rounded-md px-4 py-2">
+                    <inertia-link
+                        class="btn text-white"
+                        :href="route('Google_Login')"
+                    >
+                        Googleで作成
+                    </inertia-link>
+                </div>
+            </div>
         </form>
     </jet-authentication-card>
 </template>

@@ -24,26 +24,29 @@ class GitHubController extends Controller
 
             $user = Socialite::driver('github')->user();
 
-            dd($user);
-            $searchUser = User::where('github_id', $user->id)->first();
+            $searchUser = User::where('email', $user->email)->first();
 
             if($searchUser){
+                if ($searchUser->github_id == null) {
+                    User::where('email', $user->email)->update([
+                        'github_id' => $user->id,
+                    ]);
+                }
 
                 Auth::login($searchUser);
 
-                return redirect('/home');
+                return redirect('/');
 
             }else{
                 $gitUser = User::create([
                     'name' => $user->name,
                     'email' => $user->email,
                     'github_id'=> $user->id,
-                    'auth_type'=> 'github',
                 ]);
 
                 Auth::login($gitUser);
 
-                return redirect('/home');
+                return redirect('/');
             }
 
         } catch (Exception $e) {
