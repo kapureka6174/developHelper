@@ -2,11 +2,11 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                開発者
+                開発者一覧
             </h2>
         </template>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 px-2">
             <div v-for="user in users" :key="user.id">
                 <developer-card
                     :id="user.id"
