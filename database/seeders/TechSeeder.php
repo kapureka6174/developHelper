@@ -15,8 +15,10 @@ class TechSeeder extends Seeder
      */
     public function run()
     {
+        // 全ての技術分野のID取得
         $techFields = TechField::pluck('id')->all();
 
+        // 技術分野毎に使用技術を二つ追加
         foreach ($techFields as $techField) {
             Tech::factory()->count(2)->create(['tech_field_id' => $techField]);
         }

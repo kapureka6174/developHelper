@@ -6,13 +6,21 @@
             </h2>
         </template>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div v-for="service in services" :key="service.id">
-                <service-card
-                    :id="service.id"
-                    :title="service.title"
-                    :description="service.description"
-                />
+        <div>
+            <developer-profile
+                :username="developer.name"
+                :image_url="developer.profile_photo_url"
+                :introduction="developer.introduction"
+            />
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 px-2">
+                <div v-for="service in services" :key="service.id">
+                    <service-card
+                        :id="service.id"
+                        :title="service.title"
+                        :description="service.description"
+                        :date="service.created_at"
+                    />
+                </div>
             </div>
         </div>
     </app-layout>
@@ -21,19 +29,17 @@
 <script>
 import AppLayout from "../Layouts/AppLayout.vue";
 import ServiceCard from "../components/ServiceCard.vue";
+import DeveloperProfile from "../components/DeveloperProfile.vue";
 
 export default {
     components: {
         AppLayout,
         ServiceCard,
+        DeveloperProfile,
     },
     props: {
-        developer: {
-            type: Object,
-        },
-        services: {
-            type: Array,
-        },
+        developer: Object,
+        services: Array,
     },
 };
 </script>

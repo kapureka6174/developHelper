@@ -73,7 +73,7 @@
 
             <!-- ゲスト表示（名前） -->
             <div
-                v-if="$page.props.user.id == 13"
+                v-if="$page.props.user.id == 10"
                 class="col-span-6 sm:col-span-4"
             >
                 <jet-label for="name" value="名前" />
@@ -102,7 +102,7 @@
 
             <!-- ゲスト表示（Email） -->
             <div
-                v-if="$page.props.user.id == 13"
+                v-if="$page.props.user.id == 10"
                 class="col-span-6 sm:col-span-4"
             >
                 <jet-label for="email" value="メールアドレス" />
@@ -129,7 +129,7 @@
 
             <!-- ゲスト表示（紹介文） -->
             <div
-                v-if="$page.props.user.id == 13"
+                v-if="$page.props.user.id == 10"
                 class="col-span-6 sm:col-span-4"
             >
                 <jet-label for="introduction" value="紹介文" />

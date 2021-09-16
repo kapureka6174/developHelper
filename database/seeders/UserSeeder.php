@@ -23,14 +23,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory()->count(10)->has(Service::factory()->count(2))->create()->each(function ($service){
-        //     Requirement::factory()->count(2)->create(['service_id' => $service->id]);
-        //     Tag::factory()->count(2)->create(['service_id' => $service->id]);
-        //     Uri::factory()->count(2)->create(['service_id' => $service->id]);
-        //     TechField::factory()->count(2)->create(['service_id' => $service->id])->each( function ($techField){
-        //         Tech::factory()->count(2)->create(['tech_field_id' => $techField->id]);
-        //     });
-        // });
+        // ユーザーを10人追加
         User::factory()->count(10)->create();
     }
 }

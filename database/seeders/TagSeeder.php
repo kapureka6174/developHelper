@@ -15,8 +15,13 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
+        // タグを10個作成
         Tag::factory()->count(10)->create();
 
-        ServiceTag::factory()->count(20)->create();
+        // 中間テーブル（サービスとタグを結ぶ）にデータを追加
+        $tags = Tag::pluck('id')->all();
+        foreach ($tags as $tag) {
+            ServiceTag::factory()->count(2)->create(['tag_id' => $tag]);
+        }
     }
 }

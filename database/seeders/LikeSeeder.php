@@ -5,9 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Service;
-use App\Models\Comment;
+use App\Models\Like;
 
-class CommentSeeder extends Seeder
+class LikeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -22,9 +22,9 @@ class CommentSeeder extends Seeder
 
         // 各サービスに二つのコメントを追加（ユーザーはランダム）
         foreach ($services as $service) {
-            Comment::factory()->create(['user_id' => $users[array_rand($users)], 'service_id' => $service]);
-            Comment::factory()->create(['user_id' => $users[array_rand($users)], 'service_id' => $service]);
-            Comment::factory()->create(['user_id' => $users[array_rand($users)], 'service_id' => $service]);
+            Like::factory()->create(['user_id' => $users[array_rand($users)], 'service_id' => $service]);
+            Like::factory()->create(['user_id' => $users[array_rand($users)], 'service_id' => $service]);
+            Like::factory()->create(['user_id' => $users[array_rand($users)], 'service_id' => $service]);
         }
     }
 }

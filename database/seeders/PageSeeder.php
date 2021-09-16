@@ -17,11 +17,13 @@ class PageSeeder extends Seeder
      */
     public function run()
     {
+        // 各サービスにページを二個作成する
         $services = Service::pluck('id')->all();
         foreach ($services as $service) {
             Page::factory()->count(2)->create(['service_id' => $service]);
         }
 
+        // 作成したページに対してサービスに登録されている機能を追加する（奇数番目なら機能をすべて追加、偶数番目なら一つだけ追加）
         foreach ($services as $service) {
             $pages = Page::where('service_id', $service)->get('id');
             $requirements = Requirement::where('service_id', $service)->get('id');

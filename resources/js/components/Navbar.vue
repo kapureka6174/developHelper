@@ -151,7 +151,10 @@
             <div class="pt-4 pb-1 border-t border-gray-200">
                 <div class="flex items-center px-4">
                     <div
-                        v-if="$page.props.jetstream.managesProfilePhotos"
+                        v-if="
+                            $page.props.jetstream.managesProfilePhotos &&
+                            $page.props.user
+                        "
                         class="flex-shrink-0 mr-3"
                     >
                         <img

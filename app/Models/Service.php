@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Service extends Model
 {
@@ -42,6 +43,11 @@ class Service extends Model
         return $this->hasMany(Task::class);
     }
 
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -50,5 +56,20 @@ class Service extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+
+    protected $appends = [
+      'liked_by_user',
+    ];
+
+    public function getLikedByUserAttribute()
+    {
+        if (Auth::guest()) {
+            return false;
+        } else {
+            return $this->likes->pluck('user_id')->contains(Auth::id());
+        }
+
     }
 }

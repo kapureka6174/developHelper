@@ -21,7 +21,7 @@ class TaskController extends Controller
         // バリデーションのルールを指定
         $rules = [
             'id' => 'nullable|integer',
-            '*.id' => 'required|integer',
+            '*.id' => 'nullable|integer',
             '*.taskname' => 'required|string',
             '*.state' => ['required','string', Rule::in(["やるべきこと","開発中","完了"])],
             '*.decidable' => 'required|accepted',
@@ -50,7 +50,7 @@ class TaskController extends Controller
         });
         // 追加
         foreach ($createData as $task) {
-            Task::create(['service_id' => $data['id'], 'taskname' => $task['taskname'], 'state' => $task['state'], 'time' => 3]);
+            Task::create(['service_id' => $data['id'], 'taskname' => $task['taskname'], 'state' => $task['state']]);
         }
 
         // 削除するタスク（isDeleteがtrue）のみを取得

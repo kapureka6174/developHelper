@@ -26,11 +26,10 @@ class ServiceTagFactory extends Factory
 
         /* 中間テーブルに紐付けるIDを取得する*/
         $serviceIDs  = Service::pluck('id')->all();
-        $tagIDs  = Tag::pluck('id')->all();
 
         return [
             'service_id' => $this->faker->randomElement($serviceIDs), // ランダムでIDを選択
-            'tag_id' => $this->faker->randomElement($tagIDs),  // ランダムでIDを選択
+            'tag_id' => Tag::class,
         ];
     }
 }

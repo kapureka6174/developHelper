@@ -15,8 +15,10 @@ class RequirementSeeder extends Seeder
      */
     public function run()
     {
+        // 全サービスのIDを取得
         $services = Service::pluck('id')->all();
 
+        // 各サービスに機能を二つずつ追加
         foreach ($services as $service) {
             Requirement::factory()->count(2)->create(['service_id' => $service]);
         }

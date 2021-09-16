@@ -25,7 +25,6 @@ class RequirementFactory extends Factory
         return [
             'title' => $this->faker->realText(10),
             'content' => $this->faker->realText(20),
-            'finished' => $this->faker->boolean(50)
         ];
     }
 }

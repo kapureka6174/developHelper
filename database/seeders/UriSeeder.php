@@ -15,8 +15,10 @@ class UriSeeder extends Seeder
      */
     public function run()
     {
+        // 全サービスのIDを追加
         $services = Service::pluck('id')->all();
 
+        // 各サービスにURI設計を二つ追加
         foreach ($services as $service) {
             Uri::factory()->count(2)->create(['service_id' => $service]);
         }

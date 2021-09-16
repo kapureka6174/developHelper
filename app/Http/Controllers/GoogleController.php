@@ -35,7 +35,7 @@ class GoogleController extends Controller
 
                 return redirect('/');
 
-            }else{
+            } else {
                 $googleUser = User::create([
                     'name' => $user->name,
                     'email' => $user->email,

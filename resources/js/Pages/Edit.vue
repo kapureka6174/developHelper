@@ -1765,10 +1765,8 @@ export default {
 
         // DBへ保存
         const edit = () => {
-            Inertia.post("/edit", form);
+            Inertia.put("/edit", form);
         };
-
-        console.log(form);
 
         return {
             form,

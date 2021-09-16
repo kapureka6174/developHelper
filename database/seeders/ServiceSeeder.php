@@ -15,6 +15,7 @@ class ServiceSeeder extends Seeder
      */
     public function run()
     {
+        // 全ユーザーのIDを取得
         $users = User::pluck('id')->all();
 
         // 各ユーザーに二つのサービスを追加

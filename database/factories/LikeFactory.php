@@ -2,18 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Task;
+use App\Models\Like;
 use App\Models\Service;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class TaskFactory extends Factory
+class LikeFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Task::class;
+    protected $model = Like::class;
 
     /**
      * Define the model's default state.
@@ -23,9 +24,8 @@ class TaskFactory extends Factory
     public function definition()
     {
         return [
+            "user_id" => User::class,
             "service_id" => Service::class,
-            "taskname" => $this->faker->realText(10),
-            "state" => $this->faker->randomElement(['やるべきこと', '開発中', '完了']),
         ];
     }
 }

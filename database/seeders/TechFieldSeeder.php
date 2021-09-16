@@ -15,8 +15,10 @@ class TechFieldSeeder extends Seeder
      */
     public function run()
     {
+        // 全サービスのIDを取得
         $services = Service::pluck('id')->all();
 
+        // サービス毎に技術分野を二つ追加
         foreach ($services as $service) {
             TechField::factory()->count(2)->create(['service_id' => $service]);
         }

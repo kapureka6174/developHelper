@@ -15,8 +15,10 @@ class TaskSeeder extends Seeder
      */
     public function run()
     {
+        // 全サービスのIDを取得
         $services = Service::pluck('id')->all();
 
+        // 各サービスにタスクを二つ追加
         foreach ($services as $service) {
             Task::factory()->count(2)->create(['service_id' => $service]);
         }

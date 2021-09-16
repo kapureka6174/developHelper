@@ -18,7 +18,6 @@ class CreateRequirementsTable extends Migration
             $table->foreignId('service_id')->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->text('content')->nullable();
-            $table->boolean('finished')->nullable()->default(false);
             $table->timestamps();
         });
     }

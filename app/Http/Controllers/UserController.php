@@ -16,7 +16,7 @@ class UserController extends Controller
 
     // paramで渡されてきたuser_idと一致するサービスのデータをViewに渡す。
     public function detail ($id) {
-        $services = Service::where('user_id',$id)->get();
+        $services = Service::where('user_id',$id)->with('user:id,name')->get();
         $user = User::where('id', $id)->first();
         return Inertia::render('User',['services' => $services, 'developer' => $user]);
     }

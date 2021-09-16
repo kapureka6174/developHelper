@@ -15,7 +15,6 @@ class Requirement extends Model
         "service_id",
         "title",
         "content",
-        "finished",
     ];
 
     public function pages() {

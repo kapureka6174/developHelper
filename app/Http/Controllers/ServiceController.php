@@ -22,18 +22,18 @@ class ServiceController extends Controller
 
     // 全サービスのデータを引っ張て来てViewに渡す。
     public function all () {
-        $services = Service::with('tags:id,tagname')->get();
+        $services = Service::with('tags:id,tagname')->with('user:id,name')->withCount('comments')->withCount('likes')->get();
         return Inertia::render('Services',['services' => $services, 'tags' => Tag::all()]);
     }
 
     // サービスの詳細ページを表示する時にサービスが持つ情報をViewに渡す
     public function detail ($id) {
-        $service = Service::where('id', $id)->with('tags:id,tagname')->first(['id', 'user_id' ,'title', 'description']);
+        $service = Service::where('id', $id)->with('tags:id,tagname')->withCount('likes')->first(['id', 'user_id' ,'title', 'description']);
         $techFields = TechField::where('service_id', $id)->with('teches:id,tech_field_id,techname,version')->get(['id', 'fieldname']);
-        $requirements = Requirement::where('service_id', $id)->get(['id', 'title', 'content', 'finished']);
-        $pages = Page::where('service_id', $id)->with('requirements:id,title,content,finished')->get(['id', 'pagename']);
+        $requirements = Requirement::where('service_id', $id)->get(['id', 'title', 'content']);
+        $pages = Page::where('service_id', $id)->with('requirements:id,title,content')->get(['id', 'pagename']);
         $uris = Uri::where('service_id', $id)->get(['id', 'uri', 'method', 'explain']);
-        $tasks = Task::where('service_id', $id)->get(['id', 'taskname', 'state', 'time']);
+        $tasks = Task::where('service_id', $id)->get(['id', 'taskname', 'state']);
         $comments = Comment::where('service_id', $id)->with('user:id,name')->get();
         return Inertia::render('Service',['service' => $service, 'techFields' => $techFields,'requirements' => $requirements, 'pages' => $pages, 'uris' => $uris, 'tasks' => $tasks, 'comments' => $comments]);
     }
@@ -83,13 +83,13 @@ class ServiceController extends Controller
                 'service_id' => $service['id'],
                 'title' => $require['requireTitle']['content'],
                 'content' => $require['requireExplain']['content'],
-                'finished' => false,
             ]);
         }
 
         // pagesテーブルに追加
         foreach ($data['pages'] as $page) {
             $pages = Page::create([
+                'service_id' => $service['id'],
                 'pagename' => $page['pagename']['content'],
             ]);
             foreach ($page['requirements'] as $requirement) {
@@ -118,8 +118,8 @@ class ServiceController extends Controller
             return Inertia::render('PermissionError', ['errorMessage' => '編集権限がありません。正しいアカウントでログインしてください。']);
         }
         $techFields = TechField::where('service_id', $id)->with('teches:id,tech_field_id,techname,version')->get(['id', 'fieldname']);
-        $requirements = Requirement::where('service_id', $id)->get(['id', 'title', 'content', 'finished']);
-        $pages = Page::where('service_id', $id)->with('requirements:id,title,content,finished')->get(['id', 'pagename']);
+        $requirements = Requirement::where('service_id', $id)->get(['id', 'title', 'content']);
+        $pages = Page::where('service_id', $id)->with('requirements:id,title,content')->get(['id', 'pagename']);
         $uris = Uri::where('service_id', $id)->get(['id', 'uri', 'method', 'explain']);
         return Inertia::render('Edit',['service' => $service, 'techFields' => $techFields,'requirements' => $requirements, 'pages' => $pages, 'uris' => $uris]);
     }
@@ -272,7 +272,6 @@ class ServiceController extends Controller
                     'service_id' => $validatedData['id'],
                     'title' => $require['requireTitle']['content'],
                     'content' => $require['requireExplain']['content'],
-                    'finished' => false,
                 ]);
             }
         }
