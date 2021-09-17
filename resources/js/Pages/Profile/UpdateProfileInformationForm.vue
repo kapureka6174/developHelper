@@ -113,7 +113,6 @@
                     v-model="form.email"
                     readonly
                 />
-                <jet-input-error :message="form.errors.email" class="mt-2" />
             </div>
             <!-- 通常表示（Email） -->
             <div v-else class="col-span-6 sm:col-span-4">
@@ -152,10 +151,6 @@
                     v-model="form.introduction"
                     rows="10"
                     readonly
-                />
-                <jet-input-error
-                    :message="form.errors.introduction"
-                    class="mt-2"
                 />
             </div>
             <!-- 通常表示（紹介文） -->

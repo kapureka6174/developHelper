@@ -15,6 +15,7 @@
                     v-for="(tag, index) in tags"
                     :key="index"
                     :tagname="tag.tagname"
+                    :hover="true"
                     @click="plusSelectedTag(tag.tagname)"
                 />
             </div>

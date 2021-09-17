@@ -14,8 +14,8 @@
             rounded-full
             mx-2
             my-1
-            hover:bg-blue-100
         "
+        :class="hover ? 'text-green-500 border-green-500' : ''"
     >
         {{ tagname }}
     </div>
@@ -25,6 +25,7 @@
 export default {
     props: {
         tagname: String,
+        hover: Boolean,
     },
 };
 </script>
