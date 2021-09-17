@@ -7,90 +7,40 @@
         </template>
 
         <div class="mx-2">
-            <!-- タグ一覧の表示 -->
             <div class="md:mt-6 md:ml-12 mt-4 md:ml-6">
                 <h1 class="text-2xl text-indigo-700 font-semibold mb-2">
                     カテゴリー
                 </h1>
-                <div
+                <tag
                     v-for="(tag, index) in tags"
                     :key="index"
-                    class="
-                        text-xs
-                        inline-flex
-                        items-center
-                        font-bold
-                        leading-sm
-                        uppercase
-                        px-3
-                        py-1
-                        bg-blue-200
-                        text-blue-700
-                        rounded-full
-                        mx-2
-                        my-1
-                        hover:bg-blue-100
-                    "
-                    @click="plusCategory(tag.tagname)"
-                >
-                    {{ tag.tagname }}
-                </div>
+                    :tagname="tag.tagname"
+                    @click="plusSelectedTag(tag.tagname)"
+                />
             </div>
 
-            <!-- 選択中のタグ一覧の表示 -->
-            <div v-if="categories.length" class="md:mt-6 md:ml-12 mt-4 md:ml-6">
+            <div
+                v-if="selectedTags.length"
+                class="md:mt-6 md:ml-12 mt-4 md:ml-6"
+            >
                 <h1 class="text-2xl text-indigo-700 font-semibold mb-2">
                     選択中
                 </h1>
-                <div
-                    v-for="(category, index) in categories"
+                <selected-tag
+                    v-for="(selectedTag, index) in selectedTags"
                     :key="index"
-                    class="
-                        text-xs
-                        inline-flex
-                        items-center
-                        font-bold
-                        leading-sm
-                        uppercase
-                        px-3
-                        py-1
-                        bg-blue-300
-                        text-blue-700
-                        rounded-full
-                        mx-2
-                        my-1
-                        hover:bg-blue-100
-                    "
-                    @click="categories.splice(index, 1)"
-                >
-                    {{ category }}
-                </div>
+                    :tagname="selectedTag"
+                    @selectTag="(index) => selectedTags.splice(index, 1)"
+                />
             </div>
 
             <!-- 並び替え -->
-            <div class="md:mt-6 md:ml-12 mt-4 md:ml-6">
-                <div class="flex justify-center items-center my-4">
-                    <div v-for="(tab, index) in tabs" :key="index">
-                        <div
-                            class="
-                                cursor-pointer
-                                py-2
-                                px-4
-                                text-gray-500
-                                border-b-8
-                            "
-                            :class="
-                                activeTab === index
-                                    ? 'text-green-500 border-green-500'
-                                    : ''
-                            "
-                            @click="order(tab, index)"
-                        >
-                            {{ tab }}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <sort-button
+                :services="services"
+                @dateOrder="order"
+                @likeOrder="order"
+                @commentOrder="order"
+            />
 
             <!-- サービス一覧の表示 -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 px-2">
@@ -105,7 +55,7 @@
                     :date="service.created_at"
                     :likes="service.likes_count"
                     :comments="service.comments_count"
-                    v-show="existCategory(service.tags)"
+                    v-show="existSelectedTag(service.tags)"
                 />
             </div>
         </div>
@@ -115,12 +65,19 @@
 <script>
 import AppLayout from "../Layouts/AppLayout.vue";
 import ServiceCard from "../components/ServiceCard.vue";
-import { reactive, ref } from "vue";
+import SortButton from "../components/atoms/SortButton.vue";
+import Tag from "../components/atoms/Tag.vue";
+import SelectedTag from "../components/atoms/SelectedTag.vue";
+
+import { reactive } from "vue";
 
 export default {
     components: {
         AppLayout,
         ServiceCard,
+        SortButton,
+        Tag,
+        SelectedTag,
     },
     props: {
         services: Array,
@@ -128,71 +85,35 @@ export default {
     },
     setup(props) {
         // カテゴリーを選択中に追加する
-        const categories = reactive([]);
-        const plusCategory = (name) => {
-            if (!categories.includes(name)) categories.push(name);
+        const selectedTags = reactive([]);
+        const plusSelectedTag = (name) => {
+            if (!selectedTags.includes(name)) selectedTags.push(name);
         };
 
-        // 選択中のカテゴリーがサービスが個別に持つタグと一致しているかどうか
-        const existCategory = (tags) => {
+        // 該当カテゴリーの検索（選択中のカテゴリーがサービスが個別に持つタグと一致しているかどうか）
+        const existSelectedTag = (tags) => {
             let flag = true;
-            if (categories.length) {
+            if (selectedTags.length) {
                 let count = 0;
                 for (let i = 0; i < tags.length; i++) {
-                    if (categories.includes(tags[i].tagname)) count++;
+                    if (selectedTags.includes(tags[i].tagname)) count++;
                 }
-                flag = count == categories.length ? true : false;
+                flag = count == selectedTags.length ? true : false;
             }
             return flag;
         };
 
-        let activeTab = ref();
-        const tabs = reactive(["新着順", "お気に入り数順", "コメント数順"]);
-
-        const order = (tab, index) => {
-            activeTab.value = index;
-            console.log(activeTab);
-            switch (tab) {
-                case "新着順":
-                    // eslint-disable-next-line vue/no-mutating-props
-                    props.services.sort((a, b) => {
-                        let dateA = a.created_at;
-                        let dateB = b.created_at;
-                        return dateA < dateB ? 1 : dateA > dateB ? -1 : 0;
-                    });
-                    break;
-                case "お気に入り数順":
-                    // eslint-disable-next-line vue/no-mutating-props
-                    props.services.sort((a, b) => {
-                        return a.likes_count < b.likes_count
-                            ? 1
-                            : a.likes_count > b.likes_count
-                            ? -1
-                            : 0;
-                    });
-                    break;
-                case "コメント数順":
-                    // eslint-disable-next-line vue/no-mutating-props
-                    props.services.sort((a, b) => {
-                        return a.comments_count < b.comments_count
-                            ? 1
-                            : a.comments_count > b.comments_count
-                            ? -1
-                            : 0;
-                    });
-                    break;
-
-                default:
-                    break;
-            }
+        // 並び替え
+        const order = (type) => {
+            props.services.sort((a, b) => {
+                return a[type] < b[type] ? 1 : a[type] > b[type] ? -1 : 0;
+            });
         };
 
         return {
-            categories,
-            plusCategory,
-            existCategory,
-            activeTab,
-            tabs,
+            selectedTags,
+            plusSelectedTag,
+            existSelectedTag,
             order,
         };
     },
