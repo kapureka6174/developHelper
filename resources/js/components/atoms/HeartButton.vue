@@ -42,7 +42,7 @@
         <div
             class="
                 opacity-0
-                w-28
+                w-32
                 bg-gray-200
                 text-gray-600 text-center text-xs
                 rounded-lg
@@ -55,7 +55,7 @@
                 pointer-events-none
             "
         >
-            お気に入りに追加
+            {{ $page.props.user ? "お気に入りに追加" : "ログインが必要です" }}
             <svg
                 class="absolute text-gray-200 h-2 w-full left-0 top-full"
                 x="0px"

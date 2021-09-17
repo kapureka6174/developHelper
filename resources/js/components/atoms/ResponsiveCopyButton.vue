@@ -24,7 +24,7 @@
         "
     >
         <svg
-            class="h-8 w-8 text-gray-500"
+            class="h-8 w-8 text-gray-500 relative"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -40,5 +40,29 @@
                 d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"
             />
         </svg>
+        <div
+            v-if="copied"
+            class="
+                w-32
+                text-gray-600 text-center text-xs
+                rounded-lg
+                py-2
+                absolute
+                bottom-10
+                px-3
+                pointer-events-none
+                bg-white
+            "
+        >
+            リンクをコピーしました
+        </div>
     </button>
 </template>
+
+<script>
+export default {
+    props: {
+        copied: Boolean,
+    },
+};
+</script>

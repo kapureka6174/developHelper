@@ -57,5 +57,28 @@
                 <polygon class="fill-current" points="0,0 127.5,127.5 255,0" />
             </svg>
         </div>
+        <div
+            v-if="copied"
+            class="
+                w-32
+                text-gray-600 text-center text-xs
+                rounded-lg
+                py-2
+                absolute
+                top-10
+                px-3
+                pointer-events-none
+            "
+        >
+            コピーが完了しました
+        </div>
     </button>
 </template>
+
+<script>
+export default {
+    props: {
+        copied: Boolean,
+    },
+};
+</script>

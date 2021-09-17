@@ -1034,7 +1034,7 @@
                     </p>
                 </div>
 
-                <div class="w-full bg-gray-100 p-4 flex flex-col">
+                <div class="w-full bg-gray-100 p-4 flex flex-col" id="comment">
                     <select
                         class="
                             w-32
@@ -1159,6 +1159,7 @@
             <float-buttons
                 :liked_by_user="service.liked_by_user"
                 :service_id="service.id"
+                :user="$page.props.user"
             />
         </service-detail-layout>
     </div>

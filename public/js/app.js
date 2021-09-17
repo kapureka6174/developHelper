@@ -22757,7 +22757,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _atoms_TwitterButton_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./atoms/TwitterButton.vue */ "./resources/js/components/atoms/TwitterButton.vue");
 /* harmony import */ var _atoms_CopyButton_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./atoms/CopyButton.vue */ "./resources/js/components/atoms/CopyButton.vue");
 /* harmony import */ var _atoms_CommentButton_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./atoms/CommentButton.vue */ "./resources/js/components/atoms/CommentButton.vue");
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var vue_scrollto_src_scrollTo__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue-scrollto/src/scrollTo */ "./node_modules/vue-scrollto/src/scrollTo.js");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
 
 
 
@@ -22780,23 +22784,42 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     service_id: Number,
-    liked_by_user: Boolean
+    liked_by_user: Boolean,
+    user: Object
   },
   setup: function setup(props) {
+    // お気に入り処理
     var like = function like() {
-      if (props.liked_by_user) {
-        _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_8__.Inertia["delete"]("/services/".concat(props.service_id, "/unlike"), "", {
-          preserveScroll: true
-        });
-      } else {
-        _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_8__.Inertia.put("/services/".concat(props.service_id, "/like"), "", {
-          preserveScroll: true
-        });
+      if (props.user !== null) {
+        if (props.liked_by_user == true) {
+          _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_9__.Inertia["delete"]("/services/".concat(props.service_id, "/unlike"), "", {
+            preserveScroll: true
+          });
+        } else if (props.liked_by_user == false) {
+          _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_9__.Inertia.put("/services/".concat(props.service_id, "/like"), "", {
+            preserveScroll: true
+          });
+        }
       }
+    }; // URLをコピー
+
+
+    var copied = (0,vue__WEBPACK_IMPORTED_MODULE_10__.ref)(false);
+
+    var copy = function copy(url) {
+      navigator.clipboard.writeText("http://localhost:8000".concat(url));
+      copied.value = true;
+      setTimeout(function () {
+        copied.value = false;
+      }, 2000);
     };
 
+    var ScrollTo = (0,vue_scrollto_src_scrollTo__WEBPACK_IMPORTED_MODULE_8__.scroller)();
     return {
-      like: like
+      like: like,
+      copy: copy,
+      copied: copied,
+      ScrollTo: ScrollTo
     };
   }
 });
@@ -22869,6 +22892,25 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/atoms/CopyButton.vue?vue&type=script&lang=js":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/atoms/CopyButton.vue?vue&type=script&lang=js ***!
+  \**********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    copied: Boolean
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/atoms/HeartButton.vue?vue&type=script&lang=js":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/atoms/HeartButton.vue?vue&type=script&lang=js ***!
@@ -22883,6 +22925,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     liked_by_user: Boolean
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/atoms/ResponsiveCopyButton.vue?vue&type=script&lang=js":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/atoms/ResponsiveCopyButton.vue?vue&type=script&lang=js ***!
+  \********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    copied: Boolean
   }
 });
 
@@ -28804,7 +28865,8 @@ var _hoisted_112 = {
   "class": "text-gray-600 mt-2"
 };
 var _hoisted_113 = {
-  "class": "w-full bg-gray-100 p-4 flex flex-col"
+  "class": "w-full bg-gray-100 p-4 flex flex-col",
+  id: "comment"
 };
 
 var _hoisted_114 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
@@ -29289,10 +29351,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, " 投稿 ")])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_float_buttons, {
         liked_by_user: $props.service.liked_by_user,
-        service_id: $props.service.id
+        service_id: $props.service.id,
+        user: _ctx.$page.props.user
       }, null, 8
       /* PROPS */
-      , ["liked_by_user", "service_id"])];
+      , ["liked_by_user", "service_id", "user"])];
     }),
     _: 1
     /* STABLE */
@@ -29715,21 +29778,43 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_twitter_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("twitter-button");
 
-  var _component_comment_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("comment-button");
-
   var _component_copy_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("copy-button");
+
+  var _component_comment_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("comment-button");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" レスポンシブなボタン "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_responsive_heart_button, {
     liked_by_user: $props.liked_by_user,
     onClick: $setup.like
   }, null, 8
   /* PROPS */
-  , ["liked_by_user", "onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_responsive_twitter_button), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_responsive_copy_button), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_responsive_comment_button), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 通常表示のボタン "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_heart_button, {
+  , ["liked_by_user", "onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_responsive_twitter_button), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_responsive_copy_button, {
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $setup.copy(_ctx.$page.url);
+    }),
+    copied: $setup.copied
+  }, null, 8
+  /* PROPS */
+  , ["copied"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_responsive_comment_button, {
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $setup.ScrollTo('#comment');
+    })
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 通常表示のボタン "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_heart_button, {
     liked_by_user: $props.liked_by_user,
     onClick: $setup.like
   }, null, 8
   /* PROPS */
-  , ["liked_by_user", "onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_twitter_button), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_comment_button), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_copy_button)])])]);
+  , ["liked_by_user", "onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_twitter_button), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_copy_button, {
+    onClick: _cache[2] || (_cache[2] = function ($event) {
+      return $setup.copy(_ctx.$page.url);
+    }),
+    copied: $setup.copied
+  }, null, 8
+  /* PROPS */
+  , ["copied"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_comment_button, {
+    onClick: _cache[3] || (_cache[3] = function ($event) {
+      return $setup.ScrollTo('#comment');
+    })
+  })])])]);
 }
 
 /***/ }),
@@ -30303,9 +30388,12 @@ var _hoisted_1 = {
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<svg class=\"h-8 w-8 text-gray-500\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3\"></path></svg><div class=\"opacity-0 w-28 bg-gray-200 text-gray-600 text-center text-xs rounded-lg py-2 absolute group-hover:opacity-100 bottom-full mb-2 px-3 pointer-events-none\"> リンクをコピーする <svg class=\"absolute text-gray-200 h-2 w-full left-0 top-full\" x=\"0px\" y=\"0px\" viewBox=\"0 0 255 255\" xml:space=\"preserve\"><polygon class=\"fill-current\" points=\"0,0 127.5,127.5 255,0\"></polygon></svg></div>", 2);
 
-var _hoisted_4 = [_hoisted_2];
-function render(_ctx, _cache) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_1, _hoisted_4);
+var _hoisted_4 = {
+  key: 0,
+  "class": "w-32 text-gray-600 text-center text-xs rounded-lg py-2 absolute top-10 px-3 pointer-events-none"
+};
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_1, [_hoisted_2, $props.copied ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, " コピーが完了しました ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
@@ -30354,10 +30442,11 @@ var _hoisted_5 = {
   key: 1,
   d: "M12 20l-7 -7a4 4 0 0 1 6.5 -6a.9 .9 0 0 0 1 0a4 4 0 0 1 6.5 6l-7 7"
 };
+var _hoisted_6 = {
+  "class": "opacity-0 w-32 bg-gray-200 text-gray-600 text-center text-xs rounded-lg py-2 absolute group-hover:opacity-100 bottom-full mb-2 px-3 pointer-events-none"
+};
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "opacity-0 w-28 bg-gray-200 text-gray-600 text-center text-xs rounded-lg py-2 absolute group-hover:opacity-100 bottom-full mb-2 px-3 pointer-events-none"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" お気に入りに追加 "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   "class": "absolute text-gray-200 h-2 w-full left-0 top-full",
   x: "0px",
   y: "0px",
@@ -30366,12 +30455,14 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polygon", {
   "class": "fill-current",
   points: "0,0 127.5,127.5 255,0"
-})])], -1
+})], -1
 /* HOISTED */
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_2, [_hoisted_3, $props.liked_by_user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("path", _hoisted_4)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("path", _hoisted_5))])), _hoisted_6]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_2, [_hoisted_3, $props.liked_by_user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("path", _hoisted_4)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("path", _hoisted_5))])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.user ? "お気に入りに追加" : "ログインが必要です") + " ", 1
+  /* TEXT */
+  ), _hoisted_7])]);
 }
 
 /***/ }),
@@ -30432,7 +30523,7 @@ var _hoisted_1 = {
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "h-8 w-8 text-gray-500",
+  "class": "h-8 w-8 text-gray-500 relative",
   width: "24",
   height: "24",
   viewBox: "0 0 24 24",
@@ -30456,9 +30547,12 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_3 = [_hoisted_2];
-function render(_ctx, _cache) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_1, _hoisted_3);
+var _hoisted_3 = {
+  key: 0,
+  "class": "w-32 text-gray-600 text-center text-xs rounded-lg py-2 absolute bottom-10 px-3 pointer-events-none bg-white"
+};
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_1, [_hoisted_2, $props.copied ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, " リンクをコピーしました ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
@@ -30477,10 +30571,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "p-0 w-10 h-10 bg-white rounded-full active:shadow-lg mouse shadow-xl transition ease-in duration-200 focus:outline-none fixed bottom-10 right-4 md:hidden flex items-center justify-center border-red-500 border-2"
+  "class": "p-0 w-10 h-10 bg-white rounded-full active:shadow-lg mouse shadow-xl transition ease-in duration-200 focus:outline-none fixed bottom-10 right-4 md:hidden flex items-center justify-center border-red-500 border-2 group cursor-pointer"
 };
 var _hoisted_2 = {
-  "class": "h-8 w-8 text-red-500",
+  "class": "h-8 w-8 text-red-500 relative",
   width: "24",
   height: "24",
   viewBox: "0 0 24 24",
@@ -30507,8 +30601,29 @@ var _hoisted_5 = {
   key: 1,
   d: "M12 20l-7 -7a4 4 0 0 1 6.5 -6a.9 .9 0 0 0 1 0a4 4 0 0 1 6.5 6l-7 7"
 };
+var _hoisted_6 = {
+  key: 0,
+  "class": "opacity-0 w-20 bg-gray-200 text-gray-600 text-center text-xs rounded-lg py-2 absolute group-hover:opacity-100 bottom-full mb-2 px-3 pointer-events-none"
+};
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ログインが必要です ");
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "class": "absolute text-gray-200 h-2 w-full left-0 top-full",
+  x: "0px",
+  y: "0px",
+  viewBox: "0 0 255 255",
+  "xml:space": "preserve"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polygon", {
+  "class": "fill-current",
+  points: "0,0 127.5,127.5 255,0"
+})], -1
+/* HOISTED */
+);
+
+var _hoisted_9 = [_hoisted_7, _hoisted_8];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_2, [_hoisted_3, $props.liked_by_user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("path", _hoisted_4)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("path", _hoisted_5))]))]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_2, [_hoisted_3, $props.liked_by_user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("path", _hoisted_4)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("path", _hoisted_5))])), _ctx.$page.props.user == null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, _hoisted_9)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
@@ -30800,6 +30915,123 @@ window.axios.defaults.withCredentials = true;
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./node_modules/bezier-easing/src/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/bezier-easing/src/index.js ***!
+  \*************************************************/
+/***/ ((module) => {
+
+/**
+ * https://github.com/gre/bezier-easing
+ * BezierEasing - use bezier curve for transition easing function
+ * by Gaëtan Renaudeau 2014 - 2015 – MIT License
+ */
+
+// These values are established by empiricism with tests (tradeoff: performance VS precision)
+var NEWTON_ITERATIONS = 4;
+var NEWTON_MIN_SLOPE = 0.001;
+var SUBDIVISION_PRECISION = 0.0000001;
+var SUBDIVISION_MAX_ITERATIONS = 10;
+
+var kSplineTableSize = 11;
+var kSampleStepSize = 1.0 / (kSplineTableSize - 1.0);
+
+var float32ArraySupported = typeof Float32Array === 'function';
+
+function A (aA1, aA2) { return 1.0 - 3.0 * aA2 + 3.0 * aA1; }
+function B (aA1, aA2) { return 3.0 * aA2 - 6.0 * aA1; }
+function C (aA1)      { return 3.0 * aA1; }
+
+// Returns x(t) given t, x1, and x2, or y(t) given t, y1, and y2.
+function calcBezier (aT, aA1, aA2) { return ((A(aA1, aA2) * aT + B(aA1, aA2)) * aT + C(aA1)) * aT; }
+
+// Returns dx/dt given t, x1, and x2, or dy/dt given t, y1, and y2.
+function getSlope (aT, aA1, aA2) { return 3.0 * A(aA1, aA2) * aT * aT + 2.0 * B(aA1, aA2) * aT + C(aA1); }
+
+function binarySubdivide (aX, aA, aB, mX1, mX2) {
+  var currentX, currentT, i = 0;
+  do {
+    currentT = aA + (aB - aA) / 2.0;
+    currentX = calcBezier(currentT, mX1, mX2) - aX;
+    if (currentX > 0.0) {
+      aB = currentT;
+    } else {
+      aA = currentT;
+    }
+  } while (Math.abs(currentX) > SUBDIVISION_PRECISION && ++i < SUBDIVISION_MAX_ITERATIONS);
+  return currentT;
+}
+
+function newtonRaphsonIterate (aX, aGuessT, mX1, mX2) {
+ for (var i = 0; i < NEWTON_ITERATIONS; ++i) {
+   var currentSlope = getSlope(aGuessT, mX1, mX2);
+   if (currentSlope === 0.0) {
+     return aGuessT;
+   }
+   var currentX = calcBezier(aGuessT, mX1, mX2) - aX;
+   aGuessT -= currentX / currentSlope;
+ }
+ return aGuessT;
+}
+
+function LinearEasing (x) {
+  return x;
+}
+
+module.exports = function bezier (mX1, mY1, mX2, mY2) {
+  if (!(0 <= mX1 && mX1 <= 1 && 0 <= mX2 && mX2 <= 1)) {
+    throw new Error('bezier x values must be in [0, 1] range');
+  }
+
+  if (mX1 === mY1 && mX2 === mY2) {
+    return LinearEasing;
+  }
+
+  // Precompute samples table
+  var sampleValues = float32ArraySupported ? new Float32Array(kSplineTableSize) : new Array(kSplineTableSize);
+  for (var i = 0; i < kSplineTableSize; ++i) {
+    sampleValues[i] = calcBezier(i * kSampleStepSize, mX1, mX2);
+  }
+
+  function getTForX (aX) {
+    var intervalStart = 0.0;
+    var currentSample = 1;
+    var lastSample = kSplineTableSize - 1;
+
+    for (; currentSample !== lastSample && sampleValues[currentSample] <= aX; ++currentSample) {
+      intervalStart += kSampleStepSize;
+    }
+    --currentSample;
+
+    // Interpolate to provide an initial guess for t
+    var dist = (aX - sampleValues[currentSample]) / (sampleValues[currentSample + 1] - sampleValues[currentSample]);
+    var guessForT = intervalStart + dist * kSampleStepSize;
+
+    var initialSlope = getSlope(guessForT, mX1, mX2);
+    if (initialSlope >= NEWTON_MIN_SLOPE) {
+      return newtonRaphsonIterate(aX, guessForT, mX1, mX2);
+    } else if (initialSlope === 0.0) {
+      return guessForT;
+    } else {
+      return binarySubdivide(aX, intervalStart, intervalStart + kSampleStepSize, mX1, mX2);
+    }
+  }
+
+  return function BezierEasing (x) {
+    // Because JavaScript number are imprecise, we should guarantee the extremes are right.
+    if (x === 0) {
+      return 0;
+    }
+    if (x === 1) {
+      return 1;
+    }
+    return calcBezier(getTForX(x), mY1, mY2);
+  };
+};
+
 
 /***/ }),
 
@@ -55108,15 +55340,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _CopyButton_vue_vue_type_template_id_64172a5f__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CopyButton.vue?vue&type=template&id=64172a5f */ "./resources/js/components/atoms/CopyButton.vue?vue&type=template&id=64172a5f");
+/* harmony import */ var _CopyButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CopyButton.vue?vue&type=script&lang=js */ "./resources/js/components/atoms/CopyButton.vue?vue&type=script&lang=js");
 
-const script = {}
-script.render = _CopyButton_vue_vue_type_template_id_64172a5f__WEBPACK_IMPORTED_MODULE_0__.render
+
+
+_CopyButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].render = _CopyButton_vue_vue_type_template_id_64172a5f__WEBPACK_IMPORTED_MODULE_0__.render
 /* hot reload */
 if (false) {}
 
-script.__file = "resources/js/components/atoms/CopyButton.vue"
+_CopyButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].__file = "resources/js/components/atoms/CopyButton.vue"
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (script);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_CopyButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 /***/ }),
 
@@ -55182,15 +55416,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _ResponsiveCopyButton_vue_vue_type_template_id_2134c133__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResponsiveCopyButton.vue?vue&type=template&id=2134c133 */ "./resources/js/components/atoms/ResponsiveCopyButton.vue?vue&type=template&id=2134c133");
+/* harmony import */ var _ResponsiveCopyButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ResponsiveCopyButton.vue?vue&type=script&lang=js */ "./resources/js/components/atoms/ResponsiveCopyButton.vue?vue&type=script&lang=js");
 
-const script = {}
-script.render = _ResponsiveCopyButton_vue_vue_type_template_id_2134c133__WEBPACK_IMPORTED_MODULE_0__.render
+
+
+_ResponsiveCopyButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].render = _ResponsiveCopyButton_vue_vue_type_template_id_2134c133__WEBPACK_IMPORTED_MODULE_0__.render
 /* hot reload */
 if (false) {}
 
-script.__file = "resources/js/components/atoms/ResponsiveCopyButton.vue"
+_ResponsiveCopyButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"].__file = "resources/js/components/atoms/ResponsiveCopyButton.vue"
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (script);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_ResponsiveCopyButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 /***/ }),
 
@@ -56062,6 +56298,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/atoms/CopyButton.vue?vue&type=script&lang=js":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/atoms/CopyButton.vue?vue&type=script&lang=js ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CopyButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_CopyButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./CopyButton.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/atoms/CopyButton.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/components/atoms/HeartButton.vue?vue&type=script&lang=js":
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/atoms/HeartButton.vue?vue&type=script&lang=js ***!
@@ -56074,6 +56326,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_HeartButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_HeartButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./HeartButton.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/atoms/HeartButton.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/components/atoms/ResponsiveCopyButton.vue?vue&type=script&lang=js":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/atoms/ResponsiveCopyButton.vue?vue&type=script&lang=js ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ResponsiveCopyButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_ResponsiveCopyButton_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./ResponsiveCopyButton.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/atoms/ResponsiveCopyButton.vue?vue&type=script&lang=js");
  
 
 /***/ }),
@@ -57118,6 +57386,368 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/vue-scrollto/src/easings.js":
+/*!**************************************************!*\
+  !*** ./node_modules/vue-scrollto/src/easings.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  ease: [0.25, 0.1, 0.25, 1.0],
+  linear: [0.0, 0.0, 1.0, 1.0],
+  'ease-in': [0.42, 0.0, 1.0, 1.0],
+  'ease-out': [0.0, 0.0, 0.58, 1.0],
+  'ease-in-out': [0.42, 0.0, 0.58, 1.0],
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-scrollto/src/scrollTo.js":
+/*!***************************************************!*\
+  !*** ./node_modules/vue-scrollto/src/scrollTo.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "setDefaults": () => (/* binding */ setDefaults),
+/* harmony export */   "scroller": () => (/* binding */ scroller),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var bezier_easing__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bezier-easing */ "./node_modules/bezier-easing/src/index.js");
+/* harmony import */ var bezier_easing__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bezier_easing__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _easings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./easings */ "./node_modules/vue-scrollto/src/easings.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils */ "./node_modules/vue-scrollto/src/utils.js");
+
+
+
+
+const abortEvents = [
+  'mousedown',
+  'wheel',
+  'DOMMouseScroll',
+  'mousewheel',
+  'keyup',
+  'touchmove',
+]
+
+let defaults = {
+  container: 'body',
+  duration: 500,
+  lazy: true,
+  easing: 'ease',
+  offset: 0,
+  force: true,
+  cancelable: true,
+  onStart: false,
+  onDone: false,
+  onCancel: false,
+  x: false,
+  y: true,
+}
+
+function setDefaults(options) {
+  defaults = Object.assign({}, defaults, options)
+}
+
+const scroller = () => {
+  let element // element to scroll to
+  let container // container to scroll
+  let duration // duration of the scrolling
+  let easing // easing to be used when scrolling
+  let lazy // checks the target position at each step
+  let offset // offset to be added (subtracted)
+  let force // force scroll, even if element is visible
+  let cancelable // indicates if user can cancel the scroll or not.
+  let onStart // callback when scrolling is started
+  let onDone // callback when scrolling is done
+  let onCancel // callback when scrolling is canceled / aborted
+  let x // scroll on x axis
+  let y // scroll on y axis
+
+  let initialX // initial X of container
+  let targetX // target X of container
+  let initialY // initial Y of container
+  let targetY // target Y of container
+  let diffX // difference
+  let diffY // difference
+
+  let abort // is scrolling aborted
+
+  let cumulativeOffsetContainer
+  let cumulativeOffsetElement
+
+  let abortEv // event that aborted scrolling
+  let abortFn = e => {
+    if (!cancelable) return
+    abortEv = e
+    abort = true
+  }
+  let easingFn
+
+  let timeStart // time when scrolling started
+  let timeElapsed // time elapsed since scrolling started
+
+  let progress // progress
+
+  function scrollTop(container) {
+    let scrollTop = container.scrollTop
+
+    if (container.tagName.toLowerCase() === 'body') {
+      // in firefox body.scrollTop always returns 0
+      // thus if we are trying to get scrollTop on a body tag
+      // we need to get it from the documentElement
+      scrollTop = scrollTop || document.documentElement.scrollTop
+    }
+
+    return scrollTop
+  }
+
+  function scrollLeft(container) {
+    let scrollLeft = container.scrollLeft
+
+    if (container.tagName.toLowerCase() === 'body') {
+      // in firefox body.scrollLeft always returns 0
+      // thus if we are trying to get scrollLeft on a body tag
+      // we need to get it from the documentElement
+      scrollLeft = scrollLeft || document.documentElement.scrollLeft
+    }
+
+    return scrollLeft
+  }
+
+  function recalculateTargets() {
+    cumulativeOffsetContainer = _utils__WEBPACK_IMPORTED_MODULE_2__["default"].cumulativeOffset(container)
+    cumulativeOffsetElement = _utils__WEBPACK_IMPORTED_MODULE_2__["default"].cumulativeOffset(element)
+
+    if (x) {
+      targetX =
+        cumulativeOffsetElement.left - cumulativeOffsetContainer.left + offset
+      diffX = targetX - initialX
+    }
+    if (y) {
+      targetY =
+        cumulativeOffsetElement.top - cumulativeOffsetContainer.top + offset
+      diffY = targetY - initialY
+    }
+  }
+
+  function step(timestamp) {
+    if (abort) return done()
+    if (!timeStart) timeStart = timestamp
+
+    // When a site has a lot of media that can be loaded asynchronously,
+    // the targetY/targetX may end up in the wrong place during scrolling.
+    // So we will check this at each step
+    if (!lazy) {
+      recalculateTargets()
+    }
+
+    timeElapsed = timestamp - timeStart
+
+    progress = Math.min(timeElapsed / duration, 1)
+    progress = easingFn(progress)
+
+    topLeft(container, initialY + diffY * progress, initialX + diffX * progress)
+
+    timeElapsed < duration ? window.requestAnimationFrame(step) : done()
+  }
+
+  function done() {
+    if (!abort) topLeft(container, targetY, targetX)
+    timeStart = false
+
+    _utils__WEBPACK_IMPORTED_MODULE_2__["default"].off(container, abortEvents, abortFn)
+    if (abort && onCancel) onCancel(abortEv, element)
+    if (!abort && onDone) onDone(element)
+  }
+
+  function topLeft(element, top, left) {
+    if (y) element.scrollTop = top
+    if (x) element.scrollLeft = left
+    if (element.tagName.toLowerCase() === 'body') {
+      // in firefox body.scrollTop doesn't scroll the page
+      // thus if we are trying to scrollTop on a body tag
+      // we need to scroll on the documentElement
+      if (y) document.documentElement.scrollTop = top
+      if (x) document.documentElement.scrollLeft = left
+    }
+  }
+
+  function scrollTo(target, _duration, options = {}) {
+    if (typeof _duration === 'object') {
+      options = _duration
+    } else if (typeof _duration === 'number') {
+      options.duration = _duration
+    }
+
+    element = _utils__WEBPACK_IMPORTED_MODULE_2__["default"].$(target)
+
+    if (!element) {
+      return console.warn(
+        '[vue-scrollto warn]: Trying to scroll to an element that is not on the page: ' +
+          target
+      )
+    }
+
+    container = _utils__WEBPACK_IMPORTED_MODULE_2__["default"].$(options.container || defaults.container)
+    duration = options.hasOwnProperty('duration')
+      ? options.duration
+      : defaults.duration
+    lazy = options.hasOwnProperty('lazy') ? options.lazy : defaults.lazy
+    easing = options.easing || defaults.easing
+    offset = options.hasOwnProperty('offset') ? options.offset : defaults.offset
+    force = options.hasOwnProperty('force')
+      ? options.force !== false
+      : defaults.force
+    cancelable = options.hasOwnProperty('cancelable')
+      ? options.cancelable !== false
+      : defaults.cancelable
+    onStart = options.onStart || defaults.onStart
+    onDone = options.onDone || defaults.onDone
+    onCancel = options.onCancel || defaults.onCancel
+    x = options.x === undefined ? defaults.x : options.x
+    y = options.y === undefined ? defaults.y : options.y
+
+    if (typeof offset === 'function') {
+      offset = offset(element, container)
+    }
+
+    initialX = scrollLeft(container)
+    initialY = scrollTop(container)
+
+    // calculates cumulative offsets and targetX/Y + diffX/Y
+    recalculateTargets()
+
+    abort = false
+
+    if (!force) {
+      // When the container is the default (body) we need to use the viewport
+      // height, not the entire body height
+      const containerHeight =
+        container.tagName.toLowerCase() === 'body'
+          ? document.documentElement.clientHeight || window.innerHeight
+          : container.offsetHeight
+      const containerTop = initialY
+      const containerBottom = containerTop + containerHeight
+      const elementTop = targetY - offset
+      const elementBottom = elementTop + element.offsetHeight
+      if (elementTop >= containerTop && elementBottom <= containerBottom) {
+        // make sure to call the onDone callback even if there is no need to
+        // scroll the container. Fixes #111 (ref #118)
+        if (onDone) onDone(element)
+        return
+      }
+    }
+
+    if (onStart) onStart(element)
+
+    if (!diffY && !diffX) {
+      if (onDone) onDone(element)
+      return
+    }
+
+    if (typeof easing === 'string') {
+      easing = _easings__WEBPACK_IMPORTED_MODULE_1__["default"][easing] || _easings__WEBPACK_IMPORTED_MODULE_1__["default"].ease
+    }
+
+    easingFn = bezier_easing__WEBPACK_IMPORTED_MODULE_0___default().apply((bezier_easing__WEBPACK_IMPORTED_MODULE_0___default()), easing)
+
+    _utils__WEBPACK_IMPORTED_MODULE_2__["default"].on(container, abortEvents, abortFn, { passive: true })
+
+    window.requestAnimationFrame(step)
+
+    return () => {
+      abortEv = null
+      abort = true
+    }
+  }
+
+  return scrollTo
+}
+
+const _scroller = scroller()
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_scroller);
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-scrollto/src/utils.js":
+/*!************************************************!*\
+  !*** ./node_modules/vue-scrollto/src/utils.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md#feature-detection
+let supportsPassive = false
+try {
+  let opts = Object.defineProperty({}, 'passive', {
+    get: function() {
+      supportsPassive = true
+    },
+  })
+  window.addEventListener('test', null, opts)
+} catch (e) {}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  $(selector) {
+    if (typeof selector !== 'string') {
+      return selector
+    }
+    return document.querySelector(selector)
+  },
+  on(element, events, handler, opts = { passive: false }) {
+    if (!(events instanceof Array)) {
+      events = [events]
+    }
+    for (let i = 0; i < events.length; i++) {
+      element.addEventListener(
+        events[i],
+        handler,
+        supportsPassive ? opts : false
+      )
+    }
+  },
+  off(element, events, handler) {
+    if (!(events instanceof Array)) {
+      events = [events]
+    }
+    for (let i = 0; i < events.length; i++) {
+      element.removeEventListener(events[i], handler)
+    }
+  },
+  cumulativeOffset(element) {
+    let top = 0
+    let left = 0
+
+    do {
+      top += element.offsetTop || 0
+      left += element.offsetLeft || 0
+      element = element.offsetParent
+    } while (element)
+
+    return {
+      top: top,
+      left: left,
+    }
+  },
+});
+
+
+/***/ }),
+
 /***/ "./node_modules/vue/dist/vue.esm-bundler.js":
 /*!**************************************************!*\
   !*** ./node_modules/vue/dist/vue.esm-bundler.js ***!
@@ -57505,6 +58135,18 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
 /******/ 		};
 /******/ 	})();
 /******/ 	

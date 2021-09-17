@@ -21,10 +21,12 @@
             items-center
             justify-center
             border-red-500 border-2
+            group
+            cursor-pointer
         "
     >
         <svg
-            class="h-8 w-8 text-red-500"
+            class="h-8 w-8 text-red-500 relative"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -45,6 +47,34 @@
                 d="M12 20l-7 -7a4 4 0 0 1 6.5 -6a.9 .9 0 0 0 1 0a4 4 0 0 1 6.5 6l-7 7"
             />
         </svg>
+        <div
+            v-if="$page.props.user == null"
+            class="
+                opacity-0
+                w-20
+                bg-gray-200
+                text-gray-600 text-center text-xs
+                rounded-lg
+                py-2
+                absolute
+                group-hover:opacity-100
+                bottom-full
+                mb-2
+                px-3
+                pointer-events-none
+            "
+        >
+            ログインが必要です
+            <svg
+                class="absolute text-gray-200 h-2 w-full left-0 top-full"
+                x="0px"
+                y="0px"
+                viewBox="0 0 255 255"
+                xml:space="preserve"
+            >
+                <polygon class="fill-current" points="0,0 127.5,127.5 255,0" />
+            </svg>
+        </div>
     </button>
 </template>
 <script>
