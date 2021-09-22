@@ -24,6 +24,7 @@
                             $page.props.flash.success = null;
                         }
                     "
+                    @delete="$page.props.flash.success = null"
                 />
             </template>
 
@@ -57,163 +58,11 @@
 
                 <service-uri-design :uris="uris" />
 
-                <service-task
-                    @taskButton="taskSubmit"
-                    :tasks="tasks"
-                    :id="service.user_id"
-                />
+                <service-task :tasks="tasks" :id="service.user_id" />
 
-                <h1 class="text-2xl text-indigo-700 font-semibold my-2">
-                    コメント
-                </h1>
-                <div
-                    v-for="comment in comments"
-                    :key="comment.id"
-                    class="rounded-md bg-gray-100 w-full my-3 p-5"
-                >
-                    <div class="flex items-center">
-                        <h1 class="text-gray-600 font-bold text-2xl mr-2">
-                            {{ comment.user.name }}
-                        </h1>
-                        <h2
-                            class="
-                                text-gray-600
-                                font-semibold
-                                bg-blue-100
-                                rounded
-                                text-center
-                                py-2
-                                px-4
-                            "
-                        >
-                            {{ comment.type }}
-                        </h2>
-                    </div>
-                    <p class="text-gray-600 mt-2">
-                        {{ comment.content }}
-                    </p>
-                </div>
+                <service-comment-show :comments="comments" />
 
-                <div class="w-full bg-gray-100 p-4 flex flex-col" id="comment">
-                    <select
-                        class="
-                            w-32
-                            rounded
-                            border border-gray-200
-                            focus:outline-none
-                            focus:ring-1
-                            focus:ring-blue-500
-                            focus:border-blue-500
-                            mb-3
-                        "
-                        v-model="form.comments.type"
-                    >
-                        <option value="質問">質問</option>
-                        <option value="アドバイス">アドバイス</option>
-                        <option value="感想">感想</option>
-                    </select>
-                    <textarea
-                        class="
-                            autoexpand
-                            tracking-wide
-                            py-2
-                            px-4
-                            mb-3
-                            leading-relaxed
-                            appearance-none
-                            block
-                            w-full
-                            border border-gray-200
-                            rounded
-                            focus:outline-none
-                            focus:bg-white
-                            focus:border-gray-500
-                        "
-                        v-model="form.comments.content"
-                        v-if="!form.comments.decidable"
-                        rows="10"
-                    ></textarea>
-                    <p
-                        v-else
-                        class="
-                            py-2
-                            px-4
-                            mb-3
-                            w-full
-                            whitespace-pre-line
-                            break-words
-                        "
-                    >
-                        {{ form.comments.content }}
-                    </p>
-                    <div v-if="$page.props.errors.comments">
-                        <div
-                            v-for="(error, index) in Object.values(
-                                $page.props.errors.comments
-                            )"
-                            :key="index"
-                            class="
-                                bg-red-100
-                                border border-red-400
-                                text-red-700
-                                px-4
-                                py-3
-                                rounded
-                                my-2
-                            "
-                            role="alert"
-                        >
-                            <p class="font-bold">
-                                {{ error }}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex justify-end w-full">
-                        <button
-                            v-if="!form.comments.decidable"
-                            class="
-                                bg-indigo-600
-                                hover:bg-indigo-400
-                                h-10
-                                w-16
-                                mr-3
-                                text-white
-                                rounded
-                            "
-                            @click="form.comments.decidable = true"
-                        >
-                            決定
-                        </button>
-                        <button
-                            v-else
-                            class="
-                                bg-indigo-600
-                                hover:bg-indigo-400
-                                h-10
-                                w-16
-                                mr-3
-                                text-white
-                                rounded
-                            "
-                            @click="form.comments.decidable = false"
-                        >
-                            編集
-                        </button>
-                        <button
-                            class="
-                                bg-indigo-600
-                                hover:bg-indigo-400
-                                h-10
-                                w-16
-                                text-white
-                                rounded
-                            "
-                            @click="commentSubmit"
-                        >
-                            投稿
-                        </button>
-                    </div>
-                </div>
+                <service-comment-form />
             </div>
 
             <float-buttons
@@ -238,7 +87,9 @@ import ServiceRequirement from "../components/atoms/ServiceRequirement.vue";
 import ServicePage from "../components/atoms/ServicePage.vue";
 import ServiceUriDesign from "../components/atoms/ServiceUriDesign.vue";
 import ServiceTask from "../components/atoms/ServiceTask.vue";
-import SuccessFlashMessage from "../components/atoms/SuccessFlashMessage.vue";
+import ServiceCommentShow from "../components/atoms/ServiceCommentShow.vue";
+import ServiceCommentForm from "../components/atoms/ServiceCommentForm.vue";
+import SuccessFlashMessage from "../components/atoms/SuccessFlashMessage";
 
 import { Inertia } from "@inertiajs/inertia";
 import { useForm } from "@inertiajs/inertia-vue3";
@@ -259,6 +110,8 @@ export default {
         ServiceUriDesign,
         ServiceTask,
         SuccessFlashMessage,
+        ServiceCommentShow,
+        ServiceCommentForm,
     },
     props: {
         service: Object,
@@ -290,57 +143,18 @@ export default {
             tasks,
         });
 
-        const index = (obj) => {
-            return form.tasks.indexOf(obj);
-        };
-
-        // type(やるべきこと、開発中、完了)ごとに削除されていない状態の配列をインデックスを取得して返す。
-        const getArray = (type) => {
-            const todos = form.tasks.filter(
-                (e) => e.state == type && !e.isDelete
-            );
-            return todos.map((todo) => {
-                todo.index = index(todo);
-                return todo;
-            });
-        };
-
-        // クライアント側のバリデーション（空文字なら追加しない）
-        const addContent = (e, index) => {
-            if (e.target.value && e.target.value.match(/\S/g))
-                form.tasks[index].decidable = true;
-        };
-
-        // CommentControllerにformを渡す
-        const commentSubmit = () => {
-            Inertia.post(route("Comment"), form, {
-                errorBag: "comments",
-                preserveScroll: true,
-            });
-        };
-
-        // TaskControllerにformを渡す
-        const taskSubmit = () => {
-            Inertia.put(route("Task"), form, {
-                errorBag: "tasks",
-                preserveScroll: true,
-            });
-        };
-
         const check = () => {
             if (confirm(`${props.service.title}を本当に削除しますか？`)) {
-                Inertia.delete(route("Delete"), { id: props.service.id });
+                Inertia.delete(route("Delete", { id: props.service.id }));
             }
         };
 
+        provide("form", form);
         provide("tasks", form.tasks);
+        provide("title", props.service.title);
 
         return {
             form,
-            getArray,
-            addContent,
-            commentSubmit,
-            taskSubmit,
             check,
         };
     },

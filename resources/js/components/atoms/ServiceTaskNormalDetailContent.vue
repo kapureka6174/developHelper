@@ -12,7 +12,7 @@
                 text-center
             "
         >
-            {{ content }}
+            {{ taskname }}
         </p>
     </div>
 </template>
@@ -20,7 +20,7 @@
 <script>
 export default {
     props: {
-        content: String,
+        taskname: String,
     },
 };
 </script>

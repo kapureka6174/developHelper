@@ -1,15 +1,8 @@
 <template>
-    <div v-if="success" class="alert">
+    <div v-if="fail" class="alert">
         <div class="fixed top-0 right-0 m-6">
             <div
-                class="
-                    rounded-lg
-                    shadow-md
-                    p-6
-                    pr-10
-                    bg-green-200
-                    text-green-900
-                "
+                class="rounded-lg shadow-md p-6 pr-10 bg-red-200 text-red-900"
                 style="min-width: 240px"
             >
                 <button
@@ -28,24 +21,21 @@
                     ×
                 </button>
                 <div class="flex items-center">
-                    {{ success }}
+                    {{ fail }}
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
-import { onUpdated, onMounted } from "vue";
+import { onUpdated } from "vue";
 export default {
     props: {
-        success: String,
+        fail: String,
     },
     setup(props, ctx) {
-        onMounted(() => {
-            setTimeout(() => ctx.emit("deleteFlash"), 3000);
-        });
         onUpdated(() => {
-            if (props.success) {
+            if (props.fail) {
                 setTimeout(() => ctx.emit("deleteFlash"), 3000);
             }
         });

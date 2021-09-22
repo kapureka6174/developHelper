@@ -2,7 +2,7 @@
     <div>
         <!-- レスポンシブなボタン -->
         <responsive-heart-button :liked_by_user="liked_by_user" @click="like" />
-        <responsive-twitter-button />
+        <responsive-twitter-button @click="tweet($page.url)" />
         <responsive-copy-button @click="copy($page.url)" :copied="copied" />
         <responsive-comment-button @click="ScrollTo('#comment')" />
 
@@ -10,7 +10,7 @@
         <div class="min-h-screen col-span-1 justify-center hidden md:flex">
             <div class="flex flex-col fixed">
                 <heart-button :liked_by_user="liked_by_user" @click="like" />
-                <twitter-button />
+                <twitter-button @click="tweet($page.url)" />
                 <copy-button @click="copy($page.url)" :copied="copied" />
                 <comment-button @click="ScrollTo('#comment')" />
             </div>
@@ -30,7 +30,7 @@ import CommentButton from "./atoms/CommentButton.vue";
 import { scroller } from "vue-scrollto/src/scrollTo";
 
 import { Inertia } from "@inertiajs/inertia";
-import { ref } from "vue";
+import { ref, inject } from "vue";
 
 export default {
     components: {
@@ -76,7 +76,19 @@ export default {
 
         const ScrollTo = scroller();
 
-        return { like, copy, copied, ScrollTo };
+        const title = inject("title");
+        const tweet = (url) => {
+            window.open(
+                `https://twitter.com/share?text=${encodeURIComponent(
+                    title
+                )}&url=http://localhost:8000${encodeURIComponent(
+                    url
+                )}&hashtags=WebServiceHub`,
+                "_blank"
+            );
+        };
+
+        return { like, copy, tweet, copied, ScrollTo };
     },
 };
 </script>

@@ -1165,6 +1165,24 @@ select {
 .left-4 {
 	left: 1rem;
 }
+.right-10 {
+	right: 2.5rem;
+}
+.right-2 {
+	right: 0.5rem;
+}
+.top-3 {
+	top: 0.75rem;
+}
+.top-4 {
+	top: 1rem;
+}
+.top-5 {
+	top: 1.25rem;
+}
+.right-3 {
+	right: 0.75rem;
+}
 .z-0 {
 	z-index: 0;
 }
@@ -1452,11 +1470,14 @@ select {
 .w-6\/12 {
 	width: 50%;
 }
+.w-32 {
+	width: 8rem;
+}
 .w-96 {
 	width: 24rem;
 }
-.w-32 {
-	width: 8rem;
+.w-11\/12 {
+	width: 91.666667%;
 }
 .min-w-0 {
 	min-width: 0px;
@@ -2104,13 +2125,13 @@ select {
 	--tw-text-opacity: 1;
 	color: rgba(127, 29, 29, var(--tw-text-opacity));
 }
-.text-green-900 {
-	--tw-text-opacity: 1;
-	color: rgba(6, 78, 59, var(--tw-text-opacity));
-}
 .text-blue-700 {
 	--tw-text-opacity: 1;
 	color: rgba(29, 78, 216, var(--tw-text-opacity));
+}
+.text-green-900 {
+	--tw-text-opacity: 1;
+	color: rgba(6, 78, 59, var(--tw-text-opacity));
 }
 .text-red-400 {
 	--tw-text-opacity: 1;
@@ -2760,6 +2781,10 @@ select {
 
 	.lg\:col-span-4 {
 		grid-column: span 4 / span 4;
+	}
+
+	.lg\:grid-cols-3 {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
 
 	.lg\:px-8 {

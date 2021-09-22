@@ -39,7 +39,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::put('/task',[App\Http\Controllers\TaskController::class,'addTask'])->name('Task');
     Route::get('/services/{id}/edit',[App\Http\Controllers\ServiceController::class,'edit'])->name('Edit');
     Route::put('/edit',[App\Http\Controllers\ServiceController::class,'update']);
-    Route::delete('/delete',[App\Http\Controllers\ServiceController::class,'delete'])->name('Delete');
+    Route::delete('/delete/{id}',[App\Http\Controllers\ServiceController::class,'delete'])->name('Delete');
     Route::put('/services/{id}/like',[App\Http\Controllers\LikeController::class,'like']);
     Route::delete('/services/{id}/unlike',[App\Http\Controllers\LikeController::class,'unlike']);
 });

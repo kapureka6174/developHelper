@@ -16,7 +16,7 @@
         <service-task-normal-detail-content
             v-for="(content, index) in contents"
             :key="index"
-            :content="content"
+            :taskname="content.taskname"
         />
     </div>
 </template>
@@ -30,6 +30,9 @@ export default {
     props: {
         state: String,
         contents: Array,
+    },
+    setup(props) {
+        console.log(props.contents);
     },
 };
 </script>

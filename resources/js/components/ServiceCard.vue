@@ -1,7 +1,6 @@
 <template>
     <div
         class="
-            relative
             max-w-md
             py-4
             md:px-8

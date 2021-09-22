@@ -3,7 +3,7 @@
         <div class="flex items-center mb-2">
             <section-title title="タスク" />
             <!-- タスクの保存ボタン -->
-            <service-task-save-button @taskButton="taskButton" />
+            <service-task-save-button />
         </div>
 
         <!-- エラー表示 -->
@@ -19,7 +19,10 @@
 
         <!-- 通常表示 -->
         <service-task-normal-detail
-            v-if="$page.props.user == null"
+            v-if="
+                $page.props.user == null ||
+                $page.props.user.id !== $page.props.service.user_id
+            "
             :tasks="classifiedTasks()"
         />
 
@@ -49,11 +52,7 @@ export default {
         tasks: Array,
         id: Number,
     },
-    setup(props, ctx) {
-        const taskButton = () => {
-            ctx.emit("taskButton");
-        };
-
+    setup(props) {
         const classifiedTasks = () => {
             const results = [];
             const states = ["やるべきこと", "開発中", "完了"];
@@ -68,7 +67,7 @@ export default {
             return results;
         };
 
-        return { taskButton, classifiedTasks };
+        return { classifiedTasks };
     },
 };
 </script>

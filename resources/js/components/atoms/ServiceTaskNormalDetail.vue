@@ -10,11 +10,14 @@
 </template>
 
 <script>
-import ServiceTaskNormalDetailCard from "./ServiceTaskNormalDetailContent.vue";
+import ServiceTaskNormalDetailCard from "./ServiceTaskNormalDetailCard.vue";
 
 export default {
     components: {
         ServiceTaskNormalDetailCard,
+    },
+    props: {
+        tasks: Array,
     },
 };
 </script>

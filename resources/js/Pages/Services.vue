@@ -7,6 +7,15 @@
         </template>
 
         <div class="mx-2">
+            <success-flash-message
+                :success="$page.props.flash.success"
+                @deleteFlash="
+                    () => {
+                        $page.props.flash.success = null;
+                    }
+                "
+                @delete="$page.props.flash.success = null"
+            />
             <div class="md:mt-6 md:ml-12 mt-4 md:ml-6">
                 <h1 class="text-2xl text-indigo-700 font-semibold mb-2">
                     カテゴリー
@@ -44,7 +53,17 @@
             />
 
             <!-- サービス一覧の表示 -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 px-2">
+            <div
+                class="
+                    flex
+                    items-center
+                    flex-col
+                    md:grid md:grid-cols-2
+                    lg:grid-cols-3
+                    md:gap-4
+                    px-2
+                "
+            >
                 <service-card
                     v-for="service in services"
                     :key="service.id"
@@ -69,6 +88,7 @@ import ServiceCard from "../components/ServiceCard.vue";
 import SortButton from "../components/atoms/SortButton.vue";
 import Tag from "../components/atoms/Tag.vue";
 import SelectedTag from "../components/atoms/SelectedTag.vue";
+import SuccessFlashMessage from "../components/atoms/SuccessFlashMessage";
 
 import { reactive } from "vue";
 
@@ -79,6 +99,7 @@ export default {
         SortButton,
         Tag,
         SelectedTag,
+        SuccessFlashMessage,
     },
     props: {
         services: Array,
@@ -106,6 +127,7 @@ export default {
 
         // 並び替え
         const order = (type) => {
+            // eslint-disable-next-line vue/no-mutating-props
             props.services.sort((a, b) => {
                 return a[type] < b[type] ? 1 : a[type] > b[type] ? -1 : 0;
             });
