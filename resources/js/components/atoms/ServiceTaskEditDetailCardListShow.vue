@@ -3,12 +3,11 @@
         class="
             mx-auto
             bg-blue-200
-            w-4/5
+            w-11/12
             rounded
             text-center
             flex
             items-center
-            px-4
             py-3
             justify-between
         "
@@ -19,7 +18,7 @@
             :index="index"
         />
         <p
-            class="text-gray-600 font-semibold"
+            class="text-gray-600 font-semibold mx-auto"
             @click="tasks[index].decidable = false"
         >
             {{ tasks[index].taskname }}

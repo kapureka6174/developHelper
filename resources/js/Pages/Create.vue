@@ -124,10 +124,10 @@
                             items-center
                         "
                     >
-                        <div class="px-4 py-3 w-3/12 md:w-2/12 text-center">
+                        <div class="px-4 py-3 w-3/12 md:w-3/12 text-center">
                             URI
                         </div>
-                        <div class="px-4 py-3 w-3/12 md:w-2/12 text-center">
+                        <div class="px-4 py-3 w-3/12 md:w-1/12 text-center">
                             メソッド
                         </div>
                         <div class="px-4 py-3 w-6/12 md:w-8/12 text-center">

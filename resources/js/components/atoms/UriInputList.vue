@@ -9,7 +9,7 @@
                 relative
             "
         >
-            <div class="px-4 py-3 w-3/12 md:w-2/12 text-center">
+            <div class="px-4 py-3 w-3/12 md:w-3/12 text-center overflow-x-auto">
                 <!-- URI（通常表示） -->
                 <input
                     v-if="!uris[index].uri.decidable"
@@ -34,11 +34,15 @@
                     v-on:blur="uris[index].uri.error = false"
                 />
                 <!-- URI（通常表示） -->
-                <p v-else @click="uris[index].uri.decidable = false">
+                <div
+                    v-else
+                    @click="uris[index].uri.decidable = false"
+                    class="whitespace-nowrap"
+                >
                     {{ uris[index].uri.content }}
-                </p>
+                </div>
             </div>
-            <div class="px-4 py-3 w-3/12 md:w-2/12 text-center">
+            <div class="px-4 py-3 w-3/12 md:w-1/12 text-center overflow-x-auto">
                 <!-- メソッド（編集表示） -->
                 <input
                     v-if="!uris[index].method.decidable"
@@ -63,9 +67,13 @@
                     v-on:blur="uris[index].method.error = false"
                 />
                 <!-- メソッド（通常表示） -->
-                <p v-else @click="uris[index].method.decidable = false">
+                <div
+                    v-else
+                    @click="uris[index].method.decidable = false"
+                    class="whitespace-nowrap"
+                >
                     {{ uris[index].method.content }}
-                </p>
+                </div>
             </div>
             <!-- 説明 -->
             <div
@@ -74,8 +82,6 @@
                     py-3
                     w-6/12
                     overflow-x-auto
-                    max-h-40
-                    sm:max-h-full
                     md:w-8/12
                     items-center
                     text-center
@@ -106,9 +112,13 @@
                     v-on:blur="uris[index].explain.error = false"
                 />
                 <!-- 説明（通常表示） -->
-                <p v-else @click="uris[index].explain.decidable = false">
+                <div
+                    v-else
+                    @click="uris[index].explain.decidable = false"
+                    class="whitespace-nowrap"
+                >
                     {{ uris[index].explain.content }}
-                </p>
+                </div>
                 <!-- 削除ボタン -->
                 <svg
                     class="

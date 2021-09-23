@@ -6,7 +6,7 @@
                 font-semibold
                 mx-auto
                 py-3
-                w-4/5
+                w-11/12
                 bg-blue-200
                 rounded
                 text-center
