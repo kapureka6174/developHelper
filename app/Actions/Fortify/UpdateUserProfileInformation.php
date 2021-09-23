@@ -22,6 +22,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'introduction' => ['required', 'string'],
+            'twitter_account' => ['nullable', 'string'],
+            'github_account' => ['nullable', 'string'],
+            'fav_lang' => ['nullable', 'string'],
+            'dev_years' => ['nullable', 'string'],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
 
@@ -37,6 +41,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'name' => $input['name'],
                 'email' => $input['email'],
                 'introduction' => $input['introduction'],
+                'twitter_account' => $input['twitter_account'],
+                'github_account' => $input['github_account'],
+                'fav_lang' => $input['fav_lang'],
+                'dev_years' => $input['dev_years'],
             ])->save();
         }
     }

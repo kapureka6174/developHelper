@@ -6,7 +6,7 @@
     "extends": [
         "eslint:recommended",
         "plugin:vue/essential",
-        "plugin:prettier/recommended"
+        "plugin:prettier/vue3-recommended"
     ],
     "parserOptions": {
         "ecmaVersion": 12,
@@ -19,7 +19,7 @@
     "rules": {
         "prettier/prettier": "error",
         "vue/no-v-model-argument": "off",
-        "vue/no-v-for-template-key": "off"
+        "vue/no-v-for-template-key": "off",
     },
     "globals": {
         "route": true,

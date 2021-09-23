@@ -11,13 +11,14 @@
         "
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
+        :placeholder="placeholder"
         ref="input"
     />
 </template>
 
 <script>
 export default {
-    props: ["modelValue"],
+    props: ["modelValue", "placeholder"],
 
     emits: ["update:modelValue"],
 

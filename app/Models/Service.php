@@ -15,7 +15,10 @@ class Service extends Model
     protected $fillable = [
         "user_id",
         "title",
-        "description"
+        "description",
+        "site_url",
+        "github_url",
+        "finished",
     ];
 
     public function techfields()

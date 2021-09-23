@@ -7,17 +7,18 @@
         </template>
 
         <template #form>
-            <!-- 注意文 -->
-            <div class="col-span-6 sm:col-span-4">
-                <h2 class="font-semibold text-red-400">
-                    ※ゲストユーザーは、プロフィールを編集できません。
-                </h2>
-            </div>
+            <guest-update-profile-information-form
+                v-if="$page.props.user.id == 10"
+                :form="form"
+            />
 
             <!-- Profile Photo -->
             <div
                 class="col-span-6 sm:col-span-4"
-                v-if="$page.props.jetstream.managesProfilePhotos"
+                v-if="
+                    $page.props.jetstream.managesProfilePhotos &&
+                    $page.props.user.id !== 10
+                "
             >
                 <!-- Profile Photo File Input -->
                 <input
@@ -71,24 +72,11 @@
                 <jet-input-error :message="form.errors.photo" class="mt-2" />
             </div>
 
-            <!-- ゲスト表示（名前） -->
+            <!-- 名前 -->
             <div
-                v-if="$page.props.user.id == 10"
+                v-if="$page.props.user.id !== 10"
                 class="col-span-6 sm:col-span-4"
             >
-                <jet-label for="name" value="名前" />
-                <jet-input
-                    id="name"
-                    type="text"
-                    class="mt-1 block w-full bg-gray-300"
-                    v-model="form.name"
-                    readonly
-                    autocomplete="name"
-                />
-                <jet-input-error :message="form.errors.name" class="mt-2" />
-            </div>
-            <!-- 通常表示（名前） -->
-            <div v-else class="col-span-6 sm:col-span-4">
                 <jet-label for="name" value="名前" />
                 <jet-input
                     id="name"
@@ -100,22 +88,11 @@
                 <jet-input-error :message="form.errors.name" class="mt-2" />
             </div>
 
-            <!-- ゲスト表示（Email） -->
+            <!-- Email -->
             <div
-                v-if="$page.props.user.id == 10"
+                v-if="$page.props.user.id !== 10"
                 class="col-span-6 sm:col-span-4"
             >
-                <jet-label for="email" value="メールアドレス" />
-                <jet-input
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full bg-gray-300"
-                    v-model="form.email"
-                    readonly
-                />
-            </div>
-            <!-- 通常表示（Email） -->
-            <div v-else class="col-span-6 sm:col-span-4">
                 <jet-label for="email" value="メールアドレス" />
                 <jet-input
                     id="email"
@@ -126,35 +103,84 @@
                 <jet-input-error :message="form.errors.email" class="mt-2" />
             </div>
 
-            <!-- ゲスト表示（紹介文） -->
+            <!-- ツイッターアカウント -->
             <div
-                v-if="$page.props.user.id == 10"
+                v-if="$page.props.user.id !== 10"
                 class="col-span-6 sm:col-span-4"
             >
-                <jet-label for="introduction" value="紹介文" />
-                <textarea
-                    class="
-                        border-gray-300
-                        focus:border-indigo-300
-                        focus:ring
-                        focus:ring-indigo-200
-                        focus:ring-opacity-50
-                        rounded-md
-                        shadow-sm
-                        mt-1
-                        block
-                        w-full
-                        bg-gray-300
-                    "
-                    id="introduction"
+                <jet-label for="twitter_account" value="Twitterユーザー名" />
+                <jet-input
+                    id="twitter_account"
                     type="text"
-                    v-model="form.introduction"
-                    rows="10"
-                    readonly
+                    class="mt-1 block w-full"
+                    v-model="form.twitter_account"
+                    placeholder="＠なしで入力してください"
+                />
+                <jet-input-error
+                    :message="form.errors.twitter_account"
+                    class="mt-2"
                 />
             </div>
-            <!-- 通常表示（紹介文） -->
-            <div v-else class="col-span-6 sm:col-span-4">
+
+            <!-- Githubアカウント -->
+            <div
+                v-if="$page.props.user.id !== 10"
+                class="col-span-6 sm:col-span-4"
+            >
+                <jet-label for="github_account" value="GitHubユーザー名" />
+                <jet-input
+                    id="github_account"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.github_account"
+                    placeholder="ユーザー名だけを入力してください"
+                />
+                <jet-input-error
+                    :message="form.errors.github_account"
+                    class="mt-2"
+                />
+            </div>
+
+            <!-- 得意言語 -->
+            <div
+                v-if="$page.props.user.id !== 10"
+                class="col-span-6 sm:col-span-4"
+            >
+                <jet-label for="fav_lang" value="得意言語" />
+                <jet-input
+                    id="fav_lang"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.fav_lang"
+                    placeholder="一つだけ入力してください"
+                />
+                <jet-input-error :message="form.errors.fav_lang" class="mt-2" />
+            </div>
+
+            <!-- プログラミング歴 -->
+            <div
+                v-if="$page.props.user.id !== 10"
+                class="col-span-6 sm:col-span-4"
+            >
+                <jet-label for="dev_years" value="プログラミング歴" />
+                <jet-input
+                    id="dev_years"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.dev_years"
+                    placeholder="〇年〇ヶ月で入力してください"
+                />
+                <jet-input-error
+                    :message="form.errors.dev_years"
+                    class="mt-2"
+                />
+            </div>
+
+            <!-- 紹介文 -->
+            <div
+                v-if="$page.props.user.id !== 10"
+                class="col-span-6 sm:col-span-4"
+            >
                 <jet-label for="introduction" value="紹介文" />
                 <textarea
                     class="
@@ -215,6 +241,7 @@ import JetInputError from "@/Jetstream/InputError";
 import JetLabel from "@/Jetstream/Label";
 import JetActionMessage from "@/Jetstream/ActionMessage";
 import JetSecondaryButton from "@/Jetstream/SecondaryButton";
+import GuestUpdateProfileInformationForm from "./GuestUpdateProfileInformationForm";
 
 export default {
     components: {
@@ -225,6 +252,7 @@ export default {
         JetInputError,
         JetLabel,
         JetSecondaryButton,
+        GuestUpdateProfileInformationForm,
     },
 
     props: ["user"],
@@ -236,6 +264,10 @@ export default {
                 name: this.user.name,
                 email: this.user.email,
                 introduction: this.user.introduction,
+                twitter_account: this.user.twitter_account,
+                github_account: this.user.github_account,
+                fav_lang: this.user.fav_lang,
+                dev_years: this.user.dev_years,
                 photo: null,
             }),
 

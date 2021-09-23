@@ -18,6 +18,9 @@ class CreateServicesTable extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->longText('description')->nullable();
+            $table->string('site_url')->nullable();
+            $table->string('github_url')->nullable();
+            $table->boolean('finished')->default(false);
             $table->timestamps();
         });
     }

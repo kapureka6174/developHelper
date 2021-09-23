@@ -8,13 +8,16 @@
 
         <template #form>
             <!-- 注意文 -->
-            <div class="col-span-6 sm:col-span-4">
+            <div
+                v-if="$page.props.user.id == 10"
+                class="col-span-6 sm:col-span-4"
+            >
                 <h2 class="font-semibold text-red-400">
                     ※ゲストユーザーは、パスワードを更新できません。
                 </h2>
             </div>
 
-            <!-- ゲスト表示 -->
+            <!-- 現在のパスワード（ゲスト表示） -->
             <div
                 v-if="$page.props.user.id == 13"
                 class="col-span-6 sm:col-span-4"
@@ -26,7 +29,7 @@
                     readonly
                 />
             </div>
-            <!-- 通常表示 -->
+            <!-- 現在のパスワード（通常表示） -->
             <div
                 v-else-if="$page.props.existPass"
                 class="col-span-6 sm:col-span-4"
@@ -46,7 +49,7 @@
                 />
             </div>
 
-            <!-- ゲスト表示 -->
+            <!-- 新しいパスワード（ゲスト表示） -->
             <div
                 v-if="$page.props.user.id == 13"
                 class="col-span-6 sm:col-span-4"
@@ -59,6 +62,7 @@
                 />
             </div>
 
+            <!-- 新しいパスワード（通常表示） -->
             <div v-else class="col-span-6 sm:col-span-4">
                 <jet-label for="password" value="新しいパスワード" />
                 <jet-input
@@ -72,7 +76,7 @@
                 <jet-input-error :message="form.errors.password" class="mt-2" />
             </div>
 
-            <!-- ゲスト表示 -->
+            <!-- 確認用パスワード（ゲスト表示） -->
             <div
                 v-if="$page.props.user.id == 13"
                 class="col-span-6 sm:col-span-4"
@@ -84,7 +88,7 @@
                     readonly
                 />
             </div>
-            <!-- 通常表示 -->
+            <!-- 確認用パスワード（通常表示） -->
             <div v-else class="col-span-6 sm:col-span-4">
                 <jet-label
                     for="password_confirmation"

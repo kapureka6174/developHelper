@@ -23,6 +23,10 @@ class CreateUsersTable extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
             $table->string('google_id')->nullable();
             $table->string('github_id')->nullable();
+            $table->string('twitter_account')->nullable();
+            $table->string('github_account')->nullable();
+            $table->string('fav_lang')->nullable();
+            $table->string('dev_years')->nullable();
             $table->longText('introduction')->nullable();
             $table->timestamps();
         });
