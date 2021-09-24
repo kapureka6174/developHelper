@@ -4,7 +4,7 @@
             <div
                 class="cursor-pointer py-2 px-4 text-gray-500 border-b-8"
                 :class="
-                    activeTab === index ? 'text-green-500 border-green-500' : ''
+                    activeTab === index ? 'text-pink-500 border-pink-500' : ''
                 "
                 @click="order(tab, index)"
             >
@@ -23,23 +23,19 @@ export default {
     },
     setup(props, ctx) {
         let activeTab = ref();
-        const tabsContent =
-            props.type === "developer"
-                ? ["お気に入り数順", "コメント数順"]
-                : ["新着順", "お気に入り数順", "コメント数順"];
-        const tabs = reactive(tabsContent);
+        const tabs = reactive(["全て", "開発中", "完成"]);
 
         const order = (tab, index) => {
             activeTab.value = index;
             switch (tab) {
-                case "新着順":
-                    ctx.emit("dateOrder", "created_at");
+                case "全て":
+                    ctx.emit("all", 2);
                     break;
-                case "お気に入り数順":
-                    ctx.emit("likeOrder", "likes_count");
+                case "開発中":
+                    ctx.emit("develop", 0);
                     break;
-                case "コメント数順":
-                    ctx.emit("commentOrder", "comments_count");
+                case "完成":
+                    ctx.emit("finished", 1);
                     break;
 
                 default:

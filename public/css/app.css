@@ -1751,6 +1751,10 @@ select {
 	--tw-border-opacity: 1;
 	border-color: rgba(255, 255, 255, var(--tw-border-opacity));
 }
+.border-pink-500 {
+	--tw-border-opacity: 1;
+	border-color: rgba(236, 72, 153, var(--tw-border-opacity));
+}
 .bg-white {
 	--tw-bg-opacity: 1;
 	background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
@@ -2157,6 +2161,10 @@ select {
 .text-pink-700 {
 	--tw-text-opacity: 1;
 	color: rgba(190, 24, 93, var(--tw-text-opacity));
+}
+.text-pink-500 {
+	--tw-text-opacity: 1;
+	color: rgba(236, 72, 153, var(--tw-text-opacity));
 }
 .underline {
 	text-decoration: underline;

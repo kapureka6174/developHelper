@@ -44,13 +44,22 @@
                 />
             </div>
 
-            <!-- 並び替え -->
-            <sort-button
-                :services="services"
-                @dateOrder="order"
-                @likeOrder="order"
-                @commentOrder="order"
-            />
+            <div class="flex flex-col md:flex-row justify-evenly">
+                <!-- 並び替え -->
+                <sort-button
+                    @dateOrder="order"
+                    @likeOrder="order"
+                    @commentOrder="order"
+                />
+
+                <!-- フィルター -->
+                <filter-buttons
+                    @all="filterChange"
+                    @develop="filterChange"
+                    @finished="filterChange"
+                />
+            </div>
+            <div v-if="filterType" />
 
             <!-- サービス一覧の表示 -->
             <div
@@ -75,7 +84,7 @@
                     :date="service.created_at"
                     :likes="service.likes_count"
                     :comments="service.comments_count"
-                    v-show="existSelectedTag(service.tags)"
+                    v-show="filter(service.tags, service.finished)"
                 />
             </div>
         </div>
@@ -89,8 +98,9 @@ import SortButton from "../components/atoms/SortButton.vue";
 import Tag from "../components/atoms/Tag.vue";
 import SelectedTag from "../components/atoms/SelectedTag.vue";
 import SuccessFlashMessage from "../components/atoms/SuccessFlashMessage";
+import FilterButtons from "../components/atoms/FilterButtons.vue";
 
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 
 export default {
     components: {
@@ -100,6 +110,7 @@ export default {
         Tag,
         SelectedTag,
         SuccessFlashMessage,
+        FilterButtons,
     },
     props: {
         services: Array,
@@ -112,22 +123,38 @@ export default {
             if (!selectedTags.includes(name)) selectedTags.push(name);
         };
 
+        const filterType = ref();
+
+        // 絞り込み
+        const filterChange = (type) => {
+            if (type == 0 || type == 1) {
+                filterType.value = type;
+            }
+            console.log(filterType.value);
+        };
+
         // 該当カテゴリーの検索（選択中のカテゴリーがサービスが個別に持つタグと一致しているかどうか）
-        const existSelectedTag = (tags) => {
-            let flag = true;
+        const filter = (tags, finished) => {
+            let tagFlag = true;
+            let filterFlag = true;
+
+            if (filterType.value == 0 || filterType.value == 1) {
+                if (finished !== filterType.value) {
+                    filterFlag = false;
+                }
+            }
             if (selectedTags.length) {
                 let count = 0;
                 for (let i = 0; i < tags.length; i++) {
                     if (selectedTags.includes(tags[i].tagname)) count++;
                 }
-                flag = count == selectedTags.length ? true : false;
+                tagFlag = count == selectedTags.length ? true : false;
             }
-            return flag;
+            return tagFlag && filterFlag;
         };
 
         // 並び替え
         const order = (type) => {
-            // eslint-disable-next-line vue/no-mutating-props
             props.services.sort((a, b) => {
                 return a[type] < b[type] ? 1 : a[type] > b[type] ? -1 : 0;
             });
@@ -136,8 +163,10 @@ export default {
         return {
             selectedTags,
             plusSelectedTag,
-            existSelectedTag,
+            filterChange,
             order,
+            filter,
+            filterType,
         };
     },
 };
