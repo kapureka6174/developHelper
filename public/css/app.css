@@ -1565,6 +1565,9 @@ select {
 .flex-nowrap {
 	flex-wrap: nowrap;
 }
+.items-start {
+	align-items: flex-start;
+}
 .items-end {
 	align-items: flex-end;
 }
@@ -2676,6 +2679,18 @@ select {
 		margin-left: 1.5rem;
 	}
 
+	.md\:mr-3 {
+		margin-right: 0.75rem;
+	}
+
+	.md\:mb-0 {
+		margin-bottom: 0px;
+	}
+
+	.md\:mt-12 {
+		margin-top: 3rem;
+	}
+
 	.md\:flex {
 		display: flex;
 	}
@@ -2732,6 +2747,10 @@ select {
 		grid-template-columns: repeat(8, minmax(0, 1fr));
 	}
 
+	.md\:flex-row {
+		flex-direction: row;
+	}
+
 	.md\:items-center {
 		align-items: center;
 	}
@@ -2773,6 +2792,10 @@ select {
 	.md\:px-8 {
 		padding-left: 2rem;
 		padding-right: 2rem;
+	}
+
+	.md\:pt-16 {
+		padding-top: 4rem;
 	}
 }
 @media (min-width: 1024px) {

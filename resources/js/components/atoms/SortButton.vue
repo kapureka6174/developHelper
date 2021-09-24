@@ -23,11 +23,15 @@ import { ref, reactive } from "vue";
 
 export default {
     props: {
-        services: Array,
+        type: String,
     },
     setup(props, ctx) {
         let activeTab = ref();
-        const tabs = reactive(["新着順", "お気に入り数順", "コメント数順"]);
+        const tabsContent =
+            props.type === "developer"
+                ? ["お気に入り数順", "コメント数順"]
+                : ["新着順", "お気に入り数順", "コメント数順"];
+        const tabs = reactive(tabsContent);
 
         const order = (tab, index) => {
             activeTab.value = index;
