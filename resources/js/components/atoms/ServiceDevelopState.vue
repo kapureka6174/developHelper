@@ -1,0 +1,57 @@
+<template>
+    <h2
+        v-if="finished"
+        class="
+            text-xs
+            items-center
+            font-bold
+            leading-sm
+            uppercase
+            px-3
+            py-1
+            bg-green-200
+            text-green-700
+            rounded-full
+            mx-2
+            my-1
+            justify-center
+            w-16
+            h-8
+            hidden
+            md:inline-flex
+        "
+    >
+        完了
+    </h2>
+    <h2
+        v-else
+        class="
+            text-xs
+            items-center
+            font-bold
+            leading-sm
+            uppercase
+            px-3
+            py-1
+            bg-pink-200
+            text-pink-700
+            rounded-full
+            mx-2
+            my-1
+            justify-center
+            w-16
+            h-8
+            hidden
+            md:inline-flex
+        "
+    >
+        開発中
+    </h2>
+</template>
+<script>
+export default {
+    props: {
+        finished: Boolean,
+    },
+};
+</script>

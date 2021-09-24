@@ -33,14 +33,12 @@
             />
             <!-- サービス名 -->
             <section-title title="サービス名" />
-            <title-input
-                :decidable="form.title.decidable"
-                :content="form.title.content"
-                :error="form.title.error"
-                v-model="form.title.content"
-                @add="(value) => addContent(value, 'title')"
-                @notError="form.title.error = false"
-            />
+            <title-input />
+            <service-state-select />
+
+            <!-- サービスのURL -->
+            <section-title title="サービスURL" />
+            <urls-input />
 
             <!-- カテゴリー -->
             <section-title title="カテゴリー" />
@@ -187,6 +185,8 @@ import PageInput from "../components/atoms/PageInput.vue";
 import UriAddButton from "../components/atoms/UriAddButton.vue";
 import UriInputList from "../components/atoms/UriInputList.vue";
 import FailFlashMessage from "../components/atoms/FailFlashMessage";
+import UrlsInput from "../components/atoms/UrlsInput.vue";
+import ServiceStateSelect from "../components/atoms/ServiceStateSelect.vue";
 
 import { reactive, provide } from "vue";
 import { Inertia } from "@inertiajs/inertia";
@@ -209,6 +209,8 @@ export default {
         UriAddButton,
         UriInputList,
         FailFlashMessage,
+        UrlsInput,
+        ServiceStateSelect,
     },
     setup() {
         const normalObj = (type) => {
@@ -287,6 +289,11 @@ export default {
             requirements: [requirement()],
             uris: [uri()],
             pages: [page()],
+            github_url: normalObj(),
+            site_url: normalObj(),
+            finished: {
+                state: false,
+            },
         });
 
         // DBへ保存
@@ -306,6 +313,9 @@ export default {
         provide("newPage", page);
         provide("uris", form.uris);
         provide("newUri", uri);
+        provide("github_url", form.github_url);
+        provide("site_url", form.site_url);
+        provide("finished", form.finished);
 
         return {
             form,

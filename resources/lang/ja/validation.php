@@ -139,6 +139,11 @@ return [
         'description.content' => '概要',
         'description.decidable' => '概要',
         'tags.tagname.*.content' => 'カテゴリー',
+        'github_url.content' => 'GitHubのURL',
+        'github_url.decidable' => 'GitHubのURL',
+        'site_url.content' => 'サイトのURL',
+        'site_url.decidable' => 'サイトのURL',
+        'finished.state' => 'サイトの状態',
         //　技術分野
         'techFields.*.techField.content' => '技術分野',
         'techFields.*.techField.decidable' => '技術分野',

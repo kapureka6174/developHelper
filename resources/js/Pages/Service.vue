@@ -12,6 +12,7 @@
                     >
                         サービス詳細画面
                     </h2>
+                    <responsive-service-develop-state :finished="false" />
                     <div>
                         <service-edit-button @click="edit" />
                         <service-delete-button @click="check" />
@@ -31,7 +32,8 @@
             <!-- サービスの詳細 -->
             <div
                 class="
-                    py-10
+                    pt-6
+                    pb-10
                     px-4
                     col-span-7
                     bg-white
@@ -40,7 +42,11 @@
                     sm:rounded-lg
                 "
             >
-                <service-title :title="service.title" />
+                <div class="flex md:flex-row flex-col">
+                    <service-title :title="service.title" />
+
+                    <service-develop-state :finished="service.finished" />
+                </div>
 
                 <tag
                     v-for="tag in service.tags"
@@ -49,6 +55,11 @@
                 />
 
                 <service-description :description="service.description" />
+
+                <service-urls
+                    :github_url="service.github_url"
+                    :site_url="service.site_url"
+                />
 
                 <service-usage-technology :techFields="techFields" />
 
@@ -90,6 +101,9 @@ import ServiceTask from "../components/atoms/ServiceTask.vue";
 import ServiceCommentShow from "../components/atoms/ServiceCommentShow.vue";
 import ServiceCommentForm from "../components/atoms/ServiceCommentForm.vue";
 import SuccessFlashMessage from "../components/atoms/SuccessFlashMessage";
+import ServiceDevelopState from "../components/atoms/ServiceDevelopState.vue";
+import ResponsiveServiceDevelopState from "../components/atoms/ResponsiveServiceDevelopState.vue";
+import ServiceUrls from "../components/atoms/ServiceUrls.vue";
 
 import { Inertia } from "@inertiajs/inertia";
 import { useForm } from "@inertiajs/inertia-vue3";
@@ -112,6 +126,9 @@ export default {
         SuccessFlashMessage,
         ServiceCommentShow,
         ServiceCommentForm,
+        ServiceDevelopState,
+        ResponsiveServiceDevelopState,
+        ServiceUrls,
     },
     props: {
         service: Object,

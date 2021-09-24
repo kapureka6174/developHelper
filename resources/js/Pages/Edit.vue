@@ -41,6 +41,11 @@
                 <!-- サービス名 -->
                 <section-title title="サービス名" />
                 <title-input />
+                <service-state-select />
+
+                <!-- サービスのURL -->
+                <section-title title="サービスURL" />
+                <urls-input />
 
                 <!-- カテゴリー -->
                 <section-title title="カテゴリー" />
@@ -196,6 +201,8 @@ import PageAddButton from "../components/atoms/PageAddButton.vue";
 import PageInput from "../components/atoms/PageInput.vue";
 import UriAddButton from "../components/atoms/UriAddButton.vue";
 import UriInputList from "../components/atoms/UriInputList.vue";
+import UrlsInput from "../components/atoms/UrlsInput.vue";
+import ServiceStateSelect from "../components/atoms/ServiceStateSelect.vue";
 
 import { reactive, provide } from "vue";
 import { Inertia } from "@inertiajs/inertia";
@@ -218,6 +225,8 @@ export default {
         PageInput,
         UriAddButton,
         UriInputList,
+        UrlsInput,
+        ServiceStateSelect,
     },
     props: {
         service: Object,
@@ -292,6 +301,18 @@ export default {
             };
         };
 
+        const url = (value) => {
+            console.log(value);
+            if (value) {
+                return {
+                    content: value,
+                    decidable: true,
+                };
+            } else {
+                return normalObj();
+            }
+        };
+
         const form = reactive({
             id: props.service.id,
             title: {
@@ -310,6 +331,11 @@ export default {
             requirements: [],
             uris: [],
             pages: [page()],
+            github_url: url(props.service.github_url),
+            site_url: url(props.service.site_url),
+            finished: {
+                state: props.service.finished ? true : false,
+            },
             deleteData: {
                 techFields: [],
                 requirements: [],
@@ -419,6 +445,9 @@ export default {
         provide("uris", form.uris);
         provide("newUri", uri);
         provide("deleteData", form.deleteData);
+        provide("github_url", form.github_url);
+        provide("site_url", form.site_url);
+        provide("finished", form.finished);
 
         return {
             form,
