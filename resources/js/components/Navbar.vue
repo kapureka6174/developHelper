@@ -44,6 +44,21 @@
                             新規作成
                         </jet-nav-link>
                     </div>
+                    <div
+                        v-if="$page.props.user !== null"
+                        class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
+                    >
+                        <jet-nav-link
+                            :href="route('User', { id: $page.props.user.id })"
+                            :active="
+                                route().current('User', {
+                                    id: $page.props.user.id,
+                                })
+                            "
+                        >
+                            マイページ
+                        </jet-nav-link>
+                    </div>
                 </div>
 
                 <div class="hidden sm:flex sm:items-center sm:ml-6">

@@ -8,7 +8,7 @@
 
         <form @submit.prevent="submit">
             <div>
-                <jet-label for="name" value="名前" />
+                <jet-label for="name" value="ユーザー名" />
                 <jet-input
                     id="name"
                     type="text"
@@ -32,7 +32,10 @@
             </div>
 
             <div class="mt-4">
-                <jet-label for="password" value="パスワード" />
+                <jet-label
+                    for="password"
+                    value="パスワード（8文字以上で設定してください）"
+                />
                 <jet-input
                     id="password"
                     type="password"

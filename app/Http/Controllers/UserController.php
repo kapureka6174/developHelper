@@ -39,6 +39,12 @@ class UserController extends Controller
             $user["likes_count"] += $service['likes_count'];
             $user["comments_count"] += $service['comments_count'];
         }
-        return Inertia::render('User',['services' => $services, 'developer' => $user]);
+        $likes = $user->likes;
+        $fav_serviceIDs = [];
+        foreach ($likes as $like) {
+            array_push($fav_serviceIDs,$like['service_id']);
+        }
+        $fav_services = Service::with('user:id,name')->withCount('comments')->withCount('likes')->find($fav_serviceIDs);
+        return Inertia::render('User',['services' => $services, 'developer' => $user, 'fav_services' => $fav_services]);
     }
  }

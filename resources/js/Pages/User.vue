@@ -55,12 +55,50 @@
                     </button>
                 </inertia-link>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 px-2">
+            <section-title
+                class="ml-4"
+                :title="`${developer.name}のサービス`"
+            />
+            <div
+                class="
+                    flex
+                    items-center
+                    flex-col
+                    md:grid md:grid-cols-2
+                    lg:grid-cols-3
+                    md:gap-4
+                    px-2
+                "
+            >
                 <div v-for="service in services" :key="service.id">
                     <service-card
                         :id="service.id"
                         :title="service.title"
                         :description="service.description"
+                        :date="service.created_at"
+                        :likes="service.likes_count"
+                        :comments="service.comments_count"
+                    />
+                </div>
+            </div>
+            <section-title class="ml-4" title="お気に入りのサービス`" />
+            <div
+                class="
+                    flex
+                    items-center
+                    flex-col
+                    md:grid md:grid-cols-2
+                    lg:grid-cols-3
+                    md:gap-4
+                    px-2
+                "
+            >
+                <div v-for="service in fav_services" :key="service.id">
+                    <service-card
+                        :id="service.id"
+                        :title="service.title"
+                        :description="service.description"
+                        :user="service.user"
                         :date="service.created_at"
                         :likes="service.likes_count"
                         :comments="service.comments_count"
@@ -75,16 +113,19 @@
 import AppLayout from "../Layouts/AppLayout.vue";
 import ServiceCard from "../components/ServiceCard.vue";
 import DeveloperProfile from "../components/DeveloperProfile.vue";
+import SectionTitle from "../components/atoms/SectionTitle.vue";
 
 export default {
     components: {
         AppLayout,
         ServiceCard,
         DeveloperProfile,
+        SectionTitle,
     },
     props: {
         developer: Object,
         services: Array,
+        fav_services: Array,
     },
 };
 </script>

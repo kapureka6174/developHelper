@@ -1,6 +1,6 @@
 <template>
     <div class="md:px-32 md:pt-16 px-4 pt-8">
-        <div class="md:flex md:items-center md:justify-between">
+        <div class="md:flex md:items-center">
             <img
                 class="md:h-32 md:w-32 h-16 w-16 rounded-full mr-12 mb-3"
                 :src="image_url"
