@@ -9,7 +9,11 @@
         <div>
             <developer-profile
                 :username="developer.name"
-                :image_url="developer.profile_photo_url"
+                :image_url="
+                    checkImage(developer.profile_photo_path)
+                        ? developer.profile_photo_path
+                        : developer.profile_photo_url
+                "
                 :introduction="developer.introduction"
                 :likes="developer.likes_count"
                 :comments="developer.comments_count"
@@ -126,6 +130,16 @@ export default {
         developer: Object,
         services: Array,
         fav_services: Array,
+    },
+    setup() {
+        const checkImage = (url) => {
+            if (/profile-photos/.test(url) || url == null) {
+                return false;
+            } else {
+                return true;
+            }
+        };
+        return { checkImage };
     },
 };
 </script>

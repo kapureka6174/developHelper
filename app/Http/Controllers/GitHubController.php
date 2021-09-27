@@ -23,7 +23,6 @@ class GitHubController extends Controller
         try {
 
             $user = Socialite::driver('github')->user();
-
             $searchUser = User::where('email', $user->email)->first();
 
             if($searchUser){
@@ -42,6 +41,7 @@ class GitHubController extends Controller
                     'name' => $user->name,
                     'email' => $user->email,
                     'github_id'=> $user->id,
+                    'profile_photo_path' => $user->avatar
                 ]);
 
                 Auth::login($gitUser);

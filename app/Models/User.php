@@ -33,6 +33,7 @@ class User extends Authenticatable
         'github_account',
         'fav_lang',
         'dev_years',
+        'profile_photo_path'
     ];
 
     /**

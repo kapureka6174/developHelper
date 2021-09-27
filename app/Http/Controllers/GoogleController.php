@@ -40,6 +40,7 @@ class GoogleController extends Controller
                     'name' => $user->name,
                     'email' => $user->email,
                     'google_id'=> $user->id,
+                    'profile_photo_path' => $user->avatar
                 ]);
 
                 Auth::login($googleUser);
