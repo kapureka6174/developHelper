@@ -55,3 +55,5 @@ Route::get('auth/google', [App\Http\Controllers\GoogleController::class, 'google
 Route::get('auth/google/callback', [App\Http\Controllers\GoogleController::class, 'googleCallback']);
 
 Route::get('auth/guest', [App\Http\Controllers\GuestController::class, 'login'])->name('Guest_Login');
+
+// Route::post('forgot-password',[App\Http\Controllers\MaillingController::class, 'send'])->name('Send_Reset_Link');
