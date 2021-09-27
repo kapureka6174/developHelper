@@ -204,7 +204,6 @@ export default {
     },
     setup(props) {
         const requirements = inject("requirements");
-        console.log(requirements);
 
         const input = (value, type) => {
             if (!value) {

@@ -3,7 +3,7 @@
         <div class="flex items-center mb-2">
             <section-title title="タスク" />
             <!-- タスクの保存ボタン -->
-            <service-task-save-button />
+            <service-task-save-button class="ml-2" />
         </div>
 
         <!-- エラー表示 -->

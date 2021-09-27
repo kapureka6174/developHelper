@@ -31,8 +31,5 @@ export default {
         state: String,
         contents: Array,
     },
-    setup(props) {
-        console.log(props.contents);
-    },
 };
 </script>

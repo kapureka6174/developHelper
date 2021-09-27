@@ -61,13 +61,19 @@
                     :site_url="service.site_url"
                 />
 
-                <service-usage-technology :techFields="techFields" />
+                <service-usage-technology
+                    v-if="techFields.length"
+                    :techFields="techFields"
+                />
 
-                <service-requirement :requirements="requirements" />
+                <service-requirement
+                    v-if="requirements.length"
+                    :requirements="requirements"
+                />
 
-                <service-page :pages="pages" />
+                <service-page v-if="pages.length" :pages="pages" />
 
-                <service-uri-design :uris="uris" />
+                <service-uri-design v-if="uris.length" :uris="uris" />
 
                 <service-task :tasks="tasks" :id="service.user_id" />
 

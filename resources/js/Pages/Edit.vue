@@ -39,7 +39,10 @@
                     @delete="$page.props.flash.fail = null"
                 />
                 <!-- サービス名 -->
-                <section-title title="サービス名" />
+                <div class="flex">
+                    <section-title title="サービス名" />
+                    <hint-tool-tip type="サービス名" />
+                </div>
                 <title-input />
                 <service-state-select />
 
@@ -48,13 +51,18 @@
                 <urls-input />
 
                 <!-- カテゴリー -->
-                <section-title title="カテゴリー" />
+                <div class="flex">
+                    <section-title title="カテゴリー" />
+                    <hint-tool-tip type="カテゴリー" />
+                </div>
+
                 <tags-input />
 
                 <!-- サービスの概要 -->
                 <div class="pt-3">
                     <div class="flex mb-3 items-center">
                         <section-title title="サービス概要" />
+                        <hint-tool-tip type="サービス概要" />
                         <description-buttons />
                     </div>
                     <description-input />
@@ -63,6 +71,7 @@
                 <!-- 使用技術について -->
                 <div class="flex mb-3 items-center">
                     <section-title title="使用技術" />
+                    <hint-tool-tip type="使用技術" />
                     <tech-field-add-button />
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2">
@@ -76,6 +85,7 @@
                 <!-- 要件定義 -->
                 <div class="flex mb-3 items-center">
                     <section-title title="要件定義" />
+                    <hint-tool-tip type="要件定義" />
                     <requirement-add-button />
                 </div>
                 <div>
@@ -95,7 +105,10 @@
                 </div>
 
                 <!-- ページ -->
-                <section-title title="ページ" />
+                <div class="flex">
+                    <section-title title="ページ" />
+                    <hint-tool-tip type="カテゴリー" />
+                </div>
                 <requirement-select-list
                     v-for="(requirment, index) in form.requirements"
                     :key="index"
@@ -117,6 +130,7 @@
                 <!-- URI設計 -->
                 <div class="flex mb-3 items-center">
                     <section-title title="URI設計" />
+                    <hint-tool-tip type="URI設計" />
                     <uri-add-button />
                 </div>
                 <div class="overflow-x-auto">
@@ -203,6 +217,7 @@ import UriAddButton from "../components/atoms/UriAddButton.vue";
 import UriInputList from "../components/atoms/UriInputList.vue";
 import UrlsInput from "../components/atoms/UrlsInput.vue";
 import ServiceStateSelect from "../components/atoms/ServiceStateSelect.vue";
+import HintToolTip from "../components/atoms/HintToolTip.vue";
 
 import { reactive, provide } from "vue";
 import { Inertia } from "@inertiajs/inertia";
@@ -227,6 +242,7 @@ export default {
         UriInputList,
         UrlsInput,
         ServiceStateSelect,
+        HintToolTip,
     },
     props: {
         service: Object,
@@ -302,7 +318,6 @@ export default {
         };
 
         const url = (value) => {
-            console.log(value);
             if (value) {
                 return {
                     content: value,

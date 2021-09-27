@@ -6,7 +6,7 @@
             </h2>
         </template>
 
-        <div class="mx-2">
+        <div class="mx-2 pt-3">
             <success-flash-message
                 :success="$page.props.flash.success"
                 @deleteFlash="
@@ -130,7 +130,6 @@ export default {
             if (type == 0 || type == 1) {
                 filterType.value = type;
             }
-            console.log(filterType.value);
         };
 
         // 該当カテゴリーの検索（選択中のカテゴリーがサービスが個別に持つタグと一致しているかどうか）
