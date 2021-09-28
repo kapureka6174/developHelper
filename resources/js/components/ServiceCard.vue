@@ -1,6 +1,8 @@
 <template>
     <div
         class="
+            mx-auto
+            md:mx-0
             max-w-md
             py-4
             md:px-8

@@ -8,7 +8,7 @@
 
         <form @submit.prevent="submit">
             <div>
-                <jet-label for="email" value="Email" />
+                <jet-label for="email" value="メールアドレス" />
                 <jet-input
                     id="email"
                     type="email"
@@ -20,7 +20,7 @@
             </div>
 
             <div class="mt-4">
-                <jet-label for="password" value="Password" />
+                <jet-label for="password" value="パスワード" />
                 <jet-input
                     id="password"
                     type="password"
@@ -34,7 +34,7 @@
             <div class="mt-4">
                 <jet-label
                     for="password_confirmation"
-                    value="Confirm Password"
+                    value="パスワード（確認用）"
                 />
                 <jet-input
                     id="password_confirmation"

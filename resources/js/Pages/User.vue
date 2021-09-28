@@ -65,9 +65,8 @@
             />
             <div
                 class="
-                    flex
+                    grid grid-cols-1
                     items-center
-                    flex-col
                     md:grid md:grid-cols-2
                     lg:grid-cols-3
                     md:gap-4
@@ -88,9 +87,8 @@
             <section-title class="ml-4" title="お気に入りのサービス`" />
             <div
                 class="
-                    flex
+                    grid grid-cols-1
                     items-center
-                    flex-col
                     md:grid md:grid-cols-2
                     lg:grid-cols-3
                     md:gap-4

@@ -85,6 +85,7 @@
                     :likes="service.likes_count"
                     :comments="service.comments_count"
                     v-show="filter(service.tags, service.finished)"
+                    :style="{ width: '-webkit-fill-available' }"
                 />
             </div>
         </div>

@@ -10,7 +10,7 @@
                             leading-tight
                         "
                     >
-                        サービス詳細画面
+                        サービス詳細
                     </h2>
                     <responsive-service-develop-state :finished="false" />
                     <div>
