@@ -200,24 +200,24 @@
 
 <script>
 import AppLayout from "@/Layouts/AppLayout";
-import FailFlashMessage from "../components/atoms/FailFlashMessage";
-import SectionTitle from "../components/atoms/SectionTitle.vue";
-import TitleInput from "../components/atoms/TitleInput.vue";
-import TagsInput from "../components/atoms/TagsInput.vue";
-import DescriptionButtons from "../components/atoms/DescriptionButtons.vue";
-import DescriptionInput from "../components/atoms/DescriptionInput.vue";
-import TechFieldAddButton from "../components/atoms/TechFieldAddButton.vue";
-import TechFieldInput from "../components/atoms/TechFieldInput.vue";
-import RequirementAddButton from "../components/atoms/RequirementAddButton.vue";
-import RequirementInput from "../components/atoms/RequirementInput.vue";
-import RequirementSelectList from "../components/atoms/RequirementSelectList.vue";
-import PageAddButton from "../components/atoms/PageAddButton.vue";
-import PageInput from "../components/atoms/PageInput.vue";
-import UriAddButton from "../components/atoms/UriAddButton.vue";
-import UriInputList from "../components/atoms/UriInputList.vue";
-import UrlsInput from "../components/atoms/UrlsInput.vue";
-import ServiceStateSelect from "../components/atoms/ServiceStateSelect.vue";
-import HintToolTip from "../components/atoms/HintToolTip.vue";
+import FailFlashMessage from "../components/Utility/FailFlashMessage";
+import SectionTitle from "../components/Utility/SectionTitle";
+import TitleInput from "../components/Title/TitleInput";
+import TagsInput from "../components/Tag/TagsInput";
+import DescriptionButtons from "../components/Description/DescriptionButtons";
+import DescriptionInput from "../components/Description/DescriptionInput";
+import TechFieldAddButton from "../components/TechField/TechFieldAddButton";
+import TechFieldInput from "../components/TechField/TechFieldInput";
+import RequirementAddButton from "../components/Requirement/RequirementAddButton";
+import RequirementInput from "../components/Requirement/RequirementInput";
+import RequirementSelectList from "../components/Requirement/RequirementSelectList";
+import PageAddButton from "../components/Page/PageAddButton";
+import PageInput from "../components/Page/PageInput";
+import UriAddButton from "../components/Uri/UriAddButton";
+import UriInputList from "../components/Uri/UriInputList";
+import UrlsInput from "../components/Title/UrlsInput";
+import ServiceStateSelect from "../components/Title/ServiceStateSelect";
+import HintToolTip from "../components/Utility/HintToolTip";
 
 import { reactive, provide } from "vue";
 import { Inertia } from "@inertiajs/inertia";

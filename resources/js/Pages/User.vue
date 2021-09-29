@@ -112,10 +112,10 @@
 </template>
 
 <script>
-import AppLayout from "../Layouts/AppLayout.vue";
-import ServiceCard from "../components/ServiceCard.vue";
-import DeveloperProfile from "../components/DeveloperProfile.vue";
-import SectionTitle from "../components/atoms/SectionTitle.vue";
+import AppLayout from "../Layouts/AppLayout";
+import ServiceCard from "../components/Utility/ServiceCard";
+import DeveloperProfile from "../components/Developer/DeveloperProfile";
+import SectionTitle from "../components/Utility/SectionTitle";
 
 export default {
     components: {

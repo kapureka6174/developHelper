@@ -92,24 +92,24 @@
 </template>
 
 <script>
-import ServiceDetailLayout from "../Layouts/ServiceDetailLayout.vue";
-import ServiceEditButton from "../components/atoms/ServiceEditButton.vue";
-import ServiceDeleteButton from "../components/atoms/ServiceDeleteButton.vue";
-import FloatButtons from "../components/FloatButtons.vue";
-import ServiceTitle from "../components/atoms/ServiceTitle.vue";
-import Tag from "../components/atoms/Tag.vue";
-import ServiceDescription from "../components/atoms/ServiceDescription.vue";
-import ServiceUsageTechnology from "../components/atoms/ServiceUsageTechnology.vue";
-import ServiceRequirement from "../components/atoms/ServiceRequirement.vue";
-import ServicePage from "../components/atoms/ServicePage.vue";
-import ServiceUriDesign from "../components/atoms/ServiceUriDesign.vue";
-import ServiceTask from "../components/atoms/ServiceTask.vue";
-import ServiceCommentShow from "../components/atoms/ServiceCommentShow.vue";
-import ServiceCommentForm from "../components/atoms/ServiceCommentForm.vue";
-import SuccessFlashMessage from "../components/atoms/SuccessFlashMessage";
-import ServiceDevelopState from "../components/atoms/ServiceDevelopState.vue";
-import ResponsiveServiceDevelopState from "../components/atoms/ResponsiveServiceDevelopState.vue";
-import ServiceUrls from "../components/atoms/ServiceUrls.vue";
+import ServiceDetailLayout from "../Layouts/ServiceDetailLayout";
+import ServiceEditButton from "../components/Utility/ServiceEditButton";
+import ServiceDeleteButton from "../components/Utility/ServiceDeleteButton";
+import FloatButtons from "../components/FloatButtons/FloatButtons";
+import ServiceTitle from "../components/Title/ServiceTitle";
+import Tag from "../components/Tag/Tag";
+import ServiceDescription from "../components/Description/ServiceDescription";
+import ServiceUsageTechnology from "../components/TechField/ServiceUsageTechnology";
+import ServiceRequirement from "../components/Requirement/ServiceRequirement";
+import ServicePage from "../components/Page/ServicePage";
+import ServiceUriDesign from "../components/Uri/ServiceUriDesign";
+import ServiceTask from "../components/Task/ServiceTask";
+import ServiceCommentShow from "../components/Comment/ServiceCommentShow";
+import ServiceCommentForm from "../components/Comment/ServiceCommentForm";
+import SuccessFlashMessage from "../components/Utility/SuccessFlashMessage";
+import ServiceDevelopState from "../components/Title/ServiceDevelopState";
+import ResponsiveServiceDevelopState from "../components/Title/ResponsiveServiceDevelopState";
+import ServiceUrls from "../components/Title/ServiceUrls";
 
 import { Inertia } from "@inertiajs/inertia";
 import { useForm } from "@inertiajs/inertia-vue3";

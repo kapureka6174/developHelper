@@ -93,13 +93,13 @@
 </template>
 
 <script>
-import AppLayout from "../Layouts/AppLayout.vue";
-import ServiceCard from "../components/ServiceCard.vue";
-import SortButton from "../components/atoms/SortButton.vue";
-import Tag from "../components/atoms/Tag.vue";
-import SelectedTag from "../components/atoms/SelectedTag.vue";
-import SuccessFlashMessage from "../components/atoms/SuccessFlashMessage";
-import FilterButtons from "../components/atoms/FilterButtons.vue";
+import AppLayout from "../Layouts/AppLayout";
+import ServiceCard from "../components/Utility/ServiceCard";
+import SortButton from "../components/Utility/SortButton";
+import Tag from "../components/Tag/Tag";
+import SelectedTag from "../components/Tag/SelectedTag";
+import SuccessFlashMessage from "../components/Utility/SuccessFlashMessage";
+import FilterButtons from "../components/Utility/FilterButtons";
 
 import { reactive, ref } from "vue";
 

@@ -30,9 +30,9 @@
 </template>
 
 <script>
-import AppLayout from "../Layouts/AppLayout.vue";
-import DeveloperCard from "../components/DeveloperCard.vue";
-import SortButton from "../components/atoms/SortButton.vue";
+import AppLayout from "../Layouts/AppLayout";
+import DeveloperCard from "../components/Developer/DeveloperCard";
+import SortButton from "../components/Utility/SortButton";
 
 export default {
     components: {

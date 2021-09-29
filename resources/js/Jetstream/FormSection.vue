@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import JetSectionTitle from "./SectionTitle";
+import JetSectionTitle from "./SegmentTitle";
 
 export default {
     emits: ["submitted"],

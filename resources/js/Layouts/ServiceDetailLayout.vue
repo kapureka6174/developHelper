@@ -23,16 +23,20 @@
                     </div>
                 </div>
             </main>
+            <hr />
+            <bottom-bar />
         </div>
     </div>
 </template>
 
 <script>
-import Navbar from "../components/Navbar";
+import Navbar from "../components/LayoutPart/Navbar";
+import BottomBar from "../components/LayoutPart/BottomBar";
 
 export default {
     components: {
         Navbar,
+        BottomBar,
     },
 };
 </script>
