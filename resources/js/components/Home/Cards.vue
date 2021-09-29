@@ -1,0 +1,60 @@
+<template>
+    <div
+        class="
+            max-w-sm
+            rounded-lg
+            material-card
+            bg-white
+            border-gray-200 border-4
+            h-80
+            my-3
+            shadow-lg
+        "
+    >
+        <img class="w-full rounded-t h-48" :src="content.image" />
+        <div class="px-6 py-4">
+            <div class="font-bold text-xl tracking-wide">
+                {{ content.title }}
+            </div>
+            <p class="text-gray-700 text-base">
+                {{ content.description }}
+            </p>
+        </div>
+    </div>
+</template>
+<script>
+export default {
+    props: {
+        type: Number,
+    },
+    setup(props) {
+        const content = {};
+        switch (props.type) {
+            case 1:
+                content.title = "開発者登録";
+                content.description =
+                    "紹介文、得意な言語、プログラミング歴などのプロフィールを設定してみましょう。";
+                content.image =
+                    "http://localhost:8000/storage/images/プロフィール.png";
+                break;
+            case 2:
+                content.title = "サービス登録";
+                content.description =
+                    "作ってみたいサービス、作成中のサービス、公開済みのサービスを技術や設計も含めて登録してみよう。";
+                content.image =
+                    "http://localhost:8000/storage/images/サービス登録.png";
+                break;
+            case 3:
+                content.title = "質問・アドバイス";
+                content.description =
+                    "開発中のサービスにはアドバイスや技術選定や設計に関する質問をしてみよう。";
+                content.image =
+                    "http://localhost:8000/storage/images/コメント.png";
+                break;
+            default:
+                break;
+        }
+        return { content };
+    },
+};
+</script>
