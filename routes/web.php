@@ -17,6 +17,10 @@ use Illuminate\Http\Request;
 |
 */
 
+if (App::environment('production')) {
+    URL::forceScheme('https');
+}
+
 Route::get('/', function () {
     return Inertia::render('Home');
 })->name('Home');;
