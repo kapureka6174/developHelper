@@ -17,13 +17,13 @@ return [
 
     'paths' => ['/*', 'sanctum/csrf-cookie'],
 
-    'allowed_methods' => ['POST', 'GET', 'DELETE', 'PUT', '*'],
+    'allowed_methods' => ['*'],
 
     'allowed_origins' => ['https://web-service-hub.herokuapp.com'],
 
     'allowed_origins_patterns' => ['auth', 'github.com', 'accounts.google.com'],
 
-    'allowed_headers' => ['X-Custom-Header', 'Upgrade-Insecure-Requests', '*'],
+    'allowed_headers' => ['*'],
 
     'exposed_headers' => false,
 
