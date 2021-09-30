@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['https://web-service-hub.herokuapp.com','*oauth*'],
+    'allowed_origins' => ['https://web-service-hub.herokuapp.com*','*oauth*'],
 
     'allowed_origins_patterns' => ['*'],
 
