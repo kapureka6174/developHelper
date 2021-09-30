@@ -9,12 +9,14 @@ use Exception;
 use Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Inertia;
 
 class GitHubController extends Controller
 {
     public function gitRedirect()
     {
-        return Socialite::driver('github')->redirect();
+        $redirectUrl = Socialite::driver('github')->redirect()->getTargetUrl();
+        return Inertia::location($redirectUrl);
     }
 
 

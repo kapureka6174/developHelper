@@ -9,12 +9,14 @@ use Exception;
 use Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Inertia;
 
 class GoogleController extends Controller
 {
     public function googleRedirect()
     {
-        return Socialite::driver('google')->redirect();
+        $redirectUrl = Socialite::driver('google')->redirect()->getTargetUrl();
+        return Inertia::location($redirectUrl);
     }
 
 
