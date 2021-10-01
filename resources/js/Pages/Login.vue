@@ -102,7 +102,7 @@
                     </div>
                 </inertia-link>
                 <!-- -- Login with Google -- -->
-                <inertia-link class="btn" :href="route('Google_Login')">
+                <button class="btn" @click="login('auth/google')">
                     <div
                         class="
                             bg-blue-100
@@ -140,7 +140,7 @@
                         </svg>
                         <p class="font-medium">Googleでログイン</p>
                     </div>
-                </inertia-link>
+                </button>
             </div>
 
             <hr class="my-4" />
@@ -218,6 +218,14 @@ export default {
                 .post(this.route("login"), {
                     onFinish: () => this.form.reset("password"),
                 });
+        },
+
+        login(url) {
+            this.$inertia.get(url, {
+                onSuccess: (res) => {
+                    console.log(res.redirectUrl);
+                },
+            });
         },
     },
 };
