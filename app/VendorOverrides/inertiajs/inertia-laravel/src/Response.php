@@ -86,8 +86,16 @@ class Response implements Responsable
             }
         }
 
+        $component = $this->component;
+        if (preg_match('/Auth/',$this->component)) {
+            $component = explode('/',$this->component)[1];
+        } else if (preg_match('/Show/',$this->component)) {
+            $component = 'Profile';
+        } else if (preg_match('/Profile/',$this->component)) {
+            $component = explode('/',$this->component)[1];
+        }
         $page = [
-            'component' => (preg_match('/Auth/',$this->component)) ? explode('/',$this->component)[1] : $this->component,
+            'component' => $component,
             'props' => $props,
             'url' => $request->getRequestUri(),
             'version' => $this->version,
