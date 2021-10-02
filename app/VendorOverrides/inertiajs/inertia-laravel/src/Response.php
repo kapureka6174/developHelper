@@ -91,8 +91,6 @@ class Response implements Responsable
             $component = explode('/',$this->component)[1];
         } else if (preg_match('/Show/',$this->component)) {
             $component = 'Profile';
-        } else if (preg_match('/Profile/',$this->component)) {
-            $component = explode('/',$this->component)[1];
         }
         $page = [
             'component' => $component,
