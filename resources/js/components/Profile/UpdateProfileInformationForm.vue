@@ -8,7 +8,7 @@
 
         <template #form>
             <guest-update-profile-information-form
-                v-if="$page.props.user.id == 10"
+                v-if="$page.props.user.id == 25"
                 :form="form"
             />
 
@@ -17,7 +17,7 @@
                 class="col-span-6 sm:col-span-4"
                 v-if="
                     $page.props.jetstream.managesProfilePhotos &&
-                    $page.props.user.id !== 10
+                    $page.props.user.id !== 25
                 "
             >
                 <!-- Profile Photo File Input -->
@@ -214,7 +214,7 @@
 
             <!-- ゲスト表示 -->
             <jet-button
-                v-if="$page.props.user.id == 13"
+                v-if="$page.props.user.id == 25"
                 :class="{ 'opacity-25': form.processing }"
                 :disabled="form.processing"
                 type="button"

@@ -9,7 +9,7 @@
         <template #form>
             <!-- 注意文 -->
             <div
-                v-if="$page.props.user.id == 10"
+                v-if="$page.props.user.id == 25"
                 class="col-span-6 sm:col-span-4"
             >
                 <h2 class="font-semibold text-red-400">
@@ -19,7 +19,7 @@
 
             <!-- 現在のパスワード（ゲスト表示） -->
             <div
-                v-if="$page.props.user.id == 13"
+                v-if="$page.props.user.id == 25"
                 class="col-span-6 sm:col-span-4"
             >
                 <jet-label for="current_password" value="現在のパスワード" />
@@ -51,7 +51,7 @@
 
             <!-- 新しいパスワード（ゲスト表示） -->
             <div
-                v-if="$page.props.user.id == 13"
+                v-if="$page.props.user.id == 25"
                 class="col-span-6 sm:col-span-4"
             >
                 <jet-label value="新しいパスワード" />
@@ -78,7 +78,7 @@
 
             <!-- 確認用パスワード（ゲスト表示） -->
             <div
-                v-if="$page.props.user.id == 13"
+                v-if="$page.props.user.id == 25"
                 class="col-span-6 sm:col-span-4"
             >
                 <jet-label value="パスワード（確認用）" />
@@ -115,7 +115,7 @@
 
             <!-- ゲスト表示 -->
             <jet-button
-                v-if="$page.props.user.id == 13"
+                v-if="$page.props.user.id == 25"
                 :class="{ 'opacity-25': form.processing }"
                 type="button"
             >
