@@ -74,7 +74,7 @@
 
             <!-- 名前 -->
             <div
-                v-if="$page.props.user.id !== 10"
+                v-if="$page.props.user.id !== 25"
                 class="col-span-6 sm:col-span-4"
             >
                 <jet-label for="name" value="名前" />
@@ -90,7 +90,7 @@
 
             <!-- Email -->
             <div
-                v-if="$page.props.user.id !== 10"
+                v-if="$page.props.user.id !== 25"
                 class="col-span-6 sm:col-span-4"
             >
                 <jet-label for="email" value="メールアドレス" />
@@ -105,7 +105,7 @@
 
             <!-- ツイッターアカウント -->
             <div
-                v-if="$page.props.user.id !== 10"
+                v-if="$page.props.user.id !== 25"
                 class="col-span-6 sm:col-span-4"
             >
                 <jet-label for="twitter_account" value="Twitterユーザー名" />
@@ -124,7 +124,7 @@
 
             <!-- Githubアカウント -->
             <div
-                v-if="$page.props.user.id !== 10"
+                v-if="$page.props.user.id !== 25"
                 class="col-span-6 sm:col-span-4"
             >
                 <jet-label for="github_account" value="GitHubユーザー名" />
@@ -143,7 +143,7 @@
 
             <!-- 得意言語 -->
             <div
-                v-if="$page.props.user.id !== 10"
+                v-if="$page.props.user.id !== 25"
                 class="col-span-6 sm:col-span-4"
             >
                 <jet-label for="fav_lang" value="得意言語" />
@@ -159,7 +159,7 @@
 
             <!-- プログラミング歴 -->
             <div
-                v-if="$page.props.user.id !== 10"
+                v-if="$page.props.user.id !== 25"
                 class="col-span-6 sm:col-span-4"
             >
                 <jet-label for="dev_years" value="プログラミング歴" />
@@ -178,7 +178,7 @@
 
             <!-- 紹介文 -->
             <div
-                v-if="$page.props.user.id !== 10"
+                v-if="$page.props.user.id !== 25"
                 class="col-span-6 sm:col-span-4"
             >
                 <jet-label for="introduction" value="紹介文" />
