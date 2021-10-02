@@ -136,7 +136,7 @@ export default {
     },
     setup() {
         const checkImage = (url) => {
-            if (/profile-photos/.test(url) || url == null) {
+            if (/aws/.test(url) || url == null) {
                 return false;
             } else {
                 return true;
