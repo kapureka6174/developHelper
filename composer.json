@@ -36,10 +36,12 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "exclude-from-classmap": [
-            "vendor\\inertiajs\\inertia-laravel\\src\\Response.php"
+            "vendor\\inertiajs\\inertia-laravel\\src\\Response.php",
+            "vendor\\laravel\\jetstream\\src\\Http\\Controllers\\Inertia\\UserProfileController.php"
         ],
         "files":[
-            "app\\VendorOverrides\\inertiajs\\inertia-laravel\\src\\Response.php"
+            "app\\VendorOverrides\\inertiajs\\inertia-laravel\\src\\Response.php",
+            "app\\VendorOverrides\\laravel\\jetstream\\src\\Http\\Controllers\\Inertia\\UserProfileController.php"
         ]
     },
     "autoload-dev": {
