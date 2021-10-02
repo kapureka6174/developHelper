@@ -60,6 +60,7 @@
                 </inertia-link>
             </div>
             <section-title
+                v-if="services.length"
                 class="ml-4"
                 :title="`${developer.name}のサービス`"
             />
@@ -84,7 +85,11 @@
                     />
                 </div>
             </div>
-            <section-title class="ml-4" title="お気に入りのサービス`" />
+            <section-title
+                v-if="fav_services.length"
+                class="ml-4"
+                title="お気に入りのサービス`"
+            />
             <div
                 class="
                     grid grid-cols-1

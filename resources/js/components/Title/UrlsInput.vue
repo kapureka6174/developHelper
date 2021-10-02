@@ -15,7 +15,14 @@
             <!-- 通常表示 -->
             <p
                 v-else
-                class="md:text-2xl font-bold text-gray-700 mb-2 pt-3"
+                class="
+                    md:text-2xl
+                    font-bold
+                    text-gray-700
+                    mb-2
+                    pt-3
+                    break-words
+                "
                 @click="github_url.decidable = false"
             >
                 {{ github_url.content }}
@@ -82,7 +89,14 @@
             <!-- 通常表示 -->
             <p
                 v-else
-                class="md:text-2xl font-bold text-gray-700 mb-2 pt-3"
+                class="
+                    md:text-2xl
+                    font-bold
+                    text-gray-700
+                    mb-2
+                    pt-3
+                    break-words
+                "
                 @click="site_url.decidable = false"
             >
                 {{ site_url.content }}

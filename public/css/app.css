@@ -1453,6 +1453,9 @@ select {
 .w-6\/12 {
 	width: 50%;
 }
+.w-2\/5 {
+	width: 40%;
+}
 .w-32 {
 	width: 8rem;
 }
@@ -1470,9 +1473,6 @@ select {
 }
 .w-11\/12 {
 	width: 91.666667%;
-}
-.w-2\/5 {
-	width: 40%;
 }
 .w-96 {
 	width: 24rem;
@@ -2822,6 +2822,10 @@ select {
 
 	.md\:w-8\/12 {
 		width: 66.666667%;
+	}
+
+	.md\:w-auto {
+		width: auto;
 	}
 
 	.md\:w-32 {
