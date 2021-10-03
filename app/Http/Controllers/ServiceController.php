@@ -103,7 +103,7 @@ class ServiceController extends Controller
         ]);
 
         // Tagテーブルに追加
-        if (in_array('tags',$validatedData)) {
+        if (array_key_exists('tags',$validatedData)) {
             foreach ($validatedData['tags']['content'] as $tagname) {
                 $tag = Tag::firstOrCreate([
                     'tagname' => $tagname,
@@ -113,7 +113,7 @@ class ServiceController extends Controller
         }
 
         // techFieldに追加
-        if (in_array('techFields',$validatedData)) {
+        if (array_key_exists('techFields',$validatedData)) {
             foreach ($validatedData['techFields'] as $field) {
                 $techField = TechField::create([
                     'service_id' => $service['id'],
@@ -121,7 +121,7 @@ class ServiceController extends Controller
                 ]);
 
                 // techテーブルに追加
-                if (in_array('teches',$field)) {
+                if (array_key_exists('teches',$field)) {
                     foreach ($field['teches'] as $techContent) {
                         $teches = Tech::create([
                             'tech_field_id' => $techField['id'],
@@ -135,7 +135,7 @@ class ServiceController extends Controller
 
 
         // requirementテーブルに追加
-        if (in_array("requirements", $validatedData)) {
+        if (array_key_exists("requirements", $validatedData)) {
             foreach ($validatedData['requirements'] as $require) {
                 $requirement = Requirement::create([
                     'service_id' => $service['id'],
@@ -146,13 +146,13 @@ class ServiceController extends Controller
         }
 
         // pagesテーブルに追加
-        if (in_array("pages", $validatedData)) {
+        if (array_key_exists("pages", $validatedData)) {
             foreach ($validatedData['pages'] as $page) {
                 $pages = Page::create([
                     'service_id' => $service['id'],
                     'pagename' => $page['pagename']['content'],
                 ]);
-                if (in_array("requirements", $page)) {
+                if (array_key_exists("requirements", $page)) {
                     foreach ($page['requirements'] as $requirement) {
                         $requirementID = Requirement::where('title', $requirement)->get('id');
                         $pages->requirements()->attach($requirementID);
@@ -162,7 +162,7 @@ class ServiceController extends Controller
         }
 
         // uriテーブルに追加
-        if (in_array("uris", $validatedData)) {
+        if (array_key_exists("uris", $validatedData)) {
             foreach ($validatedData['uris'] as $uriDesign) {
                 $uri = Uri::create([
                     'service_id' => $service['id'],
