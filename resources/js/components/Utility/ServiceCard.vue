@@ -32,7 +32,7 @@
                     <img
                         v-if="user"
                         class="h-10 w-10 mr-2 rounded-full object-cover"
-                        :src="user.profile_photo_url"
+                        :src="image_url"
                         :alt="user.name"
                     />
                 </inertia-link>
@@ -112,6 +112,7 @@ export default {
         tags: Array,
         likes: Number,
         comments: Number,
+        image_url: String,
     },
 };
 </script>

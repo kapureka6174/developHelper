@@ -86,6 +86,7 @@
                     :comments="service.comments_count"
                     v-show="filter(service.tags, service.finished)"
                     :style="{ width: '-webkit-fill-available' }"
+                    :image_url="service.user.profile_photo_url"
                 />
             </div>
         </div>

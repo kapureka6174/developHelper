@@ -22,7 +22,7 @@ class ServiceController extends Controller
 
     // 全サービスのデータを引っ張て来てViewに渡す。
     public function all () {
-        $services = Service::with('tags:id,tagname')->with('user:id,name')->withCount('comments')->withCount('likes')->get();
+        $services = Service::with('tags:id,tagname')->with('user:id,name,profile_photo_path')->withCount('comments')->withCount('likes')->get();
         return Inertia::render('Services',['services' => $services, 'tags' => Tag::all()]);
     }
 
