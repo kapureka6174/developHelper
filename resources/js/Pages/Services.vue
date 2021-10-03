@@ -129,9 +129,7 @@ export default {
 
         // 絞り込み
         const filterChange = (type) => {
-            if (type == 0 || type == 1) {
-                filterType.value = type;
-            }
+            filterType.value = type;
         };
 
         // 該当カテゴリーの検索（選択中のカテゴリーがサービスが個別に持つタグと一致しているかどうか）

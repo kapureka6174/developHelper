@@ -21831,9 +21831,7 @@ __webpack_require__.r(__webpack_exports__);
     var filterType = (0,vue__WEBPACK_IMPORTED_MODULE_7__.ref)(); // 絞り込み
 
     var filterChange = function filterChange(type) {
-      if (type == 0 || type == 1) {
-        filterType.value = type;
-      }
+      filterType.value = type;
     }; // 該当カテゴリーの検索（選択中のカテゴリーがサービスが個別に持つタグと一致しているかどうか）
 
 
