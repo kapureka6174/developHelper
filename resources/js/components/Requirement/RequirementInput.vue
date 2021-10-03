@@ -46,7 +46,7 @@
             }}</strong>
         </div>
         <!-- 要件名（通常表示） -->
-        <details v-if="requirements[index].title.decidable" class="mb-1" open>
+        <details v-if="requirements[index].title.decidable" class="mb-1">
             <summary class="rounded py-2 px-4 bg-gray-200 relative h-full">
                 <span
                     class="font-semibold break-words"
