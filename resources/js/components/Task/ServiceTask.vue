@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="flex items-center mb-2">
+        <div v-if="tasks.length" class="flex items-center mb-2">
             <section-title title="タスク" />
             <!-- タスクの保存ボタン -->
             <service-task-save-button class="ml-2" />
