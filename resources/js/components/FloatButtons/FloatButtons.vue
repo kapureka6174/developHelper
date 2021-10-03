@@ -67,7 +67,9 @@ export default {
         // URLをコピー
         let copied = ref(false);
         const copy = (url) => {
-            navigator.clipboard.writeText(`http://localhost:8000${url}`);
+            navigator.clipboard.writeText(
+                `https://web-service-hub.herokuapp.com${url}`
+            );
             copied.value = true;
             setTimeout(() => {
                 copied.value = false;
@@ -81,7 +83,7 @@ export default {
             window.open(
                 `https://twitter.com/share?text=${encodeURIComponent(
                     title
-                )}&url=http://localhost:8000${encodeURIComponent(
+                )}&url=https://web-service-hub.herokuapp.com${encodeURIComponent(
                     url
                 )}&hashtags=WebServiceHub`,
                 "_blank"
