@@ -398,7 +398,7 @@ export default {
                 },
                 explain: {
                     content: requirement.content,
-                    decidable: true,
+                    decidable: false,
                     error: "",
                 },
             };
