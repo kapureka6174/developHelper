@@ -12,8 +12,15 @@
                     >
                         サービス詳細
                     </h2>
-                    <responsive-service-develop-state :finished="false" />
-                    <div>
+                    <responsive-service-develop-state
+                        :finished="service.finished"
+                    />
+                    <div
+                        v-if="
+                            $page.props.user !== null &&
+                            $page.props.user.id == $page.props.service.user_id
+                        "
+                    >
                         <service-edit-button @click="edit" />
                         <service-delete-button @click="check" />
                     </div>
