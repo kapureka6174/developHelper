@@ -107,7 +107,7 @@
                 <!-- ページ -->
                 <div class="flex">
                     <section-title title="ページ" />
-                    <hint-tool-tip type="カテゴリー" />
+                    <hint-tool-tip type="ページ" />
                 </div>
                 <requirement-select-list
                     v-for="(requirment, index) in form.requirements"
