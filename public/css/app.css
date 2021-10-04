@@ -1474,9 +1474,6 @@ select {
 .w-2\/5 {
 	width: 40%;
 }
-.w-96 {
-	width: 24rem;
-}
 .w-max {
 	width: -webkit-max-content;
 	width: -moz-max-content;

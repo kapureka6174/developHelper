@@ -15,7 +15,6 @@ class CommentController extends Controller
     public function addComment (Request $request) {
         $data = $request->all();
 
-
         // バリデーションのルールを指定
         $rules = [
             'id' => 'required|integer',

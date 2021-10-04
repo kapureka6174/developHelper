@@ -10,7 +10,7 @@
             focus:border-blue-500
             mb-3
         "
-        v-model="type"
+        v-model="comment.type"
     >
         <option value="質問">質問</option>
         <option value="アドバイス">アドバイス</option>
@@ -21,8 +21,8 @@
 import { inject } from "vue";
 export default {
     setup() {
-        const type = inject("commentType");
-        return { type };
+        const comment = inject("comment");
+        return { comment };
     },
 };
 </script>

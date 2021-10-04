@@ -182,6 +182,7 @@ export default {
         provide("form", form);
         provide("tasks", form.tasks);
         provide("title", props.service.title);
+        provide("comment", form.comments);
 
         return {
             form,

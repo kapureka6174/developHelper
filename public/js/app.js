@@ -21208,7 +21208,7 @@ __webpack_require__.r(__webpack_exports__);
         },
         explain: {
           content: requirement.content,
-          decidable: true,
+          decidable: false,
           error: ""
         }
       };
@@ -21770,6 +21770,7 @@ __webpack_require__.r(__webpack_exports__);
     (0,vue__WEBPACK_IMPORTED_MODULE_20__.provide)("form", form);
     (0,vue__WEBPACK_IMPORTED_MODULE_20__.provide)("tasks", form.tasks);
     (0,vue__WEBPACK_IMPORTED_MODULE_20__.provide)("title", props.service.title);
+    (0,vue__WEBPACK_IMPORTED_MODULE_20__.provide)("comment", form.comments);
     return {
       form: form,
       check: check
@@ -22109,9 +22110,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup() {
-    var type = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)("commentType");
+    var comment = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)("comment");
     return {
-      type: type
+      comment: comment
     };
   }
 });
@@ -22347,7 +22348,7 @@ __webpack_require__.r(__webpack_exports__);
     var copied = (0,vue__WEBPACK_IMPORTED_MODULE_10__.ref)(false);
 
     var copy = function copy(url) {
-      navigator.clipboard.writeText("http://localhost:8000".concat(url));
+      navigator.clipboard.writeText("https://web-service-hub.herokuapp.com".concat(url));
       copied.value = true;
       setTimeout(function () {
         copied.value = false;
@@ -22358,7 +22359,7 @@ __webpack_require__.r(__webpack_exports__);
     var title = (0,vue__WEBPACK_IMPORTED_MODULE_10__.inject)("title");
 
     var tweet = function tweet(url) {
-      window.open("https://twitter.com/share?text=".concat(encodeURIComponent(title), "&url=http://localhost:8000").concat(encodeURIComponent(url), "&hashtags=WebServiceHub"), "_blank");
+      window.open("https://twitter.com/share?text=".concat(encodeURIComponent(title), "&url=https://web-service-hub.herokuapp.com").concat(encodeURIComponent(url), "&hashtags=WebServiceHub"), "_blank");
     };
 
     return {
@@ -24663,7 +24664,7 @@ __webpack_require__.r(__webpack_exports__);
           break;
 
         case "ページ":
-          message = "サービスで使用するページを設定してください。<br>例）ページ名：新規登録画面、マイページ<br>要件定義で機能を設定すると選択できます。";
+          message = "サービスで主に使用するページを設定してください。<br>例）ページ名：サービス画面、ログイン画面<br>全てのページではなく役割毎に作成しましょう。";
           break;
 
         case "URI設計":
@@ -26230,7 +26231,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       ))])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ページ "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_section_title, {
         title: "ページ"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_hint_tool_tip, {
-        type: "カテゴリー"
+        type: "ページ"
       })]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.requirements, function (requirment, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_requirement_select_list, {
           key: index,
@@ -27331,9 +27332,12 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_3 = {
-  "class": "pt-6 pb-10 px-4 col-span-7 bg-white overflow-hidden shadow-xl sm:rounded-lg"
+  key: 0
 };
 var _hoisted_4 = {
+  "class": "pt-6 pb-10 px-4 col-span-7 bg-white overflow-hidden shadow-xl sm:rounded-lg"
+};
+var _hoisted_5 = {
   "class": "flex md:flex-row flex-col"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -27376,8 +27380,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_service_detail_layout, null, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_responsive_service_develop_state, {
-        finished: false
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_service_edit_button, {
+        finished: $props.service.finished
+      }, null, 8
+      /* PROPS */
+      , ["finished"]), _ctx.$page.props.user !== null && _ctx.$page.props.user.id == _ctx.$page.props.service.user_id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_service_edit_button, {
         onClick: _ctx.edit
       }, null, 8
       /* PROPS */
@@ -27385,7 +27391,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.check
       }, null, 8
       /* PROPS */
-      , ["onClick"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_success_flash_message, {
+      , ["onClick"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_success_flash_message, {
         success: _ctx.$page.props.flash.success,
         onDeleteFlash: _cache[0] || (_cache[0] = function () {
           _ctx.$page.props.flash.success = null;
@@ -27398,7 +27404,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["success"])];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_service_title, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_service_title, {
         title: $props.service.title
       }, null, 8
       /* PROPS */
@@ -28105,11 +28111,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("select", {
     "class": "w-32 rounded border border-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 mb-3",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return $setup.type = $event;
+      return $setup.comment.type = $event;
     })
   }, _hoisted_4, 512
   /* NEED_PATCH */
-  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.type]]);
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.comment.type]]);
 }
 
 /***/ }),
@@ -31228,8 +31234,7 @@ var _hoisted_3 = {
 };
 var _hoisted_4 = {
   key: 2,
-  "class": "mb-1",
-  open: ""
+  "class": "mb-1"
 };
 var _hoisted_5 = {
   "class": "rounded py-2 px-4 bg-gray-200 relative h-full"
@@ -32667,7 +32672,7 @@ var _hoisted_2 = {
   "class": "text-xs items-center font-bold leading-sm uppercase px-3 py-1 bg-pink-200 text-pink-700 rounded-full mx-2 my-1 justify-center w-16 h-8 md:hidden inline-flex"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return $props.finished ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h2", _hoisted_1, " 開発中 ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h2", _hoisted_2, " 開発中 "));
+  return $props.finished ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h2", _hoisted_1, " 完了 ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h2", _hoisted_2, " 開発中 "));
 }
 
 /***/ }),
@@ -33140,13 +33145,13 @@ var _hoisted_1 = {
   "class": "bg-gray-100 border-b border-gray-200 flex flex-nowrap items-center overflow-x-auto max-h-40 w-full"
 };
 var _hoisted_2 = {
-  "class": "flex-none px-4 py-3 w-20 md:w-2/12 break-words text-center"
+  "class": "flex-none px-4 py-3 md:w-2/12 break-words text-center"
 };
 var _hoisted_3 = {
   "class": "flex-none px-4 py-3 w-20 md:w-2/12 break-words text-center"
 };
 var _hoisted_4 = {
-  "class": "flex-none px-4 py-3 w-96 md:w-8/12 text-center"
+  "class": "flex-none px-4 py-3 md:w-8/12 text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.uri), 1
