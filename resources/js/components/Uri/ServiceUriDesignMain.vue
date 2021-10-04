@@ -10,13 +10,13 @@
             w-full
         "
     >
-        <div class="flex-none px-4 py-3 w-20 md:w-2/12 break-words text-center">
+        <div class="flex-none px-4 py-3 md:w-2/12 break-words text-center">
             {{ uri }}
         </div>
         <div class="flex-none px-4 py-3 w-20 md:w-2/12 break-words text-center">
             {{ method }}
         </div>
-        <div class="flex-none px-4 py-3 w-96 md:w-8/12 text-center">
+        <div class="flex-none px-4 py-3 md:w-8/12 text-center">
             {{ explain }}
         </div>
     </div>
