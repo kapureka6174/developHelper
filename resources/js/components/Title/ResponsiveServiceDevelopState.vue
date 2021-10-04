@@ -21,7 +21,7 @@
             inline-flex
         "
     >
-        開発中
+        完了
     </h2>
     <h2
         v-else
