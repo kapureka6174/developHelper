@@ -1,6 +1,12 @@
 <template>
-    <div>
-        <div v-if="tasks.length" class="flex items-center mb-2">
+    <div
+        v-if="
+            tasks.length ||
+            ($page.props.user !== null &&
+                $page.props.user.id == $page.props.service.user_id)
+        "
+    >
+        <div class="flex items-center mb-2">
             <section-title title="タスク" />
             <!-- タスクの保存ボタン -->
             <service-task-save-button class="ml-2" />
@@ -21,7 +27,7 @@
         <service-task-normal-detail
             v-if="
                 $page.props.user == null ||
-                $page.props.user.id !== $page.props.service.user_id
+                $page.props.user.id != $page.props.service.user_id
             "
             :tasks="classifiedTasks()"
         />
