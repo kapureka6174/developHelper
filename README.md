@@ -122,3 +122,5 @@ URL ➡　https://web-service-hub.herokuapp.com/
 
 ![image](https://user-images.githubusercontent.com/58462002/136176891-322befc6-18e5-48f5-ad91-a6e536f8b496.png)
 
+## 4.ER図
+![image](https://user-images.githubusercontent.com/58462002/136184384-6f103473-6128-4cd3-a89c-958501517e1f.png)
