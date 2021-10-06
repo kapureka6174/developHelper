@@ -30,13 +30,20 @@ URL ➡　https://web-service-hub.herokuapp.com/
 
 #### フロントエンド
 - Vue.js 3.0.5
+  - vue-scrollto 2.20.0 (コメントへのスクロール移動をするため)
 - Tailwind Css 2.0.1
+  - @tailwindcss/line-clamp 0.2.1（文字数を制限して省略表示するため）
 - Eslint 7.30.0
 - Prettier 2.3.2
 
 #### バックエンド
 - PHP 8.0
 - Laravel 8.40
+  - Jetstream 2.3 （ログイン、セッション管理機能のため）
+  - Sanctum 2.6 (CSRF対策のため)
+  - Socialite 5.2 （Google,Githubでのログインをするため）
+  - s-ichikawa/laravel-sendgrid-driver （メール送信にsendgridを使用するため）
+- Inertiajs 0.4.2 （SPAをモノシリックに開発するため）
 - MySQL (Heroku ClearDB)
 
 #### インフラ
@@ -48,7 +55,7 @@ URL ➡　https://web-service-hub.herokuapp.com/
 - PHPMyAdmin
 - VsCode
 
-## 使用画面と機能
+## 3.使用画面と機能一覧
 
 ### アカウント作成画面
 - ユーザー名、メールアドレス、パスワードで登録することができます。
