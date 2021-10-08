@@ -18,7 +18,7 @@ URL ➡　https://web-service-hub.herokuapp.com/
 
 - **どんなサービスを作ったらいいのか分からない**
 - **一通り学んだ後に個人開発しようとしてもどこから手を付けるべきか分からない**
-- **周りにプログラミングが分かる人がいないためモチベが続かない**
+- **周りにプログラミングが分かる人がいないためモチベーションが続かない**
 
 以上の3つの問題を解決したいと思い、サービスを開発するに至りました。
 
@@ -26,20 +26,20 @@ URL ➡　https://web-service-hub.herokuapp.com/
 
 #### フロントエンド
 - Vue.js 3.0.5
-  - vue-scrollto 2.20.0 (コメントへのスクロール移動をするため)
+  - vue-scrollto 2.20.0 (コメントへのスクロール移動をするために使用)
 - Tailwind CSS 2.0.1
-  - @tailwindcss/line-clamp 0.2.1（文字数を制限して省略表示するため）
-- Eslint 7.30.0
+  - @tailwindcss/line-clamp 0.2.1（文字数を制限して省略表示するために使用）
+- ESlint 7.30.0
 - Prettier 2.3.2
 
 #### バックエンド
 - PHP 8.0
 - Laravel 8.40
-  - Jetstream 2.3 （ログイン、セッション管理機能のため）
+  - Jetstream 2.3 （ログイン、セッション管理をするために使用）
   - Sanctum 2.6 (CSRF対策のため)
-  - Socialite 5.2 （Google,Githubでのログインをするため）
-  - s-ichikawa/laravel-sendgrid-driver （メール送信にsendgridを使用するため）
-- Inertiajs 0.4.2 （APIを作成せずにLaravelアプリと同じように作成するため）
+  - Socialite 5.2 （Google,Githubでのログインをするために使用）
+  - s-ichikawa/laravel-sendgrid-driver （メールをsendgridで送信するために使用）
+- InertiaJS 0.4.2 （APIを作成せずにLaravelアプリと同じように作成し開発効率を上げるために使用）
 - MySQL (Heroku ClearDB)
 
 #### インフラ
@@ -61,7 +61,7 @@ URL ➡　https://web-service-hub.herokuapp.com/
 - フィルター機能（開発中 or 完成）
 - 保存・削除時の通知機能 
 
-### 認証系
+### 認証機能
 - ユーザー登録・ログイン・ログアウト
 - Google、Githubアカウントを使ったソーシャルログイン機能
 - ゲストログイン機能
@@ -72,6 +72,8 @@ URL ➡　https://web-service-hub.herokuapp.com/
 ## 4.使用画面
 
 ### ログイン画面
+- GoogleもしくはGitHubアカウントでもログインが可能です。
+- 
 ![image](https://user-images.githubusercontent.com/58462002/136170374-18463cb4-e411-484e-9453-e33b55d2868e.png)
 
 ### サービス画面
@@ -104,4 +106,5 @@ URL ➡　https://web-service-hub.herokuapp.com/
 
 
 ## 5.ER図
+
 ![image](https://user-images.githubusercontent.com/58462002/136184384-6f103473-6128-4cd3-a89c-958501517e1f.png)
