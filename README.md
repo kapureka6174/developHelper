@@ -39,7 +39,7 @@ URL ➡　https://web-service-hub.herokuapp.com/
   - Sanctum 2.6 (CSRF対策のため)
   - Socialite 5.2 （Google,Githubでのログインをするため）
   - s-ichikawa/laravel-sendgrid-driver （メール送信にsendgridを使用するため）
-- Inertiajs 0.4.2 （SPAをモノシリックに開発するため）
+- Inertiajs 0.4.2 （APIを作成せずにLaravelアプリと同じように作成するため）
 - MySQL (Heroku ClearDB)
 
 #### インフラ
@@ -48,7 +48,7 @@ URL ➡　https://web-service-hub.herokuapp.com/
 
 #### その他
 - Git 2.33.0
-- PHPMyAdmin
+- XAMPP
 - VsCode
 
 ## 3.機能一覧
