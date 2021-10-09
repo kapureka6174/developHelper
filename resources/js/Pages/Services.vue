@@ -97,8 +97,8 @@
 import AppLayout from "../Layouts/AppLayout";
 import ServiceCard from "../components/Utility/ServiceCard";
 import SortButton from "../components/Utility/SortButton";
-import Tag from "../components/Tag/Tag";
-import SelectedTag from "../components/Tag/SelectedTag";
+import Tag from "../components/Tag/Show";
+import SelectedTag from "../components/Tag/Selected";
 import SuccessFlashMessage from "../components/Utility/SuccessFlashMessage";
 import FilterButtons from "../components/Utility/FilterButtons";
 

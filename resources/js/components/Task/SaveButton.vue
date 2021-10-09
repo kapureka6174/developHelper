@@ -21,7 +21,6 @@ export default {
         // TaskControllerにformを渡す
         const taskSubmit = () => {
             Inertia.put(route("Task"), form, {
-                errorBag: "tasks",
                 preserveScroll: true,
             });
         };

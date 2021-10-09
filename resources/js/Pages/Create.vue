@@ -37,7 +37,7 @@
                 <hint-tool-tip type="サービス名" />
             </div>
             <title-input />
-            <service-state-select />
+            <state-select />
 
             <!-- サービスのURL -->
             <div class="flex">
@@ -81,13 +81,13 @@
             <div class="flex mb-3 items-center">
                 <section-title title="要件定義" />
                 <hint-tool-tip type="要件定義" />
-                <requirement-add-button />
+                <require-add-button />
             </div>
             <div>
                 <section class="text-gray-700">
                     <div class="container px-5 py-2">
                         <div class="flex flex-wrap">
-                            <requirement-input
+                            <require-input
                                 v-for="(
                                     requirement, index
                                 ) in form.requirements"
@@ -104,7 +104,7 @@
                 <section-title title="ページ一覧" />
                 <hint-tool-tip type="ページ" />
             </div>
-            <requirement-select-list
+            <require-select-list
                 v-for="(requirment, index) in form.requirements"
                 :key="index"
                 :index="index"
@@ -128,58 +128,12 @@
                 <hint-tool-tip type="URI設計" />
                 <uri-add-button />
             </div>
-            <div class="overflow-x-auto">
-                <div class="rounded-t-lg m-5 mx-auto bg-gray-200 text-gray-800">
-                    <div
-                        class="
-                            text-left
-                            border-b-2 border-gray-300
-                            flex flex-col-3
-                            items-center
-                        "
-                    >
-                        <div class="px-4 py-3 w-3/12 md:w-3/12 text-center">
-                            URI
-                        </div>
-                        <div class="px-4 py-3 w-3/12 md:w-1/12 text-center">
-                            メソッド
-                        </div>
-                        <div class="px-4 py-3 w-6/12 md:w-8/12 text-center">
-                            説明
-                        </div>
-                    </div>
-                    <uri-input-list
-                        v-for="(uri, index) in form.uris"
-                        :key="index"
-                        :index="index"
-                    />
-                </div>
-            </div>
-            <!-- エラー表示（サーバーサイド） -->
-            <div v-if="Object.keys($page.props.errors).length">
-                <div
-                    v-for="(error, errorIndex) in Object.entries(
-                        $page.props.errors
-                    ).filter((e) => {
-                        return e[0].split('.')[0] == 'uris' ? true : false;
-                    })"
-                    :key="errorIndex"
-                    class="
-                        bg-red-100
-                        border border-red-400
-                        text-red-700
-                        px-4
-                        py-3
-                        rounded
-                        m-2
-                    "
-                    role="alert"
-                >
-                    <p class="font-bold">
-                        {{ error[1] }}
-                    </p>
-                </div>
-            </div>
+
+            <uri-input
+                v-for="(uri, index) in form.uris"
+                :key="index"
+                :index="index"
+            />
         </div>
     </app-layout>
 </template>
@@ -188,21 +142,21 @@
 import AppLayout from "../Layouts/AppLayout";
 import SectionTitle from "../components/Utility/SectionTitle";
 import TitleInput from "../components/Title/TitleInput";
-import TagsInput from "../components/Tag/TagsInput";
-import DescriptionButtons from "../components/Description/DescriptionButtons";
-import DescriptionInput from "../components/Description/DescriptionInput";
-import TechFieldAddButton from "../components/TechField/TechFieldAddButton";
-import TechFieldInput from "../components/TechField/TechFieldInput";
-import RequirementAddButton from "../components/Requirement/RequirementAddButton";
-import RequirementInput from "../components/Requirement/RequirementInput";
-import RequirementSelectList from "../components/Requirement/RequirementSelectList";
-import PageAddButton from "../components/Page/PageAddButton";
-import PageInput from "../components/Page/PageInput";
-import UriAddButton from "../components/Uri/UriAddButton";
-import UriInputList from "../components/Uri/UriInputList";
+import StateSelect from "../components/Title/StateSelect";
+import TagsInput from "../components/Tag/Input";
+import DescriptionButtons from "../components/Description/Buttons";
+import DescriptionInput from "../components/Description/Input";
+import TechFieldAddButton from "../components/TechField/AddButton";
+import TechFieldInput from "../components/TechField/Input";
+import RequireAddButton from "../components/Requirement/AddButton";
+import RequireInput from "../components/Requirement/Input";
+import RequireSelectList from "../components/Requirement/SelectList";
+import PageAddButton from "../components/Page/AddButton";
+import PageInput from "../components/Page/Input";
+import UriAddButton from "../components/Uri/AddButton";
+import UriInput from "../components/Uri/Input";
 import FailFlashMessage from "../components/Utility/FailFlashMessage";
 import UrlsInput from "../components/Title/UrlsInput";
-import ServiceStateSelect from "../components/Title/ServiceStateSelect";
 import HintToolTip from "../components/Utility/HintToolTip";
 
 import { reactive, provide } from "vue";
@@ -213,21 +167,21 @@ export default {
         AppLayout,
         SectionTitle,
         TitleInput,
+        StateSelect,
         TagsInput,
         DescriptionButtons,
         DescriptionInput,
         TechFieldAddButton,
         TechFieldInput,
-        RequirementAddButton,
-        RequirementInput,
-        RequirementSelectList,
+        RequireAddButton,
+        RequireInput,
+        RequireSelectList,
         PageAddButton,
         PageInput,
         UriAddButton,
-        UriInputList,
+        UriInput,
         FailFlashMessage,
         UrlsInput,
-        ServiceStateSelect,
         HintToolTip,
     },
     setup() {

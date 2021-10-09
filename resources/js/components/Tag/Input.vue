@@ -24,49 +24,17 @@
             @keyup.enter="addTag"
             v-on:blur="tags.error = ''"
         />
-        <!-- エラー表示（クライアントサイド） -->
-        <div
-            v-if="tags.error"
-            class="
-                bg-red-100
-                border border-red-400
-                text-red-700
-                px-4
-                py-3
-                rounded
-                mt-2
-                w-full
-                md:w-1/2
-            "
-            role="alert"
-        >
-            <strong class="font-bold">{{ tags.error }}</strong>
-        </div>
-        <!-- エラー表示（サーバーサイド） -->
-        <div v-if="Object.keys($page.props.errors).length">
-            <div
-                v-for="(error, index) in Object.entries(
-                    $page.props.errors
-                ).filter((e) => {
+        <!-- エラー表示 -->
+        <client-error :errorFlag="tags.error !== ''" :text="tags.error" />
+        <server-error
+            :errorFlag="Object.keys($page.props.errors).length"
+            :errors="
+                Object.entries($page.props.errors).filter((e) => {
                     return /tags/.test(e[0]);
-                })"
-                :key="index"
-                class="
-                    bg-red-100
-                    border border-red-400
-                    text-red-700
-                    px-4
-                    py-3
-                    rounded
-                    my-2
-                "
-                role="alert"
-            >
-                <p class="font-bold">
-                    {{ error[1] }}
-                </p>
-            </div>
-        </div>
+                })
+            "
+        />
+
         <!-- タグ一覧 -->
         <div
             class="
@@ -114,23 +82,30 @@
 </template>
 
 <script>
+import ClientError from "../Utility/ClientError";
+import ServerError from "../Utility/ServerError";
 import { inject } from "vue";
 export default {
+    components: {
+        ClientError,
+        ServerError,
+    },
     setup() {
+        // タグの追加
         const tags = inject("tags");
-
-        // タグ（配列に入れ込む）の処理
         const addTag = (e) => {
+            // 空入力かどうかのチェック
             if (!e.target.value) {
                 tags.error = "カテゴリーが入力されていません。";
             } else if (
-                // 大小区別せずに比較する
+                // 同じカテゴリーが追加されているかどうかの確認
                 tags.content
                     .map((tag) => tag.toUpperCase())
                     .includes(e.target.value.toUpperCase())
             ) {
                 tags.error = "既に同じカテゴリーが追加されています。";
             } else {
+                //問題なければ追加する
                 tags.content.push(e.target.value);
                 tags.error = false;
                 e.target.value = "";

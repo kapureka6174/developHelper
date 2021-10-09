@@ -1,5 +1,6 @@
 <template>
     <div class="w-full flex items-center justify-around mb-3">
+        <!-- ページの機能 -->
         <p
             class="
                 font-bold
@@ -19,6 +20,7 @@
                     : pages[index].requirements[requirementIndex].content
             }}
         </p>
+        <!-- 削除ボタン -->
         <svg
             class="h-6 w-6 text-red-600 my-2 mr-4 hover:text-red-400"
             viewBox="0 0 24 24"
@@ -48,11 +50,14 @@ export default {
     setup() {
         const pages = inject("pages");
 
+        // データの削除
         const deleteData = inject("deleteData");
         const destroy = (url, index, detailIndex) => {
+            // 新規作成画面ならそのままデータ消す
             if (url.split("/")[1] == "create") {
                 pages[index].requirements.splice(detailIndex, 1);
             } else {
+                // 編集画面なら削除データをDBに引き渡すためにdeleteDataに保存（ただしidが既にあるデータのみ）
                 let deleteContent = pages[index].requirements.splice(
                     detailIndex,
                     1

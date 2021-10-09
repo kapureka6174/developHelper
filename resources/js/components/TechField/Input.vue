@@ -66,24 +66,11 @@
                 </svg>
             </div>
             <!-- エラー表示（クライアントサイド） -->
-            <div
-                class="
-                    bg-red-100
-                    border border-red-400
-                    text-red-700
-                    px-4
-                    py-3
-                    rounded
-                    my-2
-                "
-                role="alert"
-                v-if="techFields[index].techField.error"
-            >
-                <strong class="font-bold">{{
-                    techFields[index].techField.error
-                }}</strong>
-            </div>
-            <tech-field-tech-input
+            <client-error
+                :errorFlag="techFields[index].techField.error !== ''"
+                :text="techFields[index].techField.error"
+            />
+            <tech-input
                 v-for="(tech, techIndex) in techFields[index].teches"
                 :key="techIndex"
                 :techIndex="techIndex"
@@ -91,41 +78,30 @@
             />
         </div>
         <!-- エラー表示（サーバーサイド） -->
-        <div v-if="Object.keys($page.props.errors).length">
-            <div
-                v-for="(error, errorIndex) in Object.entries(
-                    $page.props.errors
-                ).filter((e) => {
+        <server-error
+            :errorFlag="Object.keys($page.props.errors).length"
+            :errors="
+                Object.entries($page.props.errors).filter((e) => {
                     return e[0].split('.')[0] == 'techFields' &&
                         e[0].split('.')[1] == `${index}`
                         ? true
                         : false;
-                })"
-                :key="errorIndex"
-                class="
-                    bg-red-100
-                    border border-red-400
-                    text-red-700
-                    px-4
-                    py-3
-                    rounded
-                    m-2
-                "
-                role="alert"
-            >
-                <p class="font-bold">
-                    {{ error[1] }}
-                </p>
-            </div>
-        </div>
+                })
+            "
+        />
     </div>
 </template>
 <script>
+import TechInput from "./TechInput";
+import ClientError from "../Utility/ClientError";
+import ServerError from "../Utility/ServerError";
 import { inject } from "vue";
-import TechFieldTechInput from "./TechFieldTechInput";
+
 export default {
     components: {
-        TechFieldTechInput,
+        TechInput,
+        ClientError,
+        ServerError,
     },
     props: {
         index: Number,

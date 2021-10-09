@@ -24,19 +24,19 @@
                 </div>
             </main>
             <hr />
-            <bottom-bar />
+            <footer />
         </div>
     </div>
 </template>
 
 <script>
-import Navbar from "../components/LayoutPart/Navbar";
-import BottomBar from "../components/LayoutPart/BottomBar";
+import Navbar from "../components/Layout/Navbar";
+import Footer from "../components/Layout/Footer";
 
 export default {
     components: {
         Navbar,
-        BottomBar,
+        Footer,
     },
 };
 </script>

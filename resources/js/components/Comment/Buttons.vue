@@ -1,5 +1,6 @@
 <template>
     <div class="flex justify-end w-full">
+        <!-- 編集と通常表示との切り替え -->
         <button
             v-if="!form.comments.decidable"
             class="
@@ -11,7 +12,7 @@
                 text-white
                 rounded
             "
-            @click="form.comments.decidable = true"
+            @click="input"
         >
             決定
         </button>
@@ -30,6 +31,8 @@
         >
             編集
         </button>
+
+        <!-- ゲスト表示 -->
         <button
             v-if="$page.props.user == null"
             class="
@@ -73,6 +76,8 @@
                 </svg>
             </div>
         </button>
+
+        <!-- ログイン時の表示 -->
         <button
             v-else
             class="
@@ -98,15 +103,23 @@ export default {
     setup() {
         const form = inject("form");
 
+        const input = () => {
+            if (!form.comments.content) {
+                form.comments.error = true;
+            } else {
+                form.comments.error = false;
+                form.comments.decidable = true;
+            }
+        };
+
         // CommentControllerにformを渡す
         const commentSubmit = () => {
             Inertia.post(route("Comment"), form, {
-                errorBag: "comments",
                 preserveScroll: true,
             });
         };
 
-        return { form, commentSubmit };
+        return { form, input, commentSubmit };
     },
 };
 </script>

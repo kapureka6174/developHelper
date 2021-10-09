@@ -31,6 +31,8 @@
                     プログラミング歴：{{ dev_years }}
                 </p>
             </div>
+
+            <!-- いいね数とSNSへのリンク -->
             <div class="flex items-start justify-center">
                 <div class="flex flex-col justify-center items-center">
                     <svg

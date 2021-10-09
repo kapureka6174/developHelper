@@ -32,8 +32,7 @@ class TaskController extends Controller
             '*.taskname.required' => 'タスクの名前が入力されていません。',
             '*.state.required' => 'タスクの状態が入力されていません。',
             '*.decidable.accepted' => 'タスクの名前が編集中です。',
-        ])->validateWithBag('tasks');
-        // バリデーションの実行
+        ])->validate();
 
         // idを既に持っているものは変更
         $updateData = array_filter($validatedData, function($task) {

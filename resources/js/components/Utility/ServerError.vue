@@ -1,7 +1,7 @@
 <template>
-    <div v-if="$page.props.errors.comments">
+    <div v-if="errorFlag">
         <div
-            v-for="(error, index) in Object.values($page.props.errors.comments)"
+            v-for="(error, index) in errors"
             :key="index"
             class="
                 bg-red-100
@@ -15,8 +15,16 @@
             role="alert"
         >
             <p class="font-bold">
-                {{ error }}
+                {{ error[1] }}
             </p>
         </div>
     </div>
 </template>
+<script>
+export default {
+    props: {
+        errorFlag: Boolean,
+        errors: Array,
+    },
+};
+</script>

@@ -24,7 +24,7 @@ class CommentController extends Controller
         ];
 
         // バリデーションの設定
-        $validatedData = Validator::make($data, $rules)->validateWithBag('comments');
+        $validatedData = Validator::make($data, $rules)->validate();
 
         $comment = Comment::create([
             'service_id' => $validatedData['id'],

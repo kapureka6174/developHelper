@@ -38,7 +38,7 @@
         </form>
     </jet-authentication-card>
     <hr />
-    <bottom-bar />
+    <footer />
 </template>
 
 <script>
@@ -48,7 +48,7 @@ import JetButton from "@/Jetstream/Button";
 import JetInput from "@/Jetstream/Input";
 import JetLabel from "@/Jetstream/Label";
 import JetValidationErrors from "@/Jetstream/ValidationErrors";
-import BottomBar from "../components/LayoutPart/BottomBar";
+import Footer from "../components/Layout/Footer";
 
 export default {
     components: {
@@ -58,7 +58,7 @@ export default {
         JetInput,
         JetLabel,
         JetValidationErrors,
-        BottomBar,
+        Footer,
     },
 
     props: {

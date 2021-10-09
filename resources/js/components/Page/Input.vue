@@ -65,29 +65,13 @@
                 </svg>
             </div>
             <!-- エラー表示（クライアントサイド） -->
-            <div
-                class="
-                    bg-red-100
-                    border border-red-400
-                    text-red-700
-                    px-4
-                    py-3
-                    rounded
-                    my-2
-                    w-4/5
-                    flex
-                    justify-center
-                    mx-auto
-                "
-                role="alert"
-                v-if="pages[index].pagename.error"
-            >
-                <strong class="font-bold">{{
-                    pages[index].pagename.error
-                }}</strong>
-            </div>
+            <client-error
+                :errorFlag="pages[index].pagename.error !== ''"
+                :text="pages[index].pagename.error"
+            />
+
+            <!-- 追加ボタン -->
             <div class="w-full text-center mb-3">
-                <!-- 追加ボタン -->
                 <button
                     class="
                         bg-indigo-600
@@ -102,7 +86,7 @@
                     選択中の機能を追加
                 </button>
             </div>
-            <page-requirement-input
+            <require-input
                 v-for="(requirement, requirementIndex) in pages[index]
                     .requirements"
                 :key="requirementIndex"
@@ -111,41 +95,30 @@
             />
         </div>
         <!-- エラー表示（サーバーサイド） -->
-        <div v-if="Object.keys($page.props.errors).length">
-            <div
-                v-for="(error, errorIndex) in Object.entries(
-                    $page.props.errors
-                ).filter((e) => {
+        <server-error
+            :errorFlag="Object.keys($page.props.errors).length"
+            :errors="
+                Object.entries($page.props.errors).filter((e) => {
                     return e[0].split('.')[0] == 'pages' &&
                         e[0].split('.')[1] == `${index}`
                         ? true
                         : false;
-                })"
-                :key="errorIndex"
-                class="
-                    bg-red-100
-                    border border-red-400
-                    text-red-700
-                    px-4
-                    py-3
-                    rounded
-                    m-2
-                "
-                role="alert"
-            >
-                <p class="font-bold">
-                    {{ error[1] }}
-                </p>
-            </div>
-        </div>
+                })
+            "
+        />
     </div>
 </template>
 <script>
-import PageRequirementInput from "./PageRequirementInput";
+import RequireInput from "./RequireInput";
+import ClientError from "../Utility/ClientError";
+import ServerError from "../Utility/ServerError";
 import { inject } from "vue";
+
 export default {
     components: {
-        PageRequirementInput,
+        RequireInput,
+        ClientError,
+        ServerError,
     },
     props: {
         index: Number,
@@ -154,12 +127,14 @@ export default {
         const pages = inject("pages");
         const requirements = inject("requirements");
 
+        // データの追加
         const input = (value) => {
+            // 空入力かどうかのチェック
             if (!value) {
                 pages[props.index].pagename.error =
                     "ページ名が入力されていません。";
             } else if (
-                // 大小区別せずに比較する
+                // 同じページ名が既に存在するかどうかの確認
                 pages
                     .filter((page, index) => index !== props.index)
                     .map((page) => page.pagename.content.toUpperCase())
@@ -169,6 +144,7 @@ export default {
                     props.index
                 ].pagename.error = `既に同じページ名が追加されています。`;
             } else {
+                //問題なければ通常表示に切り替える
                 pages[props.index].pagename.error = false;
                 pages[props.index].pagename.decidable = true;
             }
@@ -176,11 +152,13 @@ export default {
 
         // 選択中の機能をページに追加
         const addSelectedRequirement = (url, pageIndex) => {
+            // 選択されている機能を取得
             const selectedArray = requirements.filter(
                 (requirement) => requirement.title.selected == true
             );
 
             if (url.split("/")[1] == "create") {
+                // 新規作成画面ならそのまま追加する
                 pages[pageIndex].requirements = [];
                 selectedArray.forEach((requirement) => {
                     pages[pageIndex].requirements.push(
@@ -190,6 +168,7 @@ export default {
             } else {
                 selectedArray.forEach((requirement) => {
                     if (
+                        // 既に存在する機能以外を追加
                         !pages[pageIndex].requirements
                             .map((requirement) => requirement.content)
                             .includes(requirement.title.content)
@@ -202,11 +181,14 @@ export default {
             }
         };
 
+        // データの削除
         const deleteData = inject("deleteData");
         const destroy = (url, index) => {
             if (url.split("/")[1] == "create") {
+                // 新規作成画面ならそのままデータ消す
                 pages.splice(index, 1);
             } else {
+                // 編集画面なら削除データをDBに引き渡すためにdeleteDataに保存
                 let deleteContent = pages.splice(index, 1)[0];
                 if (deleteContent) {
                     deleteData.pages.push(deleteContent.id);

@@ -64,20 +64,23 @@ export default {
             }
         };
 
-        // URLをコピー
+        // URLをクリップボードにコピー
         let copied = ref(false);
         const copy = (url) => {
             navigator.clipboard.writeText(
                 `https://web-service-hub.herokuapp.com${url}`
             );
             copied.value = true;
+            // 二秒後に自動で消える
             setTimeout(() => {
                 copied.value = false;
             }, 2000);
         };
 
+        // スクローラ―のインスタンス
         const ScrollTo = scroller();
 
+        // Twitterへの投稿
         const title = inject("title");
         const tweet = (url) => {
             window.open(

@@ -10,17 +10,16 @@
             my-2
         "
         role="alert"
+        v-if="errorFlag"
     >
-        <p class="font-bold">
-            {{ error }}
-        </p>
+        <strong class="font-bold">{{ text }}</strong>
     </div>
 </template>
-
 <script>
 export default {
     props: {
-        error: String,
+        errorFlag: Boolean,
+        text: String,
     },
 };
 </script>

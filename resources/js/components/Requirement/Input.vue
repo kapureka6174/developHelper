@@ -28,23 +28,11 @@
         />
 
         <!-- エラー表示（クライアントサイド） -->
-        <div
-            class="
-                bg-red-100
-                border border-red-400
-                text-red-700
-                px-4
-                py-3
-                rounded
-                my-2
-            "
-            role="alert"
-            v-if="requirements[index].title.error"
-        >
-            <strong class="font-bold">{{
-                requirements[index].title.error
-            }}</strong>
-        </div>
+        <client-error
+            :errorFlag="requirements[index].title.error"
+            :text="requirements[index].title.error"
+        />
+
         <!-- 要件名（通常表示） -->
         <details v-if="requirements[index].title.decidable" class="mb-1">
             <summary class="rounded py-2 px-4 bg-gray-200 relative h-full">
@@ -111,23 +99,10 @@
                 />
                 <div class="flex">
                     <!-- エラー表示（クライアントサイド） -->
-                    <div
-                        class="
-                            bg-red-100
-                            border border-red-400
-                            text-red-700
-                            px-4
-                            py-1
-                            rounded
-                            my-2
-                        "
-                        role="alert"
-                        v-if="requirements[index].explain.error"
-                    >
-                        <strong class="font-bold">{{
-                            requirements[index].explain.error
-                        }}</strong>
-                    </div>
+                    <client-error
+                        :errorFlag="requirements[index].explain.error"
+                        :text="requirements[index].explain.error"
+                    />
                     <!-- 要件の説明の保存ボタン -->
                     <button
                         class="
@@ -167,38 +142,28 @@
         </details>
 
         <!-- エラー表示（サーバーサイド） -->
-        <div v-if="Object.keys($page.props.errors).length">
-            <div
-                v-for="(error, errorIndex) in Object.entries(
-                    $page.props.errors
-                ).filter((e) => {
+        <server-error
+            :errorFlag="Object.keys($page.props.errors).length"
+            :errors="
+                Object.entries($page.props.errors).filter((e) => {
                     return e[0].split('.')[0] == 'requirements' &&
                         e[0].split('.')[1] == `${index}`
                         ? true
                         : false;
-                })"
-                :key="errorIndex"
-                class="
-                    bg-red-100
-                    border border-red-400
-                    text-red-700
-                    px-4
-                    py-3
-                    rounded
-                    m-2
-                "
-                role="alert"
-            >
-                <p class="font-bold">
-                    {{ error[1] }}
-                </p>
-            </div>
-        </div>
+                })
+            "
+        />
     </div>
 </template>
 <script>
+import ClientError from "../Utility/ClientError";
+import ServerError from "../Utility/ServerError";
 import { inject } from "vue";
 export default {
+    components: {
+        ClientError,
+        ServerError,
+    },
     props: {
         index: Number,
     },
@@ -206,6 +171,7 @@ export default {
         const requirements = inject("requirements");
 
         const input = (value, type) => {
+            // 空入力かどうかのチェック
             if (!value) {
                 const message =
                     type == "title" ? "要件名・機能名" : "要件・機能の説明";
@@ -213,8 +179,8 @@ export default {
                     type
                 ].error = `${message}が入力されていません。`;
             } else if (
+                // 同じ機能名が追加されているかどうかの確認
                 type != "explain" &&
-                // 大小区別せずに比較する
                 requirements
                     .filter((requirement, index) => index !== props.index)
                     .map((requirement) =>
@@ -226,6 +192,7 @@ export default {
                     type
                 ].error = `既に同じ機能名が追加されています。`;
             } else {
+                //問題なければ通常表示に切り替える
                 requirements[props.index][type].error = false;
                 requirements[props.index][type].decidable = true;
             }
@@ -234,13 +201,16 @@ export default {
         const deleteData = inject("deleteData");
         const pages = inject("pages");
         const destroy = (url, index) => {
+            // 新規作成画面ならそのままデータ消す
             if (url.split("/")[1] == "create") {
                 requirements.splice(index, 1);
             } else {
+                // 編集画面なら削除データをDBに引き渡すためにdeleteDataに保存
                 let deleteContent = requirements.splice(index, 1)[0];
                 if (deleteContent) {
                     deleteData.requirements.push(deleteContent.id);
                 }
+                // ページの中に削除した機能が含まれる場合はそれも削除する
                 pages.forEach((page, index) => {
                     page.requirements.forEach((requirement, requireIndex) => {
                         if (requirement.id == deleteContent.id) {

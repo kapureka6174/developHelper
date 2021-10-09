@@ -37,54 +37,32 @@
         >
             {{ description.content }}
         </p>
-        <!-- エラー表示（クライアントサイド） -->
-        <div
-            class="
-                bg-red-100
-                border border-red-400
-                text-red-700
-                px-4
-                py-3
-                rounded
-                mt-2
-            "
-            role="alert"
-            v-if="description.error"
-        >
-            <strong class="font-bold"
-                >サービスの概要が入力されていません。</strong
-            >
-        </div>
-        <!-- エラー表示（サーバーサイド） -->
-        <div v-if="Object.keys($page.props.errors).length">
-            <div
-                v-for="(error, index) in Object.entries(
-                    $page.props.errors
-                ).filter((e) => {
+
+        <!-- エラー表示 -->
+        <client-error
+            :errorFlag="description.error"
+            text="サービスの概要が入力されていません。"
+        />
+        <server-error
+            :errorFlag="Object.keys($page.props.errors).length"
+            :errors="
+                Object.entries($page.props.errors).filter((e) => {
                     return /description/.test(e[0]);
-                })"
-                :key="index"
-                class="
-                    bg-red-100
-                    border border-red-400
-                    text-red-700
-                    px-4
-                    py-3
-                    rounded
-                    my-2
-                "
-                role="alert"
-            >
-                <p class="font-bold">
-                    {{ error[1] }}
-                </p>
-            </div>
-        </div>
+                })
+            "
+        />
     </div>
 </template>
 <script>
 import { inject } from "vue";
+import ClientError from "../Utility/ClientError";
+import ServerError from "../Utility/ServerError";
+
 export default {
+    components: {
+        ClientError,
+        ServerError,
+    },
     setup() {
         const description = inject("description");
         return { description };

@@ -1,5 +1,6 @@
 <template>
     <div class="max-w-md py-4 px-8 bg-indigo-50 shadow-lg rounded-lg my-10">
+        <!-- 名前と紹介文 -->
         <div>
             <h2 class="text-gray-800 text-2xl font-semibold line-clamp-2">
                 {{ name }}
@@ -10,6 +11,7 @@
         </div>
         <div class="flex justify-between items-center mt-2">
             <div class="flex">
+                <!-- いいね数とコメント数 -->
                 <div class="flex items-center mr-2">
                     <svg
                         class="h-6 w-6 text-red-500"
@@ -47,6 +49,7 @@
                     <p class="text-green-500">{{ comments }}</p>
                 </div>
             </div>
+            <!-- 詳細ページへのリンク -->
             <inertia-link
                 :href="route('User', { id: id })"
                 class="text-xl font-medium text-indigo-500"

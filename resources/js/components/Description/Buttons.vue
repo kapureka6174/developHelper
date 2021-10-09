@@ -1,4 +1,5 @@
 <template>
+    <!-- 編集と通常表示との切り替え -->
     <div class="ml-2">
         <button
             class="

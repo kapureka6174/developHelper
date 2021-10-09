@@ -12,9 +12,7 @@
                     >
                         サービス詳細
                     </h2>
-                    <responsive-service-develop-state
-                        :finished="service.finished"
-                    />
+                    <responsive-state :finished="service.finished" />
                     <div
                         v-if="
                             $page.props.user !== null &&
@@ -50,9 +48,9 @@
                 "
             >
                 <div class="flex md:flex-row flex-col">
-                    <service-title :title="service.title" />
+                    <Title :title="service.title" />
 
-                    <service-develop-state :finished="service.finished" />
+                    <state :finished="service.finished" />
                 </div>
 
                 <tag
@@ -61,32 +59,38 @@
                     :tagname="tag.tagname"
                 />
 
-                <service-description :description="service.description" />
+                <description :description="service.description" />
 
-                <service-urls
+                <urls
                     :github_url="service.github_url"
                     :site_url="service.site_url"
                 />
 
-                <service-usage-technology
-                    v-if="techFields.length"
-                    :techFields="techFields"
-                />
+                <tech-field v-if="techFields.length" :techFields="techFields" />
 
-                <service-requirement
+                <require
                     v-if="requirements.length"
                     :requirements="requirements"
                 />
 
-                <service-page v-if="pages.length" :pages="pages" />
+                <page v-if="pages.length" :pages="pages" />
 
-                <service-uri-design v-if="uris.length" :uris="uris" />
+                <uri v-if="uris.length" :uris="uris" />
 
-                <service-task :tasks="tasks" :id="service.user_id" />
+                <!-- タスク -->
+                <task-show
+                    v-if="
+                        $page.props.user == null ||
+                        $page.props.user.id !== $page.props.service.user_id
+                    "
+                    :tasks="form.tasks"
+                />
+                <task-input v-else />
 
-                <service-comment-show :comments="comments" />
-
-                <service-comment-form />
+                <!-- コメント一覧 -->
+                <comment-show :comments="comments" />
+                <!-- コメント投稿 -->
+                <comment-forms />
             </div>
 
             <float-buttons
@@ -102,21 +106,22 @@
 import ServiceDetailLayout from "../Layouts/ServiceDetailLayout";
 import ServiceEditButton from "../components/Utility/ServiceEditButton";
 import ServiceDeleteButton from "../components/Utility/ServiceDeleteButton";
+import ResponsiveState from "../components/Title/ResponsiveStateShow";
 import FloatButtons from "../components/FloatButtons/FloatButtons";
-import ServiceTitle from "../components/Title/ServiceTitle";
-import Tag from "../components/Tag/Tag";
-import ServiceDescription from "../components/Description/ServiceDescription";
-import ServiceUsageTechnology from "../components/TechField/ServiceUsageTechnology";
-import ServiceRequirement from "../components/Requirement/ServiceRequirement";
-import ServicePage from "../components/Page/ServicePage";
-import ServiceUriDesign from "../components/Uri/ServiceUriDesign";
-import ServiceTask from "../components/Task/ServiceTask";
-import ServiceCommentShow from "../components/Comment/ServiceCommentShow";
-import ServiceCommentForm from "../components/Comment/ServiceCommentForm";
+import Title from "../components/Title/TitleShow";
+import State from "../components/Title/StateShow";
+import Tag from "../components/Tag/Show";
+import Description from "../components/Description/Show";
+import Urls from "../components/Title/UrlsShow";
+import TechField from "../components/TechField/Show";
+import Require from "../components/Requirement/Show";
+import Page from "../components/Page/Show";
+import Uri from "../components/Uri/Show";
+import TaskShow from "../components/Task/Show";
+import TaskInput from "../components/Task/Input";
+import CommentShow from "../components/Comment/Show";
+import CommentForms from "../components/Comment/Forms";
 import SuccessFlashMessage from "../components/Utility/SuccessFlashMessage";
-import ServiceDevelopState from "../components/Title/ServiceDevelopState";
-import ResponsiveServiceDevelopState from "../components/Title/ResponsiveServiceDevelopState";
-import ServiceUrls from "../components/Title/ServiceUrls";
 
 import { Inertia } from "@inertiajs/inertia";
 import { useForm } from "@inertiajs/inertia-vue3";
@@ -127,21 +132,22 @@ export default {
         ServiceDetailLayout,
         ServiceEditButton,
         ServiceDeleteButton,
+        ResponsiveState,
         FloatButtons,
-        ServiceTitle,
+        Title,
+        State,
         Tag,
-        ServiceDescription,
-        ServiceUsageTechnology,
-        ServiceRequirement,
-        ServicePage,
-        ServiceUriDesign,
-        ServiceTask,
+        Description,
+        Urls,
+        TechField,
+        Require,
+        Page,
+        Uri,
+        TaskShow,
+        TaskInput,
         SuccessFlashMessage,
-        ServiceCommentShow,
-        ServiceCommentForm,
-        ServiceDevelopState,
-        ResponsiveServiceDevelopState,
-        ServiceUrls,
+        CommentShow,
+        CommentForms,
     },
     props: {
         service: Object,
@@ -169,8 +175,10 @@ export default {
                 type: "",
                 content: "",
                 decidable: false,
+                error: false,
             },
             tasks,
+            deleteTasks: [],
         });
 
         const check = () => {
@@ -181,6 +189,7 @@ export default {
 
         provide("form", form);
         provide("tasks", form.tasks);
+        provide("deleteTasks", form.deleteTasks);
         provide("title", props.service.title);
         provide("comment", form.comments);
 
