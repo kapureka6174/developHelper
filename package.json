@@ -33,6 +33,7 @@
     "dependencies": {
         "@tailwindcss/line-clamp": "^0.2.1",
         "@vue/eslint-config-prettier": "^6.0.0",
+        "compression-webpack-plugin": "^9.0.0",
         "vue-scrollto": "^2.20.0"
     }
 }
