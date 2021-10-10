@@ -14,7 +14,7 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Handle Front Controller...
+    # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
@@ -22,7 +22,7 @@
     # gzip対応
     RewriteCond %{HTTP:Accept-Encoding} gzip
     RewriteCond %{REQUEST_FILENAME}\.gz -s
-    RewriteRule ^(.+) $1.gz
+    RewriteRule .+ %{REQUEST_URI}.gz
 
     <FilesMatch "\.css\.gz$">
         ForceType text/css
