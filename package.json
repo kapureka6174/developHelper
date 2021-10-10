@@ -34,6 +34,7 @@
         "@tailwindcss/line-clamp": "^0.2.1",
         "@vue/eslint-config-prettier": "^6.0.0",
         "compression-webpack-plugin": "^9.0.0",
+        "laravel-mix-bundle-analyzer": "^1.0.5",
         "vue-scrollto": "^2.20.0"
     }
 }

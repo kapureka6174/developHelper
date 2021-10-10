@@ -134,7 +134,7 @@
                     <uri-add-button />
                 </div>
 
-                <uri-input />
+                <uri-input :uris="form.uris" />
             </div>
         </app-layout>
     </div>
@@ -182,7 +182,7 @@ export default {
         PageAddButton,
         PageInput,
         UriAddButton,
-        UriInputList,
+        UriInput,
         UrlsInput,
         HintToolTip,
     },

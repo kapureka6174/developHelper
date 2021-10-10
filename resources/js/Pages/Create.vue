@@ -129,11 +129,7 @@
                 <uri-add-button />
             </div>
 
-            <uri-input
-                v-for="(uri, index) in form.uris"
-                :key="index"
-                :index="index"
-            />
+            <uri-input :uris="form.uris" />
         </div>
     </app-layout>
 </template>

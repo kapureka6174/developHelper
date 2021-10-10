@@ -1,4 +1,5 @@
 const mix = require("laravel-mix");
+require("laravel-mix-bundle-analyzer");
 
 /*
  |--------------------------------------------------------------------------
@@ -21,4 +22,7 @@ mix.js("resources/js/app.js", "public/js")
 
 if (mix.inProduction()) {
     mix.version();
+}
+if (!mix.inProduction()) {
+    mix.bundleAnalyzer();
 }
