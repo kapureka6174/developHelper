@@ -21,8 +21,10 @@
 
     # gzip対応
     RewriteCond %{HTTP:Accept-Encoding} gzip
+    RewriteCond %{REQUEST_FILENAME} !\.gz$
     RewriteCond %{REQUEST_FILENAME}\.gz -s
-    RewriteRule .+ %{REQUEST_URI}.gz
+    RewriteCond %{REQUEST_FILENAME} (\.js|\.css)$
+    RewriteRule .+ %{REQUEST_URI}.gz [L]
 
     <FilesMatch "\.css\.gz$">
         ForceType text/css
