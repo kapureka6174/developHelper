@@ -107,7 +107,7 @@ export default {
             } else {
                 //問題なければ追加する
                 tags.content.push(e.target.value);
-                tags.error = false;
+                tags.error = "";
                 e.target.value = "";
             }
         };

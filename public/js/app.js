@@ -20876,17 +20876,12 @@ __webpack_require__.r(__webpack_exports__);
           obj = {
             content: "",
             decidable: false,
-            error: false,
+            error: "",
             selected: false
           };
           break;
 
         default:
-          obj = {
-            content: "",
-            decidable: false,
-            error: false
-          };
           break;
       }
 
@@ -20910,7 +20905,7 @@ __webpack_require__.r(__webpack_exports__);
     var requirement = function requirement() {
       return {
         title: normalObj(2),
-        explain: normalObj()
+        explain: normalObj(1)
       };
     };
 
@@ -20930,18 +20925,18 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_19__.reactive)({
-      title: normalObj(),
+      title: normalObj(1),
       tags: {
         content: [],
         error: ""
       },
-      description: normalObj(),
+      description: normalObj(1),
       techFields: [techField()],
       requirements: [requirement()],
       uris: [uri()],
       pages: [page()],
-      github_url: normalObj(),
-      site_url: normalObj(),
+      github_url: normalObj(1),
+      site_url: normalObj(1),
       finished: {
         state: false
       }
@@ -21080,11 +21075,6 @@ __webpack_require__.r(__webpack_exports__);
           break;
 
         default:
-          obj = {
-            content: "",
-            decidable: false,
-            error: false
-          };
           break;
       }
 
@@ -21108,21 +21098,21 @@ __webpack_require__.r(__webpack_exports__);
     var requirement = function requirement() {
       return {
         title: normalObj(2),
-        explain: normalObj()
+        explain: normalObj(1)
       };
     };
 
     var uri = function uri() {
       return {
-        uri: normalObj(),
-        method: normalObj(),
-        explain: normalObj()
+        uri: normalObj(1),
+        method: normalObj(1),
+        explain: normalObj(1)
       };
     };
 
     var page = function page() {
       return {
-        pagename: normalObj(),
+        pagename: normalObj(1),
         requirements: []
       };
     };
@@ -21134,7 +21124,7 @@ __webpack_require__.r(__webpack_exports__);
           decidable: true
         };
       } else {
-        return normalObj();
+        return normalObj(1);
       }
     };
 
@@ -21963,9 +21953,9 @@ __webpack_require__.r(__webpack_exports__);
 
     var input = function input() {
       if (!form.comments.content) {
-        form.comments.error = true;
+        form.comments.error = "コメントが入力されていません。";
       } else {
-        form.comments.error = false;
+        form.comments.error = "";
         form.comments.decidable = true;
       }
     }; // CommentControllerにformを渡す
@@ -22065,9 +22055,9 @@ __webpack_require__.r(__webpack_exports__);
 
     var input = function input() {
       if (!description.content) {
-        description.error = true;
+        description.error = "サービスの概要が入力されていません。";
       } else {
-        description.error = false;
+        description.error = "";
         description.decidable = true;
       }
     };
@@ -22611,7 +22601,7 @@ __webpack_require__.r(__webpack_exports__);
         pages[props.index].pagename.error = "\u65E2\u306B\u540C\u3058\u30DA\u30FC\u30B8\u540D\u304C\u8FFD\u52A0\u3055\u308C\u3066\u3044\u307E\u3059\u3002";
       } else {
         //問題なければ通常表示に切り替える
-        pages[props.index].pagename.error = false;
+        pages[props.index].pagename.error = "";
         pages[props.index].pagename.decidable = true;
       }
     }; // 選択中の機能をページに追加
@@ -23174,10 +23164,10 @@ __webpack_require__.r(__webpack_exports__);
       }).map(function (requirement) {
         return requirement.title.content.toUpperCase();
       }).includes(value.toUpperCase())) {
-        requirements[props.index][type].error = "\u65E2\u306B\u540C\u3058\u6A5F\u80FD\u540D\u304C\u8FFD\u52A0\u3055\u308C\u3066\u3044\u307E\u3059\u3002";
+        requirements[props.index].title.error = "\u65E2\u306B\u540C\u3058\u6A5F\u80FD\u540D\u304C\u8FFD\u52A0\u3055\u308C\u3066\u3044\u307E\u3059\u3002";
       } else {
         //問題なければ通常表示に切り替える
-        requirements[props.index][type].error = false;
+        requirements[props.index][type].error = "";
         requirements[props.index][type].decidable = true;
       }
     };
@@ -23307,7 +23297,7 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         //問題なければ追加する
         tags.content.push(e.target.value);
-        tags.error = false;
+        tags.error = "";
         e.target.value = "";
       }
     };
@@ -23799,8 +23789,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _Utility_ClientError__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Utility/ClientError */ "./resources/js/components/Utility/ClientError.vue");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  ccomponents: {
+    ClientError: _Utility_ClientError__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   props: {
     index: Number,
     techIndex: Number
@@ -23820,16 +23815,16 @@ __webpack_require__.r(__webpack_exports__);
       }).includes(value.toUpperCase())) {
         techFields[props.index].teches[props.techIndex].tech.error = "\u65E2\u306B\u540C\u3058\u6280\u8853\u540D\u304C\u8FFD\u52A0\u3055\u308C\u3066\u3044\u307E\u3059\u3002";
       } else {
-        techFields[props.index].teches[props.techIndex][type].error = false;
+        techFields[props.index].teches[props.techIndex][type].error = "";
         techFields[props.index].teches[props.techIndex][type].decidable = true;
       }
     };
 
     var deleteData = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)("deleteData");
 
-    var destroy = function destroy(url, index, detailIndex) {
+    var destroyTech = function destroyTech(url, index, detailIndex) {
       if (url.split("/")[1] == "create") {
-        techFields.splice(index, 1);
+        techFields[index].teches.splice(detailIndex, 1);
       } else {
         var deleteContent = techFields[index].teches.splice(detailIndex, 1)[0];
 
@@ -23842,7 +23837,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       techFields: techFields,
       input: input,
-      destroy: destroy
+      destroyTech: destroyTech
     };
   }
 });
@@ -23923,16 +23918,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _Utility_ClientError__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Utility/ClientError */ "./resources/js/components/Utility/ClientError.vue");
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    ClientError: _Utility_ClientError__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ServerError: _Utility_ClientError__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   setup: function setup() {
     var title = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)("title");
 
     var input = function input(e) {
       if (!e.target.value) {
-        title.error = true;
+        title.error = "サービス名が入力されていません。";
       } else {
-        title.error = false;
+        title.error = "";
         title.decidable = true;
       }
     };
@@ -23977,8 +23979,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _Utility_ClientError__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Utility/ClientError */ "./resources/js/components/Utility/ClientError.vue");
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    ClientError: _Utility_ClientError__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ServerError: _Utility_ClientError__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   setup: function setup() {
     var github_url = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)("github_url");
     var site_url = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)("site_url");
@@ -23987,7 +23996,7 @@ __webpack_require__.r(__webpack_exports__);
       if (!value) {
         type ? github_url.error = true : site_url.error = true;
       } else {
-        type ? github_url.error = false : site_url.error = false;
+        type ? github_url.error = "" : site_url.error = "";
         type ? github_url.decidable = true : site_url.decidable = true;
       }
     };
@@ -27539,11 +27548,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
   )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_client_error, {
-    errorFlag: $setup.form.comments.error,
-    text: "コメントが入力されていません。"
+    errorFlag: $setup.form.comments.error !== '',
+    text: $setup.form.comments.error
   }, null, 8
   /* PROPS */
-  , ["errorFlag"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_server_error, {
+  , ["errorFlag", "text"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_server_error, {
     errorFlag: _ctx.$page.props.errors,
     errors: Object.entries(_ctx.$page.props.errors).filter(function (e) {
       return /comments/.test(e[0]);
@@ -27677,11 +27686,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
   )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_client_error, {
-    errorFlag: $setup.description.error,
-    text: "サービスの概要が入力されていません。"
+    errorFlag: $setup.description.error !== '',
+    text: $setup.description.error
   }, null, 8
   /* PROPS */
-  , ["errorFlag"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_server_error, {
+  , ["errorFlag", "text"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_server_error, {
     errorFlag: Object.keys(_ctx.$page.props.errors).length,
     errors: Object.entries(_ctx.$page.props.errors).filter(function (e) {
       return /description/.test(e[0]);
@@ -29296,7 +29305,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.input($event.target.value);
     }, ["enter"])),
     onBlur: _cache[2] || (_cache[2] = function ($event) {
-      return $setup.pages[$props.index].pagename.error = false;
+      return $setup.pages[$props.index].pagename.error = '';
     })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
@@ -30744,12 +30753,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.requirements[$props.index].title.content = $event;
     }),
     onBlur: _cache[2] || (_cache[2] = function ($event) {
-      return $setup.requirements[$props.index].title.error = false;
+      return $setup.requirements[$props.index].title.error = '';
     })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
   )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.requirements[$props.index].title.content]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（クライアントサイド） "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_client_error, {
-    errorFlag: $setup.requirements[$props.index].title.error,
+    errorFlag: $setup.requirements[$props.index].title.error !== '',
     text: $setup.requirements[$props.index].title.error
   }, null, 8
   /* PROPS */
@@ -30779,7 +30788,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.requirements[$props.index].explain.content = $event;
     }),
     onBlur: _cache[6] || (_cache[6] = function ($event) {
-      return $setup.requirements[$props.index].explain.error = false;
+      return $setup.requirements[$props.index].explain.error = '';
     })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
@@ -31648,22 +31657,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
+  "class": "flex flex-col"
+};
+var _hoisted_2 = {
   "class": "flex mb-2 items-center"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
   points: "3 6 5 6 21 6"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
   d: "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
   x1: "10",
   y1: "11",
   x2: "10",
@@ -31672,7 +31684,7 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
   x1: "14",
   y1: "11",
   x2: "14",
@@ -31681,25 +31693,11 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_6 = [_hoisted_2, _hoisted_3, _hoisted_4, _hoisted_5];
-var _hoisted_7 = {
-  key: 0,
-  "class": "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded my-2",
-  role: "alert"
-};
-var _hoisted_8 = {
-  "class": "font-bold"
-};
-var _hoisted_9 = {
-  key: 1,
-  "class": "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded my-2",
-  role: "alert"
-};
-var _hoisted_10 = {
-  "class": "font-bold"
-};
+var _hoisted_7 = [_hoisted_3, _hoisted_4, _hoisted_5, _hoisted_6];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 技術名（編集表示） "), !$setup.techFields[$props.index].teches[$props.techIndex].tech.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
+  var _component_client_error = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("client-error");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 技術名（編集表示） "), !$setup.techFields[$props.index].teches[$props.techIndex].tech.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
     key: 0,
     "class": "appearance-none block w-3/5 bg-white text-gray-700 border border-gray-200 rounded py-2 px-4 mr-2 leading-tight focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500",
     placeholder: "技術名",
@@ -31760,13 +31758,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "stroke-linecap": "round",
     "stroke-linejoin": "round",
     onClick: _cache[8] || (_cache[8] = function ($event) {
-      return $setup.destroy(_ctx.$page.url, $props.index, $props.techIndex);
+      return $setup.destroyTech(_ctx.$page.url, $props.index, $props.techIndex);
     })
-  }, _hoisted_6))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（クライアントサイド） "), $setup.techFields[$props.index].teches[$props.techIndex].tech.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.techFields[$props.index].teches[$props.techIndex].tech.error), 1
-  /* TEXT */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.techFields[$props.index].teches[$props.techIndex].version.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.techFields[$props.index].teches[$props.techIndex].version.error), 1
-  /* TEXT */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  }, _hoisted_7))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_client_error, {
+    errorFlag: $setup.techFields[$props.index].teches[$props.techIndex].tech.error !== '',
+    text: $setup.techFields[$props.index].teches[$props.techIndex].tech.error
+  }, null, 8
+  /* PROPS */
+  , ["errorFlag", "text"])]);
 }
 
 /***/ }),
@@ -31878,26 +31877,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = {
-  key: 2,
-  "class": "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-2",
-  role: "alert"
-};
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", {
-  "class": "font-bold"
-}, "サービス名が入力されていません。", -1
-/* HOISTED */
-);
-
-var _hoisted_3 = [_hoisted_2];
-var _hoisted_4 = {
-  key: 3
-};
-var _hoisted_5 = {
-  "class": "font-bold"
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_client_error = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("client-error");
+
+  var _component_server_error = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("server-error");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 編集表示 "), !$setup.title.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
     key: 0,
     "class": "w-full rounded my-2",
@@ -31910,7 +31894,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.input && $setup.input.apply($setup, arguments);
     }, ["enter"])),
     onBlur: _cache[2] || (_cache[2] = function ($event) {
-      return $setup.title.error = false;
+      return $setup.title.error = '';
     })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
@@ -31925,21 +31909,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
-  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（クライアントサイド） "), $setup.title.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_3)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（サーバーサイド） "), Object.keys(_ctx.$page.props.errors).length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.entries(_ctx.$page.props.errors).filter(function (e) {
-    if (!/requirement/.test(e[0])) {
-      return /title/.test(e[0]);
-    }
-  }), function (error, index) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      key: index,
-      "class": "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded my-2",
-      role: "alert"
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error[1]), 1
-    /* TEXT */
-    )]);
-  }), 128
-  /* KEYED_FRAGMENT */
-  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_client_error, {
+    errorFlag: $setup.title.error !== '',
+    text: $setup.title.error
+  }, null, 8
+  /* PROPS */
+  , ["errorFlag", "text"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_server_error, {
+    errorFlag: Object.keys(_ctx.$page.props.errors).length,
+    errors: Object.entries(_ctx.$page.props.errors).filter(function (e) {
+      if (!/requirement/.test(e[0])) {
+        return /title/.test(e[0]);
+      }
+    })
+  }, null, 8
+  /* PROPS */
+  , ["errorFlag", "errors"])]);
 }
 
 /***/ }),
@@ -31988,47 +31972,13 @@ var _hoisted_2 = {
   "class": "flex flex-col md:w-1/3 md:mr-3"
 };
 var _hoisted_3 = {
-  key: 2,
-  "class": "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-2",
-  role: "alert"
-};
-
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", {
-  "class": "font-bold"
-}, "GitHubのURLが入力されていません。", -1
-/* HOISTED */
-);
-
-var _hoisted_5 = [_hoisted_4];
-var _hoisted_6 = {
-  key: 3
-};
-var _hoisted_7 = {
-  "class": "font-bold"
-};
-var _hoisted_8 = {
   "class": "flex flex-col md:w-1/3"
 };
-var _hoisted_9 = {
-  key: 2,
-  "class": "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-2",
-  role: "alert"
-};
-
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", {
-  "class": "font-bold"
-}, "サイトのURLが入力されていません。", -1
-/* HOISTED */
-);
-
-var _hoisted_11 = [_hoisted_10];
-var _hoisted_12 = {
-  key: 3
-};
-var _hoisted_13 = {
-  "class": "font-bold"
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_client_error = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("client-error");
+
+  var _component_server_error = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("server-error");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" GitHubのURL "), !$setup.github_url.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
     key: 0,
     "class": "rounded my-2",
@@ -32041,7 +31991,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.input($event.target.value, 'github');
     }, ["enter"])),
     onBlur: _cache[2] || (_cache[2] = function ($event) {
-      return $setup.github_url.error = false;
+      return $setup.github_url.error = '';
     })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
@@ -32056,19 +32006,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
-  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（クライアントサイド） "), $setup.github_url.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, _hoisted_5)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（サーバーサイド） "), Object.keys(_ctx.$page.props.errors).length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.entries(_ctx.$page.props.errors).filter(function (e) {
-    return /github_url/.test(e[0]);
-  }), function (error, index) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      key: index,
-      "class": "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded my-2",
-      role: "alert"
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error[1]), 1
-    /* TEXT */
-    )]);
-  }), 128
-  /* KEYED_FRAGMENT */
-  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" サイトのURL "), !$setup.site_url.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_client_error, {
+    errorFlag: $setup.github_url.error !== '',
+    text: "GitHubのURLが入力されていません。"
+  }, null, 8
+  /* PROPS */
+  , ["errorFlag"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_server_error, {
+    errorFlag: Object.keys(_ctx.$page.props.errors).length,
+    errors: Object.entries(_ctx.$page.props.errors).filter(function (e) {
+      return /github_url/.test(e[0]);
+    })
+  }, null, 8
+  /* PROPS */
+  , ["errorFlag", "errors"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" サイトのURL "), !$setup.site_url.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
     key: 0,
     "class": "rounded my-2",
     type: "text",
@@ -32080,7 +32030,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.input($event.target.value);
     }, ["enter"])),
     onBlur: _cache[6] || (_cache[6] = function ($event) {
-      return $setup.site_url.error = false;
+      return $setup.site_url.error = '';
     })
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
@@ -32095,19 +32045,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
-  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（クライアントサイド） "), $setup.site_url.error ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, _hoisted_11)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（サーバーサイド） "), Object.keys(_ctx.$page.props.errors).length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(Object.entries(_ctx.$page.props.errors).filter(function (e) {
-    return /site_url/.test(e[0]);
-  }), function (error, index) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      key: index,
-      "class": "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded my-2",
-      role: "alert"
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error[1]), 1
-    /* TEXT */
-    )]);
-  }), 128
-  /* KEYED_FRAGMENT */
-  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_client_error, {
+    errorFlag: $setup.site_url.error !== '',
+    text: "サイトのURLが入力されていません。"
+  }, null, 8
+  /* PROPS */
+  , ["errorFlag"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_server_error, {
+    errorFlag: Object.keys(_ctx.$page.props.errors).length,
+    errors: Object.entries(_ctx.$page.props.errors).filter(function (e) {
+      return /site_url/.test(e[0]);
+    })
+  }, null, 8
+  /* PROPS */
+  , ["errorFlag", "errors"])])]);
 }
 
 /***/ }),

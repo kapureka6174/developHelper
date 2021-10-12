@@ -213,11 +213,6 @@ export default {
                     };
                     break;
                 default:
-                    obj = {
-                        content: "",
-                        decidable: false,
-                        error: false,
-                    };
                     break;
             }
             return obj;
@@ -240,21 +235,21 @@ export default {
         const requirement = () => {
             return {
                 title: normalObj(2),
-                explain: normalObj(),
+                explain: normalObj(1),
             };
         };
 
         const uri = () => {
             return {
-                uri: normalObj(),
-                method: normalObj(),
-                explain: normalObj(),
+                uri: normalObj(1),
+                method: normalObj(1),
+                explain: normalObj(1),
             };
         };
 
         const page = () => {
             return {
-                pagename: normalObj(),
+                pagename: normalObj(1),
                 requirements: [],
             };
         };
@@ -266,7 +261,7 @@ export default {
                     decidable: true,
                 };
             } else {
-                return normalObj();
+                return normalObj(1);
             }
         };
 

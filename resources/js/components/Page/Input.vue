@@ -27,7 +27,7 @@
                     v-model="pages[index].pagename.content"
                     type="text"
                     @keyup.enter="input($event.target.value)"
-                    v-on:blur="pages[index].pagename.error = false"
+                    v-on:blur="pages[index].pagename.error = ''"
                 />
                 <!-- ページ名（通常表示） -->
                 <h1
@@ -145,7 +145,7 @@ export default {
                 ].pagename.error = `既に同じページ名が追加されています。`;
             } else {
                 //問題なければ通常表示に切り替える
-                pages[props.index].pagename.error = false;
+                pages[props.index].pagename.error = "";
                 pages[props.index].pagename.decidable = true;
             }
         };

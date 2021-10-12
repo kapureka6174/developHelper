@@ -46,8 +46,8 @@
 
         <!-- エラー表示 -->
         <client-error
-            :errorFlag="form.comments.error"
-            text="コメントが入力されていません。"
+            :errorFlag="form.comments.error !== ''"
+            :text="form.comments.error"
         />
         <server-error
             :errorFlag="$page.props.errors"

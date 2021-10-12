@@ -24,12 +24,12 @@
             placeholder="要件名・機能名を入力してください"
             @keyup.enter="input($event.target.value, 'title')"
             v-model="requirements[index].title.content"
-            v-on:blur="requirements[index].title.error = false"
+            v-on:blur="requirements[index].title.error = ''"
         />
 
         <!-- エラー表示（クライアントサイド） -->
         <client-error
-            :errorFlag="requirements[index].title.error"
+            :errorFlag="requirements[index].title.error !== ''"
             :text="requirements[index].title.error"
         />
 
@@ -95,7 +95,7 @@
                     rows="8"
                     placeholder="要件・機能の説明を入力してください"
                     v-model="requirements[index].explain.content"
-                    v-on:blur="requirements[index].explain.error = false"
+                    v-on:blur="requirements[index].explain.error = ''"
                 />
                 <div class="flex">
                     <!-- エラー表示（クライアントサイド） -->
@@ -188,12 +188,12 @@ export default {
                     )
                     .includes(value.toUpperCase())
             ) {
-                requirements[props.index][
-                    type
-                ].error = `既に同じ機能名が追加されています。`;
+                requirements[
+                    props.index
+                ].title.error = `既に同じ機能名が追加されています。`;
             } else {
                 //問題なければ通常表示に切り替える
-                requirements[props.index][type].error = false;
+                requirements[props.index][type].error = "";
                 requirements[props.index][type].decidable = true;
             }
         };

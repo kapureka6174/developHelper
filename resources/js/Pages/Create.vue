@@ -195,16 +195,11 @@ export default {
                     obj = {
                         content: "",
                         decidable: false,
-                        error: false,
+                        error: "",
                         selected: false,
                     };
                     break;
                 default:
-                    obj = {
-                        content: "",
-                        decidable: false,
-                        error: false,
-                    };
                     break;
             }
             return obj;
@@ -227,7 +222,7 @@ export default {
         const requirement = () => {
             return {
                 title: normalObj(2),
-                explain: normalObj(),
+                explain: normalObj(1),
             };
         };
 
@@ -247,18 +242,18 @@ export default {
         };
 
         const form = reactive({
-            title: normalObj(),
+            title: normalObj(1),
             tags: {
                 content: [],
                 error: "",
             },
-            description: normalObj(),
+            description: normalObj(1),
             techFields: [techField()],
             requirements: [requirement()],
             uris: [uri()],
             pages: [page()],
-            github_url: normalObj(),
-            site_url: normalObj(),
+            github_url: normalObj(1),
+            site_url: normalObj(1),
             finished: {
                 state: false,
             },

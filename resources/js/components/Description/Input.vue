@@ -40,8 +40,8 @@
 
         <!-- エラー表示 -->
         <client-error
-            :errorFlag="description.error"
-            text="サービスの概要が入力されていません。"
+            :errorFlag="description.error !== ''"
+            :text="description.error"
         />
         <server-error
             :errorFlag="Object.keys($page.props.errors).length"

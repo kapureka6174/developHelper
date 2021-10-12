@@ -105,9 +105,9 @@ export default {
 
         const input = () => {
             if (!form.comments.content) {
-                form.comments.error = true;
+                form.comments.error = "コメントが入力されていません。";
             } else {
-                form.comments.error = false;
+                form.comments.error = "";
                 form.comments.decidable = true;
             }
         };

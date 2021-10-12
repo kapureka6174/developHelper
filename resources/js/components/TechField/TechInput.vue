@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="flex flex-col">
         <div class="flex mb-2 items-center">
             <!-- 技術名（編集表示） -->
             <input
@@ -84,7 +84,7 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                @click="destroy($page.url, index, techIndex)"
+                @click="destroyTech($page.url, index, techIndex)"
             >
                 <polyline points="3 6 5 6 21 6" />
                 <path
@@ -94,46 +94,20 @@
                 <line x1="14" y1="11" x2="14" y2="17" />
             </svg>
         </div>
-        <!-- エラー表示（クライアントサイド） -->
-        <div
-            class="
-                bg-red-100
-                border border-red-400
-                text-red-700
-                px-4
-                py-3
-                rounded
-                my-2
-            "
-            role="alert"
-            v-if="techFields[index].teches[techIndex].tech.error"
-        >
-            <strong class="font-bold">{{
-                techFields[index].teches[techIndex].tech.error
-            }}</strong>
-        </div>
-        <div
-            class="
-                bg-red-100
-                border border-red-400
-                text-red-700
-                px-4
-                py-3
-                rounded
-                my-2
-            "
-            role="alert"
-            v-if="techFields[index].teches[techIndex].version.error"
-        >
-            <strong class="font-bold">{{
-                techFields[index].teches[techIndex].version.error
-            }}</strong>
-        </div>
+        <!-- エラー表示 -->
+        <client-error
+            :errorFlag="techFields[index].teches[techIndex].tech.error !== ''"
+            :text="techFields[index].teches[techIndex].tech.error"
+        />
     </div>
 </template>
 <script>
 import { inject } from "vue";
+import ClientError from "../Utility/ClientError";
 export default {
+    ccomponents: {
+        ClientError,
+    },
     props: {
         index: Number,
         techIndex: Number,
@@ -159,9 +133,8 @@ export default {
                     props.techIndex
                 ].tech.error = `既に同じ技術名が追加されています。`;
             } else {
-                techFields[props.index].teches[props.techIndex][
-                    type
-                ].error = false;
+                techFields[props.index].teches[props.techIndex][type].error =
+                    "";
                 techFields[props.index].teches[props.techIndex][
                     type
                 ].decidable = true;
@@ -169,9 +142,9 @@ export default {
         };
 
         const deleteData = inject("deleteData");
-        const destroy = (url, index, detailIndex) => {
+        const destroyTech = (url, index, detailIndex) => {
             if (url.split("/")[1] == "create") {
-                techFields.splice(index, 1);
+                techFields[index].teches.splice(detailIndex, 1);
             } else {
                 let deleteContent = techFields[index].teches.splice(
                     detailIndex,
@@ -182,7 +155,7 @@ export default {
                 }
             }
         };
-        return { techFields, input, destroy };
+        return { techFields, input, destroyTech };
     },
 };
 </script>

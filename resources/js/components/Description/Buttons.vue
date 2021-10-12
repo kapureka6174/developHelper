@@ -39,9 +39,9 @@ export default {
 
         const input = () => {
             if (!description.content) {
-                description.error = true;
+                description.error = "サービスの概要が入力されていません。";
             } else {
-                description.error = false;
+                description.error = "";
                 description.decidable = true;
             }
         };
