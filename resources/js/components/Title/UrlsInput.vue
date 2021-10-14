@@ -16,7 +16,7 @@
             <p
                 v-else
                 class="
-                    md:text-2xl
+                    md:text-base
                     font-bold
                     text-gray-700
                     mb-2
@@ -59,7 +59,7 @@
             <p
                 v-else
                 class="
-                    md:text-2xl
+                    md:text-base
                     font-bold
                     text-gray-700
                     mb-2

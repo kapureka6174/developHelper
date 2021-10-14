@@ -21069,7 +21069,7 @@ __webpack_require__.r(__webpack_exports__);
           obj = {
             content: "",
             decidable: false,
-            error: false,
+            error: "",
             selected: false
           };
           break;
@@ -21121,7 +21121,8 @@ __webpack_require__.r(__webpack_exports__);
       if (value) {
         return {
           content: value,
-          decidable: true
+          decidable: true,
+          error: ""
         };
       } else {
         return normalObj(1);
@@ -21729,7 +21730,7 @@ __webpack_require__.r(__webpack_exports__);
         type: "",
         content: "",
         decidable: false,
-        error: false
+        error: ""
       },
       tasks: tasks,
       deleteTasks: []
@@ -32001,7 +32002,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.github_url.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 通常表示 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": "md:text-2xl font-bold text-gray-700 mb-2 pt-3 break-words",
+    "class": "md:text-base font-bold text-gray-700 mb-2 pt-3 break-words",
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $setup.github_url.decidable = false;
     })
@@ -32040,7 +32041,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.site_url.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 通常表示 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": "md:text-2xl font-bold text-gray-700 mb-2 pt-3 break-words",
+    "class": "md:text-base font-bold text-gray-700 mb-2 pt-3 break-words",
     onClick: _cache[7] || (_cache[7] = function ($event) {
       return $setup.site_url.decidable = false;
     })

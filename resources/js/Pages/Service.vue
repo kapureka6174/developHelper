@@ -175,7 +175,7 @@ export default {
                 type: "",
                 content: "",
                 decidable: false,
-                error: false,
+                error: "",
             },
             tasks,
             deleteTasks: [],

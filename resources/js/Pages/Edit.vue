@@ -208,7 +208,7 @@ export default {
                     obj = {
                         content: "",
                         decidable: false,
-                        error: false,
+                        error: "",
                         selected: false,
                     };
                     break;
@@ -259,6 +259,7 @@ export default {
                 return {
                     content: value,
                     decidable: true,
+                    error: "",
                 };
             } else {
                 return normalObj(1);
