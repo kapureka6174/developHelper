@@ -86,13 +86,13 @@
                 <div class="flex mb-3 items-center">
                     <section-title title="要件定義" />
                     <hint-tool-tip type="要件定義" />
-                    <requirement-add-button />
+                    <require-add-button />
                 </div>
                 <div>
                     <section class="text-gray-700">
                         <div class="container px-5 py-2">
                             <div class="flex flex-wrap">
-                                <requirement-input
+                                <require-input
                                     v-for="(
                                         requirement, index
                                     ) in form.requirements"
@@ -109,7 +109,7 @@
                     <section-title title="ページ" />
                     <hint-tool-tip type="ページ" />
                 </div>
-                <requirement-select-list
+                <require-select-list
                     v-for="(requirment, index) in form.requirements"
                     :key="index"
                     :index="index"
@@ -270,10 +270,12 @@ export default {
             title: {
                 content: props.service.title,
                 decidable: true,
+                error: "",
             },
             description: {
                 content: props.service.description,
                 decidable: true,
+                error: "",
             },
             tags: {
                 content: props.service.tags.map((tag) => tag.tagname),
@@ -331,6 +333,7 @@ export default {
                 title: {
                     content: requirement.title,
                     decidable: true,
+                    selected: false,
                     error: "",
                 },
                 explain: {

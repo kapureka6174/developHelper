@@ -21132,11 +21132,13 @@ __webpack_require__.r(__webpack_exports__);
       id: props.service.id,
       title: {
         content: props.service.title,
-        decidable: true
+        decidable: true,
+        error: ""
       },
       description: {
         content: props.service.description,
-        decidable: true
+        decidable: true,
+        error: ""
       },
       tags: {
         content: props.service.tags.map(function (tag) {
@@ -21194,6 +21196,7 @@ __webpack_require__.r(__webpack_exports__);
         title: {
           content: requirement.title,
           decidable: true,
+          selected: false,
           error: ""
         },
         explain: {
@@ -25770,11 +25773,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_tech_field_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("tech-field-input");
 
-  var _component_requirement_add_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("requirement-add-button");
+  var _component_require_add_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("require-add-button");
 
-  var _component_requirement_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("requirement-input");
+  var _component_require_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("require-input");
 
-  var _component_requirement_select_list = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("requirement-select-list");
+  var _component_require_select_list = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("require-select-list");
 
   var _component_page_add_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("page-add-button");
 
@@ -25837,8 +25840,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         title: "要件定義"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_hint_tool_tip, {
         type: "要件定義"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_requirement_add_button)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.requirements, function (requirement, index) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_requirement_input, {
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_require_add_button)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.requirements, function (requirement, index) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_require_input, {
           key: index,
           index: index
         }, null, 8
@@ -25851,7 +25854,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_hint_tool_tip, {
         type: "ページ"
       })]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.requirements, function (requirment, index) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_requirement_select_list, {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_require_select_list, {
           key: index,
           index: index
         }, null, 8
