@@ -30797,7 +30797,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 544
   /* HYDRATE_EVENTS, NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.requirements[$props.index].explain.content]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" エラー表示（クライアントサイド） "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_client_error, {
-    errorFlag: $setup.requirements[$props.index].explain.error,
+    errorFlag: $setup.requirements[$props.index].explain.error !== '',
     text: $setup.requirements[$props.index].explain.error
   }, null, 8
   /* PROPS */

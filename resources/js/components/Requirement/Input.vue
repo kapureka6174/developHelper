@@ -100,7 +100,7 @@
                 <div class="flex">
                     <!-- エラー表示（クライアントサイド） -->
                     <client-error
-                        :errorFlag="requirements[index].explain.error"
+                        :errorFlag="requirements[index].explain.error !== ''"
                         :text="requirements[index].explain.error"
                     />
                     <!-- 要件の説明の保存ボタン -->
