@@ -30885,7 +30885,7 @@ var _hoisted_3 = {
   "class": "font-semibold bg-gray-200 rounded-md py-2 px-4"
 };
 var _hoisted_4 = {
-  "class": "text-grey-600 font-bold p-4 rounded-md bg-gray-100 border-2 border-white"
+  "class": "text-grey-600 font-bold p-4 rounded-md bg-gray-100 border-2 border-white whitespace-pre-line break-words"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_section_title = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("section-title");

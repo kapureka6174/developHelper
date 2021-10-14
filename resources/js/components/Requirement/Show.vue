@@ -21,6 +21,8 @@
                             rounded-md
                             bg-gray-100
                             border-2 border-white
+                            whitespace-pre-line
+                            break-words
                         "
                     >
                         {{ requirement.content }}
