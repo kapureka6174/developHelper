@@ -90,7 +90,7 @@
 <script>
 import { inject } from "vue";
 import ClientError from "../Utility/ClientError";
-import ServerError from "../Utility/ClientError";
+import ServerError from "../Utility/ServerError";
 
 export default {
     components: {
