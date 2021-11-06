@@ -7,9 +7,9 @@
             }"
             v-if="show && message"
         >
-            <div class="max-w-screen-xl mx-auto py-2 px-3 sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between flex-wrap">
-                    <div class="w-0 flex-1 flex items-center min-w-0">
+            <div class="mx-auto px-3 py-2 max-w-screen-xl sm:px-6 lg:px-8">
+                <div class="flex flex-wrap items-center justify-between">
+                    <div class="flex flex-1 items-center w-0 min-w-0">
                         <span
                             class="flex p-2 rounded-lg"
                             :class="{
@@ -18,7 +18,7 @@
                             }"
                         >
                             <svg
-                                class="h-5 w-5 text-white"
+                                class="w-5 h-5 text-white"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
@@ -34,7 +34,7 @@
                             </svg>
 
                             <svg
-                                class="h-5 w-5 text-white"
+                                class="w-5 h-5 text-white"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
@@ -50,7 +50,7 @@
                             </svg>
                         </span>
 
-                        <p class="ml-3 font-medium text-sm text-white truncate">
+                        <p class="ml-3 text-white text-sm font-medium truncate">
                             {{ message }}
                         </p>
                     </div>
@@ -58,26 +58,16 @@
                     <div class="flex-shrink-0 sm:ml-3">
                         <button
                             type="button"
-                            class="
-                                -mr-1
-                                flex
-                                p-2
-                                rounded-md
-                                focus:outline-none
-                                sm:-mr-2
-                                transition
-                            "
+                            class="flex -mr-1 p-2 rounded-md focus:outline-none transition sm:-mr-2"
                             :class="{
-                                'hover:bg-indigo-600 focus:bg-indigo-600':
-                                    style == 'success',
-                                'hover:bg-red-600 focus:bg-red-600':
-                                    style == 'danger',
+                                'hover:bg-indigo-600 focus:bg-indigo-600': style == 'success',
+                                'hover:bg-red-600 focus:bg-red-600': style == 'danger',
                             }"
                             aria-label="Dismiss"
                             @click.prevent="show = false"
                         >
                             <svg
-                                class="h-5 w-5 text-white"
+                                class="w-5 h-5 text-white"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
@@ -99,21 +89,21 @@
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-            show: true,
-        };
-    },
-
-    computed: {
-        style() {
-            return this.$page.props.jetstream.flash?.bannerStyle || "success";
+    export default {
+        data() {
+            return {
+                show: true,
+            };
         },
 
-        message() {
-            return this.$page.props.jetstream.flash?.banner || "";
+        computed: {
+            style() {
+                return this.$page.props.jetstream.flash?.bannerStyle || "success";
+            },
+
+            message() {
+                return this.$page.props.jetstream.flash?.banner || "";
+            },
         },
-    },
-};
+    };
 </script>

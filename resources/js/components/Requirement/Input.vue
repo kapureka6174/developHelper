@@ -4,22 +4,22 @@
         <input
             v-if="!requirements[index].title.decidable"
             class="
-                appearance-none
                 block
-                w-full
-                bg-white
-                text-gray-700
-                border border-gray-200
-                rounded
-                py-2
-                px-4
-                mr-2
-                leading-tight
-                focus:outline-none
-                focus:ring-1
-                focus:ring-blue-500
-                focus:border-blue-500
                 mb-2
+                mr-2
+                px-4
+                py-2
+                w-full
+                text-gray-700
+                leading-tight
+                bg-white
+                border
+                focus:border-blue-500
+                border-gray-200
+                rounded
+                focus:outline-none
+                appearance-none
+                focus:ring-1 focus:ring-blue-500
             "
             placeholder="要件名・機能名を入力してください"
             @keyup.enter="input($event.target.value, 'title')"
@@ -35,24 +35,16 @@
 
         <!-- 要件名（通常表示） -->
         <details v-if="requirements[index].title.decidable" class="mb-1">
-            <summary class="rounded py-2 px-4 bg-gray-200 relative h-full">
+            <summary class="relative px-4 py-2 h-full bg-gray-200 rounded">
                 <span
-                    class="font-semibold break-words"
+                    class="break-words font-semibold"
                     @click="requirements[index].title.decidable = false"
                 >
                     {{ requirements[index].title.content }}
                 </span>
                 <!-- 削除ボタン -->
                 <svg
-                    class="
-                        h-6
-                        w-6
-                        text-red-600
-                        hover:text-red-400
-                        absolute
-                        top-1
-                        right-1
-                    "
+                    class="absolute right-1 top-1 w-6 h-6 hover:text-red-400 text-red-600"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -70,27 +62,24 @@
                 </svg>
             </summary>
             <!-- 要件の説明（編集表示） -->
-            <div
-                v-if="!requirements[index].explain.decidable"
-                class="flex flex-col items-end"
-            >
+            <div v-if="!requirements[index].explain.decidable" class="flex flex-col items-end">
                 <textarea
                     class="
-                        appearance-none
                         block
-                        w-full
-                        bg-white
-                        text-gray-700
-                        border border-gray-200
-                        rounded
-                        py-2
-                        px-4
-                        leading-tight
-                        focus:outline-none
-                        focus:ring-1
-                        focus:ring-blue-500
-                        focus:border-blue-500
                         mt-2
+                        px-4
+                        py-2
+                        w-full
+                        text-gray-700
+                        leading-tight
+                        bg-white
+                        border
+                        focus:border-blue-500
+                        border-gray-200
+                        rounded
+                        focus:outline-none
+                        appearance-none
+                        focus:ring-1 focus:ring-blue-500
                     "
                     rows="8"
                     placeholder="要件・機能の説明を入力してください"
@@ -105,21 +94,8 @@
                     />
                     <!-- 要件の説明の保存ボタン -->
                     <button
-                        class="
-                            bg-indigo-600
-                            hover:bg-indigo-400
-                            h-8
-                            w-12
-                            text-white
-                            rounded
-                            m-2
-                        "
-                        @click="
-                            input(
-                                requirements[index].explain.content,
-                                'explain'
-                            )
-                        "
+                        class="m-2 w-12 h-8 text-white hover:bg-indigo-400 bg-indigo-600 rounded"
+                        @click="input(requirements[index].explain.content, 'explain')"
                     >
                         決定
                     </button>
@@ -128,13 +104,7 @@
 
             <p
                 v-else
-                class="
-                    text-grey-600
-                    font-bold
-                    m-4
-                    whitespace-pre-line
-                    break-words
-                "
+                class="text-grey-600 m-4 break-words whitespace-pre-line font-bold"
                 @click="requirements[index].explain.decidable = false"
             >
                 {{ requirements[index].explain.content }}
@@ -146,8 +116,7 @@
             :errorFlag="Object.keys($page.props.errors).length"
             :errors="
                 Object.entries($page.props.errors).filter((e) => {
-                    return e[0].split('.')[0] == 'requirements' &&
-                        e[0].split('.')[1] == `${index}`
+                    return e[0].split('.')[0] == 'requirements' && e[0].split('.')[1] == `${index}`
                         ? true
                         : false;
                 })
@@ -156,71 +125,64 @@
     </div>
 </template>
 <script>
-import ClientError from "../Utility/ClientError";
-import ServerError from "../Utility/ServerError";
-import { inject } from "vue";
-export default {
-    components: {
-        ClientError,
-        ServerError,
-    },
-    props: {
-        index: Number,
-    },
-    setup(props) {
-        const requirements = inject("requirements");
+    import ClientError from "../Utility/ClientError";
+    import ServerError from "../Utility/ServerError";
+    import { inject } from "vue";
+    export default {
+        components: {
+            ClientError,
+            ServerError,
+        },
+        props: {
+            index: Number,
+        },
+        setup(props) {
+            const requirements = inject("requirements");
 
-        const input = (value, type) => {
-            // 空入力かどうかのチェック
-            if (!value) {
-                const message =
-                    type == "title" ? "要件名・機能名" : "要件・機能の説明";
-                requirements[props.index][
-                    type
-                ].error = `${message}が入力されていません。`;
-            } else if (
-                // 同じ機能名が追加されているかどうかの確認
-                type != "explain" &&
-                requirements
-                    .filter((requirement, index) => index !== props.index)
-                    .map((requirement) =>
-                        requirement.title.content.toUpperCase()
-                    )
-                    .includes(value.toUpperCase())
-            ) {
-                requirements[
-                    props.index
-                ].title.error = `既に同じ機能名が追加されています。`;
-            } else {
-                //問題なければ通常表示に切り替える
-                requirements[props.index][type].error = "";
-                requirements[props.index][type].decidable = true;
-            }
-        };
-
-        const deleteData = inject("deleteData");
-        const pages = inject("pages");
-        const destroy = (url, index) => {
-            // 新規作成画面ならそのままデータ消す
-            if (url.split("/")[1] == "create") {
-                requirements.splice(index, 1);
-            } else {
-                // 編集画面なら削除データをDBに引き渡すためにdeleteDataに保存
-                let deleteContent = requirements.splice(index, 1)[0];
-                if (deleteContent) {
-                    deleteData.requirements.push(deleteContent.id);
+            const input = (value, type) => {
+                // 空入力かどうかのチェック
+                if (!value) {
+                    const message = type == "title" ? "要件名・機能名" : "要件・機能の説明";
+                    requirements[props.index][type].error = `${message}が入力されていません。`;
+                } else if (
+                    // 同じ機能名が追加されているかどうかの確認
+                    type != "explain" &&
+                    requirements
+                        .filter((requirement, index) => index !== props.index)
+                        .map((requirement) => requirement.title.content.toUpperCase())
+                        .includes(value.toUpperCase())
+                ) {
+                    requirements[props.index].title.error = `既に同じ機能名が追加されています。`;
+                } else {
+                    //問題なければ通常表示に切り替える
+                    requirements[props.index][type].error = "";
+                    requirements[props.index][type].decidable = true;
                 }
-                // ページの中に削除した機能が含まれる場合はそれも削除する
-                pages.forEach((page, index) => {
-                    page.requirements.forEach((requirement, requireIndex) => {
-                        if (requirement.id == deleteContent.id) {
-                            pages[index].requirements.splice(requireIndex, 1);
-                        }
+            };
+
+            const deleteData = inject("deleteData");
+            const pages = inject("pages");
+            const destroy = (url, index) => {
+                // 新規作成画面ならそのままデータ消す
+                if (url.split("/")[1] == "create") {
+                    requirements.splice(index, 1);
+                } else {
+                    // 編集画面なら削除データをDBに引き渡すためにdeleteDataに保存
+                    let deleteContent = requirements.splice(index, 1)[0];
+                    if (deleteContent) {
+                        deleteData.requirements.push(deleteContent.id);
+                    }
+                    // ページの中に削除した機能が含まれる場合はそれも削除する
+                    pages.forEach((page, index) => {
+                        page.requirements.forEach((requirement, requireIndex) => {
+                            if (requirement.id == deleteContent.id) {
+                                pages[index].requirements.splice(requireIndex, 1);
+                            }
+                        });
                     });
-                });
-            }
-        };
-        return { requirements, input, destroy };
-    },
-};
+                }
+            };
+            return { requirements, input, destroy };
+        },
+    };
 </script>

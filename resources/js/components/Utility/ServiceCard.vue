@@ -1,60 +1,39 @@
 <template>
-    <div
-        class="
-            mx-auto
-            md:mx-0
-            max-w-md
-            py-4
-            md:px-8
-            px-4
-            bg-indigo-50
-            shadow-lg
-            rounded-lg
-            my-10
-        "
-    >
+    <div class="mx-auto my-10 px-4 py-4 max-w-md bg-indigo-50 rounded-lg shadow-lg md:mx-0 md:px-8">
         <div>
-            <div class="md:h-16 flex items-center">
-                <h2 class="text-gray-800 text-2xl font-semibold line-clamp-2">
+            <div class="flex items-center md:h-16">
+                <h2 class="line-clamp-2 text-gray-800 text-2xl font-semibold">
                     {{ title }}
                 </h2>
             </div>
-            <h4 class="h-48 mt-2 text-gray-600 line-clamp-8">
+            <h4 class="line-clamp-8 mt-2 h-48 text-gray-600">
                 {{ description }}
             </h4>
         </div>
         <div class="flex justify-between mt-4">
             <div class="flex items-center">
-                <inertia-link
-                    v-if="user"
-                    :href="route('User', { id: user.id })"
-                >
+                <inertia-link v-if="user" :href="route('User', { id: user.id })">
                     <img
                         v-if="user"
-                        class="h-10 w-10 mr-2 rounded-full object-cover"
+                        class="mr-2 w-10 h-10 rounded-full object-cover"
                         :src="image_url"
                         :alt="user.name"
                     />
                 </inertia-link>
                 <div>
-                    <inertia-link
-                        v-if="user"
-                        :href="route('User', { id: user.id })"
-                    >
+                    <inertia-link v-if="user" :href="route('User', { id: user.id })">
                         <h2 class="w-40 text-gray-600 font-medium truncate">
                             作成者：{{ user.name }}
                         </h2>
                     </inertia-link>
-                    <div class="text-gray-600 font-medium">
-                        投稿日：{{ date.split("T")[0] }}
-                    </div>
+                    <div class="text-gray-600 font-medium">投稿日：{{ date.split("T")[0] }}</div>
                 </div>
             </div>
             <div>
                 <div class="flex">
                     <div class="flex items-center mr-2">
                         <svg
-                            class="h-6 w-6 text-red-500"
+                            class="w-6 h-6 text-red-500"
                             width="24"
                             height="24"
                             viewBox="0 0 24 24"
@@ -73,7 +52,7 @@
                     </div>
                     <div class="flex items-center">
                         <svg
-                            class="h-6 w-6 text-green-500"
+                            class="w-6 h-6 text-green-500"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -92,7 +71,7 @@
 
                 <inertia-link
                     :href="route('Service', { id: id })"
-                    class="text-xl font-medium text-indigo-500"
+                    class="text-indigo-500 text-xl font-medium"
                 >
                     詳しくみる
                 </inertia-link>
@@ -102,17 +81,17 @@
 </template>
 
 <script>
-export default {
-    props: {
-        id: Number,
-        title: String,
-        description: String,
-        user: Object,
-        date: String,
-        tags: Array,
-        likes: Number,
-        comments: Number,
-        image_url: String,
-    },
-};
+    export default {
+        props: {
+            id: Number,
+            title: String,
+            description: String,
+            user: Object,
+            date: String,
+            tags: Array,
+            likes: Number,
+            comments: Number,
+            image_url: String,
+        },
+    };
 </script>

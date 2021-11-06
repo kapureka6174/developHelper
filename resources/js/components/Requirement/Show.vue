@@ -8,21 +8,19 @@
                     v-for="requirement in requirements"
                     :key="requirement.id"
                 >
-                    <summary
-                        class="font-semibold bg-gray-200 rounded-md py-2 px-4"
-                    >
+                    <summary class="px-4 py-2 font-semibold bg-gray-200 rounded-md">
                         {{ requirement.title }}
                     </summary>
                     <p
                         class="
                             text-grey-600
-                            font-bold
                             p-4
-                            rounded-md
+                            break-words
+                            whitespace-pre-line
+                            font-bold
                             bg-gray-100
                             border-2 border-white
-                            whitespace-pre-line
-                            break-words
+                            rounded-md
                         "
                     >
                         {{ requirement.content }}
@@ -33,14 +31,14 @@
     </div>
 </template>
 <script>
-import SectionTitle from "../Utility/SectionTitle";
+    import SectionTitle from "../Utility/SectionTitle";
 
-export default {
-    components: {
-        SectionTitle,
-    },
-    props: {
-        requirements: Array,
-    },
-};
+    export default {
+        components: {
+            SectionTitle,
+        },
+        props: {
+            requirements: Array,
+        },
+    };
 </script>

@@ -2,22 +2,21 @@
     <h2
         v-if="finished"
         class="
-            text-xs
-            items-center
-            font-bold
             leading-sm
-            uppercase
-            px-3
-            py-1
-            bg-green-200
-            text-green-700
-            rounded-full
+            hidden
+            items-center
+            justify-center
             mx-2
             my-1
-            justify-center
+            px-3
+            py-1
             w-16
             h-8
-            hidden
+            text-green-700 text-xs
+            font-bold
+            bg-green-200
+            rounded-full
+            uppercase
             md:inline-flex
         "
     >
@@ -26,22 +25,21 @@
     <h2
         v-else
         class="
-            text-xs
-            items-center
-            font-bold
             leading-sm
-            uppercase
-            px-3
-            py-1
-            bg-pink-200
-            text-pink-700
-            rounded-full
+            hidden
+            items-center
+            justify-center
             mx-2
             my-1
-            justify-center
+            px-3
+            py-1
             w-16
             h-8
-            hidden
+            text-pink-700 text-xs
+            font-bold
+            bg-pink-200
+            rounded-full
+            uppercase
             md:inline-flex
         "
     >
@@ -49,9 +47,9 @@
     </h2>
 </template>
 <script>
-export default {
-    props: {
-        finished: Boolean,
-    },
-};
+    export default {
+        props: {
+            finished: Boolean,
+        },
+    };
 </script>

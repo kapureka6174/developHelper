@@ -4,17 +4,19 @@
         <textarea
             class="
                 autoexpand
-                tracking-wide
-                py-2
-                px-4
-                mb-3
-                leading-relaxed
-                appearance-none
                 block
+                mb-3
+                px-4
+                py-2
                 w-full
+                tracking-wide
+                leading-relaxed
+                focus:bg-white
                 border border-gray-200
+                focus:border-gray-500
                 rounded
-                focus:outline-none focus:bg-white focus:border-gray-500
+                focus:outline-none
+                appearance-none
             "
             rows="10"
             placeholder="サービスの説明を入力してください。"
@@ -24,14 +26,15 @@
         <!-- 通常表示 -->
         <p
             class="
-                whitespace-pre-line
-                mt-2
-                py-2
-                px-4
                 mb-3
-                text-xl text-gray-700
-                font-bold
+                mt-2
+                px-4
+                py-2
+                text-gray-700
                 break-words
+                whitespace-pre-line
+                text-xl
+                font-bold
             "
             v-else
         >
@@ -39,10 +42,7 @@
         </p>
 
         <!-- エラー表示 -->
-        <client-error
-            :errorFlag="description.error !== ''"
-            :text="description.error"
-        />
+        <client-error :errorFlag="description.error !== ''" :text="description.error" />
         <server-error
             :errorFlag="Object.keys($page.props.errors).length"
             :errors="
@@ -54,18 +54,18 @@
     </div>
 </template>
 <script>
-import { inject } from "vue";
-import ClientError from "../Utility/ClientError";
-import ServerError from "../Utility/ServerError";
+    import { inject } from "vue";
+    import ClientError from "../Utility/ClientError";
+    import ServerError from "../Utility/ServerError";
 
-export default {
-    components: {
-        ClientError,
-        ServerError,
-    },
-    setup() {
-        const description = inject("description");
-        return { description };
-    },
-};
+    export default {
+        components: {
+            ClientError,
+            ServerError,
+        },
+        setup() {
+            const description = inject("description");
+            return { description };
+        },
+    };
 </script>

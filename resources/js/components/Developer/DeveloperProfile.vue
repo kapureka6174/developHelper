@@ -1,42 +1,31 @@
 <template>
-    <div class="md:px-32 md:pt-16 px-4 pt-8">
+    <div class="pt-8 px-4 md:pt-16 md:px-32">
         <div class="md:flex md:items-center">
             <img
-                class="md:h-32 md:w-32 h-16 w-16 rounded-full mr-12 mb-3"
+                class="mb-3 mr-12 w-16 h-16 rounded-full md:w-32 md:h-32"
                 :src="image_url"
                 alt="プロフィール写真"
             />
             <div>
-                <h3 class="font-bold text-3xl mb-2">{{ username }}</h3>
+                <h3 class="mb-2 text-3xl font-bold">{{ username }}</h3>
                 <p class="font-semibold">{{ introduction }}</p>
             </div>
         </div>
-        <div class="flex flex-col mt-6 justify-center md:justify-between">
-            <div
-                class="
-                    flex flex-col
-                    md:flex-row
-                    justify-center
-                    mb-3
-                    items-center
-                "
-            >
-                <p
-                    v-if="fav_lang"
-                    class="font-semibold text-xl mb-3 md:mr-3 md:mb-0"
-                >
+        <div class="flex flex-col justify-center mt-6 md:justify-between">
+            <div class="flex flex-col items-center justify-center mb-3 md:flex-row">
+                <p v-if="fav_lang" class="mb-3 text-xl font-semibold md:mb-0 md:mr-3">
                     得意な言語：{{ fav_lang }}
                 </p>
-                <p v-if="dev_years" class="font-semibold text-xl">
+                <p v-if="dev_years" class="text-xl font-semibold">
                     プログラミング歴：{{ dev_years }}
                 </p>
             </div>
 
             <!-- いいね数とSNSへのリンク -->
             <div class="flex items-start justify-center">
-                <div class="flex flex-col justify-center items-center">
+                <div class="flex flex-col items-center justify-center">
                     <svg
-                        class="h-8 w-8 text-red-500"
+                        class="w-8 h-8 text-red-500"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -50,14 +39,9 @@
                     </svg>
                     <p class="text-red-500">{{ likes }}</p>
                 </div>
-                <a
-                    v-if="github"
-                    :href="github_url"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
+                <a v-if="github" :href="github_url" target="_blank" rel="noopener noreferrer">
                     <svg
-                        class="h-8 w-8 text-black ml-6"
+                        class="ml-6 w-8 h-8 text-black"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -70,14 +54,9 @@
                         />
                     </svg>
                 </a>
-                <a
-                    v-if="twitter"
-                    :href="twitter_url"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
+                <a v-if="twitter" :href="twitter_url" target="_blank" rel="noopener noreferrer">
                     <svg
-                        class="h-8 w-8 text-blue-500 ml-6"
+                        class="ml-6 w-8 h-8 text-blue-500"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -96,23 +75,23 @@
 </template>
 
 <script>
-export default {
-    props: {
-        username: String,
-        introduction: String,
-        github: String,
-        twitter: String,
-        image_url: String,
-        likes: Number,
-        comments: Number,
-        fav_lang: String,
-        dev_years: String,
-    },
-    setup(props) {
-        const github_url = `https://github.com/${props.github}`;
-        const twitter_url = `https://twitter.com/${props.twitter}`;
+    export default {
+        props: {
+            username: String,
+            introduction: String,
+            github: String,
+            twitter: String,
+            image_url: String,
+            likes: Number,
+            comments: Number,
+            fav_lang: String,
+            dev_years: String,
+        },
+        setup(props) {
+            const github_url = `https://github.com/${props.github}`;
+            const twitter_url = `https://twitter.com/${props.twitter}`;
 
-        return { github_url, twitter_url };
-    },
-};
+            return { github_url, twitter_url };
+        },
+    };
 </script>

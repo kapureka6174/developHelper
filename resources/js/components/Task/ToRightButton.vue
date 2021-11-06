@@ -1,6 +1,6 @@
 <template>
     <svg
-        class="h-8 w-8 text-blue-500 flex-shrink-0 hover:text-blue-300"
+        class="flex-shrink-0 w-8 h-8 hover:text-blue-300 text-blue-500"
         width="24"
         height="24"
         viewBox="0 0 24 24"
@@ -17,16 +17,16 @@
 </template>
 
 <script>
-import { inject } from "vue";
+    import { inject } from "vue";
 
-export default {
-    props: {
-        state: String,
-        index: Number,
-    },
-    setup() {
-        const tasks = inject("tasks");
-        return { tasks };
-    },
-};
+    export default {
+        props: {
+            state: String,
+            index: Number,
+        },
+        setup() {
+            const tasks = inject("tasks");
+            return { tasks };
+        },
+    };
 </script>

@@ -6,22 +6,24 @@
             items-center
             px-4
             py-2
-            bg-white
-            border border-gray-300
-            rounded-md
-            font-semibold
-            text-xs text-gray-700
-            uppercase
-            tracking-widest
-            shadow-sm
             hover:text-gray-500
-            focus:outline-none
+            text-gray-700
+            active:text-gray-800
+            text-xs
+            font-semibold
+            tracking-widest
+            active:bg-gray-50
+            bg-white
+            border
             focus:border-blue-300
-            focus:ring
-            focus:ring-blue-200
-            active:text-gray-800 active:bg-gray-50
+            border-gray-300
+            rounded-md
+            focus:outline-none
+            shadow-sm
             disabled:opacity-25
+            uppercase
             transition
+            focus:ring focus:ring-blue-200
         "
     >
         <slot></slot>
@@ -29,12 +31,12 @@
 </template>
 
 <script>
-export default {
-    props: {
-        type: {
-            type: String,
-            default: "button",
+    export default {
+        props: {
+            type: {
+                type: String,
+                default: "button",
+            },
         },
-    },
-};
+    };
 </script>

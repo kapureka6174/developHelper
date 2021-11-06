@@ -5,7 +5,7 @@
             leave-from-class="opacity-100"
             leave-to-class="opacity-0"
         >
-            <div v-show="on" class="text-sm text-gray-600">
+            <div v-show="on" class="text-gray-600 text-sm">
                 <slot />
             </div>
         </transition>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-export default {
-    props: ["on"],
-};
+    export default {
+        props: ["on"],
+    };
 </script>

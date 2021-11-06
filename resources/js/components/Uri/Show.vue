@@ -2,47 +2,28 @@
     <div>
         <section-title title="URI設計" />
         <div class="overflow-x-auto">
-            <div class="rounded-t-lg m-5 mx-auto bg-gray-200 text-gray-800">
+            <div class="m-5 mx-auto text-gray-800 bg-gray-200 rounded-t-lg">
                 <Header />
                 <div
                     v-for="(uri, index) in uris"
                     :key="index"
                     class="
-                        bg-gray-100
-                        border-b border-gray-200
                         flex flex-nowrap
                         items-center
-                        overflow-x-auto
-                        max-h-40
                         w-full
+                        max-h-40
+                        bg-gray-100
+                        border-b border-gray-200
+                        overflow-x-auto
                     "
                 >
-                    <div
-                        class="
-                            flex-none
-                            px-4
-                            py-3
-                            md:w-2/12
-                            break-words
-                            text-center
-                        "
-                    >
+                    <div class="flex-none px-4 py-3 text-center break-words md:w-2/12">
                         {{ uri.uri }}
                     </div>
-                    <div
-                        class="
-                            flex-none
-                            px-4
-                            py-3
-                            w-20
-                            md:w-2/12
-                            break-words
-                            text-center
-                        "
-                    >
+                    <div class="flex-none px-4 py-3 w-20 text-center break-words md:w-2/12">
                         {{ uri.method }}
                     </div>
-                    <div class="flex-none px-4 py-3 md:w-8/12 text-center">
+                    <div class="flex-none px-4 py-3 text-center md:w-8/12">
                         {{ uri.explain }}
                     </div>
                 </div>
@@ -52,15 +33,15 @@
 </template>
 
 <script>
-import SectionTitle from "../Utility/SectionTitle";
-import Header from "./Header";
-export default {
-    components: {
-        SectionTitle,
-        Header,
-    },
-    props: {
-        uris: Array,
-    },
-};
+    import SectionTitle from "../Utility/SectionTitle";
+    import Header from "./Header";
+    export default {
+        components: {
+            SectionTitle,
+            Header,
+        },
+        props: {
+            uris: Array,
+        },
+    };
 </script>

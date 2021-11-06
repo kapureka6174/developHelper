@@ -1,37 +1,28 @@
 <template>
     <div
         class="
-            text-xs
+            leading-sm
             inline-flex
             items-center
-            font-bold
-            leading-sm
-            uppercase
-            px-3
-            py-1
-            bg-blue-200
-            text-blue-700
-            rounded-full
             mx-2
             my-1
+            px-3
+            py-1
+            text-blue-700 text-xs
+            font-bold
             hover:bg-blue-100
+            bg-blue-200
+            rounded-full
+            uppercase
         "
     >
         {{ tagname }}
         <button
-            class="
-                w-6
-                h-6
-                inline-block
-                align-middle
-                text-gray-500
-                focus:outline-none
-                rounded-full
-            "
+            class="inline-block align-middle w-6 h-6 text-gray-500 rounded-full focus:outline-none"
             @click="selectTag(index)"
         >
             <svg
-                class="w-6 h-6 fill-current mx-auto"
+                class="mx-auto w-6 h-6 fill-current"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
             >
@@ -45,16 +36,16 @@
 </template>
 
 <script>
-export default {
-    props: {
-        tagname: String,
-    },
-    setup(props, ctx) {
-        const selectTag = (index) => {
-            ctx.emit("selectTag", index);
-        };
+    export default {
+        props: {
+            tagname: String,
+        },
+        setup(props, ctx) {
+            const selectTag = (index) => {
+                ctx.emit("selectTag", index);
+            };
 
-        return { selectTag };
-    },
-};
+            return { selectTag };
+        },
+    };
 </script>

@@ -1,12 +1,12 @@
 <template>
-    <label class="block font-medium text-sm text-gray-700">
+    <label class="block text-gray-700 text-sm font-medium">
         <span v-if="value">{{ value }}</span>
         <span v-else><slot></slot></span>
     </label>
 </template>
 
 <script>
-export default {
-    props: ["value"],
-};
+    export default {
+        props: ["value"],
+    };
 </script>

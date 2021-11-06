@@ -1,7 +1,7 @@
 <template>
     <!-- 注意文 -->
     <div class="col-span-6 sm:col-span-4">
-        <h2 class="font-semibold text-red-400">
+        <h2 class="text-red-400 font-semibold">
             ※ゲストユーザーは、プロフィールを編集できません。
         </h2>
     </div>
@@ -12,7 +12,7 @@
         <jet-input
             id="name"
             type="text"
-            class="mt-1 block w-full bg-gray-300"
+            class="block mt-1 w-full bg-gray-300"
             v-model="form.name"
             readonly
             autocomplete="name"
@@ -26,7 +26,7 @@
         <jet-input
             id="email"
             type="email"
-            class="mt-1 block w-full bg-gray-300"
+            class="block mt-1 w-full bg-gray-300"
             v-model="form.email"
             readonly
         />
@@ -38,7 +38,7 @@
         <jet-input
             id="twitter_account"
             type="text"
-            class="mt-1 block w-full bg-gray-300"
+            class="block mt-1 w-full bg-gray-300"
             v-model="form.twitter_account"
             autocomplete="twitter_account"
             placeholder="＠なしで入力してください"
@@ -52,7 +52,7 @@
         <jet-input
             id="github_account"
             type="text"
-            class="mt-1 block w-full bg-gray-300"
+            class="block mt-1 w-full bg-gray-300"
             v-model="form.github_account"
             autocomplete="github_account"
             placeholder="ユーザー名だけを入力してください"
@@ -67,7 +67,7 @@
         <jet-input
             id="fav_lang"
             type="text"
-            class="mt-1 block w-full bg-gray-300"
+            class="block mt-1 w-full bg-gray-300"
             v-model="form.fav_lang"
             autocomplete="fav_lang"
             placeholder="一つだけ入力してください"
@@ -82,7 +82,7 @@
         <jet-input
             id="dev_year"
             type="text"
-            class="mt-1 block w-full bg-gray-300"
+            class="block mt-1 w-full bg-gray-300"
             v-model="form.dev_year"
             autocomplete="dev_year"
             placeholder="〇年〇ヶ月で入力してください"
@@ -96,17 +96,15 @@
         <jet-label for="introduction" value="紹介文" />
         <textarea
             class="
-                border-gray-300
-                focus:border-indigo-300
-                focus:ring
-                focus:ring-indigo-200
-                focus:ring-opacity-50
-                rounded-md
-                shadow-sm
-                mt-1
                 block
+                mt-1
                 w-full
                 bg-gray-300
+                border-gray-300
+                focus:border-indigo-300
+                rounded-md
+                shadow-sm
+                focus:ring focus:ring-indigo-200 focus:ring-opacity-50
             "
             id="introduction"
             type="text"
@@ -117,15 +115,15 @@
     </div>
 </template>
 <script>
-import JetInput from "@/Jetstream/Input";
-import JetLabel from "@/Jetstream/Label";
-export default {
-    components: {
-        JetInput,
-        JetLabel,
-    },
-    props: {
-        form: Object,
-    },
-};
+    import JetInput from "@/Jetstream/Input";
+    import JetLabel from "@/Jetstream/Label";
+    export default {
+        components: {
+            JetInput,
+            JetLabel,
+        },
+        props: {
+            form: Object,
+        },
+    };
 </script>

@@ -1,27 +1,20 @@
 <template>
     <div v-if="success" class="alert">
-        <div class="fixed top-0 right-0 m-6">
+        <div class="fixed right-0 top-0 m-6">
             <div
-                class="
-                    rounded-lg
-                    shadow-md
-                    p-6
-                    pr-10
-                    bg-green-200
-                    text-green-900
-                "
+                class="p-6 pr-10 text-green-900 bg-green-200 rounded-lg shadow-md"
                 style="min-width: 240px"
             >
                 <button
                     class="
+                        absolute
+                        right-0
+                        top-0
+                        px-3
+                        py-2
+                        hover:opacity-100
                         opacity-75
                         cursor-pointer
-                        absolute
-                        top-0
-                        right-0
-                        py-2
-                        px-3
-                        hover:opacity-100
                     "
                     @click.prevent="$emit('delete')"
                 >
@@ -35,20 +28,20 @@
     </div>
 </template>
 <script>
-import { onUpdated, onMounted } from "vue";
-export default {
-    props: {
-        success: String,
-    },
-    setup(props, ctx) {
-        onMounted(() => {
-            setTimeout(() => ctx.emit("deleteFlash"), 3000);
-        });
-        onUpdated(() => {
-            if (props.success) {
+    import { onUpdated, onMounted } from "vue";
+    export default {
+        props: {
+            success: String,
+        },
+        setup(props, ctx) {
+            onMounted(() => {
                 setTimeout(() => ctx.emit("deleteFlash"), 3000);
-            }
-        });
-    },
-};
+            });
+            onUpdated(() => {
+                if (props.success) {
+                    setTimeout(() => ctx.emit("deleteFlash"), 3000);
+                }
+            });
+        },
+    };
 </script>

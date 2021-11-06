@@ -1,10 +1,10 @@
 <template>
-    <div class="flex md:flex-row flex-col">
-        <div class="flex flex-col md:w-1/3 md:mr-3">
+    <div class="flex flex-col md:flex-row">
+        <div class="flex flex-col md:mr-3 md:w-1/3">
             <!-- GitHubのURL -->
             <input
                 v-if="!github_url.decidable"
-                class="rounded my-2"
+                class="my-2 rounded"
                 type="text"
                 placeholder="サービスのGitHubのURLを入力してください"
                 v-model="github_url.content"
@@ -15,14 +15,7 @@
             <!-- 通常表示 -->
             <p
                 v-else
-                class="
-                    md:text-base
-                    font-bold
-                    text-gray-700
-                    mb-2
-                    pt-3
-                    break-words
-                "
+                class="mb-2 pt-3 text-gray-700 break-words font-bold md:text-base"
                 @click="github_url.decidable = false"
             >
                 {{ github_url.content }}
@@ -47,7 +40,7 @@
             <!-- サイトのURL -->
             <input
                 v-if="!site_url.decidable"
-                class="rounded my-2"
+                class="my-2 rounded"
                 type="text"
                 placeholder="サービスのURLを入力してください"
                 v-model="site_url.content"
@@ -58,14 +51,7 @@
             <!-- 通常表示 -->
             <p
                 v-else
-                class="
-                    md:text-base
-                    font-bold
-                    text-gray-700
-                    mb-2
-                    pt-3
-                    break-words
-                "
+                class="mb-2 pt-3 text-gray-700 break-words font-bold md:text-base"
                 @click="site_url.decidable = false"
             >
                 {{ site_url.content }}
@@ -88,31 +74,29 @@
     </div>
 </template>
 <script>
-import { inject } from "vue";
-import ClientError from "../Utility/ClientError";
-import ServerError from "../Utility/ServerError";
+    import { inject } from "vue";
+    import ClientError from "../Utility/ClientError";
+    import ServerError from "../Utility/ServerError";
 
-export default {
-    components: {
-        ClientError,
-        ServerError,
-    },
-    setup() {
-        const github_url = inject("github_url");
-        const site_url = inject("site_url");
+    export default {
+        components: {
+            ClientError,
+            ServerError,
+        },
+        setup() {
+            const github_url = inject("github_url");
+            const site_url = inject("site_url");
 
-        const input = (value, type) => {
-            if (!value) {
-                type ? (github_url.error = true) : (site_url.error = true);
-            } else {
-                type ? (github_url.error = "") : (site_url.error = "");
-                type
-                    ? (github_url.decidable = true)
-                    : (site_url.decidable = true);
-            }
-        };
+            const input = (value, type) => {
+                if (!value) {
+                    type ? (github_url.error = true) : (site_url.error = true);
+                } else {
+                    type ? (github_url.error = "") : (site_url.error = "");
+                    type ? (github_url.decidable = true) : (site_url.decidable = true);
+                }
+            };
 
-        return { github_url, site_url, input };
-    },
-};
+            return { github_url, site_url, input };
+        },
+    };
 </script>

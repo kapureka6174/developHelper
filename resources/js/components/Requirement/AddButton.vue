@@ -1,31 +1,20 @@
 <template>
-    <button
-        class="
-            bg-indigo-600
-            hover:bg-indigo-400
-            h-8
-            w-12
-            text-white
-            rounded
-            ml-2
-        "
-        @click="add"
-    >
+    <button class="ml-2 w-12 h-8 text-white hover:bg-indigo-400 bg-indigo-600 rounded" @click="add">
         追加
     </button>
 </template>
 <script>
-import { inject } from "vue";
-export default {
-    setup() {
-        const requirements = inject("requirements");
-        const newRequirement = inject("newRequirement");
+    import { inject } from "vue";
+    export default {
+        setup() {
+            const requirements = inject("requirements");
+            const newRequirement = inject("newRequirement");
 
-        const add = () => {
-            requirements.push(newRequirement());
-        };
+            const add = () => {
+                requirements.push(newRequirement());
+            };
 
-        return { add };
-    },
-};
+            return { add };
+        },
+    };
 </script>

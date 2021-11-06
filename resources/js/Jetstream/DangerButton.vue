@@ -7,21 +7,21 @@
             justify-center
             px-4
             py-2
-            bg-red-600
-            border border-transparent
-            rounded-md
+            text-white text-xs
             font-semibold
-            text-xs text-white
-            uppercase
             tracking-widest
             hover:bg-red-500
-            focus:outline-none
-            focus:border-red-700
-            focus:ring
-            focus:ring-red-200
+            bg-red-600
             active:bg-red-600
+            border
+            focus:border-red-700
+            border-transparent
+            rounded-md
+            focus:outline-none
             disabled:opacity-25
+            uppercase
             transition
+            focus:ring focus:ring-red-200
         "
     >
         <slot></slot>
@@ -29,12 +29,12 @@
 </template>
 
 <script>
-export default {
-    props: {
-        type: {
-            type: String,
-            default: "button",
+    export default {
+        props: {
+            type: {
+                type: String,
+                default: "button",
+            },
         },
-    },
-};
+    };
 </script>

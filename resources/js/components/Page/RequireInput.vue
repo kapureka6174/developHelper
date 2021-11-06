@@ -1,19 +1,7 @@
 <template>
-    <div class="w-full flex items-center justify-around mb-3">
+    <div class="flex items-center justify-around mb-3 w-full">
         <!-- ページの機能 -->
-        <p
-            class="
-                font-bold
-                text-gray-600
-                bg-gray-200
-                rounded-md
-                py-2
-                px-4
-                w-4/5
-                mx-3
-                text-center
-            "
-        >
+        <p class="mx-3 px-4 py-2 w-4/5 text-center text-gray-600 font-bold bg-gray-200 rounded-md">
             {{
                 $page.url.split("/")[1] == "create"
                     ? pages[index].requirements[requirementIndex]
@@ -22,7 +10,7 @@
         </p>
         <!-- 削除ボタン -->
         <svg
-            class="h-6 w-6 text-red-600 my-2 mr-4 hover:text-red-400"
+            class="mr-4 my-2 w-6 h-6 hover:text-red-400 text-red-600"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -41,36 +29,33 @@
     </div>
 </template>
 <script>
-import { inject } from "vue";
-export default {
-    props: {
-        index: Number,
-        requirementIndex: Number,
-    },
-    setup() {
-        const pages = inject("pages");
+    import { inject } from "vue";
+    export default {
+        props: {
+            index: Number,
+            requirementIndex: Number,
+        },
+        setup() {
+            const pages = inject("pages");
 
-        // データの削除
-        const deleteData = inject("deleteData");
-        const destroy = (url, index, detailIndex) => {
-            // 新規作成画面ならそのままデータ消す
-            if (url.split("/")[1] == "create") {
-                pages[index].requirements.splice(detailIndex, 1);
-            } else {
-                // 編集画面なら削除データをDBに引き渡すためにdeleteDataに保存（ただしidが既にあるデータのみ）
-                let deleteContent = pages[index].requirements.splice(
-                    detailIndex,
-                    1
-                )[0];
-                if (deleteContent.id) {
-                    deleteData.pageRequirements.push({
-                        page_id: pages[index].id,
-                        id: deleteContent.id,
-                    });
+            // データの削除
+            const deleteData = inject("deleteData");
+            const destroy = (url, index, detailIndex) => {
+                // 新規作成画面ならそのままデータ消す
+                if (url.split("/")[1] == "create") {
+                    pages[index].requirements.splice(detailIndex, 1);
+                } else {
+                    // 編集画面なら削除データをDBに引き渡すためにdeleteDataに保存（ただしidが既にあるデータのみ）
+                    let deleteContent = pages[index].requirements.splice(detailIndex, 1)[0];
+                    if (deleteContent.id) {
+                        deleteData.pageRequirements.push({
+                            page_id: pages[index].id,
+                            id: deleteContent.id,
+                        });
+                    }
                 }
-            }
-        };
-        return { pages, destroy };
-    },
-};
+            };
+            return { pages, destroy };
+        },
+    };
 </script>

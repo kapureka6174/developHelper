@@ -1,20 +1,20 @@
 <template>
     <div v-if="fail" class="alert">
-        <div class="fixed top-0 right-0 m-6">
+        <div class="fixed right-0 top-0 m-6">
             <div
-                class="rounded-lg shadow-md p-6 pr-10 bg-red-200 text-red-900"
+                class="p-6 pr-10 text-red-900 bg-red-200 rounded-lg shadow-md"
                 style="min-width: 240px"
             >
                 <button
                     class="
+                        absolute
+                        right-0
+                        top-0
+                        px-3
+                        py-2
+                        hover:opacity-100
                         opacity-75
                         cursor-pointer
-                        absolute
-                        top-0
-                        right-0
-                        py-2
-                        px-3
-                        hover:opacity-100
                     "
                     @click.prevent="$emit('delete')"
                 >
@@ -28,17 +28,17 @@
     </div>
 </template>
 <script>
-import { onUpdated } from "vue";
-export default {
-    props: {
-        fail: String,
-    },
-    setup(props, ctx) {
-        onUpdated(() => {
-            if (props.fail) {
-                setTimeout(() => ctx.emit("deleteFlash"), 3000);
-            }
-        });
-    },
-};
+    import { onUpdated } from "vue";
+    export default {
+        props: {
+            fail: String,
+        },
+        setup(props, ctx) {
+            onUpdated(() => {
+                if (props.fail) {
+                    setTimeout(() => ctx.emit("deleteFlash"), 3000);
+                }
+            });
+        },
+    };
 </script>

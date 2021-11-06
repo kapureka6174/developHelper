@@ -1,5 +1,5 @@
 {
-    "printWidth": 80,
+    "printWidth": 100,
     "tabWidth": 4,
     "useTabs": false,
     "semi": true,
@@ -16,6 +16,6 @@
     "insertPragma": false,
     "proseWrap": "preserve",
     "htmlWhitespaceSensitivity": "css",
-    "vueIndentScriptAndStyle": false,
+    "vueIndentScriptAndStyle": true,
     "endOfLine": "auto"
   }

@@ -1,30 +1,30 @@
 <template>
     <button
         class="
+            mouse
+            fixed
+            bottom-10
+            left-4
+            flex
+            items-center
+            justify-center
             p-0
             w-10
             h-10
             bg-white
+            border-2 border-blue-500
             rounded-full
+            focus:outline-none
             active:shadow-lg
-            mouse
             shadow-xl
             transition
-            ease-in
             duration-200
-            focus:outline-none
-            fixed
-            bottom-10
-            left-4
+            ease-in
             md:hidden
-            flex
-            items-center
-            justify-center
-            border-blue-500 border-2
         "
     >
         <svg
-            class="h-6 w-6 text-blue-500"
+            class="w-6 h-6 text-blue-500"
             width="24"
             height="24"
             viewBox="0 0 24 24"

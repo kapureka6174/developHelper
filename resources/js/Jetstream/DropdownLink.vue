@@ -4,14 +4,13 @@
             type="submit"
             class="
                 block
-                w-full
                 px-4
                 py-2
-                text-sm
+                w-full
+                text-left text-gray-700 text-sm
                 leading-5
-                text-gray-700 text-left
                 hover:bg-gray-100
-                focus:outline-none focus:bg-gray-100
+                focus:bg-gray-100 focus:outline-none
                 transition
             "
             v-if="as == 'button'"
@@ -25,11 +24,10 @@
                 block
                 px-4
                 py-2
-                text-sm
+                text-gray-700 text-sm
                 leading-5
-                text-gray-700
                 hover:bg-gray-100
-                focus:outline-none focus:bg-gray-100
+                focus:bg-gray-100 focus:outline-none
                 transition
             "
             v-else-if="as == 'a'"
@@ -43,11 +41,10 @@
                 block
                 px-4
                 py-2
-                text-sm
+                text-gray-700 text-sm
                 leading-5
-                text-gray-700
                 hover:bg-gray-100
-                focus:outline-none focus:bg-gray-100
+                focus:bg-gray-100 focus:outline-none
                 transition
             "
             v-else
@@ -58,7 +55,7 @@
 </template>
 
 <script>
-export default {
-    props: ["href", "as"],
-};
+    export default {
+        props: ["href", "as"],
+    };
 </script>

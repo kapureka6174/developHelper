@@ -1,5 +1,5 @@
 <template>
-    <div class="ml-3 relative">
+    <div class="relative ml-3">
         <jet-dropdown align="right" width="48">
             <template #trigger>
                 <template v-if="$page.props.user">
@@ -11,14 +11,14 @@
                                 items-center
                                 px-3
                                 py-2
-                                border border-transparent
-                                text-sm
-                                leading-4
-                                font-medium
-                                rounded-md
                                 text-gray-500
-                                bg-white
                                 hover:text-gray-700
+                                text-sm
+                                font-medium
+                                leading-4
+                                bg-white
+                                border border-transparent
+                                rounded-md
                                 focus:outline-none
                                 transition
                             "
@@ -26,7 +26,7 @@
                             {{ $page.props.user.name }}
 
                             <svg
-                                class="ml-2 -mr-0.5 h-4 w-4"
+                                class="-mr-0.5 ml-2 w-4 h-4"
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
@@ -51,14 +51,14 @@
                                     items-center
                                     px-3
                                     py-2
-                                    border border-transparent
-                                    text-sm
-                                    leading-4
-                                    font-medium
-                                    rounded-md
                                     text-gray-500
-                                    bg-white
                                     hover:text-gray-700
+                                    text-sm
+                                    font-medium
+                                    leading-4
+                                    bg-white
+                                    border border-transparent
+                                    rounded-md
                                     focus:outline-none
                                     transition
                                 "
@@ -77,14 +77,14 @@
                                     items-center
                                     px-3
                                     py-2
-                                    border border-transparent
-                                    text-sm
-                                    leading-4
-                                    font-medium
-                                    rounded-md
                                     text-gray-500
-                                    bg-white
                                     hover:text-gray-700
+                                    text-sm
+                                    font-medium
+                                    leading-4
+                                    bg-white
+                                    border border-transparent
+                                    rounded-md
                                     focus:outline-none
                                     transition
                                 "
@@ -98,21 +98,15 @@
 
             <template #content v-if="$page.props.user">
                 <!-- Account Management -->
-                <div class="block px-4 py-2 text-xs text-gray-400">
-                    アカウント管理
-                </div>
+                <div class="block px-4 py-2 text-gray-400 text-xs">アカウント管理</div>
 
-                <jet-dropdown-link :href="route('profile.show')">
-                    プロフィール
-                </jet-dropdown-link>
+                <jet-dropdown-link :href="route('profile.show')"> プロフィール </jet-dropdown-link>
 
                 <div class="border-t border-gray-100"></div>
 
                 <!-- Authentication -->
                 <form @submit.prevent="logout">
-                    <jet-dropdown-link as="button">
-                        ログアウト
-                    </jet-dropdown-link>
+                    <jet-dropdown-link as="button"> ログアウト </jet-dropdown-link>
                 </form>
             </template>
         </jet-dropdown>
@@ -120,19 +114,19 @@
 </template>
 
 <script>
-import JetDropdown from "@/Jetstream/Dropdown";
-import JetDropdownLink from "@/Jetstream/DropdownLink";
+    import JetDropdown from "@/Jetstream/Dropdown";
+    import JetDropdownLink from "@/Jetstream/DropdownLink";
 
-export default {
-    components: {
-        JetDropdown,
-        JetDropdownLink,
-    },
-
-    methods: {
-        logout() {
-            this.$inertia.post(route("logout"));
+    export default {
+        components: {
+            JetDropdown,
+            JetDropdownLink,
         },
-    },
-};
+
+        methods: {
+            logout() {
+                this.$inertia.post(route("logout"));
+            },
+        },
+    };
 </script>

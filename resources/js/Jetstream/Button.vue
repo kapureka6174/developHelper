@@ -6,21 +6,21 @@
             items-center
             px-4
             py-2
-            bg-gray-800
-            border border-transparent
-            rounded-md
+            text-white text-xs
             font-semibold
-            text-xs text-white
-            uppercase
             tracking-widest
             hover:bg-gray-700
+            bg-gray-800
             active:bg-gray-900
-            focus:outline-none
+            border
             focus:border-gray-900
-            focus:ring
-            focus:ring-gray-300
+            border-transparent
+            rounded-md
+            focus:outline-none
             disabled:opacity-25
+            uppercase
             transition
+            focus:ring focus:ring-gray-300
         "
     >
         <slot></slot>
@@ -28,12 +28,12 @@
 </template>
 
 <script>
-export default {
-    props: {
-        type: {
-            type: String,
-            default: "submit",
+    export default {
+        props: {
+            type: {
+                type: String,
+                default: "submit",
+            },
         },
-    },
-};
+    };
 </script>

@@ -1,51 +1,34 @@
 <template>
     <div class="overflow-x-auto">
-        <div class="rounded-t-lg m-5 mx-auto bg-gray-200 text-gray-800">
+        <div class="m-5 mx-auto text-gray-800 bg-gray-200 rounded-t-lg">
             <Header />
             <div
                 v-for="(uri, index) in uris"
                 :key="index"
-                class="
-                    bg-gray-100
-                    border-b border-gray-200
-                    flex flex-col
-                    items-center
-                    relative
-                "
+                class="relative flex flex-col items-center bg-gray-100 border-b border-gray-200"
             >
-                <div class="w-full flex flex-col-3">
-                    <div
-                        class="
-                            px-4
-                            py-3
-                            w-3/12
-                            md:w-3/12
-                            text-center
-                            overflow-x-auto
-                        "
-                    >
+                <div class="flex-col-3 flex w-full">
+                    <div class="px-4 py-3 w-3/12 text-center overflow-x-auto md:w-3/12">
                         <!-- URI（通常表示） -->
                         <input
                             v-if="!uris[index].uri.decidable"
                             class="
-                                appearance-none
                                 block
-                                w-full
-                                bg-white
-                                text-gray-700
-                                border border-gray-200
-                                rounded
-                                h-10
                                 px-1
+                                w-full
+                                h-10
+                                text-gray-700
                                 leading-tight
-                                focus:outline-none
-                                focus:ring-1
-                                focus:ring-blue-500
+                                bg-white
+                                border
                                 focus:border-blue-500
+                                border-gray-200
+                                rounded
+                                focus:outline-none
+                                appearance-none
+                                focus:ring-1 focus:ring-blue-500
                             "
-                            @keyup.enter="
-                                input($event.target.value, index, 'uri')
-                            "
+                            @keyup.enter="input($event.target.value, index, 'uri')"
                             v-model="uris[index].uri.content"
                             v-on:blur="uris[index].uri.error = ''"
                         />
@@ -58,38 +41,27 @@
                             {{ uris[index].uri.content }}
                         </div>
                     </div>
-                    <div
-                        class="
-                            px-4
-                            py-3
-                            w-3/12
-                            md:w-1/12
-                            text-center
-                            overflow-x-auto
-                        "
-                    >
+                    <div class="px-4 py-3 w-3/12 text-center overflow-x-auto md:w-1/12">
                         <!-- メソッド（編集表示） -->
                         <input
                             v-if="!uris[index].method.decidable"
                             class="
-                                appearance-none
                                 block
-                                w-full
-                                bg-white
-                                text-gray-700
-                                border border-gray-200
-                                rounded
-                                h-10
                                 px-1
+                                w-full
+                                h-10
+                                text-gray-700
                                 leading-tight
-                                focus:outline-none
-                                focus:ring-1
-                                focus:ring-blue-500
+                                bg-white
+                                border
                                 focus:border-blue-500
+                                border-gray-200
+                                rounded
+                                focus:outline-none
+                                appearance-none
+                                focus:ring-1 focus:ring-blue-500
                             "
-                            @keyup.enter="
-                                input($event.target.value, index, 'method')
-                            "
+                            @keyup.enter="input($event.target.value, index, 'method')"
                             v-model="uris[index].method.content"
                             v-on:blur="uris[index].method.error = ''"
                         />
@@ -104,39 +76,29 @@
                     </div>
                     <!-- 説明 -->
                     <div
-                        class="
-                            px-4
-                            py-3
-                            w-6/12
-                            overflow-x-auto
-                            md:w-8/12
-                            items-center
-                            text-center
-                        "
+                        class="items-center px-4 py-3 w-6/12 text-center overflow-x-auto md:w-8/12"
                     >
                         <!-- 説明（編集表示） -->
                         <input
                             v-if="!uris[index].explain.decidable"
                             class="
-                                appearance-none
                                 block
-                                w-11/12
-                                bg-white
-                                text-gray-700
-                                border border-gray-200
-                                rounded
-                                h-10
-                                px-1
                                 mr-2
+                                px-1
+                                w-11/12
+                                h-10
+                                text-gray-700
                                 leading-tight
-                                focus:outline-none
-                                focus:ring-1
-                                focus:ring-blue-500
+                                bg-white
+                                border
                                 focus:border-blue-500
+                                border-gray-200
+                                rounded
+                                focus:outline-none
+                                appearance-none
+                                focus:ring-1 focus:ring-blue-500
                             "
-                            @keyup.enter="
-                                input($event.target.value, index, 'explain')
-                            "
+                            @keyup.enter="input($event.target.value, index, 'explain')"
                             v-model="uris[index].explain.content"
                             v-on:blur="uris[index].explain.error = ''"
                         />
@@ -150,14 +112,7 @@
                         </div>
                         <!-- 削除ボタン -->
                         <svg
-                            class="
-                                h-6
-                                w-6
-                                text-red-600
-                                hover:text-red-400
-                                absolute
-                                right-3
-                            "
+                            class="absolute right-3 w-6 h-6 hover:text-red-400 text-red-600"
                             :class="
                                 uris[index].uri.decidable == false ||
                                 uris[index].method.decidable == false ||
@@ -210,51 +165,51 @@
     />
 </template>
 <script>
-import ClientError from "../Utility/ClientError";
-import ServerError from "../Utility/ServerError";
-import Header from "./Header";
-import { inject } from "vue";
-export default {
-    components: {
-        ClientError,
-        ServerError,
-        Header,
-    },
-    props: {
-        uris: Array,
-    },
-    setup(props) {
-        const uris = inject("uris");
+    import ClientError from "../Utility/ClientError";
+    import ServerError from "../Utility/ServerError";
+    import Header from "./Header";
+    import { inject } from "vue";
+    export default {
+        components: {
+            ClientError,
+            ServerError,
+            Header,
+        },
+        props: {
+            uris: Array,
+        },
+        setup(props) {
+            const uris = inject("uris");
 
-        const input = (value, index, type) => {
-            if (!value) {
-                let message;
-                if (type == "uri") {
-                    message = "URI";
-                } else if (type == "method") {
-                    message = "メソッド";
+            const input = (value, index, type) => {
+                if (!value) {
+                    let message;
+                    if (type == "uri") {
+                        message = "URI";
+                    } else if (type == "method") {
+                        message = "メソッド";
+                    } else {
+                        message = "説明";
+                    }
+                    uris[index][type].error = `${message}が入力されていません。`;
                 } else {
-                    message = "説明";
+                    uris[index][type].error = "";
+                    uris[index][type].decidable = true;
                 }
-                uris[index][type].error = `${message}が入力されていません。`;
-            } else {
-                uris[index][type].error = "";
-                uris[index][type].decidable = true;
-            }
-        };
+            };
 
-        const deleteData = inject("deleteData");
-        const destroy = (url, index) => {
-            if (url.split("/")[1] == "create") {
-                uris.splice(index, 1);
-            } else {
-                let deleteContent = uris.splice(index, 1)[0];
-                if (deleteContent) {
-                    deleteData.uris.push(deleteContent.id);
+            const deleteData = inject("deleteData");
+            const destroy = (url, index) => {
+                if (url.split("/")[1] == "create") {
+                    uris.splice(index, 1);
+                } else {
+                    let deleteContent = uris.splice(index, 1)[0];
+                    if (deleteContent) {
+                        deleteData.uris.push(deleteContent.id);
+                    }
                 }
-            }
-        };
-        return { uris, input, destroy };
-    },
-};
+            };
+            return { uris, input, destroy };
+        },
+    };
 </script>

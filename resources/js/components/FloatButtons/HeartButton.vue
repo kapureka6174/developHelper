@@ -1,24 +1,24 @@
 <template>
     <button
         class="
-            bg-white
-            rounded-full
+            group
+            relative
             flex
+            inline-block
             items-center
             justify-center
+            my-4
             w-12
             h-12
-            my-4
-            group
-            cursor-pointer
-            relative
-            inline-block
-            border-red-500 border-2
+            bg-white
+            border-2 border-red-500
+            rounded-full
             shadow-xl
+            cursor-pointer
         "
     >
         <svg
-            class="h-8 w-8 text-red-500"
+            class="w-8 h-8 text-red-500"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -34,32 +34,29 @@
                 d="M12 20l-7 -7a4 4 0 0 1 6.5 -6a.9 .9 0 0 0 1 0a4 4 0 0 1 6.5 6l-7 7"
                 fill="rgba(239, 68, 68, var(--tw-text-opacity))"
             />
-            <path
-                v-else
-                d="M12 20l-7 -7a4 4 0 0 1 6.5 -6a.9 .9 0 0 0 1 0a4 4 0 0 1 6.5 6l-7 7"
-            />
+            <path v-else d="M12 20l-7 -7a4 4 0 0 1 6.5 -6a.9 .9 0 0 0 1 0a4 4 0 0 1 6.5 6l-7 7" />
         </svg>
 
         <!-- ホバー時に表示する説明文 -->
         <div
             class="
-                opacity-0
-                w-32
-                bg-gray-200
-                text-gray-600 text-center text-xs
-                rounded-lg
-                py-2
                 absolute
-                group-hover:opacity-100
                 bottom-full
                 mb-2
                 px-3
+                py-2
+                w-32
+                text-center text-gray-600 text-xs
+                bg-gray-200
+                rounded-lg
+                opacity-0
+                group-hover:opacity-100
                 pointer-events-none
             "
         >
             {{ $page.props.user ? "お気に入りに追加" : "ログインが必要です" }}
             <svg
-                class="absolute text-gray-200 h-2 w-full left-0 top-full"
+                class="absolute left-0 top-full w-full h-2 text-gray-200"
                 x="0px"
                 y="0px"
                 viewBox="0 0 255 255"
@@ -72,9 +69,9 @@
 </template>
 
 <script>
-export default {
-    props: {
-        liked_by_user: Boolean,
-    },
-};
+    export default {
+        props: {
+            liked_by_user: Boolean,
+        },
+    };
 </script>

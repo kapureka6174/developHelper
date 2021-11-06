@@ -1,20 +1,20 @@
 <template>
-    <div class="max-w-md py-4 px-8 bg-indigo-50 shadow-lg rounded-lg my-10">
+    <div class="my-10 px-8 py-4 max-w-md bg-indigo-50 rounded-lg shadow-lg">
         <!-- 名前と紹介文 -->
         <div>
-            <h2 class="text-gray-800 text-2xl font-semibold line-clamp-2">
+            <h2 class="line-clamp-2 text-gray-800 text-2xl font-semibold">
                 {{ name }}
             </h2>
-            <p class="h-48 mt-2 text-gray-600 line-clamp-8">
+            <p class="line-clamp-8 mt-2 h-48 text-gray-600">
                 {{ introduction }}
             </p>
         </div>
-        <div class="flex justify-between items-center mt-2">
+        <div class="flex items-center justify-between mt-2">
             <div class="flex">
                 <!-- いいね数とコメント数 -->
                 <div class="flex items-center mr-2">
                     <svg
-                        class="h-6 w-6 text-red-500"
+                        class="w-6 h-6 text-red-500"
                         width="24"
                         height="24"
                         viewBox="0 0 24 24"
@@ -33,7 +33,7 @@
                 </div>
                 <div class="flex items-center">
                     <svg
-                        class="h-6 w-6 text-green-500"
+                        class="w-6 h-6 text-green-500"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -52,7 +52,7 @@
             <!-- 詳細ページへのリンク -->
             <inertia-link
                 :href="route('User', { id: id })"
-                class="text-xl font-medium text-indigo-500"
+                class="text-indigo-500 text-xl font-medium"
             >
                 <div>詳しくみる</div>
             </inertia-link>
@@ -61,13 +61,13 @@
 </template>
 
 <script>
-export default {
-    props: {
-        id: Number,
-        name: String,
-        introduction: String,
-        likes: Number,
-        comments: Number,
-    },
-};
+    export default {
+        props: {
+            id: Number,
+            name: String,
+            introduction: String,
+            likes: Number,
+            comments: Number,
+        },
+    };
 </script>

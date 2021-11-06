@@ -5,17 +5,13 @@
         <template #description> すべての端末からログアウトする。 </template>
 
         <template #content>
-            <div class="max-w-xl text-sm text-gray-600">
+            <div class="max-w-xl text-gray-600 text-sm">
                 お使いのすべての端末からログアウトできます。最近のセッションは下記の通りです（一部の情報が表示されていない可能性があります）。心配に応じてパスワードの更新もご検討ください。
             </div>
 
             <!-- Other Browser Sessions -->
             <div class="mt-5 space-y-6" v-if="sessions.length > 0">
-                <div
-                    class="flex items-center"
-                    v-for="(session, i) in sessions"
-                    :key="i"
-                >
+                <div class="flex items-center" v-for="(session, i) in sessions" :key="i">
                     <div>
                         <svg
                             fill="none"
@@ -44,25 +40,19 @@
                             v-else
                         >
                             <path d="M0 0h24v24H0z" stroke="none"></path>
-                            <rect
-                                x="7"
-                                y="4"
-                                width="10"
-                                height="16"
-                                rx="1"
-                            ></rect>
+                            <rect x="7" y="4" width="10" height="16" rx="1"></rect>
                             <path d="M11 5h2M12 17v.01"></path>
                         </svg>
                     </div>
 
                     <div class="ml-3">
-                        <div class="text-sm text-gray-600">
+                        <div class="text-gray-600 text-sm">
                             {{ session.agent.platform }} -
                             {{ session.agent.browser }}
                         </div>
 
                         <div>
-                            <div class="text-xs text-gray-500">
+                            <div class="text-gray-500 text-xs">
                                 {{ session.ip_address }},
 
                                 <span
@@ -70,9 +60,7 @@
                                     v-if="session.is_current_device"
                                     >This device</span
                                 >
-                                <span v-else
-                                    >Last active {{ session.last_active }}</span
-                                >
+                                <span v-else>Last active {{ session.last_active }}</span>
                             </div>
                         </div>
                     </div>
@@ -80,9 +68,7 @@
             </div>
 
             <div class="flex items-center mt-5">
-                <jet-button @click="confirmLogout">
-                    すべての端末からログアウト
-                </jet-button>
+                <jet-button @click="confirmLogout"> すべての端末からログアウト </jet-button>
 
                 <jet-action-message :on="form.recentlySuccessful" class="ml-3">
                     完了
@@ -99,24 +85,19 @@
                     <div class="mt-4">
                         <jet-input
                             type="password"
-                            class="mt-1 block w-3/4"
+                            class="block mt-1 w-3/4"
                             placeholder="Password"
                             ref="password"
                             v-model="form.password"
                             @keyup.enter="logoutOtherBrowserSessions"
                         />
 
-                        <jet-input-error
-                            :message="form.errors.password"
-                            class="mt-2"
-                        />
+                        <jet-input-error :message="form.errors.password" class="mt-2" />
                     </div>
                 </template>
 
                 <template #footer>
-                    <jet-secondary-button @click="closeModal">
-                        キャンセル
-                    </jet-secondary-button>
+                    <jet-secondary-button @click="closeModal"> キャンセル </jet-secondary-button>
 
                     <jet-button
                         class="ml-2"
@@ -133,58 +114,58 @@
 </template>
 
 <script>
-import JetActionMessage from "@/Jetstream/ActionMessage";
-import JetActionSection from "@/Jetstream/ActionSection";
-import JetButton from "@/Jetstream/Button";
-import JetDialogModal from "@/Jetstream/DialogModal";
-import JetInput from "@/Jetstream/Input";
-import JetInputError from "@/Jetstream/InputError";
-import JetSecondaryButton from "@/Jetstream/SecondaryButton";
+    import JetActionMessage from "@/Jetstream/ActionMessage";
+    import JetActionSection from "@/Jetstream/ActionSection";
+    import JetButton from "@/Jetstream/Button";
+    import JetDialogModal from "@/Jetstream/DialogModal";
+    import JetInput from "@/Jetstream/Input";
+    import JetInputError from "@/Jetstream/InputError";
+    import JetSecondaryButton from "@/Jetstream/SecondaryButton";
 
-export default {
-    props: ["sessions"],
+    export default {
+        props: ["sessions"],
 
-    components: {
-        JetActionMessage,
-        JetActionSection,
-        JetButton,
-        JetDialogModal,
-        JetInput,
-        JetInputError,
-        JetSecondaryButton,
-    },
-
-    data() {
-        return {
-            confirmingLogout: false,
-
-            form: this.$inertia.form({
-                password: "",
-            }),
-        };
-    },
-
-    methods: {
-        confirmLogout() {
-            this.confirmingLogout = true;
-
-            setTimeout(() => this.$refs.password.focus(), 250);
+        components: {
+            JetActionMessage,
+            JetActionSection,
+            JetButton,
+            JetDialogModal,
+            JetInput,
+            JetInputError,
+            JetSecondaryButton,
         },
 
-        logoutOtherBrowserSessions() {
-            this.form.delete(route("other-browser-sessions.destroy"), {
-                preserveScroll: true,
-                onSuccess: () => this.closeModal(),
-                onError: () => this.$refs.password.focus(),
-                onFinish: () => this.form.reset(),
-            });
+        data() {
+            return {
+                confirmingLogout: false,
+
+                form: this.$inertia.form({
+                    password: "",
+                }),
+            };
         },
 
-        closeModal() {
-            this.confirmingLogout = false;
+        methods: {
+            confirmLogout() {
+                this.confirmingLogout = true;
 
-            this.form.reset();
+                setTimeout(() => this.$refs.password.focus(), 250);
+            },
+
+            logoutOtherBrowserSessions() {
+                this.form.delete(route("other-browser-sessions.destroy"), {
+                    preserveScroll: true,
+                    onSuccess: () => this.closeModal(),
+                    onError: () => this.$refs.password.focus(),
+                    onFinish: () => this.form.reset(),
+                });
+            },
+
+            closeModal() {
+                this.confirmingLogout = false;
+
+                this.form.reset();
+            },
         },
-    },
-};
+    };
 </script>

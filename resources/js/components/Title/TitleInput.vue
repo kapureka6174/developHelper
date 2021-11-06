@@ -3,7 +3,7 @@
         <!-- 編集表示 -->
         <input
             v-if="!title.decidable"
-            class="w-full rounded my-2"
+            class="my-2 w-full rounded"
             type="text"
             placeholder="サービス名を入力してください"
             v-model="title.content"
@@ -12,11 +12,7 @@
         />
 
         <!-- 通常表示 -->
-        <p
-            v-else
-            class="text-2xl font-bold text-gray-700 mb-2"
-            @click="title.decidable = false"
-        >
+        <p v-else class="mb-2 text-gray-700 text-2xl font-bold" @click="title.decidable = false">
             {{ title.content }}
         </p>
 
@@ -35,28 +31,28 @@
     </div>
 </template>
 <script>
-import { inject } from "vue";
-import ClientError from "../Utility/ClientError";
-import ServerError from "../Utility/ServerError";
+    import { inject } from "vue";
+    import ClientError from "../Utility/ClientError";
+    import ServerError from "../Utility/ServerError";
 
-export default {
-    components: {
-        ClientError,
-        ServerError,
-    },
-    setup() {
-        const title = inject("title");
+    export default {
+        components: {
+            ClientError,
+            ServerError,
+        },
+        setup() {
+            const title = inject("title");
 
-        const input = (e) => {
-            if (!e.target.value) {
-                title.error = "サービス名が入力されていません。";
-            } else {
-                title.error = "";
-                title.decidable = true;
-            }
-        };
+            const input = (e) => {
+                if (!e.target.value) {
+                    title.error = "サービス名が入力されていません。";
+                } else {
+                    title.error = "";
+                    title.decidable = true;
+                }
+            };
 
-        return { title, input };
-    },
-};
+            return { title, input };
+        },
+    };
 </script>

@@ -3,15 +3,7 @@
         <div
             v-for="(error, index) in errors"
             :key="index"
-            class="
-                bg-red-100
-                border border-red-400
-                text-red-700
-                px-4
-                py-3
-                rounded
-                my-2
-            "
+            class="my-2 px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded"
             role="alert"
         >
             <p class="font-bold">
@@ -21,10 +13,10 @@
     </div>
 </template>
 <script>
-export default {
-    props: {
-        errorFlag: Boolean,
-        errors: Array,
-    },
-};
+    export default {
+        props: {
+            errorFlag: Boolean,
+            errors: Array,
+        },
+    };
 </script>
