@@ -65,7 +65,6 @@
 
 <script>
     import { inject } from "vue";
-    import { Inertia } from "@inertiajs/inertia";
 
     export default {
         setup() {
@@ -82,7 +81,7 @@
 
             // CommentControllerにformを渡す
             const commentSubmit = () => {
-                Inertia.post(route("Comment"), form, {
+                form.post(route("Comment"), {
                     preserveScroll: true,
                 });
             };

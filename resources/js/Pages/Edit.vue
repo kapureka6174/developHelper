@@ -142,8 +142,8 @@
     import UrlsInput from "../components/Title/UrlsInput";
     import HintToolTip from "../components/Utility/HintToolTip";
 
-    import { reactive, provide } from "vue";
-    import { Inertia } from "@inertiajs/inertia";
+    import { provide } from "vue";
+    import { useForm } from "@inertiajs/inertia-vue3";
 
     export default {
         components: {
@@ -247,7 +247,7 @@
                 }
             };
 
-            const form = reactive({
+            const form = useForm({
                 id: props.service.id,
                 title: {
                     content: props.service.title,
@@ -366,7 +366,7 @@
 
             // DBへ保存
             const edit = () => {
-                Inertia.put("/edit", form);
+                form.put("/edit", form);
             };
 
             provide("title", form.title);

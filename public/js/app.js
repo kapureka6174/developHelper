@@ -20815,7 +20815,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Title_UrlsInput__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/Title/UrlsInput */ "./resources/js/components/Title/UrlsInput.vue");
 /* harmony import */ var _components_Utility_HintToolTip__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../components/Utility/HintToolTip */ "./resources/js/components/Utility/HintToolTip.vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 
 
 
@@ -20924,7 +20924,7 @@ __webpack_require__.r(__webpack_exports__);
       };
     };
 
-    var form = (0,vue__WEBPACK_IMPORTED_MODULE_19__.reactive)({
+    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_20__.useForm)({
       title: normalObj(1),
       tags: {
         content: [],
@@ -20943,7 +20943,7 @@ __webpack_require__.r(__webpack_exports__);
     }); // DBへ保存
 
     var submit = function submit() {
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_20__.Inertia.post("/create", form);
+      form.post("/create", form);
     };
 
     (0,vue__WEBPACK_IMPORTED_MODULE_19__.provide)("title", form.title);
@@ -21001,7 +21001,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Title_UrlsInput__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/Title/UrlsInput */ "./resources/js/components/Title/UrlsInput.vue");
 /* harmony import */ var _components_Utility_HintToolTip__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../components/Utility/HintToolTip */ "./resources/js/components/Utility/HintToolTip.vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 
 
 
@@ -21129,7 +21129,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
 
-    var form = (0,vue__WEBPACK_IMPORTED_MODULE_19__.reactive)({
+    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_20__.useForm)({
       id: props.service.id,
       title: {
         content: props.service.title,
@@ -21245,7 +21245,7 @@ __webpack_require__.r(__webpack_exports__);
     }); // DBへ保存
 
     var edit = function edit() {
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_20__.Inertia.put("/edit", form);
+      form.put("/edit", form);
     };
 
     (0,vue__WEBPACK_IMPORTED_MODULE_19__.provide)("title", form.title);
@@ -21948,8 +21948,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup() {
@@ -21966,7 +21964,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
     var commentSubmit = function commentSubmit() {
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.post(route("Comment"), form, {
+      form.post(route("Comment"), {
         preserveScroll: true
       });
     };
@@ -23529,15 +23527,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup() {
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)("form"); // TaskControllerにformを渡す
 
     var taskSubmit = function taskSubmit() {
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.put(route("Task"), form, {
+      form.put(route("Task"), {
         preserveScroll: true
       });
     };
