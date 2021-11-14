@@ -20815,7 +20815,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Title_UrlsInput__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/Title/UrlsInput */ "./resources/js/components/Title/UrlsInput.vue");
 /* harmony import */ var _components_Utility_HintToolTip__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../components/Utility/HintToolTip */ "./resources/js/components/Utility/HintToolTip.vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 
 
 
@@ -20924,7 +20924,7 @@ __webpack_require__.r(__webpack_exports__);
       };
     };
 
-    var form = (0,vue__WEBPACK_IMPORTED_MODULE_19__.reactive)({
+    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_20__.useForm)({
       title: normalObj(1),
       tags: {
         content: [],
@@ -20943,7 +20943,7 @@ __webpack_require__.r(__webpack_exports__);
     }); // DBへ保存
 
     var submit = function submit() {
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_20__.Inertia.post("/create", form);
+      form.post("/create", form);
     };
 
     (0,vue__WEBPACK_IMPORTED_MODULE_19__.provide)("title", form.title);
@@ -21001,7 +21001,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Title_UrlsInput__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/Title/UrlsInput */ "./resources/js/components/Title/UrlsInput.vue");
 /* harmony import */ var _components_Utility_HintToolTip__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../components/Utility/HintToolTip */ "./resources/js/components/Utility/HintToolTip.vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 
 
 
@@ -21129,7 +21129,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
 
-    var form = (0,vue__WEBPACK_IMPORTED_MODULE_19__.reactive)({
+    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_20__.useForm)({
       id: props.service.id,
       title: {
         content: props.service.title,
@@ -21245,7 +21245,7 @@ __webpack_require__.r(__webpack_exports__);
     }); // DBへ保存
 
     var edit = function edit() {
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_20__.Inertia.put("/edit", form);
+      form.put("/edit", form);
     };
 
     (0,vue__WEBPACK_IMPORTED_MODULE_19__.provide)("title", form.title);
@@ -21948,8 +21948,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup() {
@@ -21966,7 +21964,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
     var commentSubmit = function commentSubmit() {
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.post(route("Comment"), form, {
+      form.post(route("Comment"), {
         preserveScroll: true
       });
     };
@@ -23529,15 +23527,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup() {
     var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)("form"); // TaskControllerにformを渡す
 
     var taskSubmit = function taskSubmit() {
-      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.put(route("Task"), form, {
+      form.put(route("Task"), {
         preserveScroll: true
       });
     };
@@ -23923,13 +23919,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _Utility_ClientError__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Utility/ClientError */ "./resources/js/components/Utility/ClientError.vue");
+/* harmony import */ var _Utility_ServerError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Utility/ServerError */ "./resources/js/components/Utility/ServerError.vue");
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     ClientError: _Utility_ClientError__WEBPACK_IMPORTED_MODULE_1__["default"],
-    ServerError: _Utility_ClientError__WEBPACK_IMPORTED_MODULE_1__["default"]
+    ServerError: _Utility_ServerError__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   setup: function setup() {
     var title = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)("title");
@@ -23984,13 +23981,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _Utility_ClientError__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Utility/ClientError */ "./resources/js/components/Utility/ClientError.vue");
+/* harmony import */ var _Utility_ServerError__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Utility/ServerError */ "./resources/js/components/Utility/ServerError.vue");
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     ClientError: _Utility_ClientError__WEBPACK_IMPORTED_MODULE_1__["default"],
-    ServerError: _Utility_ClientError__WEBPACK_IMPORTED_MODULE_1__["default"]
+    ServerError: _Utility_ServerError__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   setup: function setup() {
     var github_url = (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)("github_url");
@@ -24522,7 +24520,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "text-sm text-gray-600"
+  "class": "text-gray-600 text-sm"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
@@ -24557,13 +24555,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "md:grid md:grid-cols-3 md:gap-6"
+  "class": "md:grid md:gap-6 md:grid-cols-3"
 };
 var _hoisted_2 = {
-  "class": "mt-5 md:mt-0 md:col-span-2"
+  "class": "mt-5 md:col-span-2 md:mt-0"
 };
 var _hoisted_3 = {
-  "class": "px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg"
+  "class": "px-4 py-5 bg-white shadow sm:p-6 sm:rounded-lg"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_section_title = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-section-title");
@@ -24642,10 +24640,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100"
+  "class": "flex flex-col items-center pt-6 min-h-screen bg-gray-100 sm:justify-center sm:pt-0"
 };
 var _hoisted_2 = {
-  "class": "w-full sm:max-w-md mb-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg"
+  "class": "mb-6 px-6 py-4 w-full bg-white shadow-md overflow-hidden sm:max-w-md sm:rounded-lg"
 };
 function render(_ctx, _cache) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "logo")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])]);
@@ -24724,7 +24722,7 @@ var _hoisted_1 = ["type"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     type: $props.type,
-    "class": "inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"
+    "class": "inline-flex items-center px-4 py-2 text-white text-xs font-semibold tracking-widest hover:bg-gray-700 bg-gray-800 active:bg-gray-900 border focus:border-gray-900 border-transparent rounded-md focus:outline-none disabled:opacity-25 uppercase transition focus:ring focus:ring-gray-300"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 8
   /* PROPS */
   , _hoisted_1);
@@ -24753,7 +24751,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $options.proxyChecked = $event;
     }),
-    "class": "rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+    "class": "text-indigo-600 border-gray-300 focus:border-indigo-300 rounded shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
   }, null, 8
   /* PROPS */
   , _hoisted_1)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $options.proxyChecked]]);
@@ -24778,7 +24776,7 @@ var _hoisted_1 = ["type"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     type: $props.type,
-    "class": "inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 active:bg-red-600 disabled:opacity-25 transition"
+    "class": "inline-flex items-center justify-center px-4 py-2 text-white text-xs font-semibold tracking-widest hover:bg-red-500 bg-red-600 active:bg-red-600 border focus:border-red-700 border-transparent rounded-md focus:outline-none disabled:opacity-25 uppercase transition focus:ring focus:ring-red-200"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 8
   /* PROPS */
   , _hoisted_1);
@@ -24809,7 +24807,7 @@ var _hoisted_3 = {
   "class": "mt-4"
 };
 var _hoisted_4 = {
-  "class": "px-6 py-4 bg-gray-100 text-right"
+  "class": "px-6 py-4 text-right bg-gray-100"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_modal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("modal");
@@ -24855,7 +24853,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.open = !$setup.open;
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "trigger")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Full Screen Dropdown Overlay "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "fixed inset-0 z-40",
+    "class": "fixed z-40 inset-0",
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $setup.open = false;
     })
@@ -24911,7 +24909,7 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   key: 0,
   type: "submit",
-  "class": "block w-full px-4 py-2 text-sm leading-5 text-gray-700 text-left hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition"
+  "class": "block px-4 py-2 w-full text-left text-gray-700 text-sm leading-5 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition"
 };
 var _hoisted_2 = ["href"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -24920,13 +24918,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [$props.as == 'button' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])) : $props.as == 'a' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
     key: 1,
     href: $props.href,
-    "class": "block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition"
+    "class": "block px-4 py-2 text-gray-700 text-sm leading-5 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 8
   /* PROPS */
   , _hoisted_2)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_inertia_link, {
     key: 2,
     href: $props.href,
-    "class": "block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition"
+    "class": "block px-4 py-2 text-gray-700 text-sm leading-5 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")];
@@ -24955,17 +24953,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "md:grid md:grid-cols-3 md:gap-6"
+  "class": "md:grid md:gap-6 md:grid-cols-3"
 };
 var _hoisted_2 = {
-  "class": "mt-5 md:mt-0 md:col-span-2"
+  "class": "mt-5 md:col-span-2 md:mt-0"
 };
 var _hoisted_3 = {
-  "class": "grid grid-cols-6 gap-6"
+  "class": "grid gap-6 grid-cols-6"
 };
 var _hoisted_4 = {
   key: 0,
-  "class": "flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6 shadow sm:rounded-bl-md sm:rounded-br-md"
+  "class": "flex items-center justify-end px-4 py-3 text-right bg-gray-50 shadow sm:px-6 sm:rounded-bl-md sm:rounded-br-md"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_section_title = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-section-title");
@@ -24985,7 +24983,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return _ctx.$emit('submitted');
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["px-4 py-5 bg-white sm:p-6 shadow", $options.hasActions ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md'])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["px-4 py-5 bg-white shadow sm:p-6", $options.hasActions ? 'sm:rounded-tl-md sm:rounded-tr-md' : 'sm:rounded-md'])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "form")])], 2
   /* CLASS */
   ), $options.hasActions ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "actions")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 32
@@ -25011,7 +25009,7 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = ["value", "placeholder"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
-    "class": "border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm",
+    "class": "border-gray-300 focus:border-indigo-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50",
     value: $props.modelValue,
     onInput: _cache[0] || (_cache[0] = function ($event) {
       return _ctx.$emit('update:modelValue', $event.target.value);
@@ -25039,7 +25037,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "text-sm text-red-600"
+  "class": "text-red-600 text-sm"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.message), 1
@@ -25065,7 +25063,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "block font-medium text-sm text-gray-700"
+  "class": "block text-gray-700 text-sm font-medium"
 };
 var _hoisted_2 = {
   key: 0
@@ -25095,7 +25093,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0 z-50",
+  "class": "fixed z-50 inset-0 px-4 py-6 overflow-y-auto sm:px-0",
   "scroll-region": ""
 };
 
@@ -25144,7 +25142,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["mb-6 bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:w-full sm:mx-auto", $options.maxWidthClass])
+            "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["mb-6 bg-white rounded-lg shadow-xl overflow-hidden transform transition-all sm:mx-auto sm:w-full", $options.maxWidthClass])
           }, [$props.show ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {
             key: 0
           }) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 2
@@ -25255,7 +25253,7 @@ var _hoisted_1 = ["type"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     type: $props.type,
-    "class": "inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 active:bg-gray-50 disabled:opacity-25 transition"
+    "class": "inline-flex items-center px-4 py-2 hover:text-gray-500 text-gray-700 active:text-gray-800 text-xs font-semibold tracking-widest active:bg-gray-50 bg-white border focus:border-blue-300 border-gray-300 rounded-md focus:outline-none shadow-sm disabled:opacity-25 uppercase transition focus:ring focus:ring-blue-200"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 8
   /* PROPS */
   , _hoisted_1);
@@ -25309,16 +25307,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "md:col-span-1 flex justify-between"
+  "class": "flex justify-between md:col-span-1"
 };
 var _hoisted_2 = {
   "class": "px-4 sm:px-0"
 };
 var _hoisted_3 = {
-  "class": "text-lg font-medium text-gray-900"
+  "class": "text-gray-900 text-lg font-medium"
 };
 var _hoisted_4 = {
-  "class": "mt-1 text-sm text-gray-600"
+  "class": "mt-1 text-gray-600 text-sm"
 };
 var _hoisted_5 = {
   "class": "px-4 sm:px-0"
@@ -25347,13 +25345,13 @@ var _hoisted_1 = {
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "font-medium text-red-600"
+  "class": "text-red-600 font-medium"
 }, "問題が発生しました。", -1
 /* HOISTED */
 );
 
 var _hoisted_3 = {
-  "class": "mt-3 list-disc list-inside text-sm text-red-600"
+  "class": "mt-3 text-red-600 text-sm list-inside list-disc"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return $options.hasErrors ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.errors, function (error, key) {
@@ -25390,13 +25388,13 @@ var _hoisted_2 = {
   "class": "bg-white shadow"
 };
 var _hoisted_3 = {
-  "class": "max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8"
+  "class": "mx-auto px-4 py-6 max-w-7xl sm:px-6 lg:px-8"
 };
 var _hoisted_4 = {
   "class": "py-12"
 };
 var _hoisted_5 = {
-  "class": "max-w-7xl mx-auto sm:px-6 lg:px-8"
+  "class": "mx-auto max-w-7xl sm:px-6 lg:px-8"
 };
 var _hoisted_6 = {
   "class": "bg-white shadow-xl sm:rounded-lg"
@@ -25441,16 +25439,16 @@ var _hoisted_2 = {
   "class": "bg-white shadow"
 };
 var _hoisted_3 = {
-  "class": "max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8"
+  "class": "mx-auto px-4 py-6 max-w-7xl sm:px-6 lg:px-8"
 };
 var _hoisted_4 = {
   "class": "py-12"
 };
 var _hoisted_5 = {
-  "class": "max-w-7xl mx-auto sm:px-6 lg:px-8"
+  "class": "mx-auto max-w-7xl sm:px-6 lg:px-8"
 };
 var _hoisted_6 = {
-  "class": "grid md:grid-cols-8 md:gap-4"
+  "class": "grid md:gap-4 md:grid-cols-8"
 };
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1
@@ -25489,13 +25487,13 @@ var _hoisted_1 = {
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-  "class": "font-semibold text-xl text-gray-800 leading-tight"
-}, " 新規作成 ", -1
+  "class": "text-gray-800 text-xl font-semibold leading-tight"
+}, "新規作成", -1
 /* HOISTED */
 );
 
 var _hoisted_3 = {
-  "class": "py-10 px-4"
+  "class": "px-4 py-10"
 };
 var _hoisted_4 = {
   "class": "flex"
@@ -25510,16 +25508,16 @@ var _hoisted_7 = {
   "class": "pt-3"
 };
 var _hoisted_8 = {
-  "class": "flex mb-3 items-center"
+  "class": "flex items-center mb-3"
 };
 var _hoisted_9 = {
-  "class": "flex mb-3 items-center"
+  "class": "flex items-center mb-3"
 };
 var _hoisted_10 = {
   "class": "grid grid-cols-1 md:grid-cols-2"
 };
 var _hoisted_11 = {
-  "class": "flex mb-3 items-center"
+  "class": "flex items-center mb-3"
 };
 var _hoisted_12 = {
   "class": "text-gray-700"
@@ -25537,10 +25535,10 @@ var _hoisted_16 = {
   "class": "w-full text-center"
 };
 var _hoisted_17 = {
-  "class": "grid grid-cols-1 md:grid-cols-2 justify-between"
+  "class": "grid grid-cols-1 justify-between md:grid-cols-2"
 };
 var _hoisted_18 = {
-  "class": "flex mb-3 items-center"
+  "class": "flex items-center mb-3"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_fail_flash_message = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("fail-flash-message");
@@ -25584,7 +25582,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, null, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-        "class": "bg-indigo-600 hover:bg-indigo-400 h-8 w-12 text-white rounded",
+        "class": "w-12 h-8 text-white hover:bg-indigo-400 bg-indigo-600 rounded",
         onClick: _cache[0] || (_cache[0] = function () {
           return $setup.submit && $setup.submit.apply($setup, arguments);
         })
@@ -25701,13 +25699,13 @@ var _hoisted_1 = {
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-  "class": "font-semibold text-xl text-gray-800 leading-tight"
+  "class": "text-gray-800 text-xl font-semibold leading-tight"
 }, " サービス編集画面 ", -1
 /* HOISTED */
 );
 
 var _hoisted_3 = {
-  "class": "py-10 px-4"
+  "class": "px-4 py-10"
 };
 var _hoisted_4 = {
   "class": "flex"
@@ -25719,16 +25717,16 @@ var _hoisted_6 = {
   "class": "pt-3"
 };
 var _hoisted_7 = {
-  "class": "flex mb-3 items-center"
+  "class": "flex items-center mb-3"
 };
 var _hoisted_8 = {
-  "class": "flex mb-3 items-center"
+  "class": "flex items-center mb-3"
 };
 var _hoisted_9 = {
   "class": "grid grid-cols-1 md:grid-cols-2"
 };
 var _hoisted_10 = {
-  "class": "flex mb-3 items-center"
+  "class": "flex items-center mb-3"
 };
 var _hoisted_11 = {
   "class": "text-gray-700"
@@ -25746,10 +25744,10 @@ var _hoisted_15 = {
   "class": "w-full text-center"
 };
 var _hoisted_16 = {
-  "class": "grid grid-cols-1 md:grid-cols-2 justify-between"
+  "class": "grid grid-cols-1 justify-between md:grid-cols-2"
 };
 var _hoisted_17 = {
-  "class": "flex mb-3 items-center"
+  "class": "flex items-center mb-3"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_fail_flash_message = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("fail-flash-message");
@@ -25793,7 +25791,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_app_layout, null, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-        "class": "bg-indigo-600 hover:bg-indigo-400 h-8 w-12 text-white rounded",
+        "class": "w-12 h-8 text-white hover:bg-indigo-400 bg-indigo-600 rounded",
         onClick: _cache[0] || (_cache[0] = function () {
           return $setup.edit && $setup.edit.apply($setup, arguments);
         })
@@ -25905,14 +25903,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "mb-4 text-sm text-gray-600"
+  "class": "mb-4 text-gray-600 text-sm"
 }, " ご登録いただいたメールアドレスを入力してください。パスワード再設定用のURLをメールにてお送りします。 ", -1
 /* HOISTED */
 );
 
 var _hoisted_2 = {
   key: 0,
-  "class": "mb-4 font-medium text-sm text-green-600"
+  "class": "mb-4 text-green-600 text-sm font-medium"
 };
 var _hoisted_3 = {
   "class": "flex items-center justify-end mt-4"
@@ -25960,7 +25958,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "email",
         type: "email",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.email,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $data.form.email = $event;
@@ -26012,8 +26010,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-  "class": "font-semibold text-xl text-gray-800 leading-tight"
-}, " ホーム ", -1
+  "class": "text-gray-800 text-xl font-semibold leading-tight"
+}, "ホーム", -1
 /* HOISTED */
 );
 
@@ -26021,10 +26019,10 @@ var _hoisted_2 = {
   "class": "mx-2 py-6"
 };
 var _hoisted_3 = {
-  "class": "flex items-center flex-col md:grid md:grid-cols-3 md:gap-4 pb-12"
+  "class": "flex flex-col items-center pb-12 md:grid md:gap-4 md:grid-cols-3"
 };
 var _hoisted_4 = {
-  "class": "flex items-center flex-col md:grid md:grid-cols-3 md:gap-4 pb-12"
+  "class": "flex flex-col items-center pb-12 md:grid md:gap-4 md:grid-cols-3"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_hero = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("hero");
@@ -26083,7 +26081,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = {
   key: 0,
-  "class": "mb-4 font-medium text-sm text-green-600"
+  "class": "mb-4 text-green-600 text-sm font-medium"
 };
 var _hoisted_2 = {
   "class": "mt-4"
@@ -26096,7 +26094,7 @@ var _hoisted_4 = {
 };
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "ml-2 text-sm text-gray-600"
+  "class": "ml-2 text-gray-600 text-sm"
 }, "ログイン状態を保持する", -1
 /* HOISTED */
 );
@@ -26128,7 +26126,7 @@ var _hoisted_11 = {
 };
 
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "flex items-center bg-green-100 hover:bg-gray-100 rounded-md px-4 py-2 border-2 border-green-300"
+  "class": "flex items-center px-4 py-2 hover:bg-gray-100 bg-green-100 border-2 border-green-300 rounded-md"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   fill: "#000000",
   xmlns: "http://www.w3.org/2000/svg",
@@ -26139,13 +26137,13 @@ var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "fill-rule": "evenodd",
   d: "M 16 4 C 9.371094 4 4 9.371094 4 16 C 4 21.300781 7.4375 25.800781 12.207031 27.386719 C 12.808594 27.496094 13.027344 27.128906 13.027344 26.808594 C 13.027344 26.523438 13.015625 25.769531 13.011719 24.769531 C 9.671875 25.492188 8.96875 23.160156 8.96875 23.160156 C 8.421875 21.773438 7.636719 21.402344 7.636719 21.402344 C 6.546875 20.660156 7.71875 20.675781 7.71875 20.675781 C 8.921875 20.761719 9.554688 21.910156 9.554688 21.910156 C 10.625 23.746094 12.363281 23.214844 13.046875 22.910156 C 13.15625 22.132813 13.46875 21.605469 13.808594 21.304688 C 11.144531 21.003906 8.34375 19.972656 8.34375 15.375 C 8.34375 14.0625 8.8125 12.992188 9.578125 12.152344 C 9.457031 11.851563 9.042969 10.628906 9.695313 8.976563 C 9.695313 8.976563 10.703125 8.65625 12.996094 10.207031 C 13.953125 9.941406 14.980469 9.808594 16 9.804688 C 17.019531 9.808594 18.046875 9.941406 19.003906 10.207031 C 21.296875 8.65625 22.300781 8.976563 22.300781 8.976563 C 22.957031 10.628906 22.546875 11.851563 22.421875 12.152344 C 23.191406 12.992188 23.652344 14.0625 23.652344 15.375 C 23.652344 19.984375 20.847656 20.996094 18.175781 21.296875 C 18.605469 21.664063 18.988281 22.398438 18.988281 23.515625 C 18.988281 25.121094 18.976563 26.414063 18.976563 26.808594 C 18.976563 27.128906 19.191406 27.503906 19.800781 27.386719 C 24.566406 25.796875 28 21.300781 28 16 C 28 9.371094 22.628906 4 16 4 Z"
 })]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "font-medium text-sm"
+  "class": "text-sm font-medium"
 }, "GitHubでログイン")], -1
 /* HOISTED */
 );
 
 var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "bg-blue-100 hover:bg-gray-100 rounded-md px-4 py-2 flex items-center border-2 border-blue-300"
+  "class": "flex items-center px-4 py-2 bg-blue-100 hover:bg-gray-100 border-2 border-blue-300 rounded-md"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 48 48",
@@ -26164,7 +26162,7 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   fill: "#1976D2",
   d: "M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
 })]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "font-medium text-sm"
+  "class": "text-sm font-medium"
 }, "Googleでログイン")], -1
 /* HOISTED */
 );
@@ -26179,12 +26177,12 @@ var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "flex justify-center my-2"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
   "class": "font-semibold"
-}, " ユーザー登録せずに機能を試したい方はこちら ")], -1
+}, "ユーザー登録せずに機能を試したい方はこちら")], -1
 /* HOISTED */
 );
 
 var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "bg-yellow-600 hover:bg-yellow-300 rounded-md px-4 py-2 items-center text-center"
+  "class": "items-center px-4 py-2 text-center hover:bg-yellow-300 bg-yellow-600 rounded-md"
 }, " ゲストユーザーログイン ", -1
 /* HOISTED */
 );
@@ -26233,7 +26231,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "email",
         type: "email",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.email,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $data.form.email = $event;
@@ -26248,7 +26246,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "password",
         type: "password",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.password,
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $data.form.password = $event;
@@ -26268,7 +26266,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["checked"]), _hoisted_5])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [$props.canResetPassword ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_inertia_link, {
         key: 0,
         href: _ctx.route('password.request'),
-        "class": "underline text-sm text-gray-600 hover:text-gray-900"
+        "class": "text-gray-600 hover:text-gray-900 underline text-sm"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_7];
@@ -26357,8 +26355,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-  "class": "font-semibold text-xl text-gray-800 leading-tight"
-}, " 編集画面 ", -1
+  "class": "text-gray-800 text-xl font-semibold leading-tight"
+}, "編集画面", -1
 /* HOISTED */
 );
 
@@ -26366,10 +26364,10 @@ var _hoisted_2 = {
   "class": "py-12"
 };
 var _hoisted_3 = {
-  "class": "max-w-7xl mx-auto sm:px-6 lg:px-8"
+  "class": "mx-auto max-w-7xl sm:px-6 lg:px-8"
 };
 var _hoisted_4 = {
-  "class": "rounded-lg shadow-md p-6 pr-10 bg-red-200 text-red-900"
+  "class": "p-6 pr-10 text-red-900 bg-red-200 rounded-lg shadow-md"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
@@ -26406,13 +26404,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-  "class": "font-semibold text-xl text-gray-800 leading-tight"
-}, " プロフィール ", -1
+  "class": "text-gray-800 text-xl font-semibold leading-tight"
+}, "プロフィール", -1
 /* HOISTED */
 );
 
 var _hoisted_2 = {
-  "class": "max-w-7xl mx-auto py-10 sm:px-6 lg:px-8"
+  "class": "mx-auto py-10 max-w-7xl sm:px-6 lg:px-8"
 };
 var _hoisted_3 = {
   key: 0
@@ -26524,7 +26522,7 @@ var _hoisted_15 = {
 };
 
 var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "flex items-center bg-green-100 hover:bg-gray-100 rounded-md px-4 py-2 border-2 border-green-300"
+  "class": "flex items-center px-4 py-2 hover:bg-gray-100 bg-green-100 border-2 border-green-300 rounded-md"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   fill: "#000000",
   xmlns: "http://www.w3.org/2000/svg",
@@ -26541,7 +26539,7 @@ var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "bg-blue-100 hover:bg-gray-100 rounded-md px-4 py-2 flex items-center border-2 border-blue-300"
+  "class": "flex items-center px-4 py-2 bg-blue-100 hover:bg-gray-100 border-2 border-blue-300 rounded-md"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 48 48",
@@ -26607,7 +26605,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "name",
         type: "text",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.name,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $data.form.name = $event;
@@ -26623,7 +26621,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "email",
         type: "email",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.email,
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $data.form.email = $event;
@@ -26637,7 +26635,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "password",
         type: "password",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.password,
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $data.form.password = $event;
@@ -26652,7 +26650,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "password_confirmation",
         type: "password",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.password_confirmation,
         "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
           return $data.form.password_confirmation = $event;
@@ -26677,13 +26675,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           , ["checked"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
             target: "_blank",
             href: _ctx.route('terms.show'),
-            "class": "underline text-sm text-gray-600 hover:text-gray-900"
+            "class": "text-gray-600 hover:text-gray-900 underline text-sm"
           }, "Terms of Service", 8
           /* PROPS */
           , _hoisted_8), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
             target: "_blank",
             href: _ctx.route('policy.show'),
-            "class": "underline text-sm text-gray-600 hover:text-gray-900"
+            "class": "text-gray-600 hover:text-gray-900 underline text-sm"
           }, "Privacy Policy", 8
           /* PROPS */
           , _hoisted_10)])])];
@@ -26693,7 +26691,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
         href: _ctx.route('login'),
-        "class": "underline text-sm text-gray-600 hover:text-gray-900"
+        "class": "text-gray-600 hover:text-gray-900 underline text-sm"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_12];
@@ -26818,7 +26816,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "email",
         type: "email",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.email,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $data.form.email = $event;
@@ -26833,7 +26831,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "password",
         type: "password",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.password,
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $data.form.password = $event;
@@ -26848,7 +26846,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "password_confirmation",
         type: "password",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.password_confirmation,
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $data.form.password_confirmation = $event;
@@ -26903,8 +26901,8 @@ var _hoisted_1 = {
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-  "class": "font-semibold text-xl text-gray-800 leading-tight"
-}, " サービス詳細 ", -1
+  "class": "text-gray-800 text-xl font-semibold leading-tight"
+}, "サービス詳細", -1
 /* HOISTED */
 );
 
@@ -26912,10 +26910,10 @@ var _hoisted_3 = {
   key: 0
 };
 var _hoisted_4 = {
-  "class": "pt-6 pb-10 px-4 col-span-7 bg-white overflow-hidden shadow-xl sm:rounded-lg"
+  "class": "col-span-7 pb-10 pt-6 px-4 bg-white shadow-xl overflow-hidden sm:rounded-lg"
 };
 var _hoisted_5 = {
-  "class": "flex md:flex-row flex-col"
+  "class": "flex flex-col md:flex-row"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_responsive_state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("responsive-state");
@@ -27363,8 +27361,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-  "class": "font-semibold text-xl text-gray-800 leading-tight"
-}, " 開発者一覧 ", -1
+  "class": "text-gray-800 text-xl font-semibold leading-tight"
+}, "開発者一覧", -1
 /* HOISTED */
 );
 
@@ -27372,7 +27370,7 @@ var _hoisted_2 = {
   "class": "mx-2 pt-6"
 };
 var _hoisted_3 = {
-  "class": "grid grid-cols-1 md:grid-cols-3 gap-4"
+  "class": "grid gap-4 grid-cols-1 md:grid-cols-3"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_sort_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("sort-button");
@@ -27434,15 +27432,15 @@ var _hoisted_1 = {
 };
 var _hoisted_2 = {
   key: 2,
-  "class": "bg-indigo-600 hover:bg-indigo-400 h-10 w-16 text-white rounded group relative"
+  "class": "group relative w-16 h-10 text-white hover:bg-indigo-400 bg-indigo-600 rounded"
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" 投稿 ");
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "opacity-0 w-32 bg-gray-200 text-gray-600 text-center text-xs rounded-lg py-2 absolute group-hover:opacity-100 bottom-full right-1 mb-2 px-3 pointer-events-none"
+  "class": "absolute bottom-full right-1 mb-2 px-3 py-2 w-32 text-center text-gray-600 text-xs bg-gray-200 rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ログインが必要です "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "absolute text-gray-200 h-2 w-full left-0 top-full",
+  "class": "absolute left-0 top-full w-full h-2 text-gray-200",
   x: "0px",
   y: "0px",
   viewBox: "0 0 255 255",
@@ -27458,20 +27456,20 @@ var _hoisted_5 = [_hoisted_3, _hoisted_4];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 編集と通常表示との切り替え "), !$setup.form.comments.decidable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
-    "class": "bg-indigo-600 hover:bg-indigo-400 h-10 w-16 mr-3 text-white rounded",
+    "class": "mr-3 w-16 h-10 text-white hover:bg-indigo-400 bg-indigo-600 rounded",
     onClick: _cache[0] || (_cache[0] = function () {
       return $setup.input && $setup.input.apply($setup, arguments);
     })
   }, " 決定 ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 1,
-    "class": "bg-indigo-600 hover:bg-indigo-400 h-10 w-16 mr-3 text-white rounded",
+    "class": "mr-3 w-16 h-10 text-white hover:bg-indigo-400 bg-indigo-600 rounded",
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $setup.form.comments.decidable = false;
     })
   }, " 編集 ")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ゲスト表示 "), _ctx.$page.props.user == null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_2, _hoisted_5)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 3
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ログイン時の表示 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "bg-indigo-600 hover:bg-indigo-400 h-10 w-16 text-white rounded",
+    "class": "w-16 h-10 text-white hover:bg-indigo-400 bg-indigo-600 rounded",
     onClick: _cache[2] || (_cache[2] = function () {
       return $setup.commentSubmit && $setup.commentSubmit.apply($setup, arguments);
     })
@@ -27496,7 +27494,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "w-full bg-gray-100 p-4 flex flex-col",
+  "class": "flex flex-col p-4 w-full bg-gray-100",
   id: "comment"
 };
 
@@ -27520,7 +27518,7 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 var _hoisted_5 = [_hoisted_2, _hoisted_3, _hoisted_4];
 var _hoisted_6 = {
-  "class": "py-2 px-4 mb-3 w-full whitespace-pre-line break-words"
+  "class": "mb-3 px-4 py-2 w-full break-words whitespace-pre-line"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_client_error = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("client-error");
@@ -27530,7 +27528,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_buttons = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("buttons");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" コメントの項目選択 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
-    "class": "w-32 rounded border border-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 mb-3",
+    "class": "mb-3 w-32 border focus:border-blue-500 border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-500",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.form.comments.type = $event;
     })
@@ -27538,7 +27536,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.form.comments.type]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 編集表示 "), !$setup.form.comments.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("textarea", {
     key: 0,
-    "class": "autoexpand tracking-wide py-2 px-4 mb-3 leading-relaxed appearance-none block w-full border border-gray-200 rounded focus:outline-none focus:bg-white focus:border-gray-500",
+    "class": "autoexpand block mb-3 px-4 py-2 w-full tracking-wide leading-relaxed focus:bg-white border border-gray-200 focus:border-gray-500 rounded focus:outline-none appearance-none",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $setup.form.comments.content = $event;
     }),
@@ -27585,13 +27583,13 @@ var _hoisted_1 = {
   "class": "flex items-center"
 };
 var _hoisted_2 = {
-  "class": "text-gray-600 font-bold text-2xl mr-2"
+  "class": "mr-2 text-gray-600 text-2xl font-bold"
 };
 var _hoisted_3 = {
-  "class": "text-gray-600 font-semibold bg-blue-100 rounded text-center py-2 px-4"
+  "class": "px-4 py-2 text-center text-gray-600 font-semibold bg-blue-100 rounded"
 };
 var _hoisted_4 = {
-  "class": "text-gray-600 mt-2"
+  "class": "mt-2 text-gray-600"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_section_title = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("section-title");
@@ -27601,7 +27599,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.comments, function (comment) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: comment.id,
-      "class": "rounded-md bg-gray-100 w-full my-3 p-5"
+      "class": "my-3 p-5 w-full bg-gray-100 rounded-md"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(comment.user.name), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(comment.type), 1
@@ -27635,13 +27633,13 @@ var _hoisted_1 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 編集と通常表示との切り替え "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [!$setup.description.decidable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
-    "class": "bg-indigo-600 hover:bg-indigo-400 h-8 w-12 text-white rounded",
+    "class": "w-12 h-8 text-white hover:bg-indigo-400 bg-indigo-600 rounded",
     onClick: _cache[0] || (_cache[0] = function () {
       return $setup.input && $setup.input.apply($setup, arguments);
     })
   }, " 決定 ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 1,
-    "class": "bg-indigo-600 hover:bg-indigo-400 h-8 w-12 text-white rounded",
+    "class": "w-12 h-8 text-white hover:bg-indigo-400 bg-indigo-600 rounded",
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return $setup.description.decidable = false;
     })
@@ -27666,7 +27664,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "whitespace-pre-line mt-2 py-2 px-4 mb-3 text-xl text-gray-700 font-bold break-words"
+  "class": "mb-3 mt-2 px-4 py-2 text-gray-700 break-words whitespace-pre-line text-xl font-bold"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_client_error = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("client-error");
@@ -27675,7 +27673,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 編集表示 "), !$setup.description.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("textarea", {
     key: 0,
-    "class": "autoexpand tracking-wide py-2 px-4 mb-3 leading-relaxed appearance-none block w-full border border-gray-200 rounded focus:outline-none focus:bg-white focus:border-gray-500",
+    "class": "autoexpand block mb-3 px-4 py-2 w-full tracking-wide leading-relaxed focus:bg-white border border-gray-200 focus:border-gray-500 rounded focus:outline-none appearance-none",
     rows: "10",
     placeholder: "サービスの説明を入力してください。",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
@@ -27723,7 +27721,7 @@ var _hoisted_1 = {
   "class": "pt-3"
 };
 var _hoisted_2 = {
-  "class": "whitespace-pre-line mt-2 py-2 px-4 mb-3 text-xl text-gray-600 break-words"
+  "class": "mb-3 mt-2 px-4 py-2 text-gray-600 break-words whitespace-pre-line text-xl"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_section_title = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("section-title");
@@ -27751,16 +27749,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "max-w-md py-4 px-8 bg-indigo-50 shadow-lg rounded-lg my-10"
+  "class": "my-10 px-8 py-4 max-w-md bg-indigo-50 rounded-lg shadow-lg"
 };
 var _hoisted_2 = {
-  "class": "text-gray-800 text-2xl font-semibold line-clamp-2"
+  "class": "line-clamp-2 text-gray-800 text-2xl font-semibold"
 };
 var _hoisted_3 = {
-  "class": "h-48 mt-2 text-gray-600 line-clamp-8"
+  "class": "line-clamp-8 mt-2 h-48 text-gray-600"
 };
 var _hoisted_4 = {
-  "class": "flex justify-between items-center mt-2"
+  "class": "flex items-center justify-between mt-2"
 };
 var _hoisted_5 = {
   "class": "flex"
@@ -27770,7 +27768,7 @@ var _hoisted_6 = {
 };
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "h-6 w-6 text-red-500",
+  "class": "w-6 h-6 text-red-500",
   width: "24",
   height: "24",
   viewBox: "0 0 24 24",
@@ -27796,7 +27794,7 @@ var _hoisted_9 = {
 };
 
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "h-6 w-6 text-green-500",
+  "class": "w-6 h-6 text-green-500",
   fill: "none",
   viewBox: "0 0 24 24",
   stroke: "currentColor"
@@ -27832,7 +27830,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     href: _ctx.route('User', {
       id: $props.id
     }),
-    "class": "text-xl font-medium text-indigo-500"
+    "class": "text-indigo-500 text-xl font-medium"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_12];
@@ -27861,41 +27859,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "md:px-32 md:pt-16 px-4 pt-8"
+  "class": "pt-8 px-4 md:pt-16 md:px-32"
 };
 var _hoisted_2 = {
   "class": "md:flex md:items-center"
 };
 var _hoisted_3 = ["src"];
 var _hoisted_4 = {
-  "class": "font-bold text-3xl mb-2"
+  "class": "mb-2 text-3xl font-bold"
 };
 var _hoisted_5 = {
   "class": "font-semibold"
 };
 var _hoisted_6 = {
-  "class": "flex flex-col mt-6 justify-center md:justify-between"
+  "class": "flex flex-col justify-center mt-6 md:justify-between"
 };
 var _hoisted_7 = {
-  "class": "flex flex-col md:flex-row justify-center mb-3 items-center"
+  "class": "flex flex-col items-center justify-center mb-3 md:flex-row"
 };
 var _hoisted_8 = {
   key: 0,
-  "class": "font-semibold text-xl mb-3 md:mr-3 md:mb-0"
+  "class": "mb-3 text-xl font-semibold md:mb-0 md:mr-3"
 };
 var _hoisted_9 = {
   key: 1,
-  "class": "font-semibold text-xl"
+  "class": "text-xl font-semibold"
 };
 var _hoisted_10 = {
   "class": "flex items-start justify-center"
 };
 var _hoisted_11 = {
-  "class": "flex flex-col justify-center items-center"
+  "class": "flex flex-col items-center justify-center"
 };
 
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "h-8 w-8 text-red-500",
+  "class": "w-8 h-8 text-red-500",
   viewBox: "0 0 24 24",
   fill: "none",
   stroke: "currentColor",
@@ -27914,7 +27912,7 @@ var _hoisted_13 = {
 var _hoisted_14 = ["href"];
 
 var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "h-8 w-8 text-black ml-6",
+  "class": "ml-6 w-8 h-8 text-black",
   viewBox: "0 0 24 24",
   fill: "none",
   stroke: "currentColor",
@@ -27931,7 +27929,7 @@ var _hoisted_16 = [_hoisted_15];
 var _hoisted_17 = ["href"];
 
 var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "h-8 w-8 text-blue-500 ml-6",
+  "class": "ml-6 w-8 h-8 text-blue-500",
   viewBox: "0 0 24 24",
   fill: "none",
   stroke: "currentColor",
@@ -27947,7 +27945,7 @@ var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_19 = [_hoisted_18];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    "class": "md:h-32 md:w-32 h-16 w-16 rounded-full mr-12 mb-3",
+    "class": "mb-3 mr-12 w-16 h-16 rounded-full md:w-32 md:h-32",
     src: $props.image_url,
     alt: "プロフィール写真"
   }, null, 8
@@ -27995,11 +27993,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "bg-white rounded-full flex items-center justify-center w-12 h-12 my-4 group cursor-pointer relative inline-block border-2 border-green-500 shadow-xl"
+  "class": "group relative flex inline-block items-center justify-center my-4 w-12 h-12 bg-white border-2 border-green-500 rounded-full shadow-xl cursor-pointer"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "h-8 w-8 text-green-500",
+  "class": "w-8 h-8 text-green-500",
   fill: "none",
   viewBox: "0 0 24 24",
   stroke: "currentColor"
@@ -28013,9 +28011,9 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "opacity-0 w-28 bg-gray-200 text-gray-600 text-center text-xs rounded-lg py-2 absolute group-hover:opacity-100 bottom-full mb-2 px-3 pointer-events-none"
+  "class": "absolute bottom-full mb-2 px-3 py-2 w-28 text-center text-gray-600 text-xs bg-gray-200 rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" コメントを投稿する "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "absolute text-gray-200 h-2 w-full left-0 top-full",
+  "class": "absolute left-0 top-full w-full h-2 text-gray-200",
   x: "0px",
   y: "0px",
   viewBox: "0 0 255 255",
@@ -28047,11 +28045,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "bg-white rounded-full flex items-center justify-center w-12 h-12 my-4 group cursor-pointer relative inline-block border-gray-500 border-2 shadow-xl"
+  "class": "group relative flex inline-block items-center justify-center my-4 w-12 h-12 bg-white border-2 border-gray-500 rounded-full shadow-xl cursor-pointer"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "h-8 w-8 text-gray-500",
+  "class": "w-8 h-8 text-gray-500",
   fill: "none",
   viewBox: "0 0 24 24",
   stroke: "currentColor"
@@ -28065,9 +28063,9 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "opacity-0 w-28 bg-gray-200 text-gray-600 text-center text-xs rounded-lg py-2 absolute group-hover:opacity-100 bottom-full mb-2 px-3 pointer-events-none"
+  "class": "absolute bottom-full mb-2 px-3 py-2 w-28 text-center text-gray-600 text-xs bg-gray-200 rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" リンクをコピーする "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "absolute text-gray-200 h-2 w-full left-0 top-full",
+  "class": "absolute left-0 top-full w-full h-2 text-gray-200",
   x: "0px",
   y: "0px",
   viewBox: "0 0 255 255",
@@ -28081,7 +28079,7 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 var _hoisted_4 = {
   key: 0,
-  "class": "w-32 text-gray-600 text-center text-xs rounded-lg py-2 absolute top-10 px-3 pointer-events-none"
+  "class": "absolute top-10 px-3 py-2 w-32 text-center text-gray-600 text-xs rounded-lg pointer-events-none"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ホバー時に表示する説明文 "), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" コピー完了時のメッセージ "), $props.copied ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, " コピーが完了しました ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
@@ -28103,10 +28101,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "min-h-screen col-span-1 justify-center hidden md:flex"
+  "class": "hidden col-span-1 justify-center min-h-screen md:flex"
 };
 var _hoisted_2 = {
-  "class": "flex flex-col fixed"
+  "class": "fixed flex flex-col"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_responsive_heart_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("responsive-heart-button");
@@ -28184,10 +28182,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "bg-white rounded-full flex items-center justify-center w-12 h-12 my-4 group cursor-pointer relative inline-block border-red-500 border-2 shadow-xl"
+  "class": "group relative flex inline-block items-center justify-center my-4 w-12 h-12 bg-white border-2 border-red-500 rounded-full shadow-xl cursor-pointer"
 };
 var _hoisted_2 = {
-  "class": "h-8 w-8 text-red-500",
+  "class": "w-8 h-8 text-red-500",
   width: "24",
   height: "24",
   viewBox: "0 0 24 24",
@@ -28215,11 +28213,11 @@ var _hoisted_5 = {
   d: "M12 20l-7 -7a4 4 0 0 1 6.5 -6a.9 .9 0 0 0 1 0a4 4 0 0 1 6.5 6l-7 7"
 };
 var _hoisted_6 = {
-  "class": "opacity-0 w-32 bg-gray-200 text-gray-600 text-center text-xs rounded-lg py-2 absolute group-hover:opacity-100 bottom-full mb-2 px-3 pointer-events-none"
+  "class": "absolute bottom-full mb-2 px-3 py-2 w-32 text-center text-gray-600 text-xs bg-gray-200 rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none"
 };
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "absolute text-gray-200 h-2 w-full left-0 top-full",
+  "class": "absolute left-0 top-full w-full h-2 text-gray-200",
   x: "0px",
   y: "0px",
   viewBox: "0 0 255 255",
@@ -28253,11 +28251,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "p-0 w-10 h-10 bg-white rounded-full active:shadow-lg mouse shadow-xl transition ease-in duration-200 focus:outline-none fixed bottom-10 left-36 md:hidden flex items-center justify-center border-green-500 border-2"
+  "class": "mouse fixed bottom-10 left-36 flex items-center justify-center p-0 w-10 h-10 bg-white border-2 border-green-500 rounded-full focus:outline-none active:shadow-lg shadow-xl transition duration-200 ease-in md:hidden"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "h-6 w-6 text-green-500",
+  "class": "w-6 h-6 text-green-500",
   fill: "none",
   viewBox: "0 0 24 24",
   stroke: "currentColor"
@@ -28291,11 +28289,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "p-0 w-10 h-10 bg-white rounded-full active:shadow-lg mouse shadow-xl transition ease-in duration-200 focus:outline-none fixed bottom-10 left-20 md:hidden flex items-center justify-center border-gray-500 border-2"
+  "class": "mouse fixed bottom-10 left-20 flex items-center justify-center p-0 w-10 h-10 bg-white border-2 border-gray-500 rounded-full focus:outline-none active:shadow-lg shadow-xl transition duration-200 ease-in md:hidden"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "h-8 w-8 text-gray-500 relative",
+  "class": "relative w-8 h-8 text-gray-500",
   width: "24",
   height: "24",
   viewBox: "0 0 24 24",
@@ -28321,7 +28319,7 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 var _hoisted_3 = {
   key: 0,
-  "class": "w-32 text-gray-600 text-center text-xs rounded-lg py-2 absolute bottom-10 px-3 pointer-events-none bg-white"
+  "class": "absolute bottom-10 px-3 py-2 w-32 text-center text-gray-600 text-xs bg-white rounded-lg pointer-events-none"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" コピー完了時のメッセージ "), $props.copied ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, " リンクをコピーしました ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
@@ -28343,10 +28341,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "p-0 w-10 h-10 bg-white rounded-full active:shadow-lg mouse shadow-xl transition ease-in duration-200 focus:outline-none fixed bottom-10 right-4 md:hidden flex items-center justify-center border-red-500 border-2 group cursor-pointer"
+  "class": "mouse group fixed bottom-10 right-4 flex items-center justify-center p-0 w-10 h-10 bg-white border-2 border-red-500 rounded-full focus:outline-none active:shadow-lg shadow-xl cursor-pointer transition duration-200 ease-in md:hidden"
 };
 var _hoisted_2 = {
-  "class": "h-8 w-8 text-red-500 relative",
+  "class": "relative w-8 h-8 text-red-500",
   width: "24",
   height: "24",
   viewBox: "0 0 24 24",
@@ -28375,13 +28373,13 @@ var _hoisted_5 = {
 };
 var _hoisted_6 = {
   key: 0,
-  "class": "opacity-0 w-20 bg-gray-200 text-gray-600 text-center text-xs rounded-lg py-2 absolute group-hover:opacity-100 bottom-full mb-2 px-3 pointer-events-none"
+  "class": "absolute bottom-full mb-2 px-3 py-2 w-20 text-center text-gray-600 text-xs bg-gray-200 rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none"
 };
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ログインが必要です ");
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "absolute text-gray-200 h-2 w-full left-0 top-full",
+  "class": "absolute left-0 top-full w-full h-2 text-gray-200",
   x: "0px",
   y: "0px",
   viewBox: "0 0 255 255",
@@ -28414,11 +28412,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "p-0 w-10 h-10 bg-white rounded-full active:shadow-lg mouse shadow-xl transition ease-in duration-200 focus:outline-none fixed bottom-10 left-4 md:hidden flex items-center justify-center border-blue-500 border-2"
+  "class": "mouse fixed bottom-10 left-4 flex items-center justify-center p-0 w-10 h-10 bg-white border-2 border-blue-500 rounded-full focus:outline-none active:shadow-lg shadow-xl transition duration-200 ease-in md:hidden"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "h-6 w-6 text-blue-500",
+  "class": "w-6 h-6 text-blue-500",
   width: "24",
   height: "24",
   viewBox: "0 0 24 24",
@@ -28457,10 +28455,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "bg-white rounded-full flex items-center justify-center w-12 h-12 my-4 group cursor-pointer relative inline-block border-2 border-blue-500 shadow-xl"
+  "class": "group relative flex inline-block items-center justify-center my-4 w-12 h-12 bg-white border-2 border-blue-500 rounded-full shadow-xl cursor-pointer"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<svg class=\"h-8 w-8 text-blue-500\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" stroke-width=\"2\" stroke=\"currentColor\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path stroke=\"none\" d=\"M0 0h24v24H0z\"></path><path d=\"M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84 0 0 0 .497 -3.753C20.18 7.773 21.692 5.25 22 4.009z\"></path></svg><div class=\"opacity-0 w-28 bg-gray-200 text-gray-600 text-center text-xs rounded-lg py-2 absolute group-hover:opacity-100 bottom-full mb-2 px-3 pointer-events-none\"> Twitterでツイート <svg class=\"absolute text-gray-200 h-2 w-full left-0 top-full\" x=\"0px\" y=\"0px\" viewBox=\"0 0 255 255\" xml:space=\"preserve\"><polygon class=\"fill-current\" points=\"0,0 127.5,127.5 255,0\"></polygon></svg></div>", 2);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<svg class=\"w-8 h-8 text-blue-500\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" stroke-width=\"2\" stroke=\"currentColor\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path stroke=\"none\" d=\"M0 0h24v24H0z\"></path><path d=\"M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84 0 0 0 .497 -3.753C20.18 7.773 21.692 5.25 22 4.009z\"></path></svg><div class=\"absolute bottom-full mb-2 px-3 py-2 w-28 text-center text-gray-600 text-xs bg-gray-200 rounded-lg opacity-0 group-hover:opacity-100 pointer-events-none\"> Twitterでツイート <svg class=\"absolute left-0 top-full w-full h-2 text-gray-200\" x=\"0px\" y=\"0px\" viewBox=\"0 0 255 255\" xml:space=\"preserve\"><polygon class=\"fill-current\" points=\"0,0 127.5,127.5 255,0\"></polygon></svg></div>", 2);
 
 var _hoisted_4 = [_hoisted_2];
 function render(_ctx, _cache) {
@@ -28483,21 +28481,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "max-w-sm rounded-lg material-card bg-white border-gray-200 border-4 h-80 my-3 shadow-lg"
+  "class": "material-card my-3 max-w-sm h-80 bg-white border-4 border-gray-200 rounded-lg shadow-lg"
 };
 var _hoisted_2 = ["src"];
 var _hoisted_3 = {
   "class": "px-6 py-4"
 };
 var _hoisted_4 = {
-  "class": "font-bold text-xl tracking-wide"
+  "class": "text-xl font-bold tracking-wide"
 };
 var _hoisted_5 = {
   "class": "text-gray-700 text-base"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    "class": "w-full rounded-t h-48",
+    "class": "w-full h-48 rounded-t",
     src: $setup.content.image
   }, null, 8
   /* PROPS */
@@ -28524,20 +28522,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex py-16 justify-center"
+  "class": "flex justify-center py-16"
 };
 var _hoisted_2 = {
-  "class": "py-12 px-8 text-center max-w-4xl"
+  "class": "px-8 py-12 max-w-4xl text-center"
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "md:text-3xl text-2xl font-bold"
-}, " 「 Web Service Hub 」 とは ? ", -1
+  "class": "text-2xl font-bold md:text-3xl"
+}, "「 Web Service Hub 」 とは ?", -1
 /* HOISTED */
 );
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "md:text-lg text-sm font-normal mt-4"
+  "class": "mt-4 text-sm font-normal md:text-lg"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Web Service Hub とは個人でWebサービスを開発している方のための"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "コミュニティサービス"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("です。"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" サービスを登録したり、みんなのサービスを見て"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Webサービスの開発を学んで品質向上"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("を目指す場です。 ")], -1
 /* HOISTED */
 );
@@ -28547,13 +28545,13 @@ var _hoisted_5 = {
 };
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "flex shadow-md font-medium py-2 px-10 text-white cursor-pointer bg-blue-600 hover:bg-blue-400 rounded text-lg"
+  "class": "flex px-10 py-2 text-white text-lg font-medium hover:bg-blue-400 bg-blue-600 rounded shadow-md cursor-pointer"
 }, " ログイン ", -1
 /* HOISTED */
 );
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "flex shadow-md font-medium py-2 px-4 text-white cursor-pointer bg-blue-600 hover:bg-blue-400 rounded text-lg"
+  "class": "flex px-4 py-2 text-white text-lg font-medium hover:bg-blue-400 bg-blue-600 rounded shadow-md cursor-pointer"
 }, " アカウント作成 ", -1
 /* HOISTED */
 );
@@ -28563,7 +28561,7 @@ function render(_ctx, _cache) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
     href: _ctx.route('login'),
-    "class": "mt-6 flex justify-center h-12"
+    "class": "flex justify-center mt-6 h-12"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_6];
@@ -28575,7 +28573,7 @@ function render(_ctx, _cache) {
   /* PROPS */
   , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
     href: _ctx.route('register'),
-    "class": "mt-6 flex justify-center h-12"
+    "class": "flex justify-center mt-6 h-12"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_7];
@@ -28604,16 +28602,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex py-2 justify-center"
+  "class": "flex justify-center py-2"
 };
 var _hoisted_2 = {
-  "class": "pt-8 pb-2 px-8 text-center max-w-4xl border-gray-200 border-4 rounded-lg"
+  "class": "pb-2 pt-8 px-8 max-w-4xl text-center border-4 border-gray-200 rounded-lg"
 };
 var _hoisted_3 = {
-  "class": "md:text-2xl text-xl font-bold"
+  "class": "text-xl font-bold md:text-2xl"
 };
 var _hoisted_4 = {
-  "class": "flex shadow-md font-medium absolute py-2 px-4 text-white cursor-pointer bg-blue-600 hover:bg-blue-400 rounded text-lg"
+  "class": "absolute flex px-4 py-2 text-white text-lg font-medium hover:bg-blue-400 bg-blue-600 rounded shadow-md cursor-pointer"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_inertia_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("inertia-link");
@@ -28622,7 +28620,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_inertia_link, {
     href: _ctx.route($setup.content.url),
-    "class": "my-6 flex justify-center h-12"
+    "class": "flex justify-center my-6 h-12"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.content.button), 1
@@ -28653,13 +28651,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex flex-wrap items-center md:justify-between justify-center py-3"
+  "class": "flex flex-wrap items-center justify-center py-3 md:justify-between"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "w-full md:w-4/12 px-4 mx-auto text-center"
+  "class": "mx-auto px-4 w-full text-center md:w-4/12"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "text-sm text-blueGray-500 font-semibold py-1"
+  "class": "text-blueGray-500 py-1 text-sm font-semibold"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Copyright © 2021 WebServiceHub by "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "https://github.com/kapureka6174",
   target: "_blank",
@@ -28692,7 +28690,7 @@ var _hoisted_1 = {
   "class": "bg-white border-b border-gray-100"
 };
 var _hoisted_2 = {
-  "class": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+  "class": "mx-auto px-4 max-w-7xl sm:px-6 lg:px-8"
 };
 var _hoisted_3 = {
   "class": "flex justify-between h-16"
@@ -28701,35 +28699,35 @@ var _hoisted_4 = {
   "class": "flex"
 };
 var _hoisted_5 = {
-  "class": "flex-shrink-0 flex items-center"
+  "class": "flex flex-shrink-0 items-center"
 };
 var _hoisted_6 = {
-  "class": "hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
+  "class": "hidden space-x-8 sm:flex sm:-my-px sm:ml-10"
 };
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ホーム ");
 
 var _hoisted_8 = {
-  "class": "hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
+  "class": "hidden space-x-8 sm:flex sm:-my-px sm:ml-10"
 };
 
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" サービス ");
 
 var _hoisted_10 = {
-  "class": "hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
+  "class": "hidden space-x-8 sm:flex sm:-my-px sm:ml-10"
 };
 
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" 開発者 ");
 
 var _hoisted_12 = {
-  "class": "hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
+  "class": "hidden space-x-8 sm:flex sm:-my-px sm:ml-10"
 };
 
 var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" 新規作成 ");
 
 var _hoisted_14 = {
   key: 0,
-  "class": "hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
+  "class": "hidden space-x-8 sm:flex sm:-my-px sm:ml-10"
 };
 
 var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" マイページ ");
@@ -28738,47 +28736,47 @@ var _hoisted_16 = {
   "class": "hidden sm:flex sm:items-center sm:ml-6"
 };
 var _hoisted_17 = {
-  "class": "-mr-2 flex items-center sm:hidden"
+  "class": "flex items-center -mr-2 sm:hidden"
 };
 var _hoisted_18 = {
-  "class": "h-6 w-6",
+  "class": "w-6 h-6",
   stroke: "currentColor",
   fill: "none",
   viewBox: "0 0 24 24"
 };
 var _hoisted_19 = {
-  "class": "pt-2 pb-3 space-y-1"
+  "class": "pb-3 pt-2 space-y-1"
 };
 
 var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" ホーム ");
 
 var _hoisted_21 = {
-  "class": "pt-2 pb-3 space-y-1"
+  "class": "pb-3 pt-2 space-y-1"
 };
 
 var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" サービス ");
 
 var _hoisted_23 = {
-  "class": "pt-2 pb-3 space-y-1"
+  "class": "pb-3 pt-2 space-y-1"
 };
 
 var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" 開発者 ");
 
 var _hoisted_25 = {
-  "class": "pt-2 pb-3 space-y-1"
+  "class": "pb-3 pt-2 space-y-1"
 };
 
 var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" 新規作成 ");
 
 var _hoisted_27 = {
   key: 0,
-  "class": "pt-2 pb-3 space-y-1"
+  "class": "pb-3 pt-2 space-y-1"
 };
 
 var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" マイページ ");
 
 var _hoisted_29 = {
-  "class": "pt-4 pb-1 border-t border-gray-200"
+  "class": "pb-1 pt-4 border-t border-gray-200"
 };
 var _hoisted_30 = {
   "class": "flex items-center px-4"
@@ -28792,10 +28790,10 @@ var _hoisted_33 = {
   key: 1
 };
 var _hoisted_34 = {
-  "class": "font-medium text-base text-gray-800"
+  "class": "text-gray-800 text-base font-medium"
 };
 var _hoisted_35 = {
-  "class": "font-medium text-sm text-gray-500"
+  "class": "text-gray-500 text-sm font-medium"
 };
 var _hoisted_36 = {
   key: 0,
@@ -28831,7 +28829,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_application_mark, {
-        "class": "block h-9 w-auto"
+        "class": "block w-auto h-9"
       })];
     }),
     _: 1
@@ -28907,7 +28905,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $data.showingNavigationDropdown = !$data.showingNavigationDropdown;
     }),
-    "class": "inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition"
+    "class": "inline-flex items-center justify-center p-2 text-gray-400 hover:text-gray-500 focus:text-gray-500 hover:bg-gray-100 focus:bg-gray-100 rounded-md focus:outline-none transition"
   }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
       hidden: $data.showingNavigationDropdown,
@@ -29000,7 +28998,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8
   /* PROPS */
   , ["href", "active"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Responsive Settings Options "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [_ctx.$page.props.jetstream.managesProfilePhotos && _ctx.$page.props.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-    "class": "h-10 w-10 rounded-full object-cover",
+    "class": "w-10 h-10 rounded-full object-cover",
     src: _ctx.$page.props.user.profile_photo_url,
     alt: _ctx.$page.props.user.name
   }, null, 8
@@ -29080,7 +29078,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "ml-3 relative"
+  "class": "relative ml-3"
 };
 var _hoisted_2 = {
   key: 0,
@@ -29088,11 +29086,11 @@ var _hoisted_2 = {
 };
 var _hoisted_3 = {
   type: "button",
-  "class": "inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition"
+  "class": "inline-flex items-center px-3 py-2 text-gray-500 hover:text-gray-700 text-sm font-medium leading-4 bg-white border border-transparent rounded-md focus:outline-none transition"
 };
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "ml-2 -mr-0.5 h-4 w-4",
+  "class": "-mr-0.5 ml-2 w-4 h-4",
   xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 20 20",
   fill: "currentColor"
@@ -29106,21 +29104,21 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "button",
-  "class": "inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition"
+  "class": "inline-flex items-center px-3 py-2 text-gray-500 hover:text-gray-700 text-sm font-medium leading-4 bg-white border border-transparent rounded-md focus:outline-none transition"
 }, " ログイン ", -1
 /* HOISTED */
 );
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "button",
-  "class": "inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition"
+  "class": "inline-flex items-center px-3 py-2 text-gray-500 hover:text-gray-700 text-sm font-medium leading-4 bg-white border border-transparent rounded-md focus:outline-none transition"
 }, " アカウント作成 ", -1
 /* HOISTED */
 );
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "block px-4 py-2 text-xs text-gray-400"
-}, " アカウント管理 ", -1
+  "class": "block px-4 py-2 text-gray-400 text-xs"
+}, "アカウント管理", -1
 /* HOISTED */
 );
 
@@ -29232,7 +29230,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-    "class": "bg-indigo-600 hover:bg-indigo-400 h-10 w-28 text-white rounded",
+    "class": "w-28 h-10 text-white hover:bg-indigo-400 bg-indigo-600 rounded",
     onClick: _cache[0] || (_cache[0] = function () {
       return $setup.add && $setup.add.apply($setup, arguments);
     })
@@ -29255,7 +29253,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "bg-blue-400 rounded m-3 pb-3"
+  "class": "m-3 pb-3 bg-blue-400 rounded"
 };
 var _hoisted_2 = {
   "class": "flex items-center"
@@ -29288,7 +29286,7 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 var _hoisted_6 = [_hoisted_3, _hoisted_4, _hoisted_5];
 var _hoisted_7 = {
-  "class": "w-full text-center mb-3"
+  "class": "mb-3 w-full text-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_client_error = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("client-error");
@@ -29299,7 +29297,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ページ名（編集表示） "), !$setup.pages[$props.index].pagename.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
     key: 0,
-    "class": "appearance-none block w-3/5 bg-white text-gray-700 border border-gray-200 rounded py-2 px-4 my-2 mx-auto leading-tight focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500",
+    "class": "block mx-auto my-2 px-4 py-2 w-3/5 text-gray-700 leading-tight bg-white border focus:border-blue-500 border-gray-200 rounded focus:outline-none appearance-none focus:ring-1 focus:ring-blue-500",
     placeholder: "ページ名を入力してください",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.pages[$props.index].pagename.content = $event;
@@ -29316,7 +29314,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.pages[$props.index].pagename.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ページ名（通常表示） "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
-    "class": "text-white text-xl font-semibold my-2 py-2 px-4 mx-auto w-4/5 text-center",
+    "class": "mx-auto my-2 px-4 py-2 w-4/5 text-center text-white text-xl font-semibold",
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $setup.pages[$props.index].pagename.decidable = false;
     })
@@ -29325,7 +29323,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
   )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 削除ボタン "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", {
-    "class": "h-6 w-6 text-red-600 hover:text-red-400 mr-3",
+    "class": "mr-3 w-6 h-6 hover:text-red-400 text-red-600",
     onClick: _cache[4] || (_cache[4] = function ($event) {
       return $setup.destroy(_ctx.$page.url, $props.index);
     }),
@@ -29343,7 +29341,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["errorFlag", "text"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 追加ボタン "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "bg-indigo-600 hover:bg-indigo-400 h-10 w-40 text-white rounded",
+    "class": "w-40 h-10 text-white hover:bg-indigo-400 bg-indigo-600 rounded",
     onClick: _cache[5] || (_cache[5] = function ($event) {
       return $setup.addSelectedRequirement(_ctx.$page.url, $props.index);
     })
@@ -29383,10 +29381,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "w-full flex items-center justify-around mb-3"
+  "class": "flex items-center justify-around mb-3 w-full"
 };
 var _hoisted_2 = {
-  "class": "font-bold text-gray-600 bg-gray-200 rounded-md py-2 px-4 w-4/5 mx-3 text-center"
+  "class": "mx-3 px-4 py-2 w-4/5 text-center text-gray-600 font-bold bg-gray-200 rounded-md"
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
@@ -29424,7 +29422,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" ページの機能 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.url.split("/")[1] == "create" ? $setup.pages[$props.index].requirements[$props.requirementIndex] : $setup.pages[$props.index].requirements[$props.requirementIndex].content), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 削除ボタン "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", {
-    "class": "h-6 w-6 text-red-600 my-2 mr-4 hover:text-red-400",
+    "class": "mr-4 my-2 w-6 h-6 hover:text-red-400 text-red-600",
     viewBox: "0 0 24 24",
     fill: "none",
     stroke: "currentColor",
@@ -29453,13 +29451,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "grid grid-cols-1 md:grid-cols-3 justify-between"
+  "class": "grid grid-cols-1 justify-between md:grid-cols-3"
 };
 var _hoisted_2 = {
-  "class": "text-white text-xl font-semibold my-3 mx-auto w-4/5 text-center"
+  "class": "mx-auto my-3 w-4/5 text-center text-white text-xl font-semibold"
 };
 var _hoisted_3 = {
-  "class": "font-bold text-gray-600 bg-gray-200 rounded-md py-2 px-4 w-4/5 mx-auto mb-4 text-center"
+  "class": "mb-4 mx-auto px-4 py-2 w-4/5 text-center text-gray-600 font-bold bg-gray-200 rounded-md"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_section_title = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("section-title");
@@ -29468,7 +29466,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     title: "ページ"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.pages, function (page) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      "class": "bg-blue-400 rounded m-3",
+      "class": "m-3 bg-blue-400 rounded",
       key: page.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(page.pagename), 1
     /* TEXT */
@@ -29510,7 +29508,7 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" 永久にアカウントを削除する。 ");
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "max-w-xl text-sm text-gray-600"
+  "class": "max-w-xl text-gray-600 text-sm"
 }, " アカウントを削除すると、すべてのデータが完全に削除されます。削除する前に、保存しておきたいデータなどはダウンロードしてください。 ", -1
 /* HOISTED */
 );
@@ -29575,7 +29573,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
             type: "password",
-            "class": "mt-1 block w-3/4",
+            "class": "block mt-1 w-3/4",
             placeholder: "Password",
             ref: "password",
             modelValue: $data.form.password,
@@ -29653,7 +29651,7 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "col-span-6 sm:col-span-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-  "class": "font-semibold text-red-400"
+  "class": "text-red-400 font-semibold"
 }, " ※ゲストユーザーは、プロフィールを編集できません。 ")], -1
 /* HOISTED */
 );
@@ -29696,7 +29694,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
     id: "name",
     type: "text",
-    "class": "mt-1 block w-full bg-gray-300",
+    "class": "block mt-1 w-full bg-gray-300",
     modelValue: $props.form.name,
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $props.form.name = $event;
@@ -29716,7 +29714,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
     id: "email",
     type: "email",
-    "class": "mt-1 block w-full bg-gray-300",
+    "class": "block mt-1 w-full bg-gray-300",
     modelValue: $props.form.email,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $props.form.email = $event;
@@ -29730,7 +29728,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
     id: "twitter_account",
     type: "text",
-    "class": "mt-1 block w-full bg-gray-300",
+    "class": "block mt-1 w-full bg-gray-300",
     modelValue: $props.form.twitter_account,
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $props.form.twitter_account = $event;
@@ -29746,7 +29744,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
     id: "github_account",
     type: "text",
-    "class": "mt-1 block w-full bg-gray-300",
+    "class": "block mt-1 w-full bg-gray-300",
     modelValue: $props.form.github_account,
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $props.form.github_account = $event;
@@ -29767,7 +29765,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
     id: "fav_lang",
     type: "text",
-    "class": "mt-1 block w-full bg-gray-300",
+    "class": "block mt-1 w-full bg-gray-300",
     modelValue: $props.form.fav_lang,
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $props.form.fav_lang = $event;
@@ -29788,7 +29786,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
     id: "dev_year",
     type: "text",
-    "class": "mt-1 block w-full bg-gray-300",
+    "class": "block mt-1 w-full bg-gray-300",
     modelValue: $props.form.dev_year,
     "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
       return $props.form.dev_year = $event;
@@ -29807,7 +29805,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "for": "introduction",
     value: "紹介文"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
-    "class": "border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full bg-gray-300",
+    "class": "block mt-1 w-full bg-gray-300 border-gray-300 focus:border-indigo-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50",
     id: "introduction",
     type: "text",
     "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
@@ -29843,7 +29841,7 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" すべての端末からログアウトする。 ");
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "max-w-xl text-sm text-gray-600"
+  "class": "max-w-xl text-gray-600 text-sm"
 }, " お使いのすべての端末からログアウトできます。最近のセッションは下記の通りです（一部の情報が表示されていない可能性があります）。心配に応じてパスワードの更新もご検討ください。 ", -1
 /* HOISTED */
 );
@@ -29910,10 +29908,10 @@ var _hoisted_13 = {
   "class": "ml-3"
 };
 var _hoisted_14 = {
-  "class": "text-sm text-gray-600"
+  "class": "text-gray-600 text-sm"
 };
 var _hoisted_15 = {
-  "class": "text-xs text-gray-500"
+  "class": "text-gray-500 text-xs"
 };
 var _hoisted_16 = {
   key: 0,
@@ -30011,7 +30009,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         content: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
             type: "password",
-            "class": "mt-1 block w-3/4",
+            "class": "block mt-1 w-3/4",
             placeholder: "Password",
             ref: "password",
             modelValue: $data.form.password,
@@ -30096,7 +30094,7 @@ var _hoisted_3 = {
 };
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-  "class": "font-semibold text-red-400"
+  "class": "text-red-400 font-semibold"
 }, " ※ゲストユーザーは、パスワードを更新できません。 ", -1
 /* HOISTED */
 );
@@ -30158,7 +30156,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         value: "現在のパスワード"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         type: "password",
-        "class": "mt-1 block w-full bg-gray-300",
+        "class": "block mt-1 w-full bg-gray-300",
         readonly: ""
       })])) : _ctx.$page.props.existPass ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         key: 2
@@ -30168,7 +30166,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "current_password",
         type: "password",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.current_password,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $data.form.current_password = $event;
@@ -30188,7 +30186,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         value: "新しいパスワード"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         type: "password",
-        "class": "mt-1 block w-full bg-gray-300",
+        "class": "block mt-1 w-full bg-gray-300",
         readonly: ""
       })])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         key: 4
@@ -30198,7 +30196,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "password",
         type: "password",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.password,
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $data.form.password = $event;
@@ -30218,7 +30216,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         value: "パスワード（確認用）"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         type: "password",
-        "class": "mt-1 block w-full bg-gray-300",
+        "class": "block mt-1 w-full bg-gray-300",
         readonly: ""
       })])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         key: 6
@@ -30228,7 +30226,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "password_confirmation",
         type: "password",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.password_confirmation,
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $data.form.password_confirmation = $event;
@@ -30419,20 +30417,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Current Profile Photo "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
         src: $props.user.profile_photo_url,
         alt: $props.user.name,
-        "class": "rounded-full h-20 w-20 object-cover"
+        "class": "w-20 h-20 rounded-full object-cover"
       }, null, 8
       /* PROPS */
       , _hoisted_5)], 512
       /* NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$data.photoPreview]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" New Profile Photo Preview "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-        "class": "block rounded-full w-20 h-20",
+        "class": "block w-20 h-20 rounded-full",
         style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)('background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + $data.photoPreview + '\');')
       }, null, 4
       /* STYLE */
       )], 512
       /* NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $data.photoPreview]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
-        "class": "mt-2 mr-2",
+        "class": "mr-2 mt-2",
         type: "button",
         onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.selectNewPhoto, ["prevent"])
       }, {
@@ -30469,7 +30467,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "name",
         type: "text",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.name,
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $data.form.name = $event;
@@ -30488,7 +30486,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "email",
         type: "email",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.email,
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $data.form.email = $event;
@@ -30506,7 +30504,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "twitter_account",
         type: "text",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.twitter_account,
         "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
           return $data.form.twitter_account = $event;
@@ -30525,7 +30523,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "github_account",
         type: "text",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.github_account,
         "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
           return $data.form.github_account = $event;
@@ -30544,7 +30542,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "fav_lang",
         type: "text",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.fav_lang,
         "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
           return $data.form.fav_lang = $event;
@@ -30563,7 +30561,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "dev_years",
         type: "text",
-        "class": "mt-1 block w-full",
+        "class": "block mt-1 w-full",
         modelValue: $data.form.dev_years,
         "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
           return $data.form.dev_years = $event;
@@ -30580,7 +30578,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "for": "introduction",
         value: "紹介文"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
-        "class": "border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full",
+        "class": "block mt-1 w-full border-gray-300 focus:border-indigo-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50",
         id: "introduction",
         type: "text",
         "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
@@ -30670,7 +30668,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-    "class": "bg-indigo-600 hover:bg-indigo-400 h-8 w-12 text-white rounded ml-2",
+    "class": "ml-2 w-12 h-8 text-white hover:bg-indigo-400 bg-indigo-600 rounded",
     onClick: _cache[0] || (_cache[0] = function () {
       return $setup.add && $setup.add.apply($setup, arguments);
     })
@@ -30700,7 +30698,7 @@ var _hoisted_2 = {
   "class": "mb-1"
 };
 var _hoisted_3 = {
-  "class": "rounded py-2 px-4 bg-gray-200 relative h-full"
+  "class": "relative px-4 py-2 h-full bg-gray-200 rounded"
 };
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
@@ -30748,7 +30746,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 要件名（編集表示） "), !$setup.requirements[$props.index].title.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
     key: 0,
-    "class": "appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded py-2 px-4 mr-2 leading-tight focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 mb-2",
+    "class": "block mb-2 mr-2 px-4 py-2 w-full text-gray-700 leading-tight bg-white border focus:border-blue-500 border-gray-200 rounded focus:outline-none appearance-none focus:ring-1 focus:ring-blue-500",
     placeholder: "要件名・機能名を入力してください",
     onKeyup: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
       return $setup.input($event.target.value, 'title');
@@ -30767,14 +30765,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["errorFlag", "text"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 要件名（通常表示） "), $setup.requirements[$props.index].title.decidable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("details", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("summary", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-    "class": "font-semibold break-words",
+    "class": "break-words font-semibold",
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $setup.requirements[$props.index].title.decidable = false;
     })
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.requirements[$props.index].title.content), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 削除ボタン "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", {
-    "class": "h-6 w-6 text-red-600 hover:text-red-400 absolute top-1 right-1",
+    "class": "absolute right-1 top-1 w-6 h-6 hover:text-red-400 text-red-600",
     viewBox: "0 0 24 24",
     fill: "none",
     stroke: "currentColor",
@@ -30785,7 +30783,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.destroy(_ctx.$page.url, $props.index);
     })
   }, _hoisted_8))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 要件の説明（編集表示） "), !$setup.requirements[$props.index].explain.decidable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
-    "class": "appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 mt-2",
+    "class": "block mt-2 px-4 py-2 w-full text-gray-700 leading-tight bg-white border focus:border-blue-500 border-gray-200 rounded focus:outline-none appearance-none focus:ring-1 focus:ring-blue-500",
     rows: "8",
     placeholder: "要件・機能の説明を入力してください",
     "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
@@ -30802,13 +30800,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["errorFlag", "text"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 要件の説明の保存ボタン "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "bg-indigo-600 hover:bg-indigo-400 h-8 w-12 text-white rounded m-2",
+    "class": "m-2 w-12 h-8 text-white hover:bg-indigo-400 bg-indigo-600 rounded",
     onClick: _cache[7] || (_cache[7] = function ($event) {
       return $setup.input($setup.requirements[$props.index].explain.content, 'explain');
     })
   }, " 決定 ")])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", {
     key: 1,
-    "class": "text-grey-600 font-bold m-4 whitespace-pre-line break-words",
+    "class": "text-grey-600 m-4 break-words whitespace-pre-line font-bold",
     onClick: _cache[8] || (_cache[8] = function ($event) {
       return $setup.requirements[$props.index].explain.decidable = false;
     })
@@ -30841,15 +30839,15 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = {
   key: 0,
-  "class": "w-4/5 bg-gray-200 flex items-center rounded-md py-3 my-1 mx-auto"
+  "class": "flex items-center mx-auto my-1 py-3 w-4/5 bg-gray-200 rounded-md"
 };
 var _hoisted_2 = {
-  "class": "font-bold text-gray-600 w-4/5"
+  "class": "w-4/5 text-gray-600 font-bold"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [$setup.requirements[$props.index].title.decidable ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "checkbox",
-    "class": "form-checkbox h-5 w-5 text-green-600 rounded mx-2",
+    "class": "form-checkbox mx-2 w-5 h-5 text-green-600 rounded",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.requirements[$props.index].title.selected = $event;
     })
@@ -30882,10 +30880,10 @@ var _hoisted_2 = {
   "class": "flex flex-wrap"
 };
 var _hoisted_3 = {
-  "class": "font-semibold bg-gray-200 rounded-md py-2 px-4"
+  "class": "px-4 py-2 font-semibold bg-gray-200 rounded-md"
 };
 var _hoisted_4 = {
-  "class": "text-grey-600 font-bold p-4 rounded-md bg-gray-100 border-2 border-white whitespace-pre-line break-words"
+  "class": "text-grey-600 p-4 break-words whitespace-pre-line font-bold bg-gray-100 border-2 border-white rounded-md"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_section_title = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("section-title");
@@ -30927,12 +30925,12 @@ var _hoisted_1 = {
   "class": "relative"
 };
 var _hoisted_2 = {
-  "class": "ml-2 mr-1 leading-relaxed truncate max-w-xs px-1"
+  "class": "ml-2 mr-1 px-1 max-w-xs leading-relaxed truncate"
 };
 var _hoisted_3 = ["onClick"];
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "w-6 h-6 fill-current mx-auto",
+  "class": "mx-auto w-6 h-6 fill-current",
   xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 24 24"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
@@ -30949,7 +30947,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_server_error = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("server-error");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 入力フォーム "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "appearance-none block w-full md:w-1/2 bg-white text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 mt-2",
+    "class": "block mt-2 px-4 py-2 w-full text-gray-700 leading-tight bg-white border focus:border-blue-500 border-gray-200 rounded focus:outline-none appearance-none focus:ring-1 focus:ring-blue-500 md:w-1/2",
     placeholder: "カテゴリーを追加できます",
     onKeyup: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
       return $setup.addTag && $setup.addTag.apply($setup, arguments);
@@ -30973,12 +30971,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["errorFlag", "errors"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" タグ一覧 "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.tags.content, function (tag, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-      "class": "bg-blue-100 inline-flex items-center text-sm rounded mt-2 mr-1 overflow-hidden",
+      "class": "inline-flex items-center mr-1 mt-2 text-sm bg-blue-100 rounded overflow-hidden",
       key: index
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tag), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 削除ボタン "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-      "class": "w-6 h-8 inline-block align-middle text-gray-500 bg-blue-200 focus:outline-none",
+      "class": "inline-block align-middle w-6 h-8 text-gray-500 bg-blue-200 focus:outline-none",
       onClick: function onClick($event) {
         return $setup.tags.content.splice(index, 1);
       }
@@ -31006,11 +31004,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-blue-200 text-blue-700 rounded-full mx-2 my-1 hover:bg-blue-100"
+  "class": "leading-sm inline-flex items-center mx-2 my-1 px-3 py-1 text-blue-700 text-xs font-bold hover:bg-blue-100 bg-blue-200 rounded-full uppercase"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "w-6 h-6 fill-current mx-auto",
+  "class": "mx-auto w-6 h-6 fill-current",
   xmlns: "http://www.w3.org/2000/svg",
   viewBox: "0 0 24 24"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
@@ -31025,7 +31023,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.tagname) + " ", 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "w-6 h-6 inline-block align-middle text-gray-500 focus:outline-none rounded-full",
+    "class": "inline-block align-middle w-6 h-6 text-gray-500 rounded-full focus:outline-none",
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $setup.selectTag(_ctx.index);
     })
@@ -31049,7 +31047,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-blue-200 text-blue-700 rounded-full mx-2 my-1", $props.hover ? 'text-green-500 border-green-500' : ''])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["leading-sm inline-flex items-center mx-2 my-1 px-3 py-1 text-blue-700 text-xs font-bold bg-blue-200 rounded-full uppercase", $props.hover ? 'text-green-500 border-green-500' : ''])
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.tagname), 3
   /* TEXT, CLASS */
   );
@@ -31083,7 +31081,7 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_2 = [_hoisted_1];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", {
-    "class": "h-8 w-8 text-blue-500 hover:text-blue-300",
+    "class": "w-8 h-8 hover:text-blue-300 text-blue-500",
     fill: "none",
     viewBox: "0 0 24 24",
     stroke: "currentColor",
@@ -31142,7 +31140,7 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_5 = [_hoisted_1, _hoisted_2, _hoisted_3, _hoisted_4];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", {
-    "class": "h-6 w-6 text-red-600 hover:text-red-400",
+    "class": "w-6 h-6 hover:text-red-400 text-red-600",
     viewBox: "0 0 24 24",
     fill: "none",
     stroke: "currentColor",
@@ -31174,18 +31172,18 @@ var _hoisted_1 = {
   "class": "flex items-center mb-2"
 };
 var _hoisted_2 = {
-  "class": "grid grid-cols-1 md:grid-cols-3 gap-4"
+  "class": "grid gap-4 grid-cols-1 md:grid-cols-3"
 };
 var _hoisted_3 = {
   "class": "flex items-center"
 };
 var _hoisted_4 = {
-  "class": "text-gray-700 font-bold text-2xl mx-auto my-1 w-4/5 text-center"
+  "class": "mx-auto my-1 w-4/5 text-center text-gray-700 text-2xl font-bold"
 };
 var _hoisted_5 = ["onUpdate:modelValue", "onKeyup"];
 var _hoisted_6 = {
   key: 1,
-  "class": "mx-auto bg-blue-200 w-11/12 rounded text-center flex items-center py-3 justify-between"
+  "class": "flex items-center justify-between mx-auto py-3 w-11/12 text-center bg-blue-200 rounded"
 };
 var _hoisted_7 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -31217,7 +31215,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["errorFlag", "errors"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(['やるべきこと', '開発中', '完了'], function (state, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       key: index,
-      "class": "w-full bg-gray-100 rounded py-6 px-2"
+      "class": "px-2 py-6 w-full bg-gray-100 rounded"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(state), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 追加ボタン "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_add_button, {
@@ -31227,7 +31225,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["state"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" タスク "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.tasksIndex(state), function (task) {
       return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
         key: task.index,
-        "class": "my-2 flex items-center"
+        "class": "flex items-center my-2"
       }, [!task.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
         key: 0,
         type: "text",
@@ -31237,7 +31235,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onKeyup: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
           return $setup.addContent($event, task.index);
         }, ["enter"]),
-        "class": "appearance-none block w-4/5 bg-white text-gray-700 border border-gray-200 rounded py-3 mx-auto leading-tight focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+        "class": "block mx-auto py-3 w-4/5 text-gray-700 leading-tight bg-white border focus:border-blue-500 border-gray-200 rounded focus:outline-none appearance-none focus:ring-1 focus:ring-blue-500"
       }, null, 40
       /* PROPS, HYDRATE_EVENTS */
       , _hoisted_5)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.tasks[task.index].taskname]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [state !== 'やるべきこと' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_to_left_button, {
@@ -31247,7 +31245,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 8
       /* PROPS */
       , ["state", "index"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-        "class": "text-gray-600 font-semibold mx-auto",
+        "class": "mx-auto text-gray-600 font-semibold",
         onClick: function onClick($event) {
           return $setup.tasks[task.index].decidable = false;
         }
@@ -31292,7 +31290,7 @@ __webpack_require__.r(__webpack_exports__);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return _ctx.$page.props.user !== null && _ctx.$page.props.user.id == _ctx.$page.props.service.user_id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
-    "class": "bg-indigo-600 hover:bg-indigo-400 h-8 w-12 text-white rounded",
+    "class": "w-12 h-8 text-white hover:bg-indigo-400 bg-indigo-600 rounded",
     onClick: _cache[0] || (_cache[0] = function () {
       return $setup.taskSubmit && $setup.taskSubmit.apply($setup, arguments);
     })
@@ -31316,13 +31314,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = {
   key: 0,
-  "class": "grid grid-cols-1 md:grid-cols-3 gap-4"
+  "class": "grid gap-4 grid-cols-1 md:grid-cols-3"
 };
 var _hoisted_2 = {
-  "class": "text-gray-700 font-bold text-2xl mx-auto my-1 w-4/5 text-center"
+  "class": "mx-auto my-1 w-4/5 text-center text-gray-700 text-2xl font-bold"
 };
 var _hoisted_3 = {
-  "class": "text-gray-600 font-semibold mx-auto py-3 w-11/12 bg-blue-200 rounded text-center"
+  "class": "mx-auto py-3 w-11/12 text-center text-gray-600 font-semibold bg-blue-200 rounded"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_section_title = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("section-title");
@@ -31332,7 +31330,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), _ctx.$page.props.user == null || _ctx.$page.props.user.id != _ctx.$page.props.service.user_id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.classifiedTasks(), function (task, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: index,
-      "class": "w-full bg-gray-100 rounded py-6 px-2"
+      "class": "px-2 py-6 w-full bg-gray-100 rounded"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(task.state), 1
     /* TEXT */
     ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(task.contents, function (content, index) {
@@ -31384,7 +31382,7 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_3 = [_hoisted_1, _hoisted_2];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", {
-    "class": "h-8 w-8 text-blue-500 flex-shrink-0 hover:text-blue-300",
+    "class": "flex-shrink-0 w-8 h-8 hover:text-blue-300 text-blue-500",
     width: "24",
     height: "24",
     viewBox: "0 0 24 24",
@@ -31431,7 +31429,7 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_3 = [_hoisted_1, _hoisted_2];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", {
-    "class": "h-8 w-8 text-blue-500 flex-shrink-0 hover:text-blue-300",
+    "class": "flex-shrink-0 w-8 h-8 hover:text-blue-300 text-blue-500",
     width: "24",
     height: "24",
     viewBox: "0 0 24 24",
@@ -31463,7 +31461,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-    "class": "bg-indigo-600 hover:bg-indigo-400 h-8 w-12 text-white rounded ml-2",
+    "class": "ml-2 w-12 h-8 text-white hover:bg-indigo-400 bg-indigo-600 rounded",
     onClick: _cache[0] || (_cache[0] = function () {
       return $setup.add && $setup.add.apply($setup, arguments);
     })
@@ -31486,7 +31484,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "bg-blue-200 m-2 rounded p-3"
+  "class": "m-2 p-3 bg-blue-200 rounded"
 };
 var _hoisted_2 = {
   "class": "flex items-center mb-3"
@@ -31530,7 +31528,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.techFields[$props.index].techField.content = $event;
     }),
-    "class": "appearance-none block w-4/5 bg-white text-gray-700 border border-gray-200 rounded py-2 px-4 mr-2 leading-tight focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500",
+    "class": "block mr-2 px-4 py-2 w-4/5 text-gray-700 leading-tight bg-white border focus:border-blue-500 border-gray-200 rounded focus:outline-none appearance-none focus:ring-1 focus:ring-blue-500",
     placeholder: "技術分野を入力してください。",
     onKeyup: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
       return $setup.inputFieldName && $setup.inputFieldName.apply($setup, arguments);
@@ -31539,19 +31537,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* HYDRATE_EVENTS, NEED_PATCH */
   )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.techFields[$props.index].techField.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", {
     key: 1,
-    "class": "py-2 px-4 mr-2 font-bold text-gray-700 w-4/5",
+    "class": "mr-2 px-4 py-2 w-4/5 text-gray-700 font-bold",
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return $setup.techFields[$props.index].techField.decidable = false;
     })
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.techFields[$props.index].techField.content), 1
   /* TEXT */
   )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 追加ボタン "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "bg-indigo-600 hover:bg-indigo-400 h-8 w-12 text-white rounded mr-3",
+    "class": "mr-3 w-12 h-8 text-white hover:bg-indigo-400 bg-indigo-600 rounded",
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $setup.addTech($props.index);
     })
   }, " 追加 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 削除ボタン "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", {
-    "class": "h-6 w-6 text-red-600 hover:text-red-400",
+    "class": "w-6 h-6 hover:text-red-400 text-red-600",
     onClick: _cache[4] || (_cache[4] = function ($event) {
       return $setup.destroy(_ctx.$page.url, $props.index);
     }),
@@ -31607,13 +31605,13 @@ var _hoisted_1 = {
   "class": "grid grid-cols-1 md:grid-cols-2"
 };
 var _hoisted_2 = {
-  "class": "text-2xl text-gray-600 font-bold pb-1"
+  "class": "pb-1 text-gray-600 text-2xl font-bold"
 };
 var _hoisted_3 = {
-  "class": "text-xl text-indigo-600 font-semibold"
+  "class": "text-indigo-600 text-xl font-semibold"
 };
 var _hoisted_4 = {
-  "class": "text-xl text-indigo-600 font-semibold"
+  "class": "text-indigo-600 text-xl font-semibold"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_section_title = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("section-title");
@@ -31623,7 +31621,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.techFields, function (techField) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: techField.id,
-      "class": "bg-blue-200 m-2 rounded p-3"
+      "class": "m-2 p-3 bg-blue-200 rounded"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(techField.fieldname), 1
     /* TEXT */
     ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(techField.teches, function (tech) {
@@ -31664,7 +31662,7 @@ var _hoisted_1 = {
   "class": "flex flex-col"
 };
 var _hoisted_2 = {
-  "class": "flex mb-2 items-center"
+  "class": "flex items-center mb-2"
 };
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
@@ -31703,7 +31701,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 技術名（編集表示） "), !$setup.techFields[$props.index].teches[$props.techIndex].tech.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
     key: 0,
-    "class": "appearance-none block w-3/5 bg-white text-gray-700 border border-gray-200 rounded py-2 px-4 mr-2 leading-tight focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500",
+    "class": "block mr-2 px-4 py-2 w-3/5 text-gray-700 leading-tight bg-white border focus:border-blue-500 border-gray-200 rounded focus:outline-none appearance-none focus:ring-1 focus:ring-blue-500",
     placeholder: "技術名",
     onKeyup: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
       return $setup.input($event.target.value, 'tech');
@@ -31719,7 +31717,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.techFields[$props.index].teches[$props.techIndex].tech.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 技術名（通常表示） "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": "py-2 px-4 mr-2 font-bold text-gray-700",
+    "class": "mr-2 px-4 py-2 text-gray-700 font-bold",
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $setup.techFields[$props.index].teches[$props.techIndex].tech.decidable = false;
     })
@@ -31729,7 +31727,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
   )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" バージョン名（編集表示） "), !$setup.techFields[$props.index].teches[$props.techIndex].version.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
     key: 2,
-    "class": "appearance-none block w-2/5 bg-white text-gray-700 border border-gray-200 rounded py-2 px-4 mr-2 leading-tight focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500",
+    "class": "block mr-2 px-4 py-2 w-2/5 text-gray-700 leading-tight bg-white border focus:border-blue-500 border-gray-200 rounded focus:outline-none appearance-none focus:ring-1 focus:ring-blue-500",
     placeholder: "バージョン",
     onKeyup: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
       return $setup.input($event.target.value, 'version');
@@ -31745,7 +31743,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.techFields[$props.index].teches[$props.techIndex].version.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 3
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 技術名（通常表示） "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": "py-2 px-4 mr-2 font-bold text-gray-700",
+    "class": "mr-2 px-4 py-2 text-gray-700 font-bold",
     onClick: _cache[7] || (_cache[7] = function ($event) {
       return $setup.techFields[$props.index].teches[$props.techIndex].version.decidable = false;
     })
@@ -31754,7 +31752,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
   )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 削除ボタン "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", {
-    "class": "h-6 w-6 text-red-600 hover:text-red-400",
+    "class": "w-6 h-6 hover:text-red-400 text-red-600",
     viewBox: "0 0 24 24",
     fill: "none",
     stroke: "currentColor",
@@ -31789,11 +31787,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = {
   key: 0,
-  "class": "text-xs items-center font-bold leading-sm uppercase px-3 py-1 bg-green-200 text-green-700 rounded-full mx-2 my-1 justify-center w-16 h-8 md:hidden inline-flex"
+  "class": "leading-sm inline-flex items-center justify-center mx-2 my-1 px-3 py-1 w-16 h-8 text-green-700 text-xs font-bold bg-green-200 rounded-full uppercase md:hidden"
 };
 var _hoisted_2 = {
   key: 1,
-  "class": "text-xs items-center font-bold leading-sm uppercase px-3 py-1 bg-pink-200 text-pink-700 rounded-full mx-2 my-1 justify-center w-16 h-8 md:hidden inline-flex"
+  "class": "leading-sm inline-flex items-center justify-center mx-2 my-1 px-3 py-1 w-16 h-8 text-pink-700 text-xs font-bold bg-pink-200 rounded-full uppercase md:hidden"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return $props.finished ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h2", _hoisted_1, " 完了 ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h2", _hoisted_2, " 開発中 "));
@@ -31830,7 +31828,7 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_3 = [_hoisted_1, _hoisted_2];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("select", {
-    "class": "w-32 rounded border border-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 mb-3",
+    "class": "mb-3 w-32 border focus:border-blue-500 border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-500",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.finished.state = $event;
     })
@@ -31856,11 +31854,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = {
   key: 0,
-  "class": "text-xs items-center font-bold leading-sm uppercase px-3 py-1 bg-green-200 text-green-700 rounded-full mx-2 my-1 justify-center w-16 h-8 hidden md:inline-flex"
+  "class": "leading-sm hidden items-center justify-center mx-2 my-1 px-3 py-1 w-16 h-8 text-green-700 text-xs font-bold bg-green-200 rounded-full uppercase md:inline-flex"
 };
 var _hoisted_2 = {
   key: 1,
-  "class": "text-xs items-center font-bold leading-sm uppercase px-3 py-1 bg-pink-200 text-pink-700 rounded-full mx-2 my-1 justify-center w-16 h-8 hidden md:inline-flex"
+  "class": "leading-sm hidden items-center justify-center mx-2 my-1 px-3 py-1 w-16 h-8 text-pink-700 text-xs font-bold bg-pink-200 rounded-full uppercase md:inline-flex"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return $props.finished ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h2", _hoisted_1, " 完了 ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h2", _hoisted_2, " 開発中 "));
@@ -31888,7 +31886,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 編集表示 "), !$setup.title.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
     key: 0,
-    "class": "w-full rounded my-2",
+    "class": "my-2 w-full rounded",
     type: "text",
     placeholder: "サービス名を入力してください",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
@@ -31905,7 +31903,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.title.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 通常表示 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": "text-2xl font-bold text-gray-700 mb-2",
+    "class": "mb-2 text-gray-700 text-2xl font-bold",
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $setup.title.decidable = false;
     })
@@ -31946,7 +31944,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "text-3xl font-extrabold pb-3 md:w-11/12"
+  "class": "pb-3 text-3xl font-extrabold md:w-11/12"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.title), 1
@@ -31970,10 +31968,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex md:flex-row flex-col"
+  "class": "flex flex-col md:flex-row"
 };
 var _hoisted_2 = {
-  "class": "flex flex-col md:w-1/3 md:mr-3"
+  "class": "flex flex-col md:mr-3 md:w-1/3"
 };
 var _hoisted_3 = {
   "class": "flex flex-col md:w-1/3"
@@ -31985,7 +31983,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" GitHubのURL "), !$setup.github_url.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
     key: 0,
-    "class": "rounded my-2",
+    "class": "my-2 rounded",
     type: "text",
     placeholder: "サービスのGitHubのURLを入力してください",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
@@ -32002,7 +32000,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.github_url.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 通常表示 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": "md:text-base font-bold text-gray-700 mb-2 pt-3 break-words",
+    "class": "mb-2 pt-3 text-gray-700 break-words font-bold md:text-base",
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $setup.github_url.decidable = false;
     })
@@ -32024,7 +32022,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["errorFlag", "errors"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" サイトのURL "), !$setup.site_url.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
     key: 0,
-    "class": "rounded my-2",
+    "class": "my-2 rounded",
     type: "text",
     placeholder: "サービスのURLを入力してください",
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
@@ -32041,7 +32039,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.site_url.content]]) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 1
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 通常表示 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": "md:text-base font-bold text-gray-700 mb-2 pt-3 break-words",
+    "class": "mb-2 pt-3 text-gray-700 break-words font-bold md:text-base",
     onClick: _cache[7] || (_cache[7] = function ($event) {
       return $setup.site_url.decidable = false;
     })
@@ -32086,7 +32084,7 @@ var _hoisted_1 = {
 var _hoisted_2 = ["href"];
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "bg-indigo-600 hover:bg-indigo-400 text-white rounded p-3"
+  "class": "p-3 text-white hover:bg-indigo-400 bg-indigo-600 rounded"
 }, " GitHubページへ ", -1
 /* HOISTED */
 );
@@ -32107,7 +32105,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     target: "_blank",
     rel: "noopener noreferrer"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["bg-indigo-600 hover:bg-indigo-400 text-white rounded p-3", $props.github_url ? 'md:ml-48' : ''])
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["p-3 text-white hover:bg-indigo-400 bg-indigo-600 rounded", $props.github_url ? 'md:ml-48' : ''])
   }, " サービスページへ ", 2
   /* CLASS */
   )], 8
@@ -32132,7 +32130,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-    "class": "bg-indigo-600 hover:bg-indigo-400 h-8 w-12 text-white rounded ml-2",
+    "class": "ml-2 w-12 h-8 text-white hover:bg-indigo-400 bg-indigo-600 rounded",
     onClick: _cache[0] || (_cache[0] = function () {
       return $setup.add && $setup.add.apply($setup, arguments);
     })
@@ -32155,23 +32153,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "text-left border-b-2 border-gray-300 flex flex-col-3 items-center"
+  "class": "flex-col-3 flex items-center text-left border-b-2 border-gray-300"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "px-4 py-3 w-20 md:w-3/12 text-center"
+  "class": "px-4 py-3 w-20 text-center md:w-3/12"
 }, "URI", -1
 /* HOISTED */
 );
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "px-4 py-3 w-20 md:w-1/12 text-center"
+  "class": "px-4 py-3 w-20 text-center md:w-1/12"
 }, "メソッド", -1
 /* HOISTED */
 );
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "px-4 py-3 md:w-8/12 text-center"
+  "class": "px-4 py-3 text-center md:w-8/12"
 }, "説明", -1
 /* HOISTED */
 );
@@ -32200,23 +32198,23 @@ var _hoisted_1 = {
   "class": "overflow-x-auto"
 };
 var _hoisted_2 = {
-  "class": "rounded-t-lg m-5 mx-auto bg-gray-200 text-gray-800"
+  "class": "m-5 mx-auto text-gray-800 bg-gray-200 rounded-t-lg"
 };
 var _hoisted_3 = {
-  "class": "w-full flex flex-col-3"
+  "class": "flex-col-3 flex w-full"
 };
 var _hoisted_4 = {
-  "class": "px-4 py-3 w-3/12 md:w-3/12 text-center overflow-x-auto"
+  "class": "px-4 py-3 w-3/12 text-center overflow-x-auto md:w-3/12"
 };
 var _hoisted_5 = ["onKeyup", "onUpdate:modelValue", "onBlur"];
 var _hoisted_6 = ["onClick"];
 var _hoisted_7 = {
-  "class": "px-4 py-3 w-3/12 md:w-1/12 text-center overflow-x-auto"
+  "class": "px-4 py-3 w-3/12 text-center overflow-x-auto md:w-1/12"
 };
 var _hoisted_8 = ["onKeyup", "onUpdate:modelValue", "onBlur"];
 var _hoisted_9 = ["onClick"];
 var _hoisted_10 = {
-  "class": "px-4 py-3 w-6/12 overflow-x-auto md:w-8/12 items-center text-center"
+  "class": "items-center px-4 py-3 w-6/12 text-center overflow-x-auto md:w-8/12"
 };
 var _hoisted_11 = ["onKeyup", "onUpdate:modelValue", "onBlur"];
 var _hoisted_12 = ["onClick"];
@@ -32258,10 +32256,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.uris, function (uri, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: index,
-      "class": "bg-gray-100 border-b border-gray-200 flex flex-col items-center relative"
+      "class": "relative flex flex-col items-center bg-gray-100 border-b border-gray-200"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" URI（通常表示） "), !$setup.uris[index].uri.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
       key: 0,
-      "class": "appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded h-10 px-1 leading-tight focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500",
+      "class": "block px-1 w-full h-10 text-gray-700 leading-tight bg-white border focus:border-blue-500 border-gray-200 rounded focus:outline-none appearance-none focus:ring-1 focus:ring-blue-500",
       onKeyup: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
         return $setup.input($event.target.value, index, 'uri');
       }, ["enter"]),
@@ -32286,7 +32284,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
     ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" メソッド（編集表示） "), !$setup.uris[index].method.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
       key: 0,
-      "class": "appearance-none block w-full bg-white text-gray-700 border border-gray-200 rounded h-10 px-1 leading-tight focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500",
+      "class": "block px-1 w-full h-10 text-gray-700 leading-tight bg-white border focus:border-blue-500 border-gray-200 rounded focus:outline-none appearance-none focus:ring-1 focus:ring-blue-500",
       onKeyup: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
         return $setup.input($event.target.value, index, 'method');
       }, ["enter"]),
@@ -32311,7 +32309,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
     ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 説明 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 説明（編集表示） "), !$setup.uris[index].explain.decidable ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
       key: 0,
-      "class": "appearance-none block w-11/12 bg-white text-gray-700 border border-gray-200 rounded h-10 px-1 mr-2 leading-tight focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500",
+      "class": "block mr-2 px-1 w-11/12 h-10 text-gray-700 leading-tight bg-white border focus:border-blue-500 border-gray-200 rounded focus:outline-none appearance-none focus:ring-1 focus:ring-blue-500",
       onKeyup: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
         return $setup.input($event.target.value, index, 'explain');
       }, ["enter"]),
@@ -32335,7 +32333,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , _hoisted_12)], 2112
     /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
     )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 削除ボタン "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", {
-      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["h-6 w-6 text-red-600 hover:text-red-400 absolute right-3", $setup.uris[index].uri.decidable == false || $setup.uris[index].method.decidable == false || $setup.uris[index].explain.decidable == false ? 'top-5' : 'top-3']),
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["absolute right-3 w-6 h-6 hover:text-red-400 text-red-600", $setup.uris[index].uri.decidable == false || $setup.uris[index].method.decidable == false || $setup.uris[index].explain.decidable == false ? 'top-5' : 'top-3']),
       onClick: function onClick($event) {
         return $setup.destroy(_ctx.$page.url, index);
       },
@@ -32398,16 +32396,16 @@ var _hoisted_1 = {
   "class": "overflow-x-auto"
 };
 var _hoisted_2 = {
-  "class": "rounded-t-lg m-5 mx-auto bg-gray-200 text-gray-800"
+  "class": "m-5 mx-auto text-gray-800 bg-gray-200 rounded-t-lg"
 };
 var _hoisted_3 = {
-  "class": "flex-none px-4 py-3 md:w-2/12 break-words text-center"
+  "class": "flex-none px-4 py-3 text-center break-words md:w-2/12"
 };
 var _hoisted_4 = {
-  "class": "flex-none px-4 py-3 w-20 md:w-2/12 break-words text-center"
+  "class": "flex-none px-4 py-3 w-20 text-center break-words md:w-2/12"
 };
 var _hoisted_5 = {
-  "class": "flex-none px-4 py-3 md:w-8/12 text-center"
+  "class": "flex-none px-4 py-3 text-center md:w-8/12"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_section_title = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("section-title");
@@ -32419,7 +32417,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Header), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.uris, function (uri, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: index,
-      "class": "bg-gray-100 border-b border-gray-200 flex flex-nowrap items-center overflow-x-auto max-h-40 w-full"
+      "class": "flex flex-nowrap items-center w-full max-h-40 bg-gray-100 border-b border-gray-200 overflow-x-auto"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(uri.uri), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(uri.method), 1
@@ -32449,7 +32447,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = {
   key: 0,
-  "class": "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded my-2",
+  "class": "my-2 px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded",
   role: "alert"
 };
 var _hoisted_2 = {
@@ -32481,10 +32479,10 @@ var _hoisted_1 = {
   "class": "alert"
 };
 var _hoisted_2 = {
-  "class": "fixed top-0 right-0 m-6"
+  "class": "fixed right-0 top-0 m-6"
 };
 var _hoisted_3 = {
-  "class": "rounded-lg shadow-md p-6 pr-10 bg-red-200 text-red-900",
+  "class": "p-6 pr-10 text-red-900 bg-red-200 rounded-lg shadow-md",
   style: {
     "min-width": "240px"
   }
@@ -32494,7 +32492,7 @@ var _hoisted_4 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return $props.fail ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "opacity-75 cursor-pointer absolute top-0 right-0 py-2 px-3 hover:opacity-100",
+    "class": "absolute right-0 top-0 px-3 py-2 hover:opacity-100 opacity-75 cursor-pointer",
     onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       return _ctx.$emit('delete');
     }, ["prevent"]))
@@ -32519,7 +32517,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex justify-center items-center my-4"
+  "class": "flex items-center justify-center my-4"
 };
 var _hoisted_2 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -32527,7 +32525,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: index
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["cursor-pointer py-2 px-4 text-gray-500 border-b-8", $setup.activeTab === index ? 'text-pink-500 border-pink-500' : '']),
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["px-4 py-2 text-gray-500 border-b-8 cursor-pointer", $setup.activeTab === index ? 'text-pink-500 border-pink-500' : '']),
       onClick: function onClick($event) {
         return $setup.order(tab, index);
       }
@@ -32555,12 +32553,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex flex-col items-center justify-center relative ml-2"
+  "class": "relative flex flex-col items-center justify-center ml-2"
 };
 var _hoisted_2 = ["innerHTML"];
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "absolute text-blue-500 h-2 w-full left-0 top-full",
+  "class": "absolute left-0 top-full w-full h-2 text-blue-500",
   x: "0px",
   y: "0px",
   viewBox: "0 0 255 255",
@@ -32584,7 +32582,7 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_5 = [_hoisted_4];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["bg-blue-500 text-blue-600 text-center text-xs rounded-lg py-2 mb-2 px-3 pointer-events-none w-max absolute", $setup.show ? 'inline' : 'hidden']),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["absolute mb-2 px-3 py-2 w-max text-center text-blue-600 text-xs bg-blue-500 rounded-lg pointer-events-none", $setup.show ? 'inline' : 'hidden']),
     style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)({
       bottom: '1.6rem'
     })
@@ -32602,7 +32600,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onMouseleave: _cache[1] || (_cache[1] = function () {
       return $setup.hoverout && $setup.hoverout.apply($setup, arguments);
     }),
-    "class": "h-8 w-8 text-blue-500",
+    "class": "w-8 h-8 text-blue-500",
     fill: "none",
     viewBox: "0 0 24 24",
     stroke: "currentColor"
@@ -32627,7 +32625,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "text-2xl text-indigo-700 font-semibold"
+  "class": "text-indigo-700 text-2xl font-semibold"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h2", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.title), 1
@@ -32660,7 +32658,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return $props.errorFlag ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.errors, function (error, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: index,
-      "class": "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded my-2",
+      "class": "my-2 px-4 py-3 text-red-700 bg-red-100 border border-red-400 rounded",
       role: "alert"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error[1]), 1
     /* TEXT */
@@ -32686,16 +32684,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "mx-auto md:mx-0 max-w-md py-4 md:px-8 px-4 bg-indigo-50 shadow-lg rounded-lg my-10"
+  "class": "mx-auto my-10 px-4 py-4 max-w-md bg-indigo-50 rounded-lg shadow-lg md:mx-0 md:px-8"
 };
 var _hoisted_2 = {
-  "class": "md:h-16 flex items-center"
+  "class": "flex items-center md:h-16"
 };
 var _hoisted_3 = {
-  "class": "text-gray-800 text-2xl font-semibold line-clamp-2"
+  "class": "line-clamp-2 text-gray-800 text-2xl font-semibold"
 };
 var _hoisted_4 = {
-  "class": "h-48 mt-2 text-gray-600 line-clamp-8"
+  "class": "line-clamp-8 mt-2 h-48 text-gray-600"
 };
 var _hoisted_5 = {
   "class": "flex justify-between mt-4"
@@ -32718,7 +32716,7 @@ var _hoisted_11 = {
 };
 
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "h-6 w-6 text-red-500",
+  "class": "w-6 h-6 text-red-500",
   width: "24",
   height: "24",
   viewBox: "0 0 24 24",
@@ -32744,7 +32742,7 @@ var _hoisted_14 = {
 };
 
 var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "class": "h-6 w-6 text-green-500",
+  "class": "w-6 h-6 text-green-500",
   fill: "none",
   viewBox: "0 0 24 24",
   stroke: "currentColor"
@@ -32779,7 +32777,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [$props.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
         key: 0,
-        "class": "h-10 w-10 mr-2 rounded-full object-cover",
+        "class": "mr-2 w-10 h-10 rounded-full object-cover",
         src: $props.image_url,
         alt: $props.user.name
       }, null, 8
@@ -32807,7 +32805,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, " 投稿日：" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.date.split("T")[0]), 1
+  , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, "投稿日：" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.date.split("T")[0]), 1
   /* TEXT */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.likes), 1
   /* TEXT */
@@ -32817,7 +32815,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     href: _ctx.route('Service', {
       id: $props.id
     }),
-    "class": "text-xl font-medium text-indigo-500"
+    "class": "text-indigo-500 text-xl font-medium"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_17];
@@ -32847,7 +32845,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = {
   key: 0,
-  "class": "bg-red-600 hover:bg-red-400 h-8 w-12 text-white rounded"
+  "class": "w-12 h-8 text-white hover:bg-red-400 bg-red-600 rounded"
 };
 function render(_ctx, _cache) {
   return _ctx.$page.props.user !== null && _ctx.$page.props.user.id == _ctx.$page.props.service.user_id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_1, " 削除 ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
@@ -32870,7 +32868,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _hoisted_1 = {
   key: 0,
-  "class": "bg-indigo-600 hover:bg-indigo-400 h-8 w-12 text-white rounded mr-3"
+  "class": "mr-3 w-12 h-8 text-white hover:bg-indigo-400 bg-indigo-600 rounded"
 };
 function render(_ctx, _cache) {
   var _component_inertia_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("inertia-link");
@@ -32907,7 +32905,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex justify-center items-center my-4"
+  "class": "flex items-center justify-center my-4"
 };
 var _hoisted_2 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -32915,7 +32913,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: index
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["cursor-pointer py-2 px-4 text-gray-500 border-b-8", $setup.activeTab === index ? 'text-green-500 border-green-500' : '']),
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["px-4 py-2 text-gray-500 border-b-8 cursor-pointer", $setup.activeTab === index ? 'text-green-500 border-green-500' : '']),
       onClick: function onClick($event) {
         return $setup.order(tab, index);
       }
@@ -32947,10 +32945,10 @@ var _hoisted_1 = {
   "class": "alert"
 };
 var _hoisted_2 = {
-  "class": "fixed top-0 right-0 m-6"
+  "class": "fixed right-0 top-0 m-6"
 };
 var _hoisted_3 = {
-  "class": "rounded-lg shadow-md p-6 pr-10 bg-green-200 text-green-900",
+  "class": "p-6 pr-10 text-green-900 bg-green-200 rounded-lg shadow-md",
   style: {
     "min-width": "240px"
   }
@@ -32960,7 +32958,7 @@ var _hoisted_4 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return $props.success ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "opacity-75 cursor-pointer absolute top-0 right-0 py-2 px-3 hover:opacity-100",
+    "class": "absolute right-0 top-0 px-3 py-2 hover:opacity-100 opacity-75 cursor-pointer",
     onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       return _ctx.$emit('delete');
     }, ["prevent"]))

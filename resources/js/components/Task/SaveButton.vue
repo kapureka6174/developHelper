@@ -9,7 +9,6 @@
 </template>
 <script>
     import { inject } from "vue";
-    import { Inertia } from "@inertiajs/inertia";
 
     export default {
         setup() {
@@ -17,7 +16,7 @@
 
             // TaskControllerにformを渡す
             const taskSubmit = () => {
-                Inertia.put(route("Task"), form, {
+                form.put(route("Task"), {
                     preserveScroll: true,
                 });
             };
