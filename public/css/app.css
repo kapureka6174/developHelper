@@ -2773,12 +2773,12 @@ select {
 		margin-left: 1.5rem;
 	}
 
-	.md\:mr-3 {
-		margin-right: 0.75rem;
-	}
-
 	.md\:mb-0 {
 		margin-bottom: 0px;
+	}
+
+	.md\:mr-3 {
+		margin-right: 0.75rem;
 	}
 
 	.md\:ml-48 {
